@@ -48,6 +48,7 @@ class LoginControllers extends BaseController
 
             if (count($result) > 0) {
                 foreach ($result as $res) {
+                    
                     $sessionArray = array(
                         'userId' => $res->user_id,
                         'user_email' => $res->user_email,

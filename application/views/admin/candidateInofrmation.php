@@ -142,7 +142,7 @@
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?><i class="fa fa-caret-down"></i></span>
                                     </div>
                                 </div>
-                               
+
                             </div>
 
                             <div class="pcoded-navigation-label">Home</div>
@@ -236,24 +236,20 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Addhar Card </label>
                                                         <div class="col-sm-9">
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-6">
-                                                                <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId .'/0'); ?>" style="background-color: #4CAF50; /* Green */border: none;color: white;padding: 8px 16px; /* Adjust padding to make it smaller */text-align: center;text-decoration: none;display: inline-block;font-size: 14px; /* Adjust font size to make it smaller */
-                   margin: 4px 2px;
-                   transition-duration: 0.4s;
-                   cursor: pointer;
-                   border-radius: 4px; /* Adjust border radius to make it smaller */
-                   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                   transform-style: preserve-3d;
-                   perspective: 1000px;
-                   transform: translateZ(10px); /* Adjust translateZ value to make it smaller */">
-                                                                        View Document
-</a>
-                                                                 </div>
-                                                                <div class="col-sm-6" style=" margin-top: 10px;">
-                                                                    <input type="file" name="candidate_aadhar_card" accept="application/pdf">
+
+                                                            <?php if ($candidate[0]->candidate_aadhar_card != "") { ?>
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-6">
+                                                                        <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/0'); ?>" style="background-color: #4CAF50; /* Green */border: none;color: white;padding: 8px 16px; /* Adjust padding to make it smaller */text-align: center;text-decoration: none;display: inline-block;font-size: 14px; /* Adjust font size to make it smaller */ margin: 4px 2px; transition-duration: 0.4s;cursor: pointer;border-radius: 4px; /* Adjust border radius to make it smaller */box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);transform-style: preserve-3d;perspective: 1000px;transform: translateZ(10px); /* Adjust translateZ value to make it smaller */">
+                                                                            View Document
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="col-sm-6" style=" margin-top: 10px;">
+                                                                        <input type="file" name="candidate_aadhar_card" accept="application/pdf">
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                            <?php } ?>
+
 
 
                                                         </div>
@@ -261,23 +257,19 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Upload Pan Card </label>
                                                         <div class="col-sm-9">
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-6">
-                                                                <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId.'/1'); ?>" style="background-color: #4CAF50; /* Green */border: none;color: white;padding: 8px 16px; /* Adjust padding to make it smaller */text-align: center;text-decoration: none;display: inline-block;font-size: 14px; /* Adjust font size to make it smaller */
-                   margin: 4px 2px;
-                   transition-duration: 0.4s;
-                   cursor: pointer;
-                   border-radius: 4px; /* Adjust border radius to make it smaller */
-                   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                   transform-style: preserve-3d;
-                   perspective: 1000px;
-                   transform: translateZ(10px); /* Adjust translateZ value to make it smaller */">
-                                                                        View Document
-                                                                    </a>    </div>
-                                                                <div class="col-sm-6" style=" margin-top: 10px;">
-                                                                    <input type="file" name="candidate_pan_card" accept="application/pdf">
+                                                            <?php if ($candidate[0]->candidate_pan_card != "") { ?>
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-6">
+                                                                        <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/1'); ?>" style="background-color: #4CAF50; /* Green */border: none;color: white;padding: 8px 16px; /* Adjust padding to make it smaller */text-align: center;text-decoration: none;display: inline-block;font-size: 14px; /* Adjust font size to make it smaller */ margin: 4px 2px;transition-duration: 0.4s;cursor: pointer;border-radius: 4px; /* Adjust border radius to make it smaller */box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);transform-style: preserve-3d; perspective: 1000px;transform: translateZ(10px); /* Adjust translateZ value to make it smaller */">
+                                                                            View Document
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="col-sm-6" style=" margin-top: 10px;">
+                                                                        <input type="file" name="candidate_pan_card" accept="application/pdf">
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                            <?php } ?>
+
 
 
                                                         </div>
@@ -286,23 +278,19 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Upload Passport </label>
                                                         <div class="col-sm-9">
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-6">
-                                                                <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId.'/3'); ?>" style="background-color: #4CAF50; /* Green */border: none;color: white;padding: 8px 16px; /* Adjust padding to make it smaller */text-align: center;text-decoration: none;display: inline-block;font-size: 14px; /* Adjust font size to make it smaller */
-                   margin: 4px 2px;
-                   transition-duration: 0.4s;
-                   cursor: pointer;
-                   border-radius: 4px; /* Adjust border radius to make it smaller */
-                   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                   transform-style: preserve-3d;
-                   perspective: 1000px;
-                   transform: translateZ(10px); /* Adjust translateZ value to make it smaller */">
-                                                                        View Document
-                                                                    </a>  </div>
-                                                                <div class="col-sm-6" style=" margin-top: 10px;">
-                                                                    <input type="file" name="candidate_passport" accept="application/pdf">
+                                                            <?php if ($candidate[0]->candidate_passport != "") { ?>
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-6">
+                                                                        <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/3'); ?>" style="background-color: #4CAF50; /* Green */border: none;color: white;padding: 8px 16px; /* Adjust padding to make it smaller */text-align: center;text-decoration: none;display: inline-block;font-size: 14px; /* Adjust font size to make it smaller */ margin: 4px 2px;transition-duration: 0.4s;cursor: pointer;border-radius: 4px; /* Adjust border radius to make it smaller */ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); transform-style: preserve-3d; perspective: 1000px; transform: translateZ(10px); /* Adjust translateZ value to make it smaller */">
+                                                                            View Document
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="col-sm-6" style=" margin-top: 10px;">
+                                                                        <input type="file" name="candidate_passport" accept="application/pdf">
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                            <?php } ?>
+
 
 
 
@@ -311,17 +299,10 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Upload Candidate Resume </label>
                                                         <div class="col-sm-9">
+                                                        <?php if ($candidate[0]->candidate_resume != "") { ?>
                                                             <div class="form-group row">
                                                                 <div class="col-sm-6">
-                                                                    <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId.'/2'); ?>" style="background-color: #4CAF50; /* Green */border: none;color: white;padding: 8px 16px; /* Adjust padding to make it smaller */text-align: center;text-decoration: none;display: inline-block;font-size: 14px; /* Adjust font size to make it smaller */
-                   margin: 4px 2px;
-                   transition-duration: 0.4s;
-                   cursor: pointer;
-                   border-radius: 4px; /* Adjust border radius to make it smaller */
-                   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                   transform-style: preserve-3d;
-                   perspective: 1000px;
-                   transform: translateZ(10px); /* Adjust translateZ value to make it smaller */">
+                                                                    <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/2'); ?>" style="background-color: #4CAF50; /* Green */border: none;color: white;padding: 8px 16px; /* Adjust padding to make it smaller */text-align: center;text-decoration: none;display: inline-block;font-size: 14px; /* Adjust font size to make it smaller */  margin: 4px 2px;transition-duration: 0.4s; cursor: pointer; border-radius: 4px; /* Adjust border radius to make it smaller */ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); transform-style: preserve-3d;  perspective: 1000px;  transform: translateZ(10px); /* Adjust translateZ value to make it smaller */">
                                                                         View Document
                                                                     </a>
                                                                 </div>
@@ -329,6 +310,8 @@
                                                                     <input type="file" name="candidate_resume" accept="application/pdf">>
                                                                 </div>
                                                             </div>
+                                                            <?php } ?>
+                                                            
 
 
                                                         </div>
