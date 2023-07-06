@@ -147,11 +147,11 @@
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                <?php if ($this->session->userdata('user_profile') == "") { ?>
+                                    <?php if ($this->session->userdata('user_profile') == "") { ?>
                                         <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
 
                                     <?php } else { ?>
-                                        <img class="img-80 img-radius" src="<?php echo "https://maclareenai.com/hrtool/upload/profile/".$this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
+                                        <img class="img-80 img-radius"src="<?php echo "https://maclareenai.com/hrtool/upload/profile/".$this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
                                     <?php } ?>
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?><i class="fa fa-caret-down"></i></span>
@@ -177,14 +177,13 @@
                                         <?php echo base_url(); ?>adminDashboard
                                     <?php } else { ?>
                                         <?php echo base_url(); ?>superadminDashboard
-                                    <?php } ?>"  class="waves-effect waves-dark">
+                                    <?php } ?>" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                             </ul>
-
                             <div class="pcoded-navigation-label">Add Candidate</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
@@ -195,8 +194,18 @@
                                     </a>
                                 </li>
                             </ul>
+                            <div class="pcoded-navigation-label">Admin Details</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa-solid fa fa-users"></i><b>AD</b></span>
+                                        <span class="pcoded-mtext">Admin Details</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
 
-                        </div>
+
                     </nav>
                     <div class="pcoded-content">
                         <!-- Page-header start -->
@@ -241,6 +250,7 @@
                                         <div class="card proj-progress-card">
                                             <div class="card-block">
                                                 <div class="row">
+
                                                     <div class="col-xl-6 col-md-6">
                                                         <div class="card mat-clr-stat-card text-white blue">
                                                             <div class="card-block">
@@ -273,7 +283,6 @@
                                                     </div>
 
 
-
                                                 </div>
                                             </div>
                                         </div>
@@ -282,8 +291,10 @@
 
 
 
+
+
                                     <!-- <?php print_r($pageTitle); ?> -->
-                                    <!-- Basic table card start -->
+                                    <!-- Basic table candidate start-->
                                     <div class="card">
                                         <div class="card-header">
                                             <h5>Candidate Details</h5>
@@ -379,7 +390,53 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Basic table card end -->
+                                    <!-- Basic table candidate end -->
+
+
+                                    <!--  Admin table start -->
+
+                                    <div class="card table-card">
+                                        <div class="card-header">
+                                            <h5>Employee information</h5>
+
+                                        </div>
+                                        <div class="card-block">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover m-b-0 without-header">
+                                                    <tbody id="myTable">
+                                                        <?php $counter1 = 0; ?>
+                                                        <?php foreach ($emp as $row) : ?>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="d-inline-block align-middle">
+                                                                        <?php if ($row->user_profile == "") { ?>
+                                                                            <img src="assets/images/avatar-4.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                                                        <?php } else { ?>
+                                                                            <img src="<?php echo  "https://maclareenai.com/hrtool/upload/profile/".$row->user_profile; ?>" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                                                        <?php } ?>
+
+                                                                        <div class="d-inline-block">
+                                                                            <h6><?php echo $row->user_name ?></h6>
+                                                                            <p class="text-muted m-b-0"><?php echo $row->user_email ?></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <h6 class="f-w-700"><?php echo $row->emp_id ?></h6>
+                                                                </td>
+                                                            </tr>
+
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--  Admin table end -->
+
+
 
 
 

@@ -55,12 +55,30 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['loginMe'] = 'LoginControllers/loginMe';
 $route['logout'] = 'LogOutControllers';
-$route['adminDashboard'] = 'dashboard/DashboardControllers';
-$route['addCandidate'] = 'dashboard/AddCandidateControllers';
+
+
+// admin 
+$route['adminDashboard'] = 'admin/DashboardControllers';
+$route['addCandidate'] = 'admin/AddCandidateControllers';
 $route['default_controller'] = 'LoginControllers';
-$route['RegisterCandidate'] = 'dashboard/AddCandidateControllers/RegisterCandidate';
-$route['ViewCandiateInfo/(:num)'] = 'dashboard/AddCandidateControllers/viewCandidateInformation/$1'; 
-$route['ViewCandiateDocument/(:num)/(:num)'] = 'dashboard/AddCandidateControllers/ViewCandiateDocument/$1/$2'; 
+$route['RegisterCandidate'] = 'admin/AddCandidateControllers/RegisterCandidate';
+$route['ViewCandiateInfo/(:num)'] = 'admin/AddCandidateControllers/viewCandidateInformation/$1'; 
+$route['ViewCandiateDocument/(:num)/(:num)'] = 'admin/AddCandidateControllers/ViewCandiateDocument/$1/$2'; 
+
+
+// super admin
+$route['superadminDashboard'] = 'superadmin/SuperAdminDashboardControllers';
+$route['admininformation'] = 'admin/DashboardControllers/AdminInformation';
+$route['addnewadmin'] = 'superadmin/SuperAdminDashboardControllers/RegisteNewAdmin';
+$route['UpdateAdminInformation/(:num)'] = 'admin/DashboardControllers/UpdateAdminInformation/$1'; 
+
+
+
+
+// candidate
+$route['candidateDashboard'] = 'candidate/CandidateDashboardControllers';
+
+
 
 
 

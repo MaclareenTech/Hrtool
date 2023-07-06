@@ -148,7 +148,13 @@
                             <div class="pcoded-navigation-label">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="<?php echo base_url(); ?>adminDashboard" class="waves-effect waves-dark">
+                                    <a href="<?php
+                                                $role = $this->session->userdata('role'); ?>
+                                    <?php if ($role == "admin") { ?>
+                                        <?php echo base_url(); ?>adminDashboard
+                                    <?php } else { ?>
+                                        <?php echo base_url(); ?>superadminDashboard
+                                    <?php } ?>" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
@@ -299,19 +305,19 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Upload Candidate Resume </label>
                                                         <div class="col-sm-9">
-                                                        <?php if ($candidate[0]->candidate_resume != "") { ?>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-6">
-                                                                    <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/2'); ?>" style="background-color: #4CAF50; /* Green */border: none;color: white;padding: 8px 16px; /* Adjust padding to make it smaller */text-align: center;text-decoration: none;display: inline-block;font-size: 14px; /* Adjust font size to make it smaller */  margin: 4px 2px;transition-duration: 0.4s; cursor: pointer; border-radius: 4px; /* Adjust border radius to make it smaller */ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); transform-style: preserve-3d;  perspective: 1000px;  transform: translateZ(10px); /* Adjust translateZ value to make it smaller */">
-                                                                        View Document
-                                                                    </a>
+                                                            <?php if ($candidate[0]->candidate_resume != "") { ?>
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-6">
+                                                                        <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/2'); ?>" style="background-color: #4CAF50; /* Green */border: none;color: white;padding: 8px 16px; /* Adjust padding to make it smaller */text-align: center;text-decoration: none;display: inline-block;font-size: 14px; /* Adjust font size to make it smaller */  margin: 4px 2px;transition-duration: 0.4s; cursor: pointer; border-radius: 4px; /* Adjust border radius to make it smaller */ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); transform-style: preserve-3d;  perspective: 1000px;  transform: translateZ(10px); /* Adjust translateZ value to make it smaller */">
+                                                                            View Document
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="col-sm-6" style=" margin-top: 10px;">
+                                                                        <input type="file" name="candidate_resume" accept="application/pdf">>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-sm-6" style=" margin-top: 10px;">
-                                                                    <input type="file" name="candidate_resume" accept="application/pdf">>
-                                                                </div>
-                                                            </div>
                                                             <?php } ?>
-                                                            
+
 
 
                                                         </div>

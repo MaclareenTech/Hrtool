@@ -2,14 +2,8 @@
 <html lang="en">
 
 <head>
-    <title>Admin Panel</title>
-    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 10]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
-    <!-- Meta -->
+    <title><?php echo $pageTitle; ?></title>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -36,6 +30,82 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
 </head>
+<style>
+    .left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 2.5rem;
+        border: solid 0.25rem var(--color5);
+        border-radius: 0.5rem;
+        height: 20rem;
+        margin-top: 10px;
+    }
+
+    .left img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+  
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input[type="checkbox"] {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input[type="checkbox"]:checked + .slider {
+  background-color: #2ECC71;
+}
+
+input[type="checkbox"]:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+
+    /* .left label {
+  color: var(--color3);
+  text-decoration: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+.left label:hover {
+  opacity: 0.8;
+  font-size: 12px;
+} */
+</style>
 
 <body>
 
@@ -143,32 +213,17 @@
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <?php if ($this->session->userdata('user_profile') == "") { ?>
-                                        <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
-
-                                    <?php } else { ?>
-                                        <img class="img-80 img-radius" src="<?php echo "https://maclareenai.com/hrtool/upload/profile/" . $this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
-                                    <?php } ?>
+                                    <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?><i class="fa fa-caret-down"></i></span>
                                     </div>
                                 </div>
-                                <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                            <a href=""><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                            <a href="<?php echo base_url(); ?>logout"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
-                                </div>
+
                             </div>
 
                             <div class="pcoded-navigation-label">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-
-
                                     <a href="<?php
                                                 $role = $this->session->userdata('role'); ?>
                                     <?php if ($role == "admin") { ?>
@@ -183,34 +238,7 @@
                                 </li>
                             </ul>
 
-                            <div class="pcoded-navigation-label">Add Candidate</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="active">
-                                    <a href="<?php echo base_url(); ?>addCandidate" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="fa-solid fa-user-plus"></i><b>A</b></span>
-                                        <span class="pcoded-mtext">Add Candidate</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <?php
-                            $role = $this->session->userdata('role'); ?>
-                            <?php if ($role == "admin") { ?>
 
-                            <?php } else { ?>
-                                <div class="pcoded-navigation-label">Admin Details</div>
-                                <ul class="pcoded-item pcoded-left-item">
-                                    <li class="">
-                                        <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="fa-solid fa fa-users"></i><b>AD</b></span>
-                                            <span class="pcoded-mtext">Admin Details</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            <?php } ?>
-
-                        </div>
                     </nav>
                     <div class="pcoded-content">
                         <!-- Page-header start -->
@@ -219,7 +247,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Add Candidate</h5>
+                                            <h5 class="m-b-10">Candidate Information</h5>
                                             <p class="m-b-0">Recruitment Management System</p>
                                         </div>
                                     </div>
@@ -228,7 +256,7 @@
                                             <li class="breadcrumb-item">
                                                 <a href="index.html"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Add Candidate</a>
+                                            <li class="breadcrumb-item"><a href="#!"> Candidate Information</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -257,8 +285,9 @@
                                             <!-- Basic Form Inputs card start -->
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h5>Add Candidate Information</h5>
+                                                    <h5>Update Admin Information</h5>
                                                 </div>
+                                                <div class="card-block">
                                                 <?php
                                                 $this->load->helper('form');
                                                 $error = $this->session->flashdata('error');
@@ -277,81 +306,94 @@
                                                         <?php echo $success; ?>
                                                     </div>
                                                 <?php } ?>
-                                                <div class="card-block">
-                                                    <?php echo form_open_multipart('admin/AddCandidateControllers/RegisterCandidate'); ?>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Name </label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_name" placeholder="Ex. john dev" required>
+                                                    <?php echo form_open_multipart('admin/DashboardControllers/ChangeAdminInformation'); ?>
+                                                    <div class="row">
+                                                        <div class="col-xl-4 col-md-4">
+                                                            <!-- Basic Form Inputs card start -->
+
+                                                            <!-- src ="<?= base_url($row->place_img) ?>" -->
+
+                                                            <div class="left">
+                                                                <?php if ($emp[0]->user_profile == "") { ?>
+                                                                    <img id="avatarImg" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="">
+                                                                <?php } else { ?>
+                                                                    <img id="avatarImg" src="<?php echo "https://maclareenai.com/hrtool/upload/profile/" . $emp[0]->user_profile; ?>" alt="">
+
+                                                                <?php } ?>
+
+                                                                <label for="replaceImage">Replace image</label>
+                                                                <input type="file" name="user_profile" id="replaceImage" accept="image/*" onchange="loadImage(event)">
+                                                            </div>
+
+                                                            <script>
+                                                                function loadImage(event) {
+                                                                    var input = event.target;
+                                                                    var reader = new FileReader();
+
+                                                                    reader.onload = function() {
+                                                                        var img = document.getElementById('avatarImg');
+                                                                        img.src = reader.result;
+                                                                    };
+
+                                                                    reader.readAsDataURL(input.files[0]);
+                                                                }
+                                                            </script>
+
+
+                                                            <input type="text" class="form-control" name="user_id" value="<?php echo $emp[0]->user_id ?>" style="opacity: 0;">
+
+
+
+
+
+
+
+                                                            <!-- Basic Form Inputs card end -->
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Email Id</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_email" placeholder="Ex.abc@example.com" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Mobile Number</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_mobile_no" placeholder="Ex.1234567890" pattern="[0-9]{10}" required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Job state</label>
-                                                        <div class="col-sm-9">
-                                                            <select name="candidate_job_profile" class="form-control">
-                                                                <option value="opt1" disabled selected>Select One Value</option>
-                                                                <option value="opt2">Type 2</option>
-                                                                <option value="opt3">Type 3</option>
-                                                                <option value="opt4">Type 4</option>
-                                                                <option value="opt5">Type 5</option>
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Password</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="password" class="form-control" name="candidate_password" placeholder="Enter your password" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Addhar Card </label>
-                                                        <div class="col-sm-9">
-                                                            <input type="file" name="candidate_aadhar_card" accept="application/pdf">
+                                                        <div class="col-xl-8 col-md-8">
+                                                            <!-- Basic Form Inputs card start -->
 
 
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Pan Card </label>
-                                                        <div class="col-sm-9">
 
-                                                            <input type="file" name="candidate_pan_card" accept="application/pdf">
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label"> Name </label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" class="form-control" name="user_name" value="<?php echo $emp[0]->user_name ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label"> Email Id</label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" class="form-control" name="user_email" value="<?php echo $emp[0]->user_email ?>" disabled>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label"> Mobile Number</label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" class="form-control" name="user_mobile" value="<?php echo $emp[0]->user_mobile ?>">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label">Employee Id</label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" class="form-control" name="emp_id" value="<?php echo $emp[0]->emp_id ?>">
+                                                                </div>
+                                                            </div>
+                                                            
+
+
+
+
+
+
+
+                                                            <!-- Basic Form Inputs card end -->
+                                                        </div>
+                                                        <div class="form-group row">
 
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Passport </label>
-                                                        <div class="col-sm-9">
-
-                                                            <input type="file" name="candidate_passport" accept="application/pdf">
-
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Candidate Resume </label>
-                                                        <div class="col-sm-9">
-
-                                                            <input type="file" name="candidate_resume" accept="application/pdf">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
                                                         <div class="col-sm-12">
                                                             <center> <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button></center>
                                                         </div>
@@ -365,10 +407,16 @@
                                                     </form>
 
 
+
+
+                                                    </form>
+
+
                                                 </div>
                                             </div>
                                             <!-- Basic Form Inputs card end -->
                                         </div>
+
                                     </div>
 
 

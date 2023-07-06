@@ -15,14 +15,14 @@ class LoginControllers extends BaseController
             $this->global['pageTitle'] = 'Hr Tool : Login';
             $this->loadViews("login/login", $this->global);
         } else {
-            $this->load->model('Candidate_model');
-            $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo('');
-            $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('','');
-            $this->global['completedCandidate'] = $this->Candidate_model->viewCandidate_count('','11');
-            $this->global['pageTitle'] = 'Hr Tool : Admin Dashboard';
-            $this->global['name'] = 'Hr Tool : Admin Dashboard';
-         
-            $this->loadViews("admin/dashbaord", $this->global);
+            $role = $this->session->userdata('role');
+            if ($role == "candidate") {
+                redirect('candidateDashboard');
+            } else   if ($role == "admin") {
+                redirect('adminDashboard');;
+            } else {
+                redirect('superadminDashboard');
+            }
         }
     }
 
@@ -43,26 +43,35 @@ class LoginControllers extends BaseController
         } else {
             $email = $this->input->post('email');
             $password = $this->input->post('password');
+            $hashedPassword = md5($password);
+            $result = $this->Admin_model->Login($email, $hashedPassword);
 
-            $result = $this->Admin_model->Login($email, $password);
+            if (!empty($result)) {
+                $res = $result[0];
+                $sessionArray = array(
+                    'userId' => $res->user_id,
+                    'user_profile' => $res->user_profile,
+                    'user_email' => $res->user_email,
+                    'name' => $res->user_name,
+                    'isLoggedIn' => TRUE
+                );
 
-            if (count($result) > 0) {
-                foreach ($result as $res) {
-                    
-                    $sessionArray = array(
-                        'userId' => $res->user_id,
-                        'user_email' => $res->user_email,
-                        'name' => $res->user_name,
-                        'isLoggedIn' => TRUE
-                    );
-
+                if ($res->user_role == "0") {
+                    $sessionArray['role'] = 'candidate';
+                    $this->session->set_userdata($sessionArray);
+                    redirect('candidateDashboard');
+                } else if ($res->user_role == "1") {
+                    $sessionArray['role'] = 'admin';
                     $this->session->set_userdata($sessionArray);
 
                     redirect('adminDashboard');
+                } else {
+                    $sessionArray['role'] = 'superadmin';
+                    $this->session->set_userdata($sessionArray);
+                    redirect('superadminDashboard');
                 }
             } else {
                 $this->session->set_flashdata('error', 'Email or password mismatch');
-
                 redirect('LoginControllers');
             }
         }

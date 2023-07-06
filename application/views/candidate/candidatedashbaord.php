@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Admin Panel</title>
+    <title><?php echo $pageTitle; ?></title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -35,7 +35,11 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/jquery.mCustomScrollbar.css">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
 </head>
+
 
 <body>
 
@@ -143,12 +147,7 @@
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <?php if ($this->session->userdata('user_profile') == "") { ?>
-                                        <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
-
-                                    <?php } else { ?>
-                                        <img class="img-80 img-radius" src="<?php echo "https://maclareenai.com/hrtool/upload/profile/" . $this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
-                                    <?php } ?>
+                                    <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?><i class="fa fa-caret-down"></i></span>
                                     </div>
@@ -156,8 +155,6 @@
                                 <div class="main-menu-content">
                                     <ul>
                                         <li class="more-details">
-                                            <a href=""><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
                                             <a href="<?php echo base_url(); ?>logout"><i class="ti-layout-sidebar-left"></i>Logout</a>
                                         </li>
                                     </ul>
@@ -166,51 +163,14 @@
 
                             <div class="pcoded-navigation-label">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-
-
-                                    <a href="<?php
-                                                $role = $this->session->userdata('role'); ?>
-                                    <?php if ($role == "admin") { ?>
-                                        <?php echo base_url(); ?>adminDashboard
-                                    <?php } else { ?>
-                                        <?php echo base_url(); ?>superadminDashboard
-                                    <?php } ?>" class="waves-effect waves-dark">
+                                <li class="active">
+                                    <a href="<?php echo base_url(); ?>candidateDashboard" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                             </ul>
-
-                            <div class="pcoded-navigation-label">Add Candidate</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="active">
-                                    <a href="<?php echo base_url(); ?>addCandidate" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="fa-solid fa-user-plus"></i><b>A</b></span>
-                                        <span class="pcoded-mtext">Add Candidate</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <?php
-                            $role = $this->session->userdata('role'); ?>
-                            <?php if ($role == "admin") { ?>
-
-                            <?php } else { ?>
-                                <div class="pcoded-navigation-label">Admin Details</div>
-                                <ul class="pcoded-item pcoded-left-item">
-                                    <li class="">
-                                        <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="fa-solid fa fa-users"></i><b>AD</b></span>
-                                            <span class="pcoded-mtext">Admin Details</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            <?php } ?>
-
-                        </div>
                     </nav>
                     <div class="pcoded-content">
                         <!-- Page-header start -->
@@ -219,7 +179,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Add Candidate</h5>
+                                            <h5 class="m-b-10">Dashboard</h5>
                                             <p class="m-b-0">Recruitment Management System</p>
                                         </div>
                                     </div>
@@ -228,7 +188,7 @@
                                             <li class="breadcrumb-item">
                                                 <a href="index.html"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Add Candidate</a>
+                                            <li class="breadcrumb-item"><a href="#!">Dashboard</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -245,131 +205,136 @@
 
                         <div class="pcoded-inner-content">
                             <!-- Main-body start -->
+
+
                             <div class="main-body">
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
-
-
-
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <!-- Basic Form Inputs card start -->
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>Add Candidate Information</h5>
-                                                </div>
-                                                <?php
-                                                $this->load->helper('form');
-                                                $error = $this->session->flashdata('error');
-                                                if ($error) {
-                                                ?>
-                                                    <div class="alert alert-danger alert-dismissable">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                        <?php echo $error; ?>
-                                                    </div>
-                                                <?php }
-                                                $success = $this->session->flashdata('success');
-                                                if ($success) {
-                                                ?>
-                                                    <div class="alert alert-success alert-dismissable">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                        <?php echo $success; ?>
-                                                    </div>
-                                                <?php } ?>
-                                                <div class="card-block">
-                                                    <?php echo form_open_multipart('admin/AddCandidateControllers/RegisterCandidate'); ?>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Name </label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_name" placeholder="Ex. john dev" required>
+                                    <!-- Project statustic start -->
+                                    <div class="col-xl-12">
+                                        <div class="card proj-progress-card">
+                                            <div class="card-block">
+                                                <div class="row">
+                                                    <div class="col-xl-6 col-md-6">
+                                                        <h6>Pending Candidate</h6>
+                                                        <h5 class="m-b-30 f-w-700"><?php echo $pendingCandidate; ?></h5>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-c-red" style="width:25%"></div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Email Id</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_email" placeholder="Ex.abc@example.com" required>
+                                                    <div class="col-xl-6 col-md-6">
+                                                        <h6>Completed Candidate</h6>
+                                                        <h5 class="m-b-30 f-w-700"><?php echo $completedCandidate; ?></h5>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-c-blue" style="width:65%"></div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Mobile Number</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_mobile_no" placeholder="Ex.1234567890" pattern="[0-9]{10}" required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Job state</label>
-                                                        <div class="col-sm-9">
-                                                            <select name="candidate_job_profile" class="form-control">
-                                                                <option value="opt1" disabled selected>Select One Value</option>
-                                                                <option value="opt2">Type 2</option>
-                                                                <option value="opt3">Type 3</option>
-                                                                <option value="opt4">Type 4</option>
-                                                                <option value="opt5">Type 5</option>
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Password</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="password" class="form-control" name="candidate_password" placeholder="Enter your password" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Addhar Card </label>
-                                                        <div class="col-sm-9">
-                                                            <input type="file" name="candidate_aadhar_card" accept="application/pdf">
-
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Pan Card </label>
-                                                        <div class="col-sm-9">
-
-                                                            <input type="file" name="candidate_pan_card" accept="application/pdf">
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Passport </label>
-                                                        <div class="col-sm-9">
-
-                                                            <input type="file" name="candidate_passport" accept="application/pdf">
-
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Candidate Resume </label>
-                                                        <div class="col-sm-9">
-
-                                                            <input type="file" name="candidate_resume" accept="application/pdf">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <center> <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button></center>
-                                                        </div>
-
-                                                    </div>
-
-
-
-
-
-                                                    </form>
 
 
                                                 </div>
                                             </div>
-                                            <!-- Basic Form Inputs card end -->
                                         </div>
                                     </div>
+                                    <!-- Project statustic end -->
+
+
+
+                                    <!-- <?php print_r($pageTitle); ?> -->
+                                    <!-- Basic table card start -->
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Candidate Details</h5>
+
+                                        </div>
+                                        <div class="card-block table-border-style">
+                                            <div class="table-responsive">
+                                                <div id="candidate-table-container">
+                                                    <table class="table datatable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Candidate Name</th>
+                                                                <th>Candidate Email</th>
+                                                                <th>Candidate Number</th>
+                                                                <th>Candidate job profile</th>
+                                                                <th>Candidate JOb Status</th>
+                                                                <th>Status Updated by </th>
+                                                                <th>Candidate Status Updated Date</th>
+                                                                <th>Candidate Register Date Date</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody id="myTable">
+                                                            <?php $counter = 0; ?>
+                                                            <?php foreach ($candidate as $row) : ?>
+                                                                <tr>
+                                                                    <?php $counter++; ?>
+                                                                    <td><?php echo $counter; ?></td>
+                                                                    <td><?php echo $row->candidate_name ?></td>
+                                                                    <td><?php echo $row->candidate_email ?></td>
+                                                                    <td><?php echo $row->candidate_mobile_no ?></td>
+                                                                    <td><?php echo $row->candidate_job_profile ?></td>
+                                                                    <td> <?php if ($row->candidate_job_status == "0") { ?>
+                                                                            <button style="background-color: #FA3B3B; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Screening</button>
+                                                                        <?php } else if ($row->candidate_job_status == "1") { ?>
+                                                                            <button style="background-color: #CF70FF; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Waiting for document </button>
+                                                                        <?php } else if ($row->candidate_job_status == "2") { ?>
+                                                                            <button style="background-color: #7D23FA; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Sent to recruitment review</button>
+                                                                        <?php } else if ($row->candidate_job_status == "3") { ?>
+                                                                            <button style="background-color: #14A2FA; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Shortlisted</button>
+                                                                        <?php } else if ($row->candidate_job_status == "4") { ?>
+                                                                            <button style="background-color: #F30606; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Not selected</button>
+                                                                        <?php } else if ($row->candidate_job_status == "5") { ?>
+                                                                            <button style="background-color: #71B7E6; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Training 1</button>
+                                                                        <?php } else if ($row->candidate_job_status == "6") { ?>
+                                                                            <button style="background-color: #5FAEE3; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Training 2</button>
+                                                                        <?php } else if ($row->candidate_job_status == "7") { ?>
+                                                                            <button style="background-color: #45A5E0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Training 3</button>
+                                                                        <?php } else if ($row->candidate_job_status == "8") { ?>
+                                                                            <button style="background-color: #E95D4E; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Work permit</button>
+                                                                        <?php } else if ($row->candidate_job_status == "9") { ?>
+                                                                            <button style="background-color: #F4D03F; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Visa filing</button>
+                                                                        <?php } else if ($row->candidate_job_status == "10") { ?>
+                                                                            <button style="background-color: #3D9CDD; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Training for visa</button>
+                                                                        <?php } else if ($row->candidate_job_status == "11") { ?>
+                                                                            <button style="background-color: #33D176; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Completed</button>
+
+                                                                        <?php } ?>
+
+
+                                                                    </td>
+                                                                    <td><?php echo $row->user_name ?></td>
+                                                                    <td><?php
+                                                                        $timestamp = strtotime($row->candidate_satus_days);
+                                                                        $humanReadableDate = date("F j, Y g:i A", $timestamp);
+
+                                                                        echo $humanReadableDate; ?></td>
+                                                                    <td><?php
+                                                                        $timestamp = strtotime($row->candidate_join_date);
+                                                                        $humanReadableDate = date("F j, Y g:i A", $timestamp);
+
+                                                                        echo $humanReadableDate; ?></td>
+
+
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Basic table card end -->
+
+
+
+
+
+
+
+
 
 
 
@@ -451,6 +416,13 @@
 
 
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#candidate-table').DataTable({
+                "paging": true
+            });
+        });
+    </script>
 
 
 

@@ -42,43 +42,22 @@ class Admin_model extends MY_Model
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function view($id = '', $user_name = '', $user_email = '', $isdeleted = '', $user_mobile = '', $oder_by_column = 'id')
+    public function viewAdmin($user_id = '', $emp_id = '', $user_email = '', $id_deleted = '', $user_role = '', $oder_by_column = 'user_id')
     {
-        if ($id !== "") {
-            $this->db->where('id', $id);
+        if ($user_id !== "") {
+            $this->db->where('user_id', $user_id);
         }
-        if ($user_name !== "") {
-            $this->db->where('user_name=', $user_name);
+        if ($emp_id !== "") {
+            $this->db->where('emp_id=', $emp_id);
         }
         if ($user_email !== "") {
             $this->db->where('user_email', $user_email);
         }
-        if ($isdeleted !== "") {
-            $this->db->where('isDeleted', $isdeleted);
+        if ($id_deleted !== "") {
+            $this->db->where('id_deleted', $id_deleted);
         }
-        if ($user_mobile !== "") {
-            $this->db->where('user_mobile', $user_mobile);
+        if ($user_role !== "") {
+            $this->db->where('user_role', $user_role);
         }
 
         $this->db->order_by($oder_by_column, 'asc');
@@ -86,6 +65,47 @@ class Admin_model extends MY_Model
         // echo $this->db->last_query();
         return $Query->result();
     }
+
+
+
+
+    public function Update($user_id, $data)
+    {
+        $this->db->where('user_id', $user_id);
+        if ($this->db->update($this->table, $data)) {
+            return $this->db->where('user_id', $user_id)->get($this->table)->result_array();
+        } else {
+            return false;
+        }
+        // echo $this->db->last_query();
+    }
+
+
+
+    public function CheckAvailable($user_email)
+    {
+        $count = $this->db->where(['user_email' => $user_email])->where(['id_deleted' => '0'])
+            ->get($this->table);
+
+        if ($count->num_rows()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function Insert($data)
     {
@@ -97,26 +117,8 @@ class Admin_model extends MY_Model
     }
 
 
-    public function CheckAvailable($user_email)
-    {
-        $count = $this->db->where(['user_email' => $user_email])->where(['isDeleted' => '0'])
-            ->get($this->table);
-
-        if ($count->num_rows()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+  
   
 
-    public function Update($user_email, $data)
-    {
-        $this->db->where('user_email', $user_email);
-        if ($this->db->update($this->table, $data)) {
-            return $this->db->where('user_email', $user_email)->get($this->table)->result_array();
-        } else {
-            return false;
-        }
-    }
+
 }

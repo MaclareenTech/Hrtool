@@ -37,170 +37,32 @@ class AddCandidateControllers extends BaseController
         $this->loadViews("admin/candidateInofrmation", $this->global);
     }
 
-    public function ViewCandiateDocument($id,$documentType)
+    public function ViewCandiateDocument($id, $documentType)
     {
         // echo $id;
         // echo $documentType;
         $this->load->model('Candidate_model');
-        $candidate= $this->Candidate_model->ViewCandidateInfo($id);
+        $candidate = $this->Candidate_model->ViewCandidateInfo($id);
         $Document = '';
-        $cognate3Url= '';
-        if($documentType == '0')
-        {
+        $cognate3Url = '';
+        if ($documentType == '0') {
             $Document = $candidate[0]->candidate_aadhar_card;
-            $cognate3Url = "https://maclareenai.com/hrtool/upload/aadhar/".$Document;
-            return Redirect( $cognate3Url);
-        }else if($documentType == '1')
-        {
+            $cognate3Url = "https://maclareenai.com/hrtool/upload/aadhar/" . $Document;
+            return Redirect($cognate3Url);
+        } else if ($documentType == '1') {
             $Document = $candidate[0]->candidate_pan_card;
-            $cognate3Url = "https://maclareenai.com/hrtool/upload/pan/".$Document;
-            return Redirect( $cognate3Url);
-        }
-        else if($documentType == '2')
-        {
+            $cognate3Url = "https://maclareenai.com/hrtool/upload/pan/" . $Document;
+            return Redirect($cognate3Url);
+        } else if ($documentType == '2') {
             $Document = $candidate[0]->candidate_resume;
-            $cognate3Url = "https://maclareenai.com/hrtool/upload/resume/".$Document;
-            return Redirect( $cognate3Url);
-        }
-        else if($documentType == '3')
-        {
+            $cognate3Url = "https://maclareenai.com/hrtool/upload/resume/" . $Document;
+            return Redirect($cognate3Url);
+        } else if ($documentType == '3') {
             $Document = $candidate[0]->candidate_passport;
-            $cognate3Url = "https://maclareenai.com/hrtool/upload/passport/".$Document;
-            return Redirect( $cognate3Url);
+            $cognate3Url = "https://maclareenai.com/hrtool/upload/passport/" . $Document;
+            return Redirect($cognate3Url);
         }
-      
-       
-        
-
-     
     }
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //   public function viewCandidateInformation() {
-    //     $id = $this->input->get('id');
-    //     $this->load->model('Candidate_model');
-    //         $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($id);
-    //         $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('','');
-    //         $this->global['completedCandidate'] = $this->Candidate_model->viewCandidate_count('','11');
-    //         $this->global['pageTitle'] = 'Hr Tool : Admin Dashboard';
-    //         $this->global['name'] = 'Hr Tool : Admin Dashboard';
-    //         $this->loadViews("admin/dashbaord", $this->global);
-    //   }
-
-
-    // public function RegisterCandidate()
-    // {
-
-    //     $candidateName = $this->input->post('candidate_name');
-    //     $candidateEmail = $this->input->post('candidate_email');
-    //     $candidateMobile = $this->input->post('candidate_mobile_no');
-    //     $candidateJobProfile = $this->input->post('candidate_job_profile');
-
-
-    //     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //         $config['upload_path'] = './uploads/';
-    //         $config['allowed_types'] = 'pdf';
-    //         $config['max_size'] = 2048; // Maximum file size in kilobytes
-
-    //         $this->load->library('upload', $config);
-
-    //         // $candidatePanCard = $_FILES['candidate_pan_card'];
-    //         // $candidateAadharCard = $_FILES['candidate_aadhar_card'];
-    //         // $candidatePassport = $_FILES['candidate_passport'];
-    //         // $candidateResume = $_FILES['candidate_resume'];
-
-    //         // Upload candidate_pan_card file
-    //         if ($this->upload->do_upload('candidate_pan_card')) {
-    //             $panCardPath = $config['upload_path'] . 'pancard/';
-    //             $panCardName = $_FILES['candidate_pan_card']['name'];
-    //             move_uploaded_file($candidatePanCard['tmp_name'], $panCardPath . $panCardName);
-    //         } else {
-    //             $error = array('error' => $this->upload->display_errors());
-    //             echo "error candidate_pan_card ";
-    //             error_reporting(E_ALL);
-    //             ini_set('display_errors', 1);
-    //             // Handle file upload error for candidate_pan_card
-    //         }
-
-    //         // Upload candidate_aadhar_card file
-    //         if ($this->upload->do_upload('candidate_aadhar_card')) {
-    //             $aadharCardPath = $config['upload_path'] . 'aadharcard/';
-    //             $aadharCardName = $_FILES['candidate_aadhar_card']['name'];
-    //             move_uploaded_file($candidateAadharCard['tmp_name'], $aadharCardPath . $aadharCardName);
-    //         } else {
-    //             $error = array('error' => $this->upload->display_errors());
-    //             echo "error candidate_aadhar_card ";
-    //             error_reporting(E_ALL);
-    //             ini_set('display_errors', 1);
-    //             // Handle file upload error for candidate_aadhar_card
-    //         }
-
-    //         // Upload candidate_passport file
-    //         if ($this->upload->do_upload('candidate_passport')) {
-    //             $passportPath = $config['upload_path'] . 'passport/';
-    //             $passportName = $_FILES['candidate_passport']['name'];
-    //             move_uploaded_file($candidatePassport['tmp_name'], $passportPath . $passportName);
-    //         } else {
-    //             $error = array('error' => $this->upload->display_errors());
-    //             echo "error candidate_passport ";
-    //             error_reporting(E_ALL);
-    //             ini_set('display_errors', 1);
-    //             // Handle file upload error for candidate_passport
-    //         }
-
-    //         // Upload candidate_resume file
-    //         if ($this->upload->do_upload('candidate_resume')) {
-    //             $resumePath = $config['upload_path'] . 'resume/';
-    //             $resumeName = $_FILES['candidate_resume']['name'];
-    //             move_uploaded_file($candidateResume['tmp_name'], $resumePath . $resumeName);
-    //         } else {
-    //             $error = array('error' => $this->upload->display_errors());
-    //             echo "error candidate_resume ";
-    //             error_reporting(E_ALL);
-    //             ini_set('display_errors', 1);
-    //             // Handle file upload error for candidate_resume
-    //         }
-
-
-    //         // Store file paths in the database
-    //         $fileData = array(
-    //             'candidate_pan_card' => $panCardPath . $panCardName,
-    //             'candidate_aadhar_card' => $aadharCardPath . $aadharCardName,
-    //             'candidate_passport' => $passportPath . $passportName,
-    //             'candidate_resume' => $resumePath . $resumeName
-    //         );
-
-    //         $this->load->model('Candidate_model');
-    //         $result = $this->Candidate_model->InsertNew_Candidate($fileData);
-
-    //         if ($result) {
-    //             redirect('adminDashboard');
-    //         } else {
-    //             echo "error";
-    //         }
-    //     }
-
-
-    // }
-
 
     public function RegisterCandidate()
     {
@@ -310,19 +172,33 @@ class AddCandidateControllers extends BaseController
             'user_role' => '0',
             'user_password' => $hashedPassword
         );
+        $is_new = $this->Admin_model->CheckAvailable($candidate_email);
+        if (!$is_new) {
+            $candidate_id = $this->Candidate_model->InsertNew_Candidate($data);
+            $user_id = $this->Admin_model->InsertNew_User($loginCreate);
 
-        $candidate_id = $this->Candidate_model->InsertNew_Candidate($data);
-        $user_id = $this->Admin_model->InsertNew_User($loginCreate);
+            if ($candidate_id && $user_id) {
+                // Candidate registration successful
+                $role = $this->session->userdata('role');
+                if ($role == "candidate") {
+                    redirect('candidateDashboard');
+                } else   if ($role == "admin") {
+                    redirect('adminDashboard');;
+                } else {
+                    redirect('superadminDashboard');
+                }
+            } else {
+                // Failed to save candidate data
 
-        if ($candidate_id && $user_id) {
-            // Candidate registration successful
-            redirect('adminDashboard');
+                $this->session->set_flashdata('error', 'Failed to register candidate. Please try again.');
+                redirect('addCandidate');
+            }
         } else {
-            // Failed to save candidate data
-            $data['error_message'] = 'Failed to register candidate. Please try again.';
-            // $this->load->view('registration_form', $data);
-            echo 'Failed to register candidate. Please try again.';
+            $this->session->set_flashdata('error', 'Failed to register candidate. Email ID alredy exist');
+            redirect('addCandidate');
         }
+
+
         //  }
     }
 

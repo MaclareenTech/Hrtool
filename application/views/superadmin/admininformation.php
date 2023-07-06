@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Admin Panel</title>
+    <title><?php echo $pageTitle; ?></title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -35,7 +35,11 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/jquery.mCustomScrollbar.css">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
 </head>
+
 
 <body>
 
@@ -167,8 +171,6 @@
                             <div class="pcoded-navigation-label">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-
-
                                     <a href="<?php
                                                 $role = $this->session->userdata('role'); ?>
                                     <?php if ($role == "admin") { ?>
@@ -182,35 +184,28 @@
                                     </a>
                                 </li>
                             </ul>
-
                             <div class="pcoded-navigation-label">Add Candidate</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="active">
+                                <li class="">
                                     <a href="<?php echo base_url(); ?>addCandidate" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="fa-solid fa-user-plus"></i><b>A</b></span>
+                                        <span class="pcoded-micon"><i class="fa-solid fa-user-plus"></i><b>FC</b></span>
                                         <span class="pcoded-mtext">Add Candidate</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                             </ul>
-                            <?php
-                            $role = $this->session->userdata('role'); ?>
-                            <?php if ($role == "admin") { ?>
+                            <div class="pcoded-navigation-label">Admin Details</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="active">
+                                    <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa-solid fa fa-users"></i><b>AD</b></span>
+                                        <span class="pcoded-mtext">Admin Details</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
 
-                            <?php } else { ?>
-                                <div class="pcoded-navigation-label">Admin Details</div>
-                                <ul class="pcoded-item pcoded-left-item">
-                                    <li class="">
-                                        <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="fa-solid fa fa-users"></i><b>AD</b></span>
-                                            <span class="pcoded-mtext">Admin Details</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            <?php } ?>
 
-                        </div>
                     </nav>
                     <div class="pcoded-content">
                         <!-- Page-header start -->
@@ -219,7 +214,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Add Candidate</h5>
+                                            <h5 class="m-b-10">Dashboard</h5>
                                             <p class="m-b-0">Recruitment Management System</p>
                                         </div>
                                     </div>
@@ -228,7 +223,7 @@
                                             <li class="breadcrumb-item">
                                                 <a href="index.html"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Add Candidate</a>
+                                            <li class="breadcrumb-item"><a href="#!">Admin Details</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -245,131 +240,89 @@
 
                         <div class="pcoded-inner-content">
                             <!-- Main-body start -->
+
+
                             <div class="main-body">
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
 
+                                    <!--  Admin table start -->
 
 
+                                    <div class="card">
+                                        <div class="card-header">
 
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <!-- Basic Form Inputs card start -->
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>Add Candidate Information</h5>
-                                                </div>
-                                                <?php
-                                                $this->load->helper('form');
-                                                $error = $this->session->flashdata('error');
-                                                if ($error) {
-                                                ?>
-                                                    <div class="alert alert-danger alert-dismissable">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                        <?php echo $error; ?>
-                                                    </div>
-                                                <?php }
-                                                $success = $this->session->flashdata('success');
-                                                if ($success) {
-                                                ?>
-                                                    <div class="alert alert-success alert-dismissable">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                        <?php echo $success; ?>
-                                                    </div>
-                                                <?php } ?>
-                                                <div class="card-block">
-                                                    <?php echo form_open_multipart('admin/AddCandidateControllers/RegisterCandidate'); ?>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Name </label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_name" placeholder="Ex. john dev" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Email Id</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_email" placeholder="Ex.abc@example.com" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Mobile Number</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_mobile_no" placeholder="Ex.1234567890" pattern="[0-9]{10}" required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Job state</label>
-                                                        <div class="col-sm-9">
-                                                            <select name="candidate_job_profile" class="form-control">
-                                                                <option value="opt1" disabled selected>Select One Value</option>
-                                                                <option value="opt2">Type 2</option>
-                                                                <option value="opt3">Type 3</option>
-                                                                <option value="opt4">Type 4</option>
-                                                                <option value="opt5">Type 5</option>
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Password</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="password" class="form-control" name="candidate_password" placeholder="Enter your password" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Addhar Card </label>
-                                                        <div class="col-sm-9">
-                                                            <input type="file" name="candidate_aadhar_card" accept="application/pdf">
-
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Pan Card </label>
-                                                        <div class="col-sm-9">
-
-                                                            <input type="file" name="candidate_pan_card" accept="application/pdf">
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Passport </label>
-                                                        <div class="col-sm-9">
-
-                                                            <input type="file" name="candidate_passport" accept="application/pdf">
-
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Candidate Resume </label>
-                                                        <div class="col-sm-9">
-
-                                                            <input type="file" name="candidate_resume" accept="application/pdf">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <center> <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button></center>
-                                                        </div>
-
-                                                    </div>
-
-
-
-
-
-                                                    </form>
-
-
-                                                </div>
+                                            <h5>Candidate Details</h5>
+                                            <div style="display: flex; justify-content: flex-end;">
+                                                <a href="<?php echo base_url(); ?>addnewadmin">
+                                                    <button style="background-color: #2ECC71; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        Add New Admin
+                                                    </button>
+                                                </a>
                                             </div>
-                                            <!-- Basic Form Inputs card end -->
+
+                                        </div>
+                                        <div class="card-block table-border-style">
+                                            <div class="table-responsive">
+                                                <div id="candidate-table-container">
+                                                    <table class="table datatable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Admin Name</th>
+                                                                <th>Admin Email</th>
+                                                                <th>Admin Number</th>
+                                                                <th>Emp Id</th>
+                                                                <th>Delete </th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody id="myTable">
+                                                            <?php $counter = 0; ?>
+                                                            <?php foreach ($emp as $row) : ?>
+                                                                <tr>
+                                                                    <?php $counter++; ?>
+                                                                    <td><?php echo $counter; ?></td>
+                                                                    <td><?php echo $row->user_name ?></td>
+                                                                    <td><?php echo $row->user_email ?></td>
+                                                                    <td><?php echo $row->user_mobile ?></td>
+                                                                    <td><?php echo $row->emp_id ?></td>
+                                                                    <td> <?php if ($row->id_deleted == "0") { ?>
+                                                                            <button style="background-color: #2ECC71; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Active</button>
+                                                                        <?php } else if ($row->id_deleted == "1") { ?>
+                                                                            <button style="background-color: #E40505; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Deactive </button>
+                                                                        <?php } ?>
+
+                                                                    <td> <a class="btn btn-default" href="<?php echo base_url('UpdateAdminInformation/' . $row->user_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
+                                                                            <em class="fa fa-pencil"></em>
+                                                                        </a> </td>
+
+                                                                    <!-- <td><a class="btn btn-default"   href="<?php echo base_url('dashboard/AddCandidateControllers/UpdateAdminInformation/?id=' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
+                                                                            <em class="fa fa-pencil"></em>
+                                                                        </a> </td> -->
+
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+
+                                            </div>
                                         </div>
                                     </div>
+                                    <!--  Admin table end -->
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -451,6 +404,13 @@
 
 
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#candidate-table').DataTable({
+                "paging": true
+            });
+        });
+    </script>
 
 
 
