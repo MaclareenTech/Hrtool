@@ -147,7 +147,7 @@ function &DB($params = '', $query_builder_override = NULL)
 	// No DB specified yet? Beat them senseless...
 	if (empty($params['dbdriver']))
 	{
-		show_error('You have not selected a database type to connect to.');
+		show_error('You have Not selected a database type to connect to.');
 	}
 
 	// Load the DB classes. Note: Since the query builder class is optional

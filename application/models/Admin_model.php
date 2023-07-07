@@ -11,7 +11,14 @@ class Admin_model extends MY_Model
 
 
     
-
+    public function InsertAdmin($data)
+    {
+        if ($this->db->insert($this->table, $data)) {
+            return $this->db->insert_id();
+        } else {
+            return false;
+        }
+    }
 
     public function Login($user_email, $user_password)
     {
@@ -107,14 +114,7 @@ class Admin_model extends MY_Model
 
 
 
-    public function Insert($data)
-    {
-        if ($this->db->insert($this->table, $data)) {
-            return $this->db->insert_id();
-        } else {
-            return false;
-        }
-    }
+    
 
 
   

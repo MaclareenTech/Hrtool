@@ -77,6 +77,14 @@ $route['UpdateAdminInformation/(:num)'] = 'admin/DashboardControllers/UpdateAdmi
 
 // candidate
 $route['candidateDashboard'] = 'candidate/CandidateDashboardControllers';
+$route['viewCandidateInformationforUpdate/(:num)'] = 'admin/AddCandidateControllers/viewCandidateInformationforUpdate/$1'; 
+
+// viewCandidateInformationforUpdate
+
+
+
+// mail
+$route['registermail'] = 'mail/RegisterMailControllers/RegisterMail';
 
 
 

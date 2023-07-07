@@ -1584,7 +1584,7 @@ class CI_Email {
 				$temp .= $char;
 			}
 
-			// Add our completed line to the output
+			// Add our Completed line to the output
 			$output .= $temp.$this->crlf;
 		}
 

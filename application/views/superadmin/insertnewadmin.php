@@ -247,7 +247,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Candidate Information</h5>
+                                            <h5 class="m-b-10">Add New Admin</h5>
                                             <p class="m-b-0">Recruitment Management System</p>
                                         </div>
                                     </div>
@@ -256,7 +256,7 @@
                                             <li class="breadcrumb-item">
                                                 <a href="index.html"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!"> Candidate Information</a>
+                                            <li class="breadcrumb-item"><a href="#!">Add New Admin</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -285,7 +285,7 @@
                                             <!-- Basic Form Inputs card start -->
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h5>Update Admin Information</h5>
+                                                    <h5>Add Admin Information</h5>
                                                 </div>
                                                 <div class="card-block">
                                                     <?php
@@ -306,7 +306,7 @@
                                                         <?php echo $success; ?>
                                                     </div>
                                                 <?php } ?>
-                                                    <?php echo form_open_multipart('admin/DashboardControllers/ChangeAdminInformation'); ?>
+                                                    <?php echo form_open_multipart('admin/DashboardControllers/AddAdminInformation'); ?>
                                                     <div class="row">
                                                         <div class="col-xl-4 col-md-4">
                                                             <!-- Basic Form Inputs card start -->
@@ -318,7 +318,7 @@
                                                                     <img id="avatarImg" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="">
                                                                 
 
-                                                                <label for="replaceImage">Replace image</label>
+                                                                <label for="replaceImage">Upload Profile image</label>
                                                                 <input type="file" name="user_profile" id="replaceImage" accept="image/*" onchange="loadImage(event)">
                                                             </div>
 
@@ -351,37 +351,37 @@
                                                             <div class="form-group row">
                                                                 <label class="col-sm-3 col-form-label">Name</label>
                                                                 <div class="col-sm-9">
-                                                                    <input type="text" class="form-control" name="user_name" placeholder="ex.john mohan">
+                                                                    <input type="text" class="form-control" name="user_name" placeholder="ex.john mohan" required>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-sm-3 col-form-label">Email Id</label>
                                                                 <div class="col-sm-9">
-                                                                    <input type="text" class="form-control" name="user_email"  placeholder="ex.john@example.com" >
+                                                                    <input type="text" class="form-control" name="user_email"  placeholder="ex.john@example.com"  required>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-sm-3 col-form-label">Mobile Number</label>
                                                                 <div class="col-sm-9">
-                                                                    <input type="text" class="form-control" name="user_mobile" placeholder="ex.0000000000">
+                                                                    <input type="text" class="form-control" name="user_mobile" placeholder="ex.0000000000" required>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-sm-3 col-form-label">Employee Id</label>
                                                                 <div class="col-sm-9">
-                                                                    <input type="text" class="form-control" name="emp_id" placeholder="ex.xxxxxx">
+                                                                    <input type="text" class="form-control" name="emp_id" placeholder="ex.xxxxxx" required>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-sm-3 col-form-label">Password</label>
                                                                 <div class="col-sm-9">
-                                                                    <input type="password" class="form-control" name="user_password" placeholder="xxxxxxx">
+                                                                    <input type="password" class="form-control" name="user_password" placeholder="xxxxxxx" required>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-sm-3 col-form-label">Role</label>
                                                                 <div class="col-sm-9">
-                                                                    <select class="form-control" name="user_role">
+                                                                    <select class="form-control" name="user_role" required>
                                                                         <option value="admin">Admin</option>
                                                                         <option value="super_admin">Super Admin</option>
                                                                     </select>
