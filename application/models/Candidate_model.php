@@ -31,12 +31,21 @@ class Candidate_model extends MY_Model
     public function InsertNew_Candidate($data)
     {
         if ($this->db->insert($this->table, $data)) {
-            return true;
+            return $this->db->insert_id();
         } else {
             return false;
         }
     }
 
+    public function UpdateCandidate($candidate_id, $data)
+    {
+        $this->db->where('candidate_id', $candidate_id);
+        if ($this->db->update($this->table, $data)) {
+            return $this->db->where('candidate_id', $candidate_id)->get($this->table)->result();
+        } else {
+            return false;
+        }
+    }
 
 
 
@@ -53,9 +62,7 @@ class Candidate_model extends MY_Model
              ->order_by('candidate_job_status', 'asc')->get($this->table);
         return $query->result();
         } else {
-        }
-
-        $query = $this->db->select('tbl_candidate.*,
+            $query = $this->db->select('tbl_candidate.*,
         tbl_user.user_name,
         tbl_user.user_email,
         tbl_user.user_mobile,
@@ -63,6 +70,48 @@ class Candidate_model extends MY_Model
             ->join('tbl_user', 'tbl_candidate.updated_by=tbl_user.user_id')
              ->order_by('candidate_job_status', 'asc')->get($this->table);
         return $query->result();
+        }
+       
+       
+    }
+    public function ViewCandidateInfoForMail($id = '')
+    {
+        if ($id !== "") {
+            $query = $this->db->select('tbl_candidate.*,
+        tbl_user.user_name,
+        tbl_user.user_email,
+        tbl_user.user_mobile,
+        tbl_user.emp_id')->where(['candidate_id' => $id])
+            ->join('tbl_user', 'tbl_candidate.updated_by=tbl_user.user_id')
+             ->order_by('candidate_job_status', 'asc')->get($this->table);
+        return $query->result_array();
+        } else { $query = $this->db->select('tbl_candidate.*,
+            tbl_user.user_name,
+            tbl_user.user_email,
+            tbl_user.user_mobile,
+            tbl_user.emp_id')
+                ->join('tbl_user', 'tbl_candidate.updated_by=tbl_user.user_id')
+                 ->order_by('candidate_job_status', 'asc')->get($this->table);
+            return $query->result_array();
+           
+        }
+       
+       
+    } 
+    
+    
+    public function ViewCandidateInfoUsingId($id)
+    {
+      
+            $query = $this->db->select('tbl_candidate.*,
+        tbl_user.user_name,
+        tbl_user.user_email,
+        tbl_user.user_mobile,
+        tbl_user.emp_id')->where(['candidate_id' => $id])
+            ->join('tbl_user', 'tbl_candidate.updated_by=tbl_user.user_id')
+             ->order_by('candidate_job_status', 'asc')->get($this->table);
+        return $query->result();
+     
     }
 
 

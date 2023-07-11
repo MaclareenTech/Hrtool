@@ -63,6 +63,7 @@ $route['addCandidate'] = 'admin/AddCandidateControllers';
 $route['default_controller'] = 'LoginControllers';
 $route['RegisterCandidate'] = 'admin/AddCandidateControllers/RegisterCandidate';
 $route['ViewCandiateInfo/(:num)'] = 'admin/AddCandidateControllers/viewCandidateInformation/$1'; 
+$route['editCandidateInfo/(:num)'] = 'admin/AddCandidateControllers/viewCandidateInformationforUpdate/$1'; 
 $route['ViewCandiateDocument/(:num)/(:num)'] = 'admin/AddCandidateControllers/ViewCandiateDocument/$1/$2'; 
 
 

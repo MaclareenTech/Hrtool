@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<title><?php echo $pageTitle; ?></title>
+    <title><?php echo $pageTitle; ?></title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -11,7 +11,7 @@
     <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="Codedthemes" />
     <!-- Favicon icon -->
-    <link rel="icon" href="<?php echo base_url(); ?>assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?php echo base_url(); ?>assets/images/fev.png" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
     <!-- waves.css -->
@@ -178,6 +178,7 @@
         background: linear-gradient(135deg, #71B7E6, #9B59B6);
     }
 </style>
+
 <body>
 
     <!-- Pre-loader start -->
@@ -255,7 +256,7 @@
                             </div>
                         </div>
                         <a href="index.html">
-                            <img class="img-fluid" src="<?php echo base_url(); ?>assets/images/logo.png" alt="Theme-Logo" />
+                            <img class="img-fluid" src="<?php echo base_url(); ?>assets/images/logo_new.png" alt="Theme-Logo" />
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -351,136 +352,318 @@
 
 
 
-                                 
+
                                     <div class="wrapper">
                                         <div class="title">Update</div>
-                                        <form action="#">
-                                            <div class="user-details">
-                                                <div class="input-box">
-                                                    <span class="details">Full Name</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->candidate_name ?>" >
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">Job title</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->candidate_job_profile ?>" disabled>
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">E-Mail</span>
-                                                    <input type="email" value="<?php echo $candidate[0]->candidate_email ?>" disabled>
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">Phone Number</span>
-                                                    <input type="number" value="<?php echo $candidate[0]->candidate_mobile_no ?>" >
-                                                </div>
-                                                <div class="button">
-                                                <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Job Sttaus</label>
-                                                        <div class="col-sm-9">
-                                                            <select name="candidate_job_profile" class="form-control">
-                                                                <option value="opt1" disabled selected>Select One Value</option>
-                                                                <option value="0">Screening</option>
-                                                                <option value="1">Waiting for document </option>
-                                                                <option value="2">Sent to recruitment review</option>
-                                                                <option value="3">Shortlisted</option>
-                                                                <option value="4">Not selected</option>
-                                                                <option value="5">Job training 1</option>
-                                                                <option value="6">Job training 2</option>
-                                                                <option value="7">Job training 3</option>
-                                                                <option value="8">Work permit</option>
-                                                                <option value="9">Visa filing</option>
-                                                                <option value="10">tTraining for visa</option>
-                                                                <option value="11">Completed</option>
+                                        <?php
+                                        $this->load->helper('form');
+                                        $error = $this->session->flashdata('error');
+                                        if ($error) {
+                                        ?>
+                                            <div class="alert alert-danger alert-dismissable">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                <?php echo $error; ?>
+                                            </div>
+                                        <?php }
+                                        $success = $this->session->flashdata('success');
+                                        if ($success) {
+                                        ?>
+                                            <div class="alert alert-success alert-dismissable">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                <?php echo $success; ?>
+                                            </div>
+                                        <?php } ?>
+                                        <?php echo form_open_multipart('admin/AddCandidateControllers/UpdateCandidateInformation'); ?>
+                                        <div class="user-details">
+                                            <div class="input-box">
+                                                <span class="details">Full Name</span>
+                                                <input type="text" value="<?php echo $candidate[0]->candidate_name ?>" name="candidate_name">
+                                            </div>
+                                            <div class="input-box">
+                                                <span class="details">Job title</span>
+                                                <input type="text" value="<?php echo $candidate[0]->candidate_job_profile ?>" name="candidate_job_profile" disabled>
+                                            </div>
+                                            <div class="input-box">
+                                                <span class="details">E-Mail</span>
 
-                                                            </select>
-                                                        </div>
+                                                <input type="email" value="<?php echo $candidate[0]->candidate_email ?>" name="candidate_email" disabled>
+                                            </div>
+                                            <div class="input-box">
+                                                <span class="details">Phone Number</span>
+                                                <input type="tel" value="<?php echo $candidate[0]->candidate_mobile_no ?>" name="candidate_mobile_no">
+                                                <input type="text" value="<?php echo $candidateId ?>" style="opacity: 0;" name="candidate_id">
+
+                                            </div>
+
+                                            <!-- <div class="button">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Job Status</label>
+                                                    <div class="col-sm-8">
+                                                        <select name="candidate_job_status" class="form-control" style="border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); background: linear-gradient(to bottom, #f9f9f9, #e8e8e8); outline: none;">
+                                                            <option value="opt1" disabled selected>Select One Value</option>
+                                                            <option value="1">Waiting for document</option>
+                                                            <option value="2">Sent to recruitment review</option>
+                                                            <option value="3">Shortlisted</option>
+                                                            <option value="4">Not selected</option>
+                                                            <option value="5">Job training 1</option>
+                                                            <option value="6">Job training 2</option>
+                                                            <option value="7">Job training 3</option>
+                                                            <option value="8">Work permit</option>
+                                                            <option value="9">Visa filing</option>
+                                                            <option value="10">Training for visa</option>
+                                                            <option value="11">Completed</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <div class="button">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Job Status</label>
+                                                    <div class="col-sm-8">
+                                                        <select name="candidate_job_status" class="form-control" style="border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); background: linear-gradient(to bottom, #f9f9f9, #e8e8e8); outline: none;">
+                                                            <option value="opt1" disabled>Select One Value</option>
+                                                            <option value="1" <?php echo ($candidate[0]->candidate_job_status === '1') ? 'selected' : ''; ?>>Waiting for document</option>
+                                                            <option value="2" <?php echo ($candidate[0]->candidate_job_status === '2') ? 'selected' : ''; ?>>Sent to recruitment review</option>
+                                                            <option value="3" <?php echo ($candidate[0]->candidate_job_status === '3') ? 'selected' : ''; ?>>Shortlisted</option>
+                                                            <option value="4" <?php echo ($candidate[0]->candidate_job_status === '4') ? 'selected' : ''; ?>>Not selected</option>
+                                                            <option value="5" <?php echo ($candidate[0]->candidate_job_status === '5') ? 'selected' : ''; ?>>Job training 1</option>
+                                                            <option value="6" <?php echo ($candidate[0]->candidate_job_status === '6') ? 'selected' : ''; ?>>Job training 2</option>
+                                                            <option value="7" <?php echo ($candidate[0]->candidate_job_status === '7') ? 'selected' : ''; ?>>Job training 3</option>
+                                                            <option value="8" <?php echo ($candidate[0]->candidate_job_status === '8') ? 'selected' : ''; ?>>Work permit</option>
+                                                            <option value="9" <?php echo ($candidate[0]->candidate_job_status === '9') ? 'selected' : ''; ?>>Visa filing</option>
+                                                            <option value="10" <?php echo ($candidate[0]->candidate_job_status === '10') ? 'selected' : ''; ?>>Training for visa</option>
+                                                            <option value="11" <?php echo ($candidate[0]->candidate_job_status === '11') ? 'selected' : ''; ?>>Completed</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
 
 
+                                        </div>
+                                        <?php if ($candidate[0]->candidate_job_status == "0"  || $candidate[0]->candidate_job_status == "1" ) { ?>
                                             <div class="title" style="margin-bottom:20px;">Documents</div>
 
-                                            <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Addhar Card </label>
-                                                        <div class="col-sm-9">
-                                                            <input type="file" name="candidate_aadhar_card" accept="application/pdf">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Upload Addhar Card </label>
+                                            <div class="col-sm-9">
+                                                <input type="file" name="candidate_aadhar_card" accept="application/pdf">
 
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Pan Card </label>
-                                                        <div class="col-sm-9">
-
-                                                            <input type="file" name="candidate_pan_card" accept="application/pdf">
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Passport </label>
-                                                        <div class="col-sm-9">
-
-                                                            <input type="file" name="candidate_passport" accept="application/pdf">
-
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Candidate Resume </label>
-                                                        <div class="col-sm-9">
-
-                                                            <input type="file" name="candidate_resume" accept="application/pdf">
-
-                                                        </div>
-                                                    </div>
-
-                                            <div class="title" style="margin-top: 20px;">Job Training</div>
-                                            <div class="user-details">
-                                                <div class="input-box">
-                                                    <span class="details">URL</span>
-                                                    <input type="text" placeholder="URL" required>
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">Date & time</span>
-                                                    <input type="text" placeholder="Date & time" required>
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">URL</span>
-                                                    <input type="text" placeholder="URL" required>
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">Date & time</span>
-                                                    <input type="text" placeholder="Date & time" required>
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">URL</span>
-                                                    <input type="text" placeholder="URL" required>
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">Date & time</span>
-                                                    <input type="text" placeholder="Date & time" required>
-                                                </div>
 
                                             </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Upload Pan Card </label>
+                                            <div class="col-sm-9">
 
-                                            <div class="title">Visa Training</div>
+                                                <input type="file" name="candidate_pan_card" accept="application/pdf">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Upload Passport </label>
+                                            <div class="col-sm-9">
+
+                                                <input type="file" name="candidate_passport" accept="application/pdf">
+
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Upload Candidate Resume </label>
+                                            <div class="col-sm-9">
+
+                                                <input type="file" name="candidate_resume" accept="application/pdf">
+
+                                            </div>
+                                        </div>
+                                        <?php }  ?>
+
+                                       
+
+                                        <div class="title" style="margin-top: 20px;">Job Training</div>
+
+
+                                       
+                                        <?php if ($candidate[0]->candidate_job_status == "6" || $candidate[0]->candidate_job_status == "7" || $candidate[0]->candidate_job_status == "8"  || $candidate[0]->candidate_job_status == "9" || $candidate[0]->candidate_job_status == "10" || $candidate[0]->candidate_job_status == "11") { ?>
+                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 1</div>
                                             <div class="user-details">
-                                                <div class="input-box">
-                                                    <span class="details">URL</span>
-                                                    <input type="text" placeholder="URL" required>
+
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Url</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_one ?>" disabled>
                                                 </div>
-                                                <div class="input-box">
-                                                    <span class="details">Date & time</span>
-                                                    <input type="text" placeholder="Date & time" required>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Time</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_one_date_time ?>" disabled>
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting ID</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_id ?>" disabled>
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Password</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_password ?>" disabled>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <center> <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button></center>
-                                                        </div>
+                                        <?php } else { ?>
+                                            <div class="user-details">
 
-                                                    </div>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Url</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_one ?>" name="job_training_one">
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Time</span>
+                                                    <input type="datetime-local" value="<?php echo $candidate[0]->job_training_one_date_time ?>" name="job_training_one_date_time">
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting ID</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_id ?>" name="job_training_one_meet_id">
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Password</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_password ?>" name="job_training_one_meet_password">
+                                                </div>
+                                            </div>
+                                        <?php  } ?>
+
+                                        <?php if ($candidate[0]->candidate_job_status == "7" || $candidate[0]->candidate_job_status == "8"  || $candidate[0]->candidate_job_status == "9" || $candidate[0]->candidate_job_status == "10" || $candidate[0]->candidate_job_status == "11") { ?>
+                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 2</div>
+                                            <div class="user-details">
+
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Url</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_two ?>" disabled>
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Time</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_two_date_time ?>" disabled>
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting ID</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_id ?>" disabled>
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Password</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_password ?>" disabled>
+                                                </div>
+                                            </div>
+                                        <?php } else { ?>
+                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 2</div>
+                                            <div class="user-details">
+
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Url</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_two ?>" name="job_training_two">
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Time</span>
+                                                    <input type="datetime-local" value="<?php echo $candidate[0]->job_training_two_date_time ?>" name="job_training_two_date_time">
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting ID</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_id ?>" name="job_training_two_meet_id">
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Password</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_password ?>" name="job_training_two_meet_password">
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                        <?php if ($candidate[0]->candidate_job_status == "8"  || $candidate[0]->candidate_job_status == "9" || $candidate[0]->candidate_job_status == "10" || $candidate[0]->candidate_job_status == "11") { ?>
+                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 3</div>
+                                            <div class="user-details">
+
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Url</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_three ?>" disabled>
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Time</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_three_date_time ?>" disabled>
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting ID</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_three_meet_id ?>" disabled>
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Password</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_three_password ?>" disabled>
+                                                </div>
+                                            </div>
+                                        <?php } else { ?>
+                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 3</div>
+                                            <div class="user-details">
+
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Url</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_three ?>" name="job_training_three">
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Time</span>
+                                                    <input type="datetime-local" value="<?php echo $candidate[0]->job_training_three_date_time ?>" name="job_training_three_date_time">
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting ID</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_three_meet_id ?>" name="job_training_three_meet_id">
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Password</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->job_training_three_password ?>" name="job_training_three_password">
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+
+                                        <br>
+                                        <div class="title">Visa Training</div>
+                                        <?php if ($candidate[0]->candidate_job_status == "11") { ?>
+                                            <div class="user-details">
+
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Url</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->visa_training ?>" disabled>
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Time</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->visa_training_datetime ?>" disabled>
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting ID</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->visa_training_meet_id ?>" disabled>
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Password</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->visa_training_meet_password ?>" disabled>
+                                                </div>
+                                            </div>
+                                        <?php } else { ?>
+                                            <div class="user-details">
+
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Url</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->visa_training ?>" name="visa_training">
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Time</span>
+                                                    <input type="datetime-local" value="<?php echo $candidate[0]->visa_training_datetime ?>" name="visa_training_datetime">
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting ID</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->visa_training_meet_id ?>" name="visa_training_meet_id">
+                                                </div>
+                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                    <span class="details">Meeting Password</span>
+                                                    <input type="text" value="<?php echo $candidate[0]->visa_training_meet_password ?>" name="visa_training_meet_password">
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <center> <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button></center>
+                                            </div>
+
+                                        </div>
                                         </form>
                                     </div>
 
@@ -497,50 +680,7 @@
         </div>
     </div>
     </div>
-    <!-- Warning Section Starts -->
-    <!-- Older IE warning message -->
-    <!--[if lt IE 10]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/chrome.png" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/firefox.png" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/opera.png" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/safari.png" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/ie.png" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
-    <!-- Warning Section Ends -->
+
 
     <!-- Required Jquery -->
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery/jquery.min.js "></script>

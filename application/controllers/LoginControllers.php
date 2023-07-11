@@ -56,17 +56,22 @@ class LoginControllers extends BaseController
                     'isLoggedIn' => TRUE
                 );
 
+
                 if ($res->user_role == "0") {
+
                     $sessionArray['role'] = 'candidate';
+                    $sessionArray['userId'] = $res->table_id;
                     $this->session->set_userdata($sessionArray);
                     redirect('candidateDashboard');
                 } else if ($res->user_role == "1") {
                     $sessionArray['role'] = 'admin';
+                    $sessionArray['userId'] = $res->user_id;
                     $this->session->set_userdata($sessionArray);
 
                     redirect('adminDashboard');
                 } else {
                     $sessionArray['role'] = 'superadmin';
+                    $sessionArray['userId'] = $res->user_id;
                     $this->session->set_userdata($sessionArray);
                     redirect('superadminDashboard');
                 }

@@ -17,7 +17,7 @@
     <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="Codedthemes" />
     <!-- Favicon icon -->
-    <link rel="icon" href="<?php echo base_url(); ?>assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?php echo base_url(); ?>assets/images/fev.png" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
     <!-- waves.css -->
@@ -118,7 +118,7 @@
                             </div>
                         </div>
                         <a href="index.html">
-                            <img class="img-fluid" src="<?php echo base_url(); ?>assets/images/logo.png" alt="Theme-Logo" />
+                            <img class="img-fluid" src="<?php echo base_url(); ?>assets/images/logo_new.png" alt="Theme-Logo" />
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -160,8 +160,8 @@
                                 <div class="main-menu-content">
                                     <ul>
                                         <li class="more-details">
-                                            <a href=""><i class="ti-user"></i>View Profile</a>
-                                            <a href="#!"><i class="ti-settings"></i>Settings</a>
+                                            <!-- <a href=""><i class="ti-user"></i>View Profile</a>
+                                            <a href="#!"><i class="ti-settings"></i>Settings</a> -->
                                             <a href="<?php echo base_url(); ?>logout"><i class="ti-layout-sidebar-left"></i>Logout</a>
                                         </li>
                                     </ul>
@@ -311,9 +311,10 @@
                                                                 <th>Candidate Email</th>
                                                                 <th>Candidate Number</th>
                                                                 <th>Candidate job profile</th>
-                                                                <th>Candidate JOb Status</th>
+                                                                <th>Candidate Jbb Status</th>
                                                                 <th>Status Updated by </th>
                                                                 <th>Candidate Status Updated Date</th>
+                                                                <th>Candidate Status updated days </th>
                                                                 <th>Candidate Register Date Date</th>
 
                                                                 <th></th>
@@ -362,15 +363,27 @@
                                                                     <td><?php echo $row->user_name ?></td>
                                                                     <td><?php
                                                                         $timestamp = strtotime($row->candidate_satus_days);
-                                                                        $humanReadableDate = date("F j, Y g:i A", $timestamp);
+                                                                        $humanReadableDate = date("Y-m-d", $timestamp);
 
                                                                         echo $humanReadableDate; ?></td>
+                                                                    
                                                                     <td><?php
+                                                                        $timestamp = strtotime($row->candidate_satus_days);
+                                                                        $humanReadableDate = date("Y-m-d", $timestamp);
+                                                                        $currentDate = new DateTime();
+                                                                        $targetDate = new DateTime($humanReadableDate);
+                                                                        
+                                                                        $diff = $currentDate->diff($targetDate);
+                                                                        $days = $diff->days;
+                                                                        echo $days; ?></td>
+                                                                    <td>
+                                                                        <?php
                                                                         $timestamp = strtotime($row->candidate_join_date);
-                                                                        $humanReadableDate = date("F j, Y g:i A", $timestamp);
+                                                                        $humanReadableDate = date("Y-m-d", $timestamp);
 
                                                                         echo $humanReadableDate; ?></td>
-                                                                    <td><a class="btn btn-default" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
+
+                                                                    <td><a class="btn btn-default" href="<?php echo base_url('editCandidateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
                                                                             <em class="fa fa-pencil"></em>
                                                                         </a> </td>
                                                                     <td><a class="btn btn-default" href="<?php echo base_url('ViewCandiateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">

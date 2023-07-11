@@ -17,20 +17,11 @@ class CandidateDashboardControllers extends BaseController
         } else {
             $userId = $this->session->userdata('userId');
             $this->load->model('Candidate_model');
+
             $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($userId);
-            $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('', '');
-            $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
             $this->global['pageTitle'] = 'Hr Tool : Candidate Dashboard';
-            $this->global['name'] = 'Hr Tool : Candidate Dashboard';
             $this->global['candidateId'] = $userId;
-            $this->loadViews("candidate/candidatedashbaord", $this->global);
+              $this->loadViews("candidate/candidatedashbaord", $this->global);
         }
     }
-
-
-
-
-
-
-
 }

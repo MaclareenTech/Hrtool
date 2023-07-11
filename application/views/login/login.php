@@ -18,7 +18,7 @@
     <meta name="author" content="Codedthemes" />
     <!-- Favicon icon -->
 
-    <link rel="icon" href="<?php echo base_url(); ?>assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?php echo base_url(); ?>assets/images/fev.png" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
     <!-- Required Fremwork -->
@@ -119,7 +119,7 @@
 
                     <form class="md-float-material form-material" action="<?php echo base_url(); ?>loginMe" method="post">
                         <div class="text-center">
-                            <img src="<?php echo base_url(); ?>assets/images/logo.png" alt="logo.png">
+                            <img src="<?php echo base_url(); ?>assets/images/logo_new.png" alt="logo_new.png">
                         </div>
                         <div class="auth-box card">
                             <div class="card-block">
@@ -164,7 +164,7 @@
                                             <p class="text-inverse text-left"><a href="index.html"><b>Back to website</b></a></p>
                                         </div>
                                         <div class="col-md-2">
-                                            <img src="<?php echo base_url(); ?>assets/images/auth/Logo-small-bottom.png" alt="small-logo.png">
+                                            <img src="<?php echo base_url(); ?>assets/images/auth/Logo-small-bottom.png" alt="small-logo_new.png">
                                         </div>
                                     </div> -->
                             </div>

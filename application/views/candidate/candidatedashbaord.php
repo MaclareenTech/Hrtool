@@ -3,13 +3,7 @@
 
 <head>
     <title><?php echo $pageTitle; ?></title>
-    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 10]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
-    <!-- Meta -->
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,7 +11,7 @@
     <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="Codedthemes" />
     <!-- Favicon icon -->
-    <link rel="icon" href="<?php echo base_url(); ?>assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?php echo base_url(); ?>assets/images/fev.png" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
     <!-- waves.css -->
@@ -35,26 +29,11 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/jquery.mCustomScrollbar.css">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
-    /**{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins",sans-serif;
-}*/
-    /*body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #71B7E6, #9B59B6);
-}*/
+
     .wrapper {
         /*    max-width: 700px;*/
         width: 100%;
@@ -265,7 +244,7 @@
                             </div>
                         </div>
                         <a href="index.html">
-                            <img class="img-fluid" src="<?php echo base_url(); ?>assets/images/logo.png" alt="Theme-Logo" />
+                            <img class="img-fluid" src="<?php echo base_url(); ?>assets/images/logo_new.png" alt="Theme-Logo" />
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -294,16 +273,13 @@
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?><i class="fa fa-caret-down"></i></span>
                                     </div>
-                                    
                                 </div>
                                 <div class="main-menu-content">
                                     <ul>
                                         <li class="more-details">
-                                           
                                             <a href="<?php echo base_url(); ?>logout"><i class="ti-layout-sidebar-left"></i>Logout</a>
                                         </li>
                                     </ul>
@@ -356,142 +332,17 @@
 
 
                         <div class="pcoded-inner-content">
-
+                            <!-- Main-body start -->
                             <div class="main-body">
                                 <div class="page-wrapper">
-
-
-
-
-
-                                    <!-- <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>Add Candidate Informv hchation</h5>
-                                                </div>
-                                                <div class="card-block">
-                                                    <?php echo form_open_multipart('dashboard/AddCandidateControllers/RegisterCandidate'); ?>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Name </label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_name" value="<?php echo $candidate[0]->candidate_name ?>" disabled>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Email Id</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_name" value="<?php echo $candidate[0]->candidate_email ?>" disabled>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Mobile Number</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_name" value="<?php echo $candidate[0]->candidate_mobile_no ?>" disabled>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Job state</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_name" value="<?php echo $candidate[0]->candidate_job_profile ?>" disabled>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Addhar Card </label>
-                                                        <div class="col-sm-9">
-
-                                                            <?php if ($candidate[0]->candidate_aadhar_card != "") { ?>
-                                                                <div class="form-group row">
-                                                                    <div class="col-sm-6">
-                                                                        <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/0'); ?>" style="background-color: #4CAF50;border: none;color: white;padding: 8px 16px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px; margin: 4px 2px; transition-duration: 0.4s;cursor: pointer;border-radius: 4px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);transform-style: preserve-3d;perspective: 1000px;transform: translateZ(10px);">
-                                                                            View Document
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="col-sm-6" style=" margin-top: 10px;">
-                                                                        <input type="file" name="candidate_aadhar_card" accept="application/pdf">
-                                                                    </div>
-                                                                </div>
-                                                            <?php } ?>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Pan Card </label>
-                                                        <div class="col-sm-9">
-                                                            <?php if ($candidate[0]->candidate_pan_card != "") { ?>
-                                                                <div class="form-group row">
-                                                                    <div class="col-sm-6">
-                                                                        <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/1'); ?>" style="background-color: #4CAF50; border: none;color: white;padding: 8px 16px; text-align: center;text-decoration: none;display: inline-block;font-size: 14px;  margin: 4px 2px;transition-duration: 0.4s;cursor: pointer;border-radius: 4px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);transform-style: preserve-3d; perspective: 1000px;transform: translateZ(10px); ">
-                                                                            View Document
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="col-sm-6" style=" margin-top: 10px;">
-                                                                        <input type="file" name="candidate_pan_card" accept="application/pdf">
-                                                                    </div>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Passport </label>
-                                                        <div class="col-sm-9">
-                                                            <?php if ($candidate[0]->candidate_passport != "") { ?>
-                                                                <div class="form-group row">
-                                                                    <div class="col-sm-6">
-                                                                        <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/3'); ?>" style="background-color: #4CAF50; border: none;color: white;padding: 8px 16px; text-align: center;text-decoration: none;display: inline-block;font-size: 14px; margin: 4px 2px;transition-duration: 0.4s;cursor: pointer;border-radius: 4px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); transform-style: preserve-3d; perspective: 1000px; transform: translateZ(10px); ">
-                                                                            View Document
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="col-sm-6" style=" margin-top: 10px;">
-                                                                        <input type="file" name="candidate_passport" accept="application/pdf">
-                                                                    </div>
-                                                                </div>
-                                                            <?php } ?>
-
-
-
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Candidate Resume </label>
-                                                        <div class="col-sm-9">
-                                                        <?php if ($candidate[0]->candidate_resume != "") { ?>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-6">
-                                                                    <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/2'); ?>" style="background-color: #4CAF50;border: none;color: white;padding: 8px 16px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px; margin: 4px 2px;transition-duration: 0.4s; cursor: pointer; border-radius: 4px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); transform-style: preserve-3d;  perspective: 1000px;  transform: translateZ(10px);">
-                                                                        View Document
-                                                                    </a>
-                                                                </div>
-                                                                <div class="col-sm-6" style=" margin-top: 10px;">
-                                                                    <input type="file" name="candidate_resume" accept="application/pdf">>
-                                                                </div>
-                                                            </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <center> <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button></center>
-                                                        </div>
-
-                                                   </div>
-                                                   </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>  -->
-
+                                    <!-- Page-body start -->
 
 
 
 
 
                                     <div class="wrapper">
-                                        <div class="title">Registration</div>
+                                        <div class="title">Candidate Information</div>
                                         <form action="#">
                                             <div class="user-details">
                                                 <div class="input-box">
@@ -510,34 +361,59 @@
                                                     <span class="details">Phone Number</span>
                                                     <input type="number" value="<?php echo $candidate[0]->candidate_mobile_no ?>" disabled>
                                                 </div>
+
                                                 <div class="button">
                                                     <?php if ($candidate[0]->candidate_job_status == "0") { ?>
-                                                        <button style="background-color: #FA3B3B; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Screening</button>
+                                                        <button style="background-color: #FA3B3B; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                            <span style="font-weight: bold;">Job Status:</span> Screening
+                                                        </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "1") { ?>
-                                                        <button style="background-color: #CF70FF; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Waiting for document </button>
+                                                        <button style="background-color: #CF70FF; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                            <span style="font-weight: bold;">Job Status:</span> Waiting for document
+                                                        </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "2") { ?>
-                                                        <button style="background-color: #7D23FA; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Sent to recruitment review</button>
+                                                        <button style="background-color: #7D23FA; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                            <span style="font-weight: bold;">Job Status:</span> Sent to recruitment review
+                                                        </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "3") { ?>
-                                                        <button style="background-color: #14A2FA; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Shortlisted</button>
+                                                        <button style="background-color: #14A2FA; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                            <span style="font-weight: bold;">Job Status:</span> Shortlisted
+                                                        </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "4") { ?>
-                                                        <button style="background-color: #F30606; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Not selected</button>
+                                                        <button style="background-color: #F30606; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                            <span style="font-weight: bold;">Job Status:</span> Not selected
+                                                        </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "5") { ?>
-                                                        <button style="background-color: #71B7E6; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job training 1</button>
+                                                        <button style="background-color: #71B7E6; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                            <span style="font-weight: bold;">Job Status:</span> Job training 1
+                                                        </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "6") { ?>
-                                                        <button style="background-color: #5FAEE3; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job training 2</button>
+                                                        <button style="background-color: #5FAEE3; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                            <span style="font-weight: bold;">Job Status:</span> Job training 2
+                                                        </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "7") { ?>
-                                                        <button style="background-color: #45A5E0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job training 3</button>
+                                                        <button style="background-color: #45A5E0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                            <span style="font-weight: bold;">Job Status:</span> Job training 3
+                                                        </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "8") { ?>
-                                                        <button style="background-color: #E95D4E; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Work permit</button>
+                                                        <button style="background-color: #E95D4E; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                            <span style="font-weight: bold;">Job Status:</span> Work permit
+                                                        </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "9") { ?>
-                                                        <button style="background-color: #F4D03F; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Visa filing</button>
+                                                        <button style="background-color: #F4D03F; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                            <span style="font-weight: bold;">Job Status:</span> Visa filing
+                                                        </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "10") { ?>
-                                                        <button style="background-color: #3D9CDD; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">TTraining for visa</button>
+                                                        <button style="background-color: #3D9CDD; color: white;border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                            <span style="font-weight: bold;">Job Status:</span> Training for visa
+                                                        </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "11") { ?>
-                                                        <button style="background-color: #33D176; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Completed</button>
-
+                                                        <button style="background-color: #33D176; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                            <span style="font-weight: bold;">Job Status:</span> Completed
+                                                        </button>
                                                     <?php } ?>
                                                 </div>
+
                                             </div>
 
 
@@ -575,69 +451,118 @@
                                                 </a>
 
                                             <?php } ?>
-                                                <?php if ($candidate[0]->candidate_resume != "") { ?>
+                                            <?php if ($candidate[0]->candidate_resume != "") { ?>
 
                                                 <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/2'); ?>" style="background: linear-gradient(135deg, #71B7E6, #9B59B6);border: none;color: white;padding: 8px 16px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px; margin: 4px 2px;transition-duration: 0.4s; cursor: pointer; border-radius: 4px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); transform-style: preserve-3d;  perspective: 1000px;  transform: translateZ(10px);">
                                                     View Resume
                                                 </a>
 
                                             <?php } ?>
-                                            <!-- <?php if ($candidate[0]->candidate_resume != "") { ?>
-                                                <?php } ?> -->
-
                                             <div class="title" style="margin-top: 20px;">Job Training</div>
-                                            <div class="user-details">
-                                                <div class="input-box">
-                                                    <span class="details">URL</span>
-                                                    <input type="text" placeholder="URL" required>
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">Date & time</span>
-                                                    <input type="text" placeholder="Date & time" required>
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">URL</span>
-                                                    <input type="text" placeholder="URL" required>
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">Date & time</span>
-                                                    <input type="text" placeholder="Date & time" required>
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">URL</span>
-                                                    <input type="text" placeholder="URL" required>
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">Date & time</span>
-                                                    <input type="text" placeholder="Date & time" required>
-                                                </div>
 
-                                            </div>
+                                            <?php if ($candidate[0]->job_training_one != "") { ?>
+                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 1</div>
+                                                <div class="user-details">
 
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                        <span class="details">Meeting Url</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one ?>" disabled>
+                                                    </div>
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                        <span class="details">Meeting Time</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one_date_time ?>" disabled>
+                                                    </div>
+                                                    <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
+                                                        <span class="details">Meeting ID</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_id ?>" disabled>
+                                                    </div>
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                        <span class="details">Meeting Password</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_password ?>" disabled>
+                                                    </div>
+                                                </div>
+                                            <?php } ?>
+
+                                            <?php if ($candidate[0]->job_training_two != "") { ?>
+                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 2</div>
+                                                <div class="user-details">
+
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                        <span class="details">Meeting Url</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two ?>" disabled>
+                                                    </div>
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                        <span class="details">Meeting Time</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two_date_time ?>" disabled>
+                                                    </div>
+                                                    <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
+                                                        <span class="details">Meeting ID</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_id ?>" disabled>
+                                                    </div>
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                        <span class="details">Meeting Password</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_password ?>" disabled>
+                                                    </div>
+                                                </div>
+                                            <?php } ?>
+                                            <?php if ($candidate[0]->job_training_three != "") { ?>
+                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 3</div>
+                                                <div class="user-details">
+
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                        <span class="details">Meeting Url</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_three ?>" disabled>
+                                                    </div>
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                        <span class="details">Meeting Time</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_three_date_time ?>" disabled>
+                                                    </div>
+                                                    <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
+                                                        <span class="details">Meeting ID</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_three_meet_id ?>" disabled>
+                                                    </div>
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                        <span class="details">Meeting Password</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_three_password ?>" disabled>
+                                                    </div>
+                                                </div>
+                                            <?php } ?>
+
+                                            <br>
                                             <div class="title">Visa Training</div>
-                                            <div class="user-details">
-                                                <div class="input-box">
-                                                    <span class="details">URL</span>
-                                                    <input type="text" placeholder="URL" required>
+
+                                            <?php if ($candidate[0]->visa_training != "") { ?>
+                                                <div class="user-details">
+
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                        <span class="details">Meeting Url</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->visa_training ?>" disabled>
+                                                    </div>
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                        <span class="details">Meeting Time</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->visa_training_datetime ?>" disabled>
+                                                    </div>
+                                                    <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
+                                                        <span class="details">Meeting ID</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->visa_training_meet_id ?>" disabled>
+                                                    </div>
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                        <span class="details">Meeting Password</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->visa_training_meet_password ?>" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="input-box">
-                                                    <span class="details">Date & time</span>
-                                                    <input type="text" placeholder="Date & time" required>
-                                                </div>
-                                            </div>
+                                            <?php } ?>
 
                                         </form>
                                     </div>
 
 
-                                </div>
 
+                                </div>
+                                <!-- Page-body end -->
                             </div>
                             <div id="styleSelector"> </div>
                         </div>
-
-
-
                     </div>
                 </div>
             </div>
@@ -714,6 +639,7 @@
 
 
 </body>
+
 
 
 
