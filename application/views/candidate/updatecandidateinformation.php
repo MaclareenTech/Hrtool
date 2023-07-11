@@ -44,7 +44,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #71B7E6, #9B59B6);
+    background: #434341;
 }*/
     .wrapper {
         /*    max-width: 700px;*/
@@ -67,7 +67,7 @@
         bottom: 0;
         height: 3px;
         width: 40px;
-        background: linear-gradient(135deg, #71B7E6, #9B59B6);
+        background: #434341;
     }
 
     .wrapper form .user-details {
@@ -132,11 +132,11 @@
         cursor: pointer;
         border-radius: 5px;
         letter-spacing: 1px;
-        background: linear-gradient(135deg, #71B7E6, #9B59B6);
+        background: #434341;
     }
 
     form .button input:hover {
-        background: linear-gradient(-135deg, #71B7E6, #9B59B6);
+        background: linear-gradient(-135deg, #C0C0C0, #9B59B6);
     }
 
     /* Media Query */
@@ -175,7 +175,7 @@
         cursor: pointer;
         border-radius: 5px;
         letter-spacing: 1px;
-        background: linear-gradient(135deg, #71B7E6, #9B59B6);
+        background: #434341;
     }
 </style>
 
@@ -256,7 +256,7 @@
                             </div>
                         </div>
                         <a href="index.html">
-                            <img class="img-fluid" src="<?php echo base_url(); ?>assets/images/logo_new.png" alt="Theme-Logo" />
+                        <img class="img-fluid" src="https://maclareenai.com/hrtool/assets/images/logo_new.png" alt="Theme-Logo" style="  width: 160px;">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -285,9 +285,18 @@
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
+                                <?php
+                                    $role = $this->session->userdata('role'); ?>
+                                    <?php if ($role == "admin") { ?>
+                                        <?php if ($this->session->userdata('user_profile') == "") { ?>
+                                            <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
+
+                                        <?php } else { ?>
+                                            <img class="img-80 img-radius" src="<?php echo "https://maclareenai.com/hrtool/upload/profile/" . $this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
+                                        <?php } ?>
+                                    <?php } ?>
                                     <div class="user-details">
-                                        <span id="more-details"><?php echo $this->session->userdata('name');; ?><i class="fa fa-caret-down"></i></span>
+                                        <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
                                     </div>
                                 </div>
 
@@ -707,10 +716,6 @@
 
 
 </body>
-
-
-
-
 
 
 </html>

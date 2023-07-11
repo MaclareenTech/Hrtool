@@ -27,16 +27,6 @@ class DashboardControllers extends BaseController
 
 
 
-
-
-
-
-
-
-
-
-
-
     public function AdminInformation()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
@@ -55,7 +45,6 @@ class DashboardControllers extends BaseController
 
 
 
-
     public function UpdateAdminInformation($id)
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
@@ -71,11 +60,6 @@ class DashboardControllers extends BaseController
             $this->loadViews("superadmin/updateadmininformation", $this->global);
         }
     }
-
-
-
-
-
 
 
 
@@ -143,8 +127,7 @@ class DashboardControllers extends BaseController
     }
 
 
-
-
+    
     public function AddAdminInformation()
     {
         $this->load->helper('form');
@@ -188,7 +171,7 @@ class DashboardControllers extends BaseController
         }
         // Upload profile
 
-       // print_r($data);
+        // print_r($data);
 
 
         $is_new = $this->Admin_model->CheckAvailable($user_email);

@@ -49,49 +49,49 @@
         border-radius: 50%;
         object-fit: cover;
     }
-  
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
 
-.switch input[type="checkbox"] {
-  display: none;
-}
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: .4s;
-  border-radius: 34px;
-}
+    .switch input[type="checkbox"] {
+        display: none;
+    }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: .4s;
-  border-radius: 50%;
-}
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+    }
 
-input[type="checkbox"]:checked + .slider {
-  background-color: #2ECC71;
-}
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
 
-input[type="checkbox"]:checked + .slider:before {
-  transform: translateX(26px);
-}
+    input[type="checkbox"]:checked+.slider {
+        background-color: #2ECC71;
+    }
+
+    input[type="checkbox"]:checked+.slider:before {
+        transform: translateX(26px);
+    }
 
 
     /* .left label {
@@ -184,7 +184,7 @@ input[type="checkbox"]:checked + .slider:before {
                             </div>
                         </div>
                         <a href="index.html">
-                            <img class="img-fluid" src="<?php echo base_url(); ?>assets/images/logo_new.png" alt="Theme-Logo" />
+                            <img class="img-fluid" src="https://maclareenai.com/hrtool/assets/images/logo_new.png" alt="Theme-Logo" style="  width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -213,9 +213,9 @@ input[type="checkbox"]:checked + .slider:before {
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
+
                                     <div class="user-details">
-                                        <span id="more-details"><?php echo $this->session->userdata('name');; ?><i class="fa fa-caret-down"></i></span>
+                                        <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
                                     </div>
                                 </div>
 
@@ -288,24 +288,24 @@ input[type="checkbox"]:checked + .slider:before {
                                                     <h5>Update Admin Information</h5>
                                                 </div>
                                                 <div class="card-block">
-                                                <?php
-                                                $this->load->helper('form');
-                                                $error = $this->session->flashdata('error');
-                                                if ($error) {
-                                                ?>
-                                                    <div class="alert alert-danger alert-dismissable">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                        <?php echo $error; ?>
-                                                    </div>
-                                                <?php }
-                                                $success = $this->session->flashdata('success');
-                                                if ($success) {
-                                                ?>
-                                                    <div class="alert alert-success alert-dismissable">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                        <?php echo $success; ?>
-                                                    </div>
-                                                <?php } ?>
+                                                    <?php
+                                                    $this->load->helper('form');
+                                                    $error = $this->session->flashdata('error');
+                                                    if ($error) {
+                                                    ?>
+                                                        <div class="alert alert-danger alert-dismissable">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <?php echo $error; ?>
+                                                        </div>
+                                                    <?php }
+                                                    $success = $this->session->flashdata('success');
+                                                    if ($success) {
+                                                    ?>
+                                                        <div class="alert alert-success alert-dismissable">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <?php echo $success; ?>
+                                                        </div>
+                                                    <?php } ?>
                                                     <?php echo form_open_multipart('admin/DashboardControllers/ChangeAdminInformation'); ?>
                                                     <div class="row">
                                                         <div class="col-xl-4 col-md-4">
@@ -380,7 +380,7 @@ input[type="checkbox"]:checked + .slider:before {
                                                                     <input type="text" class="form-control" name="emp_id" value="<?php echo $emp[0]->emp_id ?>">
                                                                 </div>
                                                             </div>
-                                                            
+
 
 
 
@@ -433,50 +433,7 @@ input[type="checkbox"]:checked + .slider:before {
         </div>
     </div>
     </div>
-    <!-- Warning Section Starts -->
-    <!-- Older IE warning message -->
-    <!--[if lt IE 10]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/chrome.png" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/firefox.png" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/opera.png" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/safari.png" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/ie.png" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
-    <!-- Warning Section Ends -->
+
 
     <!-- Required Jquery -->
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery/jquery.min.js "></script>
@@ -503,9 +460,6 @@ input[type="checkbox"]:checked + .slider:before {
 
 
 </body>
-
-
-
 
 
 

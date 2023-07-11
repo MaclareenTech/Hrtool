@@ -6,194 +6,197 @@ class AddCandidateControllers extends BaseController
 {
 
 
-    public function index()
-    {
-        $isLoggedIn = $this->session->userdata('isLoggedIn');
+  public function index()
+  {
+    $isLoggedIn = $this->session->userdata('isLoggedIn');
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+    if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
 
-            $this->global['pageTitle'] = 'Hr Tool : Login';
-            $this->loadViews("login/login", $this->global);
-        } else {
+      $this->global['pageTitle'] = 'Hr Tool : Login';
+      $this->loadViews("login/login", $this->global);
+    } else {
 
-            $this->global['pageTitle'] = 'Hr Tool : Add candidate';
+      $this->global['pageTitle'] = 'Hr Tool : Add candidate';
 
-            $this->loadViews("admin/addcandidate", $this->global);
-        }
+      $this->loadViews("admin/addcandidate", $this->global);
     }
+  }
 
 
 
-    public function viewCandidateInformation($id)
-    {
-        //echo $id;
-        $this->load->model('Candidate_model');
-        $this->load->model('Admin_model');
-        $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($id);
-        $this->global['log'] = $this->Admin_model->ViewCandidateInfoLog($id);
-        $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('', '');
-        $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
-        $this->global['pageTitle'] = 'Hr Tool : Admin Dashboard';
-        $this->global['name'] = 'Hr Tool : Admin Dashboard';
-        $this->global['candidateId'] = $id;
-        $this->loadViews("admin/candidateInofrmation", $this->global);
+  public function viewCandidateInformation($id)
+  {
+    //echo $id;
+    $this->load->model('Candidate_model');
+    $this->load->model('Admin_model');
+    $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($id);
+    $this->global['log'] = $this->Admin_model->ViewCandidateInfoLog($id);
+    $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('', '');
+    $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
+    $this->global['pageTitle'] = 'Hr Tool : Candidate Information';
+    $this->global['candidateId'] = $id;
+    $this->loadViews("admin/candidateInofrmation", $this->global);
+  }
+
+
+
+  public function ViewCandiateDocument($id, $documentType)
+  {
+    // echo $id;
+    // echo $documentType;
+    $this->load->model('Candidate_model');
+    $candidate = $this->Candidate_model->ViewCandidateInfo($id);
+    $Document = '';
+    $cognate3Url = '';
+    if ($documentType == '0') {
+      $Document = $candidate[0]->candidate_aadhar_card;
+      $cognate3Url = "https://maclareenai.com/hrtool/upload/aadhar/" . $Document;
+      return Redirect($cognate3Url);
+    } else if ($documentType == '1') {
+      $Document = $candidate[0]->candidate_pan_card;
+      $cognate3Url = "https://maclareenai.com/hrtool/upload/pan/" . $Document;
+      return Redirect($cognate3Url);
+    } else if ($documentType == '2') {
+      $Document = $candidate[0]->candidate_resume;
+      $cognate3Url = "https://maclareenai.com/hrtool/upload/resume/" . $Document;
+      return Redirect($cognate3Url);
+    } else if ($documentType == '3') {
+      $Document = $candidate[0]->candidate_passport;
+      $cognate3Url = "https://maclareenai.com/hrtool/upload/passport/" . $Document;
+      return Redirect($cognate3Url);
     }
-
-    public function ViewCandiateDocument($id, $documentType)
-    {
-        // echo $id;
-        // echo $documentType;
-        $this->load->model('Candidate_model');
-        $candidate = $this->Candidate_model->ViewCandidateInfo($id);
-        $Document = '';
-        $cognate3Url = '';
-        if ($documentType == '0') {
-            $Document = $candidate[0]->candidate_aadhar_card;
-            $cognate3Url = "https://maclareenai.com/hrtool/upload/aadhar/" . $Document;
-            return Redirect($cognate3Url);
-        } else if ($documentType == '1') {
-            $Document = $candidate[0]->candidate_pan_card;
-            $cognate3Url = "https://maclareenai.com/hrtool/upload/pan/" . $Document;
-            return Redirect($cognate3Url);
-        } else if ($documentType == '2') {
-            $Document = $candidate[0]->candidate_resume;
-            $cognate3Url = "https://maclareenai.com/hrtool/upload/resume/" . $Document;
-            return Redirect($cognate3Url);
-        } else if ($documentType == '3') {
-            $Document = $candidate[0]->candidate_passport;
-            $cognate3Url = "https://maclareenai.com/hrtool/upload/passport/" . $Document;
-            return Redirect($cognate3Url);
-        }
-    }
-
-    public function RegisterCandidate()
-    {
-        // Load necessary helpers and libraries
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-
-        // Validate form fields
-        $this->form_validation->set_rules('candidate_name', 'Candidate Name', 'required');
-        $this->form_validation->set_rules('candidate_email', 'Candidate Email', 'required|valid_email');
-        $this->form_validation->set_rules('candidate_mobile_no', 'Candidate Mobile Number', 'required|regex_match[/^[0-9]{10}$/]');
-        $this->form_validation->set_rules('candidate_job_profile', 'Job Profile', 'required');
-        $this->form_validation->set_rules('candidate_password', 'Job Profile', 'required');
-
-        // Check if form validation passes
-        // if ($this->form_validation->run() == FALSE) {
-        //     // If validation fails, reload the form view with error messages
-        //     $this->load->view('registration_form');
-        // } else {
-        // Get the form input values
-        $candidate_name = $this->input->post('candidate_name');
-        $candidate_email = $this->input->post('candidate_email');
-        $candidate_mobile_no = $this->input->post('candidate_mobile_no');
-        $candidate_job_profile = $this->input->post('candidate_job_profile');
-        $candidate_password = $this->input->post('candidate_password');
-        $hashedPassword = md5($candidate_password);
-
-        // Upload files
-        $config['upload_path'] = './upload/';
-        $config['allowed_types'] = 'pdf';
-        $this->load->library('upload', $config);
-
-        $uploaded_files = array();
-        $upload_errors = false;
+  }
 
 
-        $this->load->model('Candidate_model');
-        $this->load->model('Admin_model');
-        $Admin_id = $this->session->userdata('userId');
-        date_default_timezone_set("Asia/Kolkata");
-        $today = date("Y-m-d H:i:s");
-        $data = array(
-            'candidate_name' => $candidate_name,
-            'candidate_email' => $candidate_email,
-            'candidate_mobile_no' => $candidate_mobile_no,
-            'candidate_job_profile' => $candidate_job_profile,
-            'updated_by' => $Admin_id,
-            'candidate_satus_days' => $today,
-            'candidate_password' => $hashedPassword
+
+  public function RegisterCandidate()
+  {
+    // Load necessary helpers and libraries
+    $this->load->helper('form');
+    $this->load->library('form_validation');
+
+    // Validate form fields
+    $this->form_validation->set_rules('candidate_name', 'Candidate Name', 'required');
+    $this->form_validation->set_rules('candidate_email', 'Candidate Email', 'required|valid_email');
+    $this->form_validation->set_rules('candidate_mobile_no', 'Candidate Mobile Number', 'required|regex_match[/^[0-9]{10}$/]');
+    $this->form_validation->set_rules('candidate_job_profile', 'Job Profile', 'required');
+    $this->form_validation->set_rules('candidate_password', 'Job Profile', 'required');
+
+    // Check if form validation passes
+    // if ($this->form_validation->run() == FALSE) {
+    //     // If validation fails, reload the form view with error messages
+    //     $this->load->view('registration_form');
+    // } else {
+    // Get the form input values
+    $candidate_name = $this->input->post('candidate_name');
+    $candidate_email = $this->input->post('candidate_email');
+    $candidate_mobile_no = $this->input->post('candidate_mobile_no');
+    $candidate_job_profile = $this->input->post('candidate_job_profile');
+    $candidate_password = $this->input->post('candidate_password');
+    $hashedPassword = md5($candidate_password);
+
+    // Upload files
+    $config['upload_path'] = './upload/';
+    $config['allowed_types'] = 'pdf';
+    $this->load->library('upload', $config);
+
+    $uploaded_files = array();
+    $upload_errors = false;
+
+
+    $this->load->model('Candidate_model');
+    $this->load->model('Admin_model');
+    $Admin_id = $this->session->userdata('userId');
+    date_default_timezone_set("Asia/Kolkata");
+    $today = date("Y-m-d H:i:s");
+    $data = array(
+      'candidate_name' => $candidate_name,
+      'candidate_email' => $candidate_email,
+      'candidate_mobile_no' => $candidate_mobile_no,
+      'candidate_job_profile' => $candidate_job_profile,
+      'updated_by' => $Admin_id,
+      'candidate_satus_days' => $today,
+      'candidate_password' => $hashedPassword
+    );
+
+
+
+    // // If any file upload encountered errors, display an error message
+    // if ($upload_errors) {
+    //     $data['error_message'] = $this->upload->display_errors();
+    //     // $this->load->view('registration_form', $data);
+    //     echo $this->upload->display_errors();
+    //     return;
+    // }
+
+    // Save the form data and uploaded file paths to the database
+
+
+
+    $is_new = $this->Admin_model->CheckAvailable($candidate_email);
+    if (!$is_new) {
+      // Upload Aadhar Card
+      if ($this->upload->do_upload('candidate_aadhar_card')) {
+        $file_name = $candidate_email . '_aadhar.pdf';
+        $uploaded_files['aadhar_card'] = $file_name;
+        rename($this->upload->data('full_path'), './upload/aadhar/' . $file_name);
+        $data['candidate_aadhar_card'] = $uploaded_files['aadhar_card'];
+      } else {
+        // $upload_errors = true;
+      }
+
+      // Upload Pan Card
+      if ($this->upload->do_upload('candidate_pan_card')) {
+        $file_name = $candidate_email . '_pan.pdf';
+        $uploaded_files['pan_card'] = $file_name;
+        rename($this->upload->data('full_path'), './upload/pan/' . $file_name);
+        $data['candidate_pan_card'] = $uploaded_files['pan_card'];
+      } else {
+        //  $upload_errors = true;
+      }
+
+      // Upload Passport
+      if ($this->upload->do_upload('candidate_passport')) {
+        $file_name = $candidate_email . '_passport.pdf';
+        $uploaded_files['passport'] = $file_name;
+        rename($this->upload->data('full_path'), './upload/passport/' . $file_name);
+        $data['candidate_passport'] = $uploaded_files['passport'];
+      } else {
+        // $upload_errors = true;
+      }
+
+      // Upload Candidate Resume
+      if ($this->upload->do_upload('candidate_resume')) {
+        $file_name = $candidate_email . '_resume.pdf';
+        $uploaded_files['resume'] = $file_name;
+        rename($this->upload->data('full_path'), './upload/resume/' . $file_name);
+        $data['candidate_resume'] = $uploaded_files['resume'];
+      } else {
+        //   $upload_errors = true;
+      }
+      $candidate_id = $this->Candidate_model->InsertNew_Candidate($data);
+
+
+      if ($candidate_id) {
+
+
+        $loginCreate = array(
+          'user_name' => $candidate_name,
+          'user_email' => $candidate_email,
+          'user_mobile' => $candidate_mobile_no,
+          'user_role' => '0',
+          'table_id' => $candidate_id,
+          'user_password' => $hashedPassword
         );
+        $Logdata = array(
+          'candidate_id' => $candidate_id,
+          'admin_id' => $Admin_id,
+          'status' => '0'
+        );
+        $test = $this->Admin_model->InsertLog($Logdata);
+        $user_id = $this->Admin_model->InsertNew_User($loginCreate);
 
-
-
-        // // If any file upload encountered errors, display an error message
-        // if ($upload_errors) {
-        //     $data['error_message'] = $this->upload->display_errors();
-        //     // $this->load->view('registration_form', $data);
-        //     echo $this->upload->display_errors();
-        //     return;
-        // }
-
-        // Save the form data and uploaded file paths to the database
-
-
-
-        $is_new = $this->Admin_model->CheckAvailable($candidate_email);
-        if (!$is_new) {
-            // Upload Aadhar Card
-            if ($this->upload->do_upload('candidate_aadhar_card')) {
-                $file_name = $candidate_email . '_aadhar.pdf';
-                $uploaded_files['aadhar_card'] = $file_name;
-                rename($this->upload->data('full_path'), './upload/aadhar/' . $file_name);
-                $data['candidate_aadhar_card'] = $uploaded_files['aadhar_card'];
-            } else {
-                // $upload_errors = true;
-            }
-
-            // Upload Pan Card
-            if ($this->upload->do_upload('candidate_pan_card')) {
-                $file_name = $candidate_email . '_pan.pdf';
-                $uploaded_files['pan_card'] = $file_name;
-                rename($this->upload->data('full_path'), './upload/pan/' . $file_name);
-                $data['candidate_pan_card'] = $uploaded_files['pan_card'];
-            } else {
-                //  $upload_errors = true;
-            }
-
-            // Upload Passport
-            if ($this->upload->do_upload('candidate_passport')) {
-                $file_name = $candidate_email . '_passport.pdf';
-                $uploaded_files['passport'] = $file_name;
-                rename($this->upload->data('full_path'), './upload/passport/' . $file_name);
-                $data['candidate_passport'] = $uploaded_files['passport'];
-            } else {
-                // $upload_errors = true;
-            }
-
-            // Upload Candidate Resume
-            if ($this->upload->do_upload('candidate_resume')) {
-                $file_name = $candidate_email . '_resume.pdf';
-                $uploaded_files['resume'] = $file_name;
-                rename($this->upload->data('full_path'), './upload/resume/' . $file_name);
-                $data['candidate_resume'] = $uploaded_files['resume'];
-            } else {
-                //   $upload_errors = true;
-            }
-            $candidate_id = $this->Candidate_model->InsertNew_Candidate($data);
-
-
-            if ($candidate_id) {
-
-
-                $loginCreate = array(
-                    'user_name' => $candidate_name,
-                    'user_email' => $candidate_email,
-                    'user_mobile' => $candidate_mobile_no,
-                    'user_role' => '0',
-                    'table_id' => $candidate_id,
-                    'user_password' => $hashedPassword
-                );
-                $Logdata = array(
-                  'candidate_id' => $candidate_id,
-                  'admin_id' => $Admin_id,
-                  'status' => '0'
-              );
-              $test = $this->Admin_model->InsertLog($Logdata);
-                $user_id = $this->Admin_model->InsertNew_User($loginCreate);
-
-                $registerMessage = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        $registerMessage = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><meta content="width=device-width, initial-scale=1" name="viewport"><title> Welcome Email</title><!-- Designed by https://github.com/kaytcat --><!-- Robot header image designed by Freepik.com --><style type="text/css">
                   @import url(https://fonts.googleapis.com/css?family=Nunito);
@@ -329,302 +332,298 @@ class AddCandidateControllers extends BaseController
                 </tbody></table>
                 </body></html>';
 
-                $this->load->config('email');
-                $this->load->library('email');
-                $subject = 'Recruitment Management System -  Candidate Register';
-                //	$token = $email_exist->emp_id;
-                $this->email->from('maclareendata@gmail.com', 'Recruitment Management System -  Candidate Registe');
-                $this->email->to($candidate_email);
-                $this->email->subject($subject);
-                $this->email->message($registerMessage);
-                $this->email->set_mailtype("html");
-                $sendemail = $this->email->send();
+        $this->load->config('email');
+        $this->load->library('email');
+        $subject = 'Recruitment Management System -  Candidate Register';
+        //	$token = $email_exist->emp_id;
+        $this->email->from('maclareendata@gmail.com', 'Recruitment Management System -  Candidate Registe');
+        $this->email->to($candidate_email);
+        $this->email->subject($subject);
+        $this->email->message($registerMessage);
+        $this->email->set_mailtype("html");
+        $sendemail = $this->email->send();
 
-                // echo $candidate_email;
-                // echo $sendemail;
+        // echo $candidate_email;
+        // echo $sendemail;
 
-                // Candidate registration successful
-                $role = $this->session->userdata('role');
-                if ($role == "candidate") {
-                    redirect('candidateDashboard');
-                } else   if ($role == "admin") {
-                    redirect('adminDashboard');;
-                } else {
-                    redirect('superadminDashboard');
-                }
-
-                //  redirect('registermail');
-            } else {
-                // Failed to save candidate data
-
-                $this->session->set_flashdata('error', 'Failed to register candidate. Please try again.');
-                redirect('addCandidate');
-            }
+        // Candidate registration successful
+        $role = $this->session->userdata('role');
+        if ($role == "candidate") {
+          redirect('candidateDashboard');
+        } else   if ($role == "admin") {
+          redirect('adminDashboard');;
         } else {
-            $this->session->set_flashdata('error', 'Failed to register candidate. Email ID alredy exist');
-            redirect('addCandidate');
+          redirect('superadminDashboard');
         }
 
+        //  redirect('registermail');
+      } else {
+        // Failed to save candidate data
 
-        //  }
+        $this->session->set_flashdata('error', 'Failed to register candidate. Please try again.');
+        redirect('addCandidate');
+      }
+    } else {
+      $this->session->set_flashdata('error', 'Failed to register candidate. Email ID alredy exist');
+      redirect('addCandidate');
     }
 
 
-    // Custom validation callback function to check if a file is uploaded
-    public function check_file($value)
-    {
-        if (empty($_FILES[$value]['name'])) {
-            $this->form_validation->set_message('check_file', 'Please select a file for ' . $value . '.');
-            echo 'Please select a file for ' . $value . '.';
-            return FALSE;
-        }
-        return TRUE;
+    //  }
+  }
+
+
+
+  public function check_file($value)
+  {
+    if (empty($_FILES[$value]['name'])) {
+      $this->form_validation->set_message('check_file', 'Please select a file for ' . $value . '.');
+      echo 'Please select a file for ' . $value . '.';
+      return FALSE;
     }
-    public function loginMe()
-    {
-        $this->load->library('form_validation');
-        $this->load->model('Admin_model');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|trim');
-        $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]');
+    return TRUE;
+  }
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->index();
-        } else {
-            $email = $this->input->post('email');
-            $password = $this->input->post('password');
 
-            $result = $this->Admin_model->Login($email, $password);
 
-            if (count($result) > 0) {
-                foreach ($result as $res) {
-                    $sessionArray = array(
-                        'userId' => $res->user_id,
-                        'user_email' => $res->user_email,
-                        'name' => $res->user_name,
-                        'isLoggedIn' => TRUE
-                    );
+  public function loginMe()
+  {
+    $this->load->library('form_validation');
+    $this->load->model('Admin_model');
+    $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|trim');
+    $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]');
 
-                    $this->session->set_userdata($sessionArray);
+    if ($this->form_validation->run() == FALSE) {
+      $this->index();
+    } else {
+      $email = $this->input->post('email');
+      $password = $this->input->post('password');
 
-                    redirect('admin/dashbaord');
-                }
-            } else {
-                $this->session->set_flashdata('error', 'Email or password mismatch');
+      $result = $this->Admin_model->Login($email, $password);
 
-                redirect('LoginControllers');
-            }
+      if (count($result) > 0) {
+        foreach ($result as $res) {
+          $sessionArray = array(
+            'userId' => $res->user_id,
+            'user_email' => $res->user_email,
+            'name' => $res->user_name,
+            'isLoggedIn' => TRUE
+          );
+
+          $this->session->set_userdata($sessionArray);
+
+          redirect('admin/dashbaord');
         }
+      } else {
+        $this->session->set_flashdata('error', 'Email or password mismatch');
+
+        redirect('LoginControllers');
+      }
+    }
+  }
+
+
+  public function UpdateCandidateInformation()
+  {
+    // Load necessary helpers and libraries
+    $this->load->helper('form');
+    $this->load->library('form_validation');
+    $this->load->model('Candidate_model');
+    $this->load->model('Admin_model');
+    // Validate form fields
+    $this->form_validation->set_rules('candidate_name', 'Candidate Name', 'required');
+    $this->form_validation->set_rules('candidate_mobile_no', 'Candidate Mobile Number', 'required|regex_match[/^[0-9]{10}$/]');
+    $this->form_validation->set_rules('candidate_job_status', 'Job status', 'required');
+
+
+    $candidate_name = $this->input->post('candidate_name');
+
+    $candidate_mobile_no = $this->input->post('candidate_mobile_no');
+    $candidate_id = $this->input->post('candidate_id');
+    $candidate_job_status = $this->input->post('candidate_job_status');
+
+    $job_training_one = $this->input->post('job_training_one');
+    $job_training_one_date_time = $this->input->post('job_training_one_date_time');
+    $job_training_one_meet_id = $this->input->post('candidate_id');
+    $job_training_one_meet_password = $this->input->post('job_training_one_meet_password');
+
+
+    $job_training_two = $this->input->post('job_training_two');
+    $job_training_two_date_time = $this->input->post('job_training_two_date_time');
+    $job_training_two_meet_id = $this->input->post('job_training_two_meet_id');
+    $job_training_two_meet_password = $this->input->post('job_training_two_meet_password');
+
+
+
+    $job_training_three = $this->input->post('job_training_three');
+    $job_training_three_date_time = $this->input->post('job_training_three_date_time');
+    $job_training_three_meet_id = $this->input->post('job_training_three_meet_id');
+    $job_training_three_password = $this->input->post('job_training_three_password');
+
+
+    $visa_training = $this->input->post('visa_training');
+    $visa_training_datetime = $this->input->post('visa_training_datetime');
+    $visa_training_meet_id = $this->input->post('visa_training_meet_id');
+    $visa_training_meet_password = $this->input->post('visa_training_meet_password');
+    $Admin_id = $this->session->userdata('userId');
+    $candidate = $this->Candidate_model->ViewCandidateInfoForMail($candidate_id);
+    $candidate_email = $candidate[0]['candidate_email'];
+    $candidate_job_profile = $candidate[0]['candidate_job_profile'];
+
+    $job_training_onedatetime = new DateTime($job_training_one_date_time);
+    $job_training_one_humanReadable = $job_training_onedatetime->format('F j, Y \a\t h:i A');
+
+
+    $job_training_twodatetime = new DateTime($job_training_two_date_time);
+    $job_training_two_humanReadable = $job_training_twodatetime->format('F j, Y \a\t h:i A');
+
+    $job_training_threedatetime = new DateTime($job_training_three_date_time);
+    $job_training_three_humanReadable = $job_training_threedatetime->format('F j, Y \a\t h:i A');
+
+
+    $job_training_visadatetime = new DateTime($visa_training_datetime);
+    $job_training_visa_humanReadable = $job_training_visadatetime->format('F j, Y \a\t h:i A');
+
+    date_default_timezone_set("Asia/Kolkata");
+    $today = date("Y-m-d H:i:s");
+    $data = array(
+      'candidate_name' => $candidate_name,
+      'candidate_mobile_no' => $candidate_mobile_no,
+      'updated_by' => $Admin_id,
+      'candidate_satus_days' => $today,
+      'candidate_job_status' => $candidate_job_status
+    );
+    if ($candidate_job_status == "opt1" || $candidate_job_status == "") {
+      $this->session->set_flashdata('error', 'Failed to update candidate. Please select valid Status.');
+      redirect('editCandidateInfo/' . $candidate_id);
+    }
+    if ($candidate_job_status == 5) {
+      if ($job_training_one == '' ||  $job_training_one_date_time == '' || $job_training_one_meet_id == '' || $job_training_one_meet_password == '') {
+        $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
+        redirect('editCandidateInfo/' . $candidate_id);
+      } else {
+        $data['job_training_one'] = $job_training_one;
+        $data['job_training_one_date_time'] = $job_training_one_humanReadable;
+        $data['job_training_one_meet_password'] = $job_training_one_meet_password;
+        $data['job_training_one_meet_id'] = $job_training_one_meet_id;
+      }
+    }
+    if ($candidate_job_status == 6) {
+      if ($job_training_two == '' ||  $job_training_two_date_time == '' || $job_training_two_meet_id == '' || $job_training_two_meet_password == '') {
+        $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
+        redirect('editCandidateInfo/' . $candidate_id);
+      } else {
+        $data['job_training_two'] = $job_training_two;
+        $data['job_training_two_date_time'] = $job_training_two_humanReadable;
+        $data['job_training_two_meet_id'] = $job_training_two_meet_id;
+        $data['job_training_two_meet_password'] = $job_training_two_meet_password;
+      }
+    }
+    if ($candidate_job_status == 7) {
+      if ($job_training_three == '' ||  $job_training_three_date_time == '' || $job_training_three_meet_id == '' || $job_training_three_password == '') {
+        $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
+        redirect('editCandidateInfo/' . $candidate_id);
+      } else {
+        $data['job_training_three'] = $job_training_three;
+        $data['job_training_three_date_time'] = $job_training_three_humanReadable;
+        $data['job_training_three_meet_id'] = $job_training_three_meet_id;
+        $data['job_training_three_password'] = $job_training_three_password;
+      }
+    }
+    if ($candidate_job_status == 10) {
+      if ($visa_training == '' ||  $visa_training_datetime == '' || $visa_training_meet_id == '' || $visa_training_meet_password == '') {
+        $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
+        redirect('editCandidateInfo/' . $candidate_id);
+      } else {
+        $data['visa_training'] = $visa_training;
+        $data['visa_training_datetime'] = $job_training_visa_humanReadable;
+        $data['visa_training_meet_id'] = $visa_training_meet_id;
+        $data['visa_training_meet_password'] = $visa_training_meet_password;
+      }
+    }
+    // if ($candidate_job_status == 1 || $candidate_job_status == 2 || $candidate_job_status == 3 || $candidate_job_status == 4) {
+    //     if ($job_training_one != '' ||  $job_training_one_date_time != '' || $job_training_one_meet_id != '' || $job_training_one_meet_password != '' || $job_training_two != '' ||  $job_training_two_date_time != '' || $job_training_two_meet_id != '' || $job_training_two_meet_password != '' || $job_training_three != '' ||  $job_training_three_date_time != '' || $job_training_three_meet_id != '' || $job_training_three_password != ''  || $visa_training != '' ||  $visa_training_datetime != '' || $visa_training_meet_id != '' || $visa_training_meet_password != '') {
+    //         $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
+    //         redirect('editCandidateInfo/' . $candidate_id);
+    //     }
+    // }
+
+
+
+
+
+
+    //Upload files
+    $config['upload_path'] = './upload/';
+    $config['allowed_types'] = 'pdf';
+    $this->load->library('upload', $config);
+
+    $uploaded_files = array();
+    $upload_errors = false;;
+
+    $Logdata = array(
+      'candidate_id' => $candidate_id,
+      'admin_id' => $Admin_id,
+      'status' => $candidate_job_status
+    );
+
+
+    $candidate_aadhar_card = '';
+    $candidate_pan_card = '';
+    $candidate_passport =  '';
+    $candidate_resume =  '';
+
+    // Upload Aadhar Card
+    if ($this->upload->do_upload('candidate_aadhar_card')) {
+      $file_name = $candidate_email . '_aadhar.pdf';
+      $uploaded_files['aadhar_card'] = $file_name;
+      rename($this->upload->data('full_path'), './upload/aadhar/' . $file_name);
+      $data['candidate_aadhar_card'] = $uploaded_files['aadhar_card'];
+      $candidate_aadhar_card = $uploaded_files['aadhar_card'];
+    } else {
+      // $upload_errors = true;
     }
 
+    // Upload Pan Card
+    if ($this->upload->do_upload('candidate_pan_card')) {
+      $file_name = $candidate_email . '_pan.pdf';
+      $uploaded_files['pan_card'] = $file_name;
+      rename($this->upload->data('full_path'), './upload/pan/' . $file_name);
+      $data['candidate_pan_card'] = $uploaded_files['pan_card'];
+      $candidate_pan_card =  $uploaded_files['pan_card'];
+    } else {
+      //  $upload_errors = true;
+    }
 
+    // Upload Passport
+    if ($this->upload->do_upload('candidate_passport')) {
+      $file_name = $candidate_email . '_passport.pdf';
+      $uploaded_files['passport'] = $file_name;
+      rename($this->upload->data('full_path'), './upload/passport/' . $file_name);
+      $data['candidate_passport'] = $uploaded_files['passport'];
+      $candidate_passport = $uploaded_files['passport'];
+    } else {
+      // $upload_errors = true;
+    }
 
+    // Upload Candidate Resume
+    if ($this->upload->do_upload('candidate_resume')) {
+      $file_name = $candidate_email . '_resume.pdf';
+      $uploaded_files['resume'] = $file_name;
+      rename($this->upload->data('full_path'), './upload/resume/' . $file_name);
+      $data['candidate_resume'] = $uploaded_files['resume'];
+      $candidate_resume = $uploaded_files['resume'];
+    } else {
+      //   $upload_errors = true;
+    }
+    $candidate_id = $this->Candidate_model->UpdateCandidate($candidate_id, $data);
+    $candidateMail = "";
+    if ($candidate_id) {
 
+      if ($candidate_job_status == 1) {
+        $subject = 'Recruitment Management System -  Waiting for document ';
 
-    public function UpdateCandidateInformation()
-    {
-        // Load necessary helpers and libraries
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $this->load->model('Candidate_model');
-        $this->load->model('Admin_model');
-        // Validate form fields
-        $this->form_validation->set_rules('candidate_name', 'Candidate Name', 'required');
-        $this->form_validation->set_rules('candidate_mobile_no', 'Candidate Mobile Number', 'required|regex_match[/^[0-9]{10}$/]');
-        $this->form_validation->set_rules('candidate_job_status', 'Job status', 'required');
-
-
-        $candidate_name = $this->input->post('candidate_name');
-
-        $candidate_mobile_no = $this->input->post('candidate_mobile_no');
-        $candidate_id = $this->input->post('candidate_id');
-        $candidate_job_status = $this->input->post('candidate_job_status');
-
-        $job_training_one = $this->input->post('job_training_one');
-        $job_training_one_date_time = $this->input->post('job_training_one_date_time');
-        $job_training_one_meet_id = $this->input->post('candidate_id');
-        $job_training_one_meet_password = $this->input->post('job_training_one_meet_password');
-
-
-        $job_training_two = $this->input->post('job_training_two');
-        $job_training_two_date_time = $this->input->post('job_training_two_date_time');
-        $job_training_two_meet_id = $this->input->post('job_training_two_meet_id');
-        $job_training_two_meet_password = $this->input->post('job_training_two_meet_password');
-
-
-
-        $job_training_three = $this->input->post('job_training_three');
-        $job_training_three_date_time = $this->input->post('job_training_three_date_time');
-        $job_training_three_meet_id = $this->input->post('job_training_three_meet_id');
-        $job_training_three_password = $this->input->post('job_training_three_password');
-
-
-        $visa_training = $this->input->post('visa_training');
-        $visa_training_datetime = $this->input->post('visa_training_datetime');
-        $visa_training_meet_id = $this->input->post('visa_training_meet_id');
-        $visa_training_meet_password = $this->input->post('visa_training_meet_password');
-        $Admin_id = $this->session->userdata('userId');
-        $candidate = $this->Candidate_model->ViewCandidateInfoForMail($candidate_id);
-        $candidate_email = $candidate[0]['candidate_email'];
-        $candidate_job_profile = $candidate[0]['candidate_job_profile'];
-
-        $job_training_onedatetime = new DateTime($job_training_one_date_time);
-      $job_training_one_humanReadable = $job_training_onedatetime->format('F j, Y \a\t h:i A');
-
-
-      $job_training_twodatetime = new DateTime($job_training_two_date_time);
-      $job_training_two_humanReadable = $job_training_twodatetime->format('F j, Y \a\t h:i A');
-
-      $job_training_threedatetime = new DateTime($job_training_three_date_time);
-      $job_training_three_humanReadable = $job_training_threedatetime->format('F j, Y \a\t h:i A');
-
-
-      $job_training_visadatetime = new DateTime($visa_training_datetime);
-      $job_training_visa_humanReadable = $job_training_visadatetime->format('F j, Y \a\t h:i A');
-
-        date_default_timezone_set("Asia/Kolkata");
-        $today = date("Y-m-d H:i:s");
-        $data = array(
-            'candidate_name' => $candidate_name,
-            'candidate_mobile_no' => $candidate_mobile_no,
-            'updated_by' => $Admin_id,
-            'candidate_satus_days' => $today,
-            'candidate_job_status' => $candidate_job_status
-        );
-           if($candidate_job_status =="opt1" || $candidate_job_status =="")
-           {
-            $this->session->set_flashdata('error', 'Failed to update candidate. Please select valid Status.');
-                redirect('editCandidateInfo/' . $candidate_id);
-           }
-        if ($candidate_job_status == 5) {
-            if ($job_training_one == '' ||  $job_training_one_date_time == '' || $job_training_one_meet_id == '' || $job_training_one_meet_password == '') {
-                $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
-                redirect('editCandidateInfo/' . $candidate_id);
-            } else {
-                $data['job_training_one'] = $job_training_one;
-                $data['job_training_one_date_time'] = $job_training_one_humanReadable;
-                $data['job_training_one_meet_password'] = $job_training_one_meet_password;
-                $data['job_training_one_meet_id'] = $job_training_one_meet_id;
-            }
-        }
-        if ($candidate_job_status == 6) {
-            if ($job_training_two == '' ||  $job_training_two_date_time == '' || $job_training_two_meet_id == '' || $job_training_two_meet_password == '') {
-                $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
-                redirect('editCandidateInfo/' . $candidate_id);
-            } else {
-                $data['job_training_two'] = $job_training_two;
-                $data['job_training_two_date_time'] = $job_training_two_humanReadable;
-                $data['job_training_two_meet_id'] = $job_training_two_meet_id;
-                $data['job_training_two_meet_password'] = $job_training_two_meet_password;
-            }
-        }
-        if ($candidate_job_status == 7) {
-            if ($job_training_three == '' ||  $job_training_three_date_time == '' || $job_training_three_meet_id == '' || $job_training_three_password == '') {
-                $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
-                redirect('editCandidateInfo/' . $candidate_id);
-            } else {
-                $data['job_training_three'] = $job_training_three;
-                $data['job_training_three_date_time'] = $job_training_three_humanReadable;
-                $data['job_training_three_meet_id'] = $job_training_three_meet_id;
-                $data['job_training_three_password'] = $job_training_three_password;
-            }
-        }
-        if ($candidate_job_status == 10) {
-            if ($visa_training == '' ||  $visa_training_datetime == '' || $visa_training_meet_id == '' || $visa_training_meet_password == '') {
-                $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
-                redirect('editCandidateInfo/' . $candidate_id);
-            } else {
-                $data['visa_training'] = $visa_training;
-                $data['visa_training_datetime'] = $job_training_visa_humanReadable;
-                $data['visa_training_meet_id'] = $visa_training_meet_id;
-                $data['visa_training_meet_password'] = $visa_training_meet_password;
-            }
-        }
-        // if ($candidate_job_status == 1 || $candidate_job_status == 2 || $candidate_job_status == 3 || $candidate_job_status == 4) {
-        //     if ($job_training_one != '' ||  $job_training_one_date_time != '' || $job_training_one_meet_id != '' || $job_training_one_meet_password != '' || $job_training_two != '' ||  $job_training_two_date_time != '' || $job_training_two_meet_id != '' || $job_training_two_meet_password != '' || $job_training_three != '' ||  $job_training_three_date_time != '' || $job_training_three_meet_id != '' || $job_training_three_password != ''  || $visa_training != '' ||  $visa_training_datetime != '' || $visa_training_meet_id != '' || $visa_training_meet_password != '') {
-        //         $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
-        //         redirect('editCandidateInfo/' . $candidate_id);
-        //     }
-        // }
-
-
-
-
-
-
-        //Upload files
-        $config['upload_path'] = './upload/';
-        $config['allowed_types'] = 'pdf';
-        $this->load->library('upload', $config);
-
-        $uploaded_files = array();
-        $upload_errors = false;
-
-
-      ;
-
-        $Logdata = array(
-            'candidate_id' => $candidate_id,
-            'admin_id' => $Admin_id,
-            'status' => $candidate_job_status
-        );
-
-
-        $candidate_aadhar_card = '';
-        $candidate_pan_card = '';
-        $candidate_passport =  '';
-        $candidate_resume =  '';
-
-        // Upload Aadhar Card
-        if ($this->upload->do_upload('candidate_aadhar_card')) {
-            $file_name = $candidate_email . '_aadhar.pdf';
-            $uploaded_files['aadhar_card'] = $file_name;
-            rename($this->upload->data('full_path'), './upload/aadhar/' . $file_name);
-            $data['candidate_aadhar_card'] = $uploaded_files['aadhar_card'];
-            $candidate_aadhar_card = $uploaded_files['aadhar_card'];
-        } else {
-            // $upload_errors = true;
-        }
-
-        // Upload Pan Card
-        if ($this->upload->do_upload('candidate_pan_card')) {
-            $file_name = $candidate_email . '_pan.pdf';
-            $uploaded_files['pan_card'] = $file_name;
-            rename($this->upload->data('full_path'), './upload/pan/' . $file_name);
-            $data['candidate_pan_card'] = $uploaded_files['pan_card'];
-            $candidate_pan_card =  $uploaded_files['pan_card'];
-        } else {
-            //  $upload_errors = true;
-        }
-
-        // Upload Passport
-        if ($this->upload->do_upload('candidate_passport')) {
-            $file_name = $candidate_email . '_passport.pdf';
-            $uploaded_files['passport'] = $file_name;
-            rename($this->upload->data('full_path'), './upload/passport/' . $file_name);
-            $data['candidate_passport'] = $uploaded_files['passport'];
-            $candidate_passport = $uploaded_files['passport'];
-        } else {
-            // $upload_errors = true;
-        }
-
-        // Upload Candidate Resume
-        if ($this->upload->do_upload('candidate_resume')) {
-            $file_name = $candidate_email . '_resume.pdf';
-            $uploaded_files['resume'] = $file_name;
-            rename($this->upload->data('full_path'), './upload/resume/' . $file_name);
-            $data['candidate_resume'] = $uploaded_files['resume'];
-            $candidate_resume = $uploaded_files['resume'];
-        } else {
-            //   $upload_errors = true;
-        }
-        $candidate_id = $this->Candidate_model->UpdateCandidate($candidate_id, $data);
-        $candidateMail = "";
-        if ($candidate_id) {
-
-            if ($candidate_job_status == 1) {
-              $subject = 'Recruitment Management System -  Waiting for document ';
-
-                $candidateMail = '
+        $candidateMail = '
                     <!DOCTYPE html>
                     <html>
                     <head>
@@ -694,19 +693,19 @@ class AddCandidateControllers extends BaseController
                           <p>I recently registered you for the ' . $candidate_job_profile . ' job profile. Please let me know when you are submitting all the documents.</p>
                           <p>Following is the document list:</p>
                           <ol class="document-list">';
-                if ($candidate_aadhar_card == "") {
-                    $candidateMail .= '<li>Aadhar Card</li>';
-                }
-                if ($candidate_pan_card == "") {
-                    $candidateMail .= '<li>PAN Card</li>';
-                }
-                if ($candidate_passport == "") {
-                    $candidateMail .= '<li>Passport</li>';
-                }
-                if ($candidate_resume == "") {
-                    $candidateMail .= '<li>Resume</li>';
-                }
-                $candidateMail .= '</ol>
+        if ($candidate_aadhar_card == "") {
+          $candidateMail .= '<li>Aadhar Card</li>';
+        }
+        if ($candidate_pan_card == "") {
+          $candidateMail .= '<li>PAN Card</li>';
+        }
+        if ($candidate_passport == "") {
+          $candidateMail .= '<li>Passport</li>';
+        }
+        if ($candidate_resume == "") {
+          $candidateMail .= '<li>Resume</li>';
+        }
+        $candidateMail .= '</ol>
                           <p>Once you send all the documents, I will start the further process for your job profile. Kindly share your documents as soon as possible.</p>
                         </div>
                         <div class="footer">
@@ -716,11 +715,11 @@ class AddCandidateControllers extends BaseController
                       </div>
                     </body>
                     </html>';
-            }
-            if ($candidate_job_status == 2) {
-              $subject = 'Recruitment Management System -  Sent to recruitment review ';
+      }
+      if ($candidate_job_status == 2) {
+        $subject = 'Recruitment Management System -  Sent to recruitment review ';
 
-                $candidateMail = '
+        $candidateMail = '
                     <!DOCTYPE html>
                     <html>
                     <head>
@@ -742,7 +741,7 @@ class AddCandidateControllers extends BaseController
                     
                         /* Heading styles */
                         h1 {
-                          color: #448AFF;
+                          color: #989898;
                           font-size: 24px;
                           margin-top: 0;
                         }
@@ -757,7 +756,7 @@ class AddCandidateControllers extends BaseController
                         /* Button styles */
                         .button {
                           display: inline-block;
-                          background-color: #448AFF;
+                          background-color: #989898;
                           color: #ffffff;
                           text-decoration: none;
                           padding: 10px 20px;
@@ -789,10 +788,10 @@ class AddCandidateControllers extends BaseController
                     </body>
                     </html>
                     ';
-            }
-            if ($candidate_job_status == 3) {
-              $subject = 'Recruitment Management System -  Shortlisted ';
-                $candidateMail = '
+      }
+      if ($candidate_job_status == 3) {
+        $subject = 'Recruitment Management System -  Shortlisted ';
+        $candidateMail = '
                     <!DOCTYPE html>
                     <html>
                     <head>
@@ -814,7 +813,7 @@ class AddCandidateControllers extends BaseController
                     
                         /* Heading styles */
                         h1 {
-                          color: #448AFF;
+                          color: #989898;
                           font-size: 24px;
                           margin-top: 0;
                         }
@@ -829,7 +828,7 @@ class AddCandidateControllers extends BaseController
                         /* Button styles */
                         .button {
                           display: inline-block;
-                          background-color: #448AFF;
+                          background-color: #989898;
                           color: #ffffff;
                           text-decoration: none;
                           padding: 10px 20px;
@@ -863,10 +862,10 @@ class AddCandidateControllers extends BaseController
                     </html>
                     
                     ';
-            }
-            if ($candidate_job_status == 4) {
-              $subject = 'Recruitment Management System -  Not selected ';
-                $candidateMail = '
+      }
+      if ($candidate_job_status == 4) {
+        $subject = 'Recruitment Management System -  Not selected ';
+        $candidateMail = '
                     <!DOCTYPE html>
                             <html>
                             <head>
@@ -904,7 +903,7 @@ class AddCandidateControllers extends BaseController
                         }
 
                         .reasons li {
-                            color: #448AFF;
+                            color: #989898;
                             font-size: 16px;
                             line-height: 1.5;
                             margin-bottom: 10px;
@@ -931,10 +930,10 @@ class AddCandidateControllers extends BaseController
 
                     
                     ';
-            }
-            if ($candidate_job_status == 5) {
-              $subject = 'Recruitment Management System -  Job training 1 ';
-                $candidateMail = '
+      }
+      if ($candidate_job_status == 5) {
+        $subject = 'Recruitment Management System -  Job training 1 ';
+        $candidateMail = '
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -1012,7 +1011,7 @@ class AddCandidateControllers extends BaseController
                     /* Add color and 3D effect to specific elements */
                 
                     .header h1 {
-                      color: #448AFF;
+                      color: #989898;
                       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
                     }
                 
@@ -1022,7 +1021,7 @@ class AddCandidateControllers extends BaseController
                 
                     .container:before,
                     .container:after {
-                      border: 2px solid #448AFF;
+                      border: 2px solid #989898;
                       opacity: 0.5;
                     }
                   </style>
@@ -1051,10 +1050,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-            }
-            if ($candidate_job_status == 6) {
-              $subject = 'Recruitment Management System -  Job training 2 ';
-                $candidateMail = '
+      }
+      if ($candidate_job_status == 6) {
+        $subject = 'Recruitment Management System -  Job training 2 ';
+        $candidateMail = '
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -1132,7 +1131,7 @@ class AddCandidateControllers extends BaseController
                     /* Add color and 3D effect to specific elements */
                 
                     .header h1 {
-                      color: #448AFF;
+                      color: #989898;
                       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
                     }
                 
@@ -1142,7 +1141,7 @@ class AddCandidateControllers extends BaseController
                 
                     .container:before,
                     .container:after {
-                      border: 2px solid #448AFF;
+                      border: 2px solid #989898;
                       opacity: 0.5;
                     }
                   </style>
@@ -1171,10 +1170,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-            }
-            if ($candidate_job_status == 7) {
-              $subject = 'Recruitment Management System -  Job training 3 ';
-                $candidateMail = '
+      }
+      if ($candidate_job_status == 7) {
+        $subject = 'Recruitment Management System -  Job training 3 ';
+        $candidateMail = '
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -1252,7 +1251,7 @@ class AddCandidateControllers extends BaseController
                     /* Add color and 3D effect to specific elements */
                 
                     .header h1 {
-                      color: #448AFF;
+                      color: #989898;
                       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
                     }
                 
@@ -1262,7 +1261,7 @@ class AddCandidateControllers extends BaseController
                 
                     .container:before,
                     .container:after {
-                      border: 2px solid #448AFF;
+                      border: 2px solid #989898;
                       opacity: 0.5;
                     }
                   </style>
@@ -1291,10 +1290,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-            }
-            if ($candidate_job_status == 8) {
-              $subject = 'Recruitment Management System -  Work permit ';
-                $candidateMail = '
+      }
+      if ($candidate_job_status == 8) {
+        $subject = 'Recruitment Management System -  Work permit ';
+        $candidateMail = '
                 <!DOCTYPE html>
                         <html>
                         <head>
@@ -1316,11 +1315,11 @@ class AddCandidateControllers extends BaseController
                             }
 
                             h1 {
-                            color: #448AFF;
+                            color: #989898;
                             font-size: 28px;
                             margin: 0;
                             padding-bottom: 10px;
-                            border-bottom: 2px solid #448AFF;
+                            border-bottom: 2px solid #989898;
                             }
 
                             p {
@@ -1331,7 +1330,7 @@ class AddCandidateControllers extends BaseController
                             }
 
                             .button {
-                            background-color: #448AFF;
+                            background-color: #989898;
                             border-radius: 5px;
                             color: #ffffff;
                             display: inline-block;
@@ -1343,7 +1342,7 @@ class AddCandidateControllers extends BaseController
                             }
 
                             .button:hover {
-                            background-color: #448AFF;
+                            background-color: #989898;
                             }
 
                             .signature {
@@ -1375,10 +1374,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-            }
-            if ($candidate_job_status == 9) {
-              $subject = 'Recruitment Management System -  Visa filing ';
-                $candidateMail = '
+      }
+      if ($candidate_job_status == 9) {
+        $subject = 'Recruitment Management System -  Visa filing ';
+        $candidateMail = '
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -1401,7 +1400,7 @@ class AddCandidateControllers extends BaseController
                     }
                     
                     h1 {
-                      color: #448AFF;
+                      color: #989898;
                       font-size: 28px;
                       margin: 0;
                       text-align: center;
@@ -1415,7 +1414,7 @@ class AddCandidateControllers extends BaseController
                     }
                     
                     .button {
-                      background-color: #448AFF;
+                      background-color: #989898;
                       border-radius: 5px;
                       color: #ffffff;
                       display: inline-block;
@@ -1427,14 +1426,14 @@ class AddCandidateControllers extends BaseController
                     }
                     
                     .button:hover {
-                      background-color: #448AFF;
+                      background-color: #989898;
                     }
                   </style>
                 </head>
                 <body>
                   <div class="container">
                     <h1 >Visa Application Process</h1>
-                    <p style="color: #448AFF; font-weight: bold;">Dear ' . $candidate_name . ',</p>
+                    <p style="color: #989898; font-weight: bold;">Dear ' . $candidate_name . ',</p>
                     <p>For visa and further process, we will be filling out the visa application on your behalf. After any response or updates, we will promptly inform you.</p>
                     <p>If you have any questions or need more information, please dont hesitate to contact us.</p>
                     
@@ -1446,10 +1445,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-            }
-            if ($candidate_job_status == 10) {
-              $subject = 'Recruitment Management System -  Training for visa ';
-                $candidateMail = '
+      }
+      if ($candidate_job_status == 10) {
+        $subject = 'Recruitment Management System -  Training for visa ';
+        $candidateMail = '
                 <!DOCTYPE html>
                     <html>
                     <head>
@@ -1527,7 +1526,7 @@ class AddCandidateControllers extends BaseController
                         /* Add color and 3D effect to specific elements */
 
                         .header h1 {
-                        color: #448AFF;
+                        color: #989898;
                         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
                         }
 
@@ -1537,7 +1536,7 @@ class AddCandidateControllers extends BaseController
 
                         .container:before,
                         .container:after {
-                        border: 2px solid #448AFF;
+                        border: 2px solid #989898;
                         opacity: 0.5;
                         }
                     </style>
@@ -1569,10 +1568,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-            }
-            if ($candidate_job_status == 11) {
-              $subject = 'Recruitment Management System - Completed ';
-                $candidateMail = '
+      }
+      if ($candidate_job_status == 11) {
+        $subject = 'Recruitment Management System - Completed ';
+        $candidateMail = '
                 <html>
                     <head>
                         <title>
@@ -1696,109 +1695,107 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-            }
-            $this->load->config('email');
-            $this->load->library('email');
-            
-            //	$token = $email_exist->emp_id;
-         
-            $this->email->from('maclareendigital@gmail.com', 'Recruitment Management System');
-            $this->email->to($candidate_email);
-            $this->email->subject($subject);
-            $this->email->message($candidateMail);
-            $this->email->set_mailtype("html");
-            $sendemail = $this->email->send();
-            $test = $this->Admin_model->InsertLog($Logdata);
-            // Candidate registration successful
-            $role = $this->session->userdata('role');
-            if ($role == "candidate") {
-                redirect('candidateDashboard');
-            } else   if ($role == "admin") {
-                redirect('adminDashboard');;
-            } else {
-                redirect('superadminDashboard');
-            }
+      }
+      $this->load->config('email');
+      $this->load->library('email');
 
-            //  redirect('registermail');
+      //	$token = $email_exist->emp_id;
+
+      $this->email->from('maclareendigital@gmail.com', 'Recruitment Management System');
+      $this->email->to($candidate_email);
+      $this->email->subject($subject);
+      $this->email->message($candidateMail);
+      $this->email->set_mailtype("html");
+      $sendemail = $this->email->send();
+      $test = $this->Admin_model->InsertLog($Logdata);
+      // Candidate registration successful
+      $role = $this->session->userdata('role');
+      if ($role == "candidate") {
+        redirect('candidateDashboard');
+      } else   if ($role == "admin") {
+        redirect('adminDashboard');;
+      } else {
+        redirect('superadminDashboard');
+      }
+
+      //  redirect('registermail');
+    } else {
+      // Failed to save candidate data
+
+      $this->session->set_flashdata('error', 'Failed to register candidate. Please try again.');
+      redirect('addCandidate');
+    }
+  }
+
+
+
+  public function createExcel($id)
+  {
+    $this->load->model('Admin_model');
+
+    $fileName = 'employee.xlsx';
+    $tableData = $this->Admin_model->ExportCandidateInfoLog($id);
+  }
+
+
+
+  function add()
+  {
+    if ($this->input->post('userSubmit')) {
+
+      //Check whether user upload picture
+      if (!empty($_FILES['picture']['name'])) {
+        $config['upload_path'] = 'uploads/images/';
+        $config['allowed_types'] = 'jpg|jpeg|png|gif';
+        $config['file_name'] = $_FILES['picture']['name'];
+
+        //Load upload library and initialize configuration
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_upload('picture')) {
+          $uploadData = $this->upload->data();
+          $picture = $uploadData['file_name'];
         } else {
-            // Failed to save candidate data
-
-            $this->session->set_flashdata('error', 'Failed to register candidate. Please try again.');
-            redirect('addCandidate');
+          $picture = '';
         }
+      } else {
+        $picture = '';
+      }
+
+      //Prepare array of user data
+      $userData = array(
+        'name' => $this->input->post('name'),
+        'email' => $this->input->post('email'),
+        'picture' => $picture
+      );
+
+      //Pass user data to model
+      $insertUserData = $this->user->insert($userData);
+
+      //Storing insertion status message.
+      if ($insertUserData) {
+        $this->session->set_flashdata('success_msg', 'User data have been added successfully.');
+      } else {
+        $this->session->set_flashdata('error_msg', 'Some problems occured, please try again.');
+      }
     }
+    //Form for adding user data
+    $this->load->view('users/add');
+  }
 
 
 
+  public function viewCandidateInformationforUpdate($id)
+  {
+    //echo $id;
+    $this->load->model('Candidate_model');
+    $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($id);
+    $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('', '');
+    $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
+    $this->global['pageTitle'] = 'Hr Tool : Update Candidate';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function add()
-    {
-        if ($this->input->post('userSubmit')) {
-
-            //Check whether user upload picture
-            if (!empty($_FILES['picture']['name'])) {
-                $config['upload_path'] = 'uploads/images/';
-                $config['allowed_types'] = 'jpg|jpeg|png|gif';
-                $config['file_name'] = $_FILES['picture']['name'];
-
-                //Load upload library and initialize configuration
-                $this->load->library('upload', $config);
-                $this->upload->initialize($config);
-
-                if ($this->upload->do_upload('picture')) {
-                    $uploadData = $this->upload->data();
-                    $picture = $uploadData['file_name'];
-                } else {
-                    $picture = '';
-                }
-            } else {
-                $picture = '';
-            }
-
-            //Prepare array of user data
-            $userData = array(
-                'name' => $this->input->post('name'),
-                'email' => $this->input->post('email'),
-                'picture' => $picture
-            );
-
-            //Pass user data to model
-            $insertUserData = $this->user->insert($userData);
-
-            //Storing insertion status message.
-            if ($insertUserData) {
-                $this->session->set_flashdata('success_msg', 'User data have been added successfully.');
-            } else {
-                $this->session->set_flashdata('error_msg', 'Some problems occured, please try again.');
-            }
-        }
-        //Form for adding user data
-        $this->load->view('users/add');
-    }
-
-    public function viewCandidateInformationforUpdate($id)
-    {
-        //echo $id;
-        $this->load->model('Candidate_model');
-        $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($id);
-        $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('', '');
-        $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
-        $this->global['pageTitle'] = 'Hr Tool : Admin Dashboard';
-        $this->global['name'] = 'Hr Tool : Admin Dashboard';
-        $this->global['candidateId'] = $id;
-        $this->loadViews("candidate/updatecandidateinformation", $this->global);
-    }
+    $this->global['candidateId'] = $id;
+    $this->loadViews("candidate/updatecandidateinformation", $this->global);
+  }
 }

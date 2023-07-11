@@ -118,7 +118,7 @@
                             </div>
                         </div>
                         <a href="index.html">
-                            <img class="img-fluid" src="<?php echo base_url(); ?>assets/images/logo_new.png" alt="Theme-Logo" />
+                            <img class="img-fluid" src="https://maclareenai.com/hrtool/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -147,24 +147,12 @@
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <?php if ($this->session->userdata('user_profile') == "") { ?>
-                                        <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
 
-                                    <?php } else { ?>
-                                        <img class="img-80 img-radius" src="<?php echo "https://maclareenai.com/hrtool/upload/profile/" . $this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
-                                    <?php } ?>
                                     <div class="user-details">
-                                        <span id="more-details"><?php echo $this->session->userdata('name');; ?><i class="fa fa-caret-down"></i></span>
+                                        <span id="more-details"><?php echo $this->session->userdata('name'); ?></span>
                                     </div>
                                 </div>
-                                <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
-                                      
-                                            <a href="<?php echo base_url(); ?>logout"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
-                                </div>
+
                             </div>
 
                             <div class="pcoded-navigation-label">Home</div>
@@ -199,6 +187,16 @@
                                     <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="fa-solid fa fa-users"></i><b>AD</b></span>
                                         <span class="pcoded-mtext">Admin Details</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="pcoded-navigation-label">Logout</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>logout" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa fa-sign-out"></i><b>L</b></span>
+                                        <span class="pcoded-mtext">Logout</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -337,50 +335,7 @@
         </div>
     </div>
     </div>
-    <!-- Warning Section Starts -->
-    <!-- Older IE warning message -->
-    <!--[if lt IE 10]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/chrome.png" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/firefox.png" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/opera.png" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/safari.png" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/ie.png" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
-    <!-- Warning Section Ends -->
+
 
     <!-- Required Jquery -->
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery/jquery.min.js "></script>
@@ -414,9 +369,6 @@
 
 
 </body>
-
-
-
 
 
 

@@ -62,6 +62,21 @@ class Admin_model extends MY_Model
        
     }
 
+    public function ExportCandidateInfoLog($candidate_id = '')
+    {
+       
+            $query = $this->db->select('tbl_log.*,
+        tbl_user.*,
+        tbl_candidate.*')->where(['tbl_log.candidate_id' => $candidate_id])
+            ->join('tbl_candidate', 'tbl_log.candidate_id=tbl_candidate.candidate_id')
+            ->join('tbl_user', 'tbl_log.admin_id=tbl_user.user_id')
+             ->order_by('candidate_job_status', 'asc')->get('tbl_log');
+        return $query->result_array();
+       
+       
+       
+    }
+    
     public function InsertNew_User($data)
     {
         if ($this->db->insert($this->table, $data)) {

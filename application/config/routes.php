@@ -79,6 +79,7 @@ $route['UpdateAdminInformation/(:num)'] = 'admin/DashboardControllers/UpdateAdmi
 // candidate
 $route['candidateDashboard'] = 'candidate/CandidateDashboardControllers';
 $route['viewCandidateInformationforUpdate/(:num)'] = 'admin/AddCandidateControllers/viewCandidateInformationforUpdate/$1'; 
+$route['ExportCandidateInfoLog/(:num)'] = 'admin/AddCandidateControllers/createExcel/$1'; 
 
 // viewCandidateInformationforUpdate
 

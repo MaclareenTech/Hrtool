@@ -21,7 +21,7 @@ class CandidateDashboardControllers extends BaseController
             $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($userId);
             $this->global['pageTitle'] = 'Hr Tool : Candidate Dashboard';
             $this->global['candidateId'] = $userId;
-              $this->loadViews("candidate/candidatedashbaord", $this->global);
+            $this->loadViews("candidate/candidatedashbaord", $this->global);
         }
     }
 }

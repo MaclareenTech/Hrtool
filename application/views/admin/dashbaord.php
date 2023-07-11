@@ -112,7 +112,7 @@
                             </div>
                         </div>
                         <a href="index.html">
-                            <img class="img-fluid" src="<?php echo base_url(); ?>assets/images/logo_new.png" alt="Theme-Logo" />
+                            <img class="img-fluid" src="https://maclareenai.com/hrtool/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px;">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -141,24 +141,17 @@
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                <?php if ($this->session->userdata('user_profile') == "") { ?>
+                                    <?php if ($this->session->userdata('user_profile') == "") { ?>
                                         <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
 
                                     <?php } else { ?>
-                                        <img class="img-80 img-radius" src="<?php echo "https://maclareenai.com/hrtool/upload/profile/".$this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
+                                        <img class="img-80 img-radius" src="<?php echo "https://maclareenai.com/hrtool/upload/profile/" . $this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
                                     <?php } ?>
                                     <div class="user-details">
-                                        <span id="more-details"><?php echo $this->session->userdata('name');; ?><i class="fa fa-caret-down"></i></span>
+                                        <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
                                     </div>
                                 </div>
-                                <div class="main-menu-content">
-                                    <ul>
-                                        <li class="more-details">
 
-                                            <a href="<?php echo base_url(); ?>logout"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
 
                             <div class="pcoded-navigation-label">Home</div>
@@ -170,7 +163,7 @@
                                         <?php echo base_url(); ?>adminDashboard
                                     <?php } else { ?>
                                         <?php echo base_url(); ?>superadminDashboard
-                                    <?php } ?>"  class="waves-effect waves-dark">
+                                    <?php } ?>" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
@@ -184,6 +177,16 @@
                                     <a href="<?php echo base_url(); ?>addCandidate" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="fa-solid fa-user-plus"></i><b>FC</b></span>
                                         <span class="pcoded-mtext">Add Candidate</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="pcoded-navigation-label">Logout</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>logout" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa fa-sign-out"></i><b>L</b></span>
+                                        <span class="pcoded-mtext">Logout</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -235,10 +238,10 @@
                                             <div class="card-block">
                                                 <div class="row">
                                                     <div class="col-xl-6 col-md-6">
-                                                        <div class="card mat-clr-stat-card text-white blue">
+                                                        <div class="card mat-clr-stat-card text-white red">
                                                             <div class="card-block">
                                                                 <div class="row">
-                                                                    <div class="col-3 text-center bg-c-blue">
+                                                                    <div class="col-3 text-center bg-c-red">
                                                                         <i class="fa fa-list mat-icon f-24"></i>
                                                                     </div>
                                                                     <div class="col-9 cst-cont">
@@ -285,99 +288,104 @@
                                         <div class="card-block table-border-style">
                                             <div class="table-responsive">
                                                 <div id="candidate-table-container">
-                                                    <table class="table datatable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>#</th>
-                                                                <th>Candidate Name</th>
-                                                                <th>Candidate Email</th>
-                                                                <th>Candidate Number</th>
-                                                                <th>Candidate job profile</th>
-                                                                <th>Candidate Job Status</th>
-                                                                <th>Status Updated by </th>
-                                                                <th>Candidate Status Updated Date</th>
-                                                                <th>Candidate Status updated days </th>
-                                                                <th>Candidate Register Date Date</th>
-
-                                                                <th></th>
-                                                            </tr>
-                                                        </thead>
-
-                                                        <tbody id="myTable">
-                                                            <?php $counter = 0; ?>
-                                                            <?php foreach ($candidate as $row) : ?>
+                                                    <div id="table-container">
+                                                        <table id="my-table" class="table datatable">
+                                                            <thead>
                                                                 <tr>
-                                                                    <?php $counter++; ?>
-                                                                    <td><?php echo $counter; ?></td>
-                                                                    <td><?php echo $row->candidate_name ?></td>
-                                                                    <td><?php echo $row->candidate_email ?></td>
-                                                                    <td><?php echo $row->candidate_mobile_no ?></td>
-                                                                    <td><?php echo $row->candidate_job_profile ?></td>
-                                                                    <td> <?php if ($row->candidate_job_status == "0") { ?>
-                                                                            <button style="background-color: #FA3B3B; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Screening</button>
-                                                                        <?php } else if ($row->candidate_job_status == "1") { ?>
-                                                                            <button style="background-color: #CF70FF; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Waiting for document </button>
-                                                                        <?php } else if ($row->candidate_job_status == "2") { ?>
-                                                                            <button style="background-color: #7D23FA; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Sent to recruitment review</button>
-                                                                        <?php } else if ($row->candidate_job_status == "3") { ?>
-                                                                            <button style="background-color: #14A2FA; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Shortlisted</button>
-                                                                        <?php } else if ($row->candidate_job_status == "4") { ?>
-                                                                            <button style="background-color: #F30606; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Not selected</button>
-                                                                        <?php } else if ($row->candidate_job_status == "5") { ?>
-                                                                            <button style="background-color: #71B7E6; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job training 1</button>
-                                                                        <?php } else if ($row->candidate_job_status == "6") { ?>
-                                                                            <button style="background-color: #5FAEE3; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job training 2</button>
-                                                                        <?php } else if ($row->candidate_job_status == "7") { ?>
-                                                                            <button style="background-color: #45A5E0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job training 3</button>
-                                                                        <?php } else if ($row->candidate_job_status == "8") { ?>
-                                                                            <button style="background-color: #E95D4E; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Work permit</button>
-                                                                        <?php } else if ($row->candidate_job_status == "9") { ?>
-                                                                            <button style="background-color: #F4D03F; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Visa filing</button>
-                                                                        <?php } else if ($row->candidate_job_status == "10") { ?>
-                                                                            <button style="background-color: #3D9CDD; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">TTraining for visa</button>
-                                                                        <?php } else if ($row->candidate_job_status == "11") { ?>
-                                                                            <button style="background-color: #33D176; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Completed</button>
+                                                                    <th>#</th>
+                                                                    <th>Candidate Name</th>
+                                                                    <th>Candidate Email</th>
+                                                                    <th>Candidate Number</th>
+                                                                    <th>Candidate job profile</th>
+                                                                    <th>Candidate Job Status</th>
+                                                                    <th>Status Updated by </th>
+                                                                    <th>Candidate Status Updated Date</th>
+                                                                    <th>Candidate Status updated days </th>
+                                                                    <th>Candidate Register Date Date</th>
 
-                                                                        <?php } ?>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tbody id="myTable">
+                                                                <?php $counter = 0; ?>
+                                                                <?php foreach ($candidate as $row) : ?>
+                                                                    <tr>
+                                                                        <?php $counter++; ?>
+                                                                        <td><?php echo $counter; ?></td>
+                                                                        <td><?php echo $row->candidate_name ?></td>
+                                                                        <td><?php echo $row->candidate_email ?></td>
+                                                                        <td><?php echo $row->candidate_mobile_no ?></td>
+                                                                        <td><?php echo $row->candidate_job_profile ?></td>
+                                                                        <td> <?php if ($row->candidate_job_status == "0") { ?>
+                                                                                <button style="background-color: #ff3333; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Screening</button>
+                                                                            <?php } else if ($row->candidate_job_status == "1") { ?>
+                                                                                <button style="background-color: #e60000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Waiting for document </button>
+                                                                            <?php } else if ($row->candidate_job_status == "2") { ?>
+                                                                                <button style="background-color: #00e600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Sent to recruitment review</button>
+                                                                            <?php } else if ($row->candidate_job_status == "3") { ?>
+                                                                                <button style="background-color: #00b300; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Shortlisted</button>
+                                                                            <?php } else if ($row->candidate_job_status == "4") { ?>
+                                                                                <button style="background-color: #b30000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Not selected</button>
+                                                                            <?php } else if ($row->candidate_job_status == "5") { ?>
+                                                                                <button style="background-color: #C0C0C0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job training 1</button>
+                                                                            <?php } else if ($row->candidate_job_status == "6") { ?>
+                                                                                <button style="background-color: #A9A9A9; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job training 2</button>
+                                                                            <?php } else if ($row->candidate_job_status == "7") { ?>
+                                                                                <button style="background-color: #808080; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job training 3</button>
+                                                                            <?php } else if ($row->candidate_job_status == "8") { ?>
+                                                                                <button style="background-color: #009900; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Work permit</button>
+                                                                            <?php } else if ($row->candidate_job_status == "9") { ?>
+                                                                                <button style="background-color: #008000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Visa filing</button>
+                                                                            <?php } else if ($row->candidate_job_status == "10") { ?>
+                                                                                <button style="background-color: #696969; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Training for visa</button>
+                                                                            <?php } else if ($row->candidate_job_status == "11") { ?>
+                                                                                <button style="background-color: #006600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Completed</button>
+
+                                                                            <?php } ?>
 
 
-                                                                    </td>
-                                                                    <td><?php echo $row->user_name ?></td>
-                                                                    <td><?php
-                                                                        $timestamp = strtotime($row->candidate_satus_days);
-                                                                        $humanReadableDate = date("Y-m-d", $timestamp);
+                                                                        </td>
+                                                                        <td><?php echo $row->user_name ?></td>
+                                                                        <td><?php
+                                                                            $timestamp = strtotime($row->candidate_satus_days);
+                                                                            $humanReadableDate = date("Y-m-d", $timestamp);
 
-                                                                        echo $humanReadableDate; ?></td>
-                                                                    
-                                                                    <td><?php
-                                                                        $timestamp = strtotime($row->candidate_satus_days);
-                                                                        $humanReadableDate = date("Y-m-d", $timestamp);
-                                                                        $currentDate = new DateTime();
-                                                                        $targetDate = new DateTime($humanReadableDate);
-                                                                        
-                                                                        $diff = $currentDate->diff($targetDate);
-                                                                        $days = $diff->days;
-                                                                        echo $days; ?></td>
-                                                                    <td>
-                                                                        <?php
-                                                                        $timestamp = strtotime($row->candidate_join_date);
-                                                                        $humanReadableDate = date("Y-m-d", $timestamp);
+                                                                            echo $humanReadableDate; ?></td>
 
-                                                                        echo $humanReadableDate; ?></td>
-                                                                    <td><a class="btn btn-default" href="<?php echo base_url('editCandidateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
-                                                                            <em class="fa fa-pencil"></em>
-                                                                        </a> </td>
-                                                                    <td><a class="btn btn-default" href="<?php echo base_url('ViewCandiateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
-                                                                            <em class="fa fa-eye"></em>
-                                                                        </a> </td>
-                                                                    <!-- <td><a class="btn btn-default"   href="<?php echo base_url('admin/AddCandidateControllers/viewCandidateInformation/?id=' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
+                                                                        <td><?php
+                                                                            $timestamp = strtotime($row->candidate_satus_days);
+                                                                            $humanReadableDate = date("Y-m-d", $timestamp);
+                                                                            $currentDate = new DateTime();
+                                                                            $targetDate = new DateTime($humanReadableDate);
+
+                                                                            $diff = $currentDate->diff($targetDate);
+                                                                            $days = $diff->days;
+                                                                            echo $days; ?></td>
+                                                                        <td>
+                                                                            <?php
+                                                                            $timestamp = strtotime($row->candidate_join_date);
+                                                                            $humanReadableDate = date("Y-m-d", $timestamp);
+
+                                                                            echo $humanReadableDate; ?></td>
+                                                                        <td><a class="btn btn-default" href="<?php echo base_url('editCandidateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
+                                                                                <em class="fa fa-pencil"></em>
+                                                                            </a> </td>
+                                                                        <td><a class="btn btn-default" href="<?php echo base_url('ViewCandiateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
+                                                                                <em class="fa fa-eye"></em>
+                                                                            </a> </td>
+                                                                        <!-- <td><a class="btn btn-default"   href="<?php echo base_url('admin/AddCandidateControllers/viewCandidateInformation/?id=' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
                                                                             <em class="fa fa-pencil"></em>
                                                                         </a> </td> -->
 
-                                                                </tr>
-                                                            <?php endforeach; ?>
-                                                        </tbody>
-                                                    </table>
+                                                                    </tr>
+                                                                <?php endforeach; ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div id="pagination-container">
+                                                        <ul id="pagination" class="pagination"></ul>
+                                                    </div>
                                                 </div>
 
 
@@ -408,50 +416,45 @@
         </div>
     </div>
     </div>
-    <!-- Warning Section Starts -->
-    <!-- Older IE warning message -->
-    <!--[if lt IE 10]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/chrome.png" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/firefox.png" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/opera.png" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/safari.png" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/ie.png" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
-    <!-- Warning Section Ends -->
+    <script>
+        const tableBody = document.getElementById('myTable');
+        const paginationContainer = document.getElementById('pagination');
+        const itemsPerPage = 7;
+        let currentPage = 1;
+
+        function displayDataPage(page) {
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const rows = Array.from(tableBody.getElementsByTagName('tr'));
+
+            rows.forEach((row, index) => {
+                if (index >= start && index < end) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            updatePagination(page);
+        }
+
+        function updatePagination(currentPage) {
+            const rowsCount = tableBody.getElementsByTagName('tr').length;
+            const totalPages = Math.ceil(rowsCount / itemsPerPage);
+            let paginationHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                paginationHTML += `<li class="page-item${i === currentPage ? ' active' : ''}">
+        <a class="page-link" href="#" onclick="displayDataPage(${i})">${i}</a>
+      </li>`;
+            }
+
+            paginationContainer.innerHTML = paginationHTML;
+        }
+
+        displayDataPage(currentPage);
+    </script>
+
 
     <!-- Required Jquery -->
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery/jquery.min.js "></script>
@@ -485,10 +488,6 @@
 
 
 </body>
-
-
-
-
 
 
 </html>
