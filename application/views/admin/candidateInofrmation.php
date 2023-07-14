@@ -352,6 +352,7 @@
 
                                     <div class="wrapper">
                                         <div class="title">Candidate Information
+                                        <a class="pull-right btn btn-warning btn-large" style="margin-right:40px;    background-color: #007bff; border-color: #007bff;" href="<?php echo base_url('Sendmail/' . $candidate[0]->candidate_id); ?>"><i class="fa fa-envelope"></i>Send Email</a> 
                                             <?php if ($candidate[0]->candidate_job_status == "13") { ?><a class="pull-right btn btn-warning btn-large" style="margin-right:40px;    background-color: #007bff; border-color: #007bff;" href="<?php echo base_url('ExportCandidateInfoLog/' . $candidate[0]->candidate_id); ?>"><i class="fa fa-file-excel-o"></i> Export to Excel</a> <?php } ?>
                                         </div>
 

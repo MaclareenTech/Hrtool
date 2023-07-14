@@ -690,7 +690,7 @@ class AddCandidateControllers extends BaseController
                         </div>
                         <div class="content">
                           <h1>Hi ' . $candidate_name . ',</h1>
-                          <p>I recently registered you for the ' . $candidate_job_profile . ' job profile. Please let me know when you are submitting all the documents.</p>
+                          <p>I recently registered you for the ' . $candidate_job_profile . ' job profile. Kindly share the documents within 3-4 working days . If sent already you may ignore.</p>
                           <p>Following is the document list:</p>
                           <ol class="document-list">';
         if ($candidate_aadhar_card == "") {
@@ -706,7 +706,7 @@ class AddCandidateControllers extends BaseController
           $candidateMail .= '<li>Resume</li>';
         }
         $candidateMail .= '</ol>
-                          <p>Once you send all the documents, I will start the further process for your job profile. Kindly share your documents as soon as possible.</p>
+                          <p>Once you send all the documents, I will start the further process for your job profile.</p>
                         </div>
                         <div class="footer">
                           <p>Best regards,</p>
@@ -1361,7 +1361,7 @@ class AddCandidateControllers extends BaseController
                         <div class="container">
                             <h1>Work Permit Letter</h1>
                             <p>Dear ' . $candidate_name . ',</p>
-                            <p>Work permit letter is issued by a country or a state to a foreign individual who is looking for employment in that country. The work permit request letter is written for the same purpose. The work permission letter format must include all the information in relation to the permission and the job.</p>
+                            <p>Congratulation , this is to inform you that we have received your work contract and we are very much glad to share the sane with you . Kindly go through the work contact and verify whether all mentioned details are correct</p>
                             <p>If you have any further questions, please feel free to contact us.</p>
                             <div class="signature">
                             <p>Best Regards,</p>
@@ -1675,9 +1675,9 @@ class AddCandidateControllers extends BaseController
                         <div class=content>
                 <div class="wrapper-1">
                     <div class="wrapper-2">
-                    <h1>Thank you !</h1>
-                    <p>Thanks for connect with us .  </p>
-                    <p>you are ready to fly for your job your job process has completed </p>
+                    <h1>congratulations !</h1>
+                  
+                    <p>your visa application has approved you are ready to fly abroad</p>
                     
                     </div>
                     
@@ -1797,5 +1797,44 @@ class AddCandidateControllers extends BaseController
 
     $this->global['candidateId'] = $id;
     $this->loadViews("candidate/updatecandidateinformation", $this->global);
+  }
+
+
+  public function SendmailForm($id)
+  {
+    $this->load->model('Candidate_model');
+    $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($id);
+    $this->global['pageTitle'] = 'Hr Tool : Send Mail To  Candidate';
+    $this->global['candidateId'] = $id;
+    $this->loadViews("candidate/sendmail", $this->global);
+  }
+
+  public function Sendmail()
+  {
+    $subject = $this->input->post('subject');
+    $body = $this->input->post('body');
+    $candidate_email = $this->input->post('candidate_email');
+
+    $this->load->config('email');
+    $this->load->library('email');
+  
+    //	$token = $email_exist->emp_id;
+    $this->email->from('maclareendata@gmail.com', 'Recruitment Management System ');
+    $this->email->to($candidate_email);
+    $this->email->subject($subject);
+    $this->email->message($body);
+    $this->email->set_mailtype("html");
+    $sendemail = $this->email->send();
+    if($sendemail)
+    {
+      $role = $this->session->userdata('role');
+      if ($role == "candidate") {
+        redirect('candidateDashboard');
+      } else   if ($role == "admin") {
+        redirect('adminDashboard');;
+      } else {
+        redirect('superadminDashboard');
+      }
+    }
   }
 }
