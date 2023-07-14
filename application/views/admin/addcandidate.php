@@ -299,14 +299,17 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Job state</label>
+                                                        <label class="col-sm-3 col-form-label">Job Profile</label>
                                                         <div class="col-sm-9">
                                                             <select name="candidate_job_profile" class="form-control">
                                                                 <option value="opt1" disabled selected>Select One Value</option>
-                                                                <option value="opt2">Type 2</option>
-                                                                <option value="opt3">Type 3</option>
-                                                                <option value="opt4">Type 4</option>
-                                                                <option value="opt5">Type 5</option>
+                                                                <option value="Armenia Farming">Armenia Farming</option>
+                                                                <option value="Armenia Construction">Armenia Construction</option>
+                                                                <option value="Armenia Hotel Jobs">Armenia Hotel Jobs</option>
+                                                                <option value="Armenia Casino">Armenia Casino</option>
+                                                                <option value="Poland Warehouse">Poland Warehouse</option>
+                                                                <option value="Poland Worker">Poland Worker</option>
+                                                                <option value="Poland General Helper">Poland General Helper</option>
 
                                                             </select>
                                                         </div>
