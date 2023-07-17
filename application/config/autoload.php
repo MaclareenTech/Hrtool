@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -93,7 +93,7 @@ $autoload['libraries'] = array('database', 'session');
 
 
 
-$autoload['helper'] = array('url', 'file','cias_helper','security','form');
+$autoload['helper'] = array('url', 'file', 'cias_helper', 'security', 'form');
 
 /*
 | -------------------------------------------------------------------

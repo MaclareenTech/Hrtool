@@ -27,7 +27,7 @@ class SuperAdminDashboardControllers extends BaseController
     }
 
 
-    
+
     public function RegisteNewAdmin()
     {
 

@@ -181,6 +181,37 @@
         letter-spacing: 1px;
         background: #434341;
     }
+
+    .progress-container {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 8px solid #f3f3f3;
+        position: relative;
+        display: none;
+        /* Hide the progress bar initially */
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 100%;
+        clip: rect(0, 60px, 120px, 0);
+        border-radius: 50%;
+        position: absolute;
+        background-color: #616561;
+        transform-origin: center;
+        animation: progress 5s linear infinite;
+    }
+
+    @keyframes progress {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 </style>
 
 <body>
@@ -359,21 +390,42 @@
                         <div class="pcoded-inner-content">
                             <!-- Main-body start -->
                             <div class="main-body">
-                            <form action="<?php echo base_url(); ?>send" method="post" style="padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);">
-    <h1 class="title" style="text-align: center;">Start Email to <?php echo $candidate[0]->candidate_name ?></h1>
-    <div class="field" style="margin-bottom: 10px;">
-        <p  for="subject" style="display: block; font-weight: bold; color: black;">Email Subject</p>
-        <input id="subject" type="text" class="input" name="subject" placeholder="Email Subject" style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" required>
-    </div>
-    <div class="field" style="margin-bottom: 10px;">
-        <p  for="body" style="display: block; font-weight: bold; color: black;">Email Body</p>
-        <textarea class="textarea" name="body" id="body" style="width: 100%; height: 150px; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" required>Example Email Body</textarea>
-    </div>
-    <div style="text-align: center;">
-        <input type="text" value="<?php echo $candidate[0]->candidate_email ?>" style="opacity: 0;" name="candidate_email">
-        <button type="submit" class="button is-primary" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Send Mail</button>
-    </div>
-</form>
+                                <form action="<?php echo base_url(); ?>send" method="post" style="padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);">
+                                    <h1 class="title" style="text-align: center;">Start Email to <?php echo $candidate[0]->candidate_name ?></h1>
+                                    <div class="field" style="margin-bottom: 10px;">
+                                        <p for="subject" style="display: block; font-weight: bold; color: black;">Email Subject</p>
+                                        <input id="subject" type="text" class="input" name="subject" placeholder="Email Subject" style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" required>
+                                    </div>
+                                    <div class="field" style="margin-bottom: 10px;">
+                                        <p for="body" style="display: block; font-weight: bold; color: black;">Email Body</p>
+                                        <textarea class="textarea" name="body" id="body" style="width: 100%; height: 150px; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" required>Example Email Body</textarea>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <input type="text" value="<?php echo $candidate[0]->candidate_email ?>" style="opacity: 0;" name="candidate_email">
+                                        <button type="submit" class="button is-primary" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="startProgressBar()">Send Mail</button>
+                                    </div>
+                                </form>
+                                <div class="progress-container" id="progressContainer" style="margin-top: -100px;margin-left: 500px;">
+                                    <div class="progress-bar"></div>
+                                </div>
+
+                                <script>
+                                    function startProgressBar() {
+                                        const progressBar = document.querySelector(".progress-bar");
+                                        progressBar.style.animationPlayState = "running";
+
+                                        // Show the progress bar when the button is clicked
+                                        const progressContainer = document.getElementById("progressContainer");
+                                        progressContainer.style.display = "block";
+
+                                        // Reset the progress bar after the animation delay (5 seconds in this example)
+                                        setTimeout(() => {
+                                            progressBar.style.animationPlayState = "paused";
+                                            // Hide the progress bar after the animation is completed
+                                            progressContainer.style.display = "none";
+                                        }, 50000);
+                                    }
+                                </script>
 
 
 

@@ -1817,7 +1817,7 @@ class AddCandidateControllers extends BaseController
 
     $this->load->config('email');
     $this->load->library('email');
-  
+
     //	$token = $email_exist->emp_id;
     $this->email->from('maclareendata@gmail.com', 'Recruitment Management System ');
     $this->email->to($candidate_email);
@@ -1825,8 +1825,7 @@ class AddCandidateControllers extends BaseController
     $this->email->message($body);
     $this->email->set_mailtype("html");
     $sendemail = $this->email->send();
-    if($sendemail)
-    {
+    if ($sendemail) {
       $role = $this->session->userdata('role');
       if ($role == "candidate") {
         redirect('candidateDashboard');

@@ -11,7 +11,4 @@ class LogOutControllers extends BaseController
         $this->session->sess_destroy();
         redirect('LoginControllers');
     }
-
-
-
 }

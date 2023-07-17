@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 // $config = array(
 //     'protocol' => 'smtp', // 'mail', 'sendmail', or 'smtp'
@@ -31,13 +31,13 @@
 
 $config = array(
     'protocol' => 'smtp', // 'mail', 'sendmail', or 'smtp'
-    'smtp_host' => 'smtp.googlemail.com', 
+    'smtp_host' => 'smtp.googlemail.com',
     'smtp_port' => 465,
     'smtp_crypto' => 'ssl',
     'smtp_timeout' => "400",
     // 'smtp_user' => 'maclareendata@gmail.com',
     // 'smtp_pass' => 'vlackdoijrplkhzz',   // less secure password    spsoiptxvkhcundd
-     'smtp_user' => 'maclareendigital@gmail.com',
+    'smtp_user' => 'maclareendigital@gmail.com',
     'smtp_pass' => 'spsoiptxvkhcundd', // less secure password 
     'validate' => true,
     'charset' => 'utf-8',
@@ -57,10 +57,3 @@ $config = array(
 // $config['smtp_pass']='M2S7@99$#';
 // $config['charset']='utf-8';
 // $config['newline']="\r\n";
-
-
-
-
-
-
-

@@ -127,7 +127,7 @@ class DashboardControllers extends BaseController
     }
 
 
-    
+
     public function AddAdminInformation()
     {
         $this->load->helper('form');

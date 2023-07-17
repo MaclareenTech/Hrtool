@@ -177,6 +177,37 @@
         letter-spacing: 1px;
         background: #434341;
     }
+
+    .progress-container {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 8px solid #f3f3f3;
+        position: relative;
+        display: none;
+        /* Hide the progress bar initially */
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 100%;
+        clip: rect(0, 60px, 120px, 0);
+        border-radius: 50%;
+        position: absolute;
+        background-color: #616561;
+        transform-origin: center;
+        animation: progress 5s linear infinite;
+    }
+
+    @keyframes progress {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 </style>
 
 <body>
@@ -256,7 +287,7 @@
                             </div>
                         </div>
                         <a href="index.html">
-                        <img class="img-fluid" src="https://maclareenai.com/hrtool/assets/images/logo_new.png" alt="Theme-Logo" style="  width: 160px;">
+                            <img class="img-fluid" src="https://maclareenai.com/hrtool/assets/images/logo_new.png" alt="Theme-Logo" style="  width: 160px;">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -285,7 +316,7 @@
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                <?php
+                                    <?php
                                     $role = $this->session->userdata('role'); ?>
                                     <?php if ($role == "admin") { ?>
                                         <?php if ($this->session->userdata('user_profile') == "") { ?>
@@ -449,51 +480,51 @@
 
 
                                         </div>
-                                        <?php if ($candidate[0]->candidate_job_status == "0"  || $candidate[0]->candidate_job_status == "1" ) { ?>
+                                        <?php if ($candidate[0]->candidate_job_status == "0"  || $candidate[0]->candidate_job_status == "1") { ?>
                                             <div class="title" style="margin-bottom:20px;">Documents</div>
 
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Upload Addhar Card </label>
-                                            <div class="col-sm-9">
-                                                <input type="file" name="candidate_aadhar_card" accept="application/pdf">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Upload Addhar Card </label>
+                                                <div class="col-sm-9">
+                                                    <input type="file" name="candidate_aadhar_card" accept="application/pdf">
 
 
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Upload Pan Card </label>
-                                            <div class="col-sm-9">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Upload Pan Card </label>
+                                                <div class="col-sm-9">
 
-                                                <input type="file" name="candidate_pan_card" accept="application/pdf">
+                                                    <input type="file" name="candidate_pan_card" accept="application/pdf">
 
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Upload Passport </label>
-                                            <div class="col-sm-9">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Upload Passport </label>
+                                                <div class="col-sm-9">
 
-                                                <input type="file" name="candidate_passport" accept="application/pdf">
+                                                    <input type="file" name="candidate_passport" accept="application/pdf">
 
 
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Upload Candidate Resume </label>
-                                            <div class="col-sm-9">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Upload Candidate Resume </label>
+                                                <div class="col-sm-9">
 
-                                                <input type="file" name="candidate_resume" accept="application/pdf">
+                                                    <input type="file" name="candidate_resume" accept="application/pdf">
 
+                                                </div>
                                             </div>
-                                        </div>
                                         <?php }  ?>
 
-                                       
+
 
                                         <div class="title" style="margin-top: 20px;">Job Training</div>
 
 
-                                       
+
                                         <?php if ($candidate[0]->candidate_job_status == "6" || $candidate[0]->candidate_job_status == "7" || $candidate[0]->candidate_job_status == "8"  || $candidate[0]->candidate_job_status == "9" || $candidate[0]->candidate_job_status == "10" || $candidate[0]->candidate_job_status == "11") { ?>
                                             <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 1</div>
                                             <div class="user-details">
@@ -669,7 +700,7 @@
                                         <?php } ?>
                                         <div class="form-group row">
                                             <div class="col-sm-12">
-                                                <center> <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button></center>
+                                                <center> <button type="submit" class="btn btn-primary waves-effect waves-light" onclick="startProgressBar()">>Submit</button></center>
                                             </div>
 
                                         </div>
@@ -677,11 +708,33 @@
                                     </div>
 
 
+                                    <div class="progress-container" id="progressContainer" style="margin-top: -100px;margin-left: 500px;">
+                                        <div class="progress-bar"></div>
+                                    </div>
+
+                                    <script>
+                                        function startProgressBar() {
+                                            const progressBar = document.querySelector(".progress-bar");
+                                            progressBar.style.animationPlayState = "running";
+
+                                            // Show the progress bar when the button is clicked
+                                            const progressContainer = document.getElementById("progressContainer");
+                                            progressContainer.style.display = "block";
+
+                                            // Reset the progress bar after the animation delay (5 seconds in this example)
+                                            setTimeout(() => {
+                                                progressBar.style.animationPlayState = "paused";
+                                                // Hide the progress bar after the animation is completed
+                                                progressContainer.style.display = "none";
+                                            }, 50000);
+                                        }
+                                    </script>
 
                                 </div>
                                 <!-- Page-body end -->
                             </div>
                             <div id="styleSelector"> </div>
+
                         </div>
                     </div>
                 </div>

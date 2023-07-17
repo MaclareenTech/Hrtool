@@ -30,6 +30,38 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
 </head>
+<style>
+    .progress-container {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 8px solid #f3f3f3;
+        position: relative;
+        display: none;
+        /* Hide the progress bar initially */
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 100%;
+        clip: rect(0, 60px, 120px, 0);
+        border-radius: 50%;
+        position: absolute;
+        background-color: #616561;
+        transform-origin: center;
+        animation: progress 5s linear infinite;
+    }
+
+    @keyframes progress {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
 
 <body>
 
@@ -356,7 +388,7 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-sm-12">
-                                                            <center> <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button></center>
+                                                            <center> <button type="submit" class="btn btn-primary waves-effect waves-light" onclick="startProgressBar()">Submit</button></center>
                                                         </div>
 
                                                     </div>
@@ -367,7 +399,27 @@
 
                                                     </form>
 
+                                                    <div class="progress-container" id="progressContainer" style="margin-top: -100px;margin-left: 500px;">
+                                                        <div class="progress-bar"></div>
+                                                    </div>
 
+                                                    <script>
+                                                        function startProgressBar() {
+                                                            const progressBar = document.querySelector(".progress-bar");
+                                                            progressBar.style.animationPlayState = "running";
+
+                                                            // Show the progress bar when the button is clicked
+                                                            const progressContainer = document.getElementById("progressContainer");
+                                                            progressContainer.style.display = "block";
+
+                                                            // Reset the progress bar after the animation delay (5 seconds in this example)
+                                                            setTimeout(() => {
+                                                                progressBar.style.animationPlayState = "paused";
+                                                                // Hide the progress bar after the animation is completed
+                                                                progressContainer.style.display = "none";
+                                                            }, 50000);
+                                                        }
+                                                    </script>
                                                 </div>
                                             </div>
                                             <!-- Basic Form Inputs card end -->
