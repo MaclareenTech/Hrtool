@@ -207,4 +207,31 @@ class DashboardControllers extends BaseController
             redirect('addnewadmin');
         }
     }
+    public function UpdateVendorInformation($delete ,$id)
+    {
+      $this->load->database();
+      $this->load->model('Admin_model');
+  
+  
+
+      if ($delete == '1') {
+        $Del = '0';
+      } else {
+        $Del = '1';
+      }
+      $Data['id_deleted'] = $Del;
+      if (!$this->Admin_model->Update($id, $Data)) {
+        $data['message'] = 'No user Found';
+        echo '<script>alert("No user Found")</script>';
+      } else {
+        $role = $this->session->userdata('role');
+        if ($role == "candidate") {
+            redirect('candidateDashboard');
+        } else   if ($role == "admin") {
+            redirect('adminDashboard');;
+        } else {
+            redirect('superadminDashboard');
+        }
+      }
+    }
 }

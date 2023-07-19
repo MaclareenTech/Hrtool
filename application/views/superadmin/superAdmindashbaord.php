@@ -416,7 +416,7 @@
                                         <div class="card-block">
                                             <div class="table-responsive">
                                                 <div id="table-container2">
-                                                    <table id="my-table2" class="table table-hover m-b-0 without-header">
+                                                    <table  class="table table-hover m-b-0 without-header">
                                                         <tbody id="my-tableee">
                                                             <?php $counter1 = 0; ?>
                                                             <?php foreach ($emp as $row) : ?>
@@ -445,9 +445,7 @@
                                                     </table>
 
                                                 </div>
-                                                <div id="pagination-container">
-                                                    <ul id="pagination2" class="pagination2"></ul>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -516,44 +514,7 @@
 
         displayDataPage(currentPage);
     </script>
-    <script>
-        const tableBody2 = document.getElementById('myTable2');
-        const paginationContainer2 = document.getElementById('pagination2');
-        const itemsPerPage2 = 1;
-        let currentPage2 = 1;
 
-        function displayDataPage(page) {
-            const start = (page - 1) * itemsPerPage2;
-            const end = start + itemsPerPage2;
-            const rows = Array.from(tableBody2.getElementsByTagName('tr'));
-
-            rows.forEach((row, index) => {
-                if (index >= start && index < end) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-
-            updatePagination(page);
-        }
-
-        function updatePagination(currentPage2) {
-            const rowsCount = tableBody2.getElementsByTagName('tr').length;
-            const totalPages = Math.ceil(rowsCount / itemsPerPage2);
-            let paginationHTML = '';
-
-            for (let i = 1; i <= totalPages; i++) {
-                paginationHTML += `<li class="page-item${i === currentPage2 ? ' active' : ''}">
-        <a class="page-link" href="#" onclick="displayDataPage(${i})">${i}</a>
-      </li>`;
-            }
-
-            paginationContainer2.innerHTML = paginationHTML;
-        }
-
-        displayDataPage(currentPage2);
-    </script>
     <!-- Warning Section Starts -->
     <!-- Older IE warning message -->
     <!--[if lt IE 10]>
@@ -631,7 +592,7 @@
 
 
 </body>
-
+   
 
 
 </html>

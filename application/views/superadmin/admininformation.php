@@ -270,7 +270,7 @@
                                                                 <th>Admin Email</th>
                                                                 <th>Admin Number</th>
                                                                 <th>Emp Id</th>
-                                                                <th>Delete </th>
+                                                                <th>Status </th>
                                                                 <th></th>
                                                             </tr>
                                                         </thead>
@@ -286,10 +286,17 @@
                                                                     <td><?php echo $row->user_mobile ?></td>
                                                                     <td><?php echo $row->emp_id ?></td>
                                                                     <td> <?php if ($row->id_deleted == "0") { ?>
-                                                                            <button style="background-color: #2ECC71; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Active</button>
+                                                                            <a href="<?php echo base_url('UpdateStatus/' . $row->id_deleted . '/' . $row->user_id); ?>" style="text-decoration: none;">
+                                                                                <button style="background-color: #2ECC71; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                                                    Active
+                                                                                </button>
+                                                                            </a>
                                                                         <?php } else if ($row->id_deleted == "1") { ?>
-                                                                            <button style="background-color: #E40505; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Deactive </button>
-                                                                        <?php } ?>
+                                                                            <a href="<?php echo base_url('UpdateStatus/' . $row->id_deleted . '/' . $row->user_id); ?>" style="text-decoration: none;">
+                                                                                <button style="background-color: #E40505; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                                                    Deactivate
+                                                                                </button>
+                                                                            </a> <?php } ?>
 
                                                                     <td> <a class="btn btn-default" href="<?php echo base_url('UpdateAdminInformation/' . $row->user_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
                                                                             <em class="fa fa-pencil"></em>

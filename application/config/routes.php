@@ -89,6 +89,7 @@ $route['Sendmail/(:num)'] = 'admin/AddCandidateControllers/SendmailForm/$1';
 
 // mail
 $route['registermail'] = 'mail/RegisterMailControllers/RegisterMail';
+$route['UpdateStatus/(:num)/(:num)'] = 'admin/DashboardControllers/UpdateVendorInformation/$1/$2'; 
 
 
 
