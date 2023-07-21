@@ -140,7 +140,7 @@
                             </div>
                         </div>
                         <a href="index.html">
-                            <img class="img-fluid" src="https://maclareenai.com/hrtool/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px;">
+                            <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px;">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -176,7 +176,7 @@
                                             <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
 
                                         <?php } else { ?>
-                                            <img class="img-80 img-radius" src="<?php echo "https://maclareenai.com/hrtool/upload/profile/" . $this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
+                                            <img class="img-80 img-radius" src="<?php echo "http://mtas.net.in/upload/profile/" . $this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
                                         <?php } ?>
                                     <?php } ?>
                                     <div class="user-details">
@@ -252,7 +252,7 @@
                                     <div class="col-md-8">
                                         <div class="page-header-title">
                                             <h5 class="m-b-10">Add Candidate</h5>
-                                            <p class="m-b-0">Recruitment Management System</p>
+                                            <p class="m-b-0">Maclareen Talent Acquisition System </p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -387,8 +387,24 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Upload Candidate Images </label>
+                                                        <div class="col-sm-9">
+
+                                                        <input type="file" name="candidate_photo" accept="image/*">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label"></label>
+                                                        <div class="col-sm-9">
+
+                                                        <input type="checkbox" id="toggle_switch" name="toggle_switch">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
                                                         <div class="col-sm-12">
-                                                            <center> <button type="submit" class="btn btn-primary waves-effect waves-light" onclick="startProgressBar()">Submit</button></center>
+                                                            <center> <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button></center>
                                                         </div>
 
                                                     </div>

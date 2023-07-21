@@ -37,7 +37,7 @@ class DashboardControllers extends BaseController
             $this->loadViews("login/login", $this->global);
         } else {
             $this->load->model('Admin_model');
-            $this->global['emp'] = $this->Admin_model->viewAdmin('', '', '', '', '1');
+            $this->global['emp'] = $this->Admin_model->viewAdmin('', '', '', '', '');
             $this->global['pageTitle'] = 'Hr Tool : Super-Admin Emp Information';
             $this->loadViews("superadmin/admininformation", $this->global);
         }
@@ -167,7 +167,7 @@ class DashboardControllers extends BaseController
         if ($user_role == "admin") {
             $data['user_role'] = '1';
         } else  if ($user_role == "super_admin") {
-            $data['super_admin'] = '2';
+            $data['user_role'] = '2';
         }
         // Upload profile
 

@@ -184,7 +184,7 @@
                             </div>
                         </div>
                         <a href="index.html">
-                            <img class="img-fluid" src="https://maclareenai.com/hrtool/assets/images/logo_new.png" alt="Theme-Logo" style="  width: 160px; ">
+                            <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style="  width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -248,7 +248,7 @@
                                     <div class="col-md-8">
                                         <div class="page-header-title">
                                             <h5 class="m-b-10">Candidate Information</h5>
-                                            <p class="m-b-0">Recruitment Management System</p>
+                                            <p class="m-b-0">Maclareen Talent Acquisition System </p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -317,7 +317,7 @@
                                                                 <?php if ($emp[0]->user_profile == "") { ?>
                                                                     <img id="avatarImg" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="">
                                                                 <?php } else { ?>
-                                                                    <img id="avatarImg" src="<?php echo "https://maclareenai.com/hrtool/upload/profile/" . $emp[0]->user_profile; ?>" alt="">
+                                                                    <img id="avatarImg" src="<?php echo "http://mtas.net.in/upload/profile/" . $emp[0]->user_profile; ?>" alt="">
 
                                                                 <?php } ?>
 

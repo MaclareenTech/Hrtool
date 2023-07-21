@@ -10,7 +10,7 @@ class Admin_model extends MY_Model
     }
 
 
-    
+
     public function InsertAdmin($data)
     {
         if ($this->db->insert($this->table, $data)) {
@@ -49,34 +49,28 @@ class Admin_model extends MY_Model
 
     public function ViewCandidateInfoLog($candidate_id = '')
     {
-       
-            $query = $this->db->select('tbl_log.*,
+
+        $query = $this->db->select('tbl_log.*,
         tbl_user.*,
         tbl_candidate.*')->where(['tbl_log.candidate_id' => $candidate_id])
             ->join('tbl_candidate', 'tbl_log.candidate_id=tbl_candidate.candidate_id')
             ->join('tbl_user', 'tbl_log.admin_id=tbl_user.user_id')
-             ->order_by('candidate_job_status', 'asc')->get('tbl_log');
+            ->order_by('candidate_job_status', 'asc')->get('tbl_log');
         return $query->result();
-       
-       
-       
     }
 
     public function ExportCandidateInfoLog($candidate_id = '')
     {
-       
-            $query = $this->db->select('tbl_log.*,
+
+        $query = $this->db->select('tbl_log.*,
         tbl_user.*,
         tbl_candidate.*')->where(['tbl_log.candidate_id' => $candidate_id])
             ->join('tbl_candidate', 'tbl_log.candidate_id=tbl_candidate.candidate_id')
             ->join('tbl_user', 'tbl_log.admin_id=tbl_user.user_id')
-             ->order_by('candidate_job_status', 'asc')->get('tbl_log');
+            ->order_by('candidate_job_status', 'asc')->get('tbl_log');
         return $query->result_array();
-       
-       
-       
     }
-    
+
     public function InsertNew_User($data)
     {
         if ($this->db->insert($this->table, $data)) {
@@ -103,11 +97,17 @@ class Admin_model extends MY_Model
         if ($user_role !== "") {
             $this->db->where('user_role', $user_role);
         }
+        $this->db->where('user_role !=', 0);
 
+        // Set the order by column and direction (asc for ascending)
+         // Replace 'column_name' with the actual column you want to use for ordering
         $this->db->order_by($oder_by_column, 'asc');
-        $Query = $this->db->get($this->table);
-        // echo $this->db->last_query();
-        return $Query->result();
+
+        // Get the results from the database using the table name specified in $this->table
+        $query = $this->db->get($this->table);
+
+        // Return the results as an array of objects
+        return $query->result();
     }
 
 
@@ -137,25 +137,4 @@ class Admin_model extends MY_Model
             return false;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-  
-  
-
-
 }

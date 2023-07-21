@@ -119,7 +119,7 @@
 
                     <form class="md-float-material form-material" action="<?php echo base_url(); ?>loginMe" method="post">
                         <div class="text-center">
-                            <img src="https://maclareenai.com/hrtool/assets/images/logo_new.png" alt="logo_new.png" style="width: 300px;">
+                            <img src="http://mtas.net.in/assets/images/logo_new.png" alt="logo_new.png" style="width: 300px;">
                         </div>
                         <div class="auth-box card">
                             <div class="card-block">

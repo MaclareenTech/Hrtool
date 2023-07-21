@@ -244,7 +244,7 @@
                             </div>
                         </div>
                         <a href="index.html">
-                            <img class="img-fluid" src="https://maclareenai.com/hrtool/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px;">
+                            <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px;">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -313,7 +313,7 @@
                                     <div class="col-md-8">
                                         <div class="page-header-title">
                                             <h5 class="m-b-10">Candidate Information</h5>
-                                            <p class="m-b-0">Recruitment Management System</p>
+                                            <p class="m-b-0">Maclareen Talent Acquisition System </p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -390,15 +390,15 @@
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "5") { ?>
                                                         <button style="background-color: #C0C0C0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Job training 1
+                                                            <span style="font-weight: bold;">Job Status:</span> Job Orientation 1
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "6") { ?>
                                                         <button style="background-color: #A9A9A9; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Job training 2
+                                                            <span style="font-weight: bold;">Job Status:</span> Job Orientation 2
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "7") { ?>
                                                         <button style="background-color: #808080; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Job training 3
+                                                            <span style="font-weight: bold;">Job Status:</span> Job Orientation 3
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "8") { ?>
                                                         <button style="background-color: #009900; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
@@ -456,11 +456,18 @@
                                                 </a>
 
                                             <?php } ?>
+                                            <?php if ($candidate[0]->candidate_resume != "") { ?>
 
-                                            <div class="title" style="margin-top: 20px;">Job Training</div>
+                                                <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/4'); ?>" style="background: #434341;border: none;color: white;padding: 8px 16px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px; margin: 4px 2px;transition-duration: 0.4s; cursor: pointer; border-radius: 4px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); transform-style: preserve-3d;  perspective: 1000px;  transform: translateZ(10px);">
+                                                    View Photo
+                                                </a>
+
+                                            <?php } ?>
+
+                                            <div class="title" style="margin-top: 20px;">Job Orientation </div>
 
                                             <?php if ($candidate[0]->job_training_one != "") { ?>
-                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 1</div>
+                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 1</div>
                                                 <div class="user-details">
 
                                                     <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
@@ -483,7 +490,7 @@
                                             <?php } ?>
 
                                             <?php if ($candidate[0]->job_training_two != "") { ?>
-                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 2</div>
+                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 2</div>
                                                 <div class="user-details">
 
                                                     <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
@@ -505,7 +512,7 @@
                                                 </div>
                                             <?php } ?>
                                             <?php if ($candidate[0]->job_training_three != "") { ?>
-                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 3</div>
+                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 3</div>
                                                 <div class="user-details">
 
                                                     <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">

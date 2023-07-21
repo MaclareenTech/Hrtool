@@ -50,19 +50,23 @@ class AddCandidateControllers extends BaseController
     $cognate3Url = '';
     if ($documentType == '0') {
       $Document = $candidate[0]->candidate_aadhar_card;
-      $cognate3Url = "https://maclareenai.com/hrtool/upload/aadhar/" . $Document;
+      $cognate3Url = "http://mtas.net.in/upload/aadhar/" . $Document;
       return Redirect($cognate3Url);
     } else if ($documentType == '1') {
       $Document = $candidate[0]->candidate_pan_card;
-      $cognate3Url = "https://maclareenai.com/hrtool/upload/pan/" . $Document;
+      $cognate3Url = "http://mtas.net.in/upload/pan/" . $Document;
       return Redirect($cognate3Url);
     } else if ($documentType == '2') {
       $Document = $candidate[0]->candidate_resume;
-      $cognate3Url = "https://maclareenai.com/hrtool/upload/resume/" . $Document;
+      $cognate3Url = "http://mtas.net.in/upload/resume/" . $Document;
       return Redirect($cognate3Url);
     } else if ($documentType == '3') {
       $Document = $candidate[0]->candidate_passport;
-      $cognate3Url = "https://maclareenai.com/hrtool/upload/passport/" . $Document;
+      $cognate3Url = "http://mtas.net.in/upload/passport/" . $Document;
+      return Redirect($cognate3Url);
+    } else if ($documentType == '4') {
+      $Document = $candidate[0]->candidate_photo;
+      $cognate3Url = "http://mtas.net.in/upload/image/" . $Document;
       return Redirect($cognate3Url);
     }
   }
@@ -97,7 +101,7 @@ class AddCandidateControllers extends BaseController
 
     // Upload files
     $config['upload_path'] = './upload/';
-    $config['allowed_types'] = 'pdf';
+    $config['allowed_types'] = 'pdf|gif|jpg|jpeg|png';
     $this->load->library('upload', $config);
 
     $uploaded_files = array();
@@ -109,6 +113,11 @@ class AddCandidateControllers extends BaseController
     $Admin_id = $this->session->userdata('userId');
     date_default_timezone_set("Asia/Kolkata");
     $today = date("Y-m-d H:i:s");
+    if (isset($_POST["toggle_switch"])) {
+      $is_paid = "1";
+    } else {
+      $is_paid = "0";
+    }
     $data = array(
       'candidate_name' => $candidate_name,
       'candidate_email' => $candidate_email,
@@ -116,6 +125,7 @@ class AddCandidateControllers extends BaseController
       'candidate_job_profile' => $candidate_job_profile,
       'updated_by' => $Admin_id,
       'candidate_satus_days' => $today,
+      'is_paid' => $is_paid,
       'candidate_password' => $hashedPassword
     );
 
@@ -171,6 +181,17 @@ class AddCandidateControllers extends BaseController
         $uploaded_files['resume'] = $file_name;
         rename($this->upload->data('full_path'), './upload/resume/' . $file_name);
         $data['candidate_resume'] = $uploaded_files['resume'];
+      } else {
+        //   $upload_errors = true;
+      }
+
+      // Upload Candidate image
+      if ($this->upload->do_upload('candidate_photo')) {
+        $file_name = $candidate_email . '_img.pnd';
+        $uploaded_files['image'] = $file_name;
+        rename($this->upload->data('full_path'), './upload/image/' . $file_name);
+        $data['candidate_photo'] = $uploaded_files['image'];
+        $candidate_photo = $uploaded_files['image'];
       } else {
         //   $upload_errors = true;
       }
@@ -312,7 +333,7 @@ class AddCandidateControllers extends BaseController
                 <tr>
                 <td class="">
                 <div class="">
-                <a  href="https://maclareenai.com/hrtool/" style="background-color:#05C6E3;border-radius:4px;color:#fff;display:inline-block;font-family:Helvetica, Arial, sans-serif;font-size:18px;font-weight:normal;line-height:50px;text-align:center;text-decoration:none;width:350px;-webkit-text-size-adjust:none;" href="https://maclareenai.com/hrtool/">Visit Account and Start Traking</a>
+                <a  href="http://mtas.net.in/" style="background-color:#05C6E3;border-radius:4px;color:#fff;display:inline-block;font-family:Helvetica, Arial, sans-serif;font-size:18px;font-weight:normal;line-height:50px;text-align:center;text-decoration:none;width:350px;-webkit-text-size-adjust:none;" href="http://mtas.net.in/">Visit Account and Start Traking</a>
                 </div>
                  <br>
                 </td>
@@ -334,9 +355,9 @@ class AddCandidateControllers extends BaseController
 
         $this->load->config('email');
         $this->load->library('email');
-        $subject = 'Recruitment Management System -  Candidate Register';
+        $subject = 'Maclareen Talent Acquisition System  -  Candidate Register';
         //	$token = $email_exist->emp_id;
-        $this->email->from('maclareendata@gmail.com', 'Recruitment Management System -  Candidate Registe');
+        $this->email->from('maclareendata@gmail.com', 'Maclareen Talent Acquisition System  -  Candidate Registe');
         $this->email->to($candidate_email);
         $this->email->subject($subject);
         $this->email->message($registerMessage);
@@ -547,15 +568,19 @@ class AddCandidateControllers extends BaseController
     //         redirect('editCandidateInfo/' . $candidate_id);
     //     }
     // }
-
-
+    if (isset($_POST["toggle_switch"])) {
+      $is_paid = "1";
+    } else {
+      $is_paid = "0";
+    }
+    $data['is_paid'] = $is_paid;
 
 
 
 
     //Upload files
     $config['upload_path'] = './upload/';
-    $config['allowed_types'] = 'pdf';
+    $config['allowed_types'] = 'pdf|gif|jpg|jpeg|png';
     $this->load->library('upload', $config);
 
     $uploaded_files = array();
@@ -572,6 +597,7 @@ class AddCandidateControllers extends BaseController
     $candidate_pan_card = '';
     $candidate_passport =  '';
     $candidate_resume =  '';
+    $candidate_photo =  '';
 
     // Upload Aadhar Card
     if ($this->upload->do_upload('candidate_aadhar_card')) {
@@ -616,12 +642,23 @@ class AddCandidateControllers extends BaseController
     } else {
       //   $upload_errors = true;
     }
+
+    // Upload Candidate image
+    if ($this->upload->do_upload('candidate_photo')) {
+      $file_name = $candidate_email . '_img.png';
+      $uploaded_files['image'] = $file_name;
+      rename($this->upload->data('full_path'), './upload/image/' . $file_name);
+      $data['candidate_photo'] = $uploaded_files['image'];
+      $candidate_photo = $uploaded_files['image'];
+    } else {
+      //   $upload_errors = true;
+    }
     $candidate_id = $this->Candidate_model->UpdateCandidate($candidate_id, $data);
     $candidateMail = "";
     if ($candidate_id) {
 
       if ($candidate_job_status == 1) {
-        $subject = 'Recruitment Management System -  Waiting for document ';
+        $subject = 'Maclareen Talent Acquisition System  -  Waiting for document ';
 
         $candidateMail = '
                     <!DOCTYPE html>
@@ -705,6 +742,9 @@ class AddCandidateControllers extends BaseController
         if ($candidate_resume == "") {
           $candidateMail .= '<li>Resume</li>';
         }
+        if ($candidate_photo == "") {
+          $candidateMail .= '<li>Passport size photo</li>';
+        }
         $candidateMail .= '</ol>
                           <p>Once you send all the documents, I will start the further process for your job profile.</p>
                         </div>
@@ -717,7 +757,7 @@ class AddCandidateControllers extends BaseController
                     </html>';
       }
       if ($candidate_job_status == 2) {
-        $subject = 'Recruitment Management System -  Sent to recruitment review ';
+        $subject = 'Maclareen Talent Acquisition System  -  Sent to recruitment review ';
 
         $candidateMail = '
                     <!DOCTYPE html>
@@ -790,7 +830,7 @@ class AddCandidateControllers extends BaseController
                     ';
       }
       if ($candidate_job_status == 3) {
-        $subject = 'Recruitment Management System -  Shortlisted ';
+        $subject = 'Maclareen Talent Acquisition System  -  Shortlisted ';
         $candidateMail = '
                     <!DOCTYPE html>
                     <html>
@@ -850,7 +890,7 @@ class AddCandidateControllers extends BaseController
                       <div class="container">
                         <h1>Congratulations!</h1>
                         <p>Dear ' . $candidate_name . ',</p>
-                        <p>It is our good pleasure to inform you that your Resume has been selected for the ' . $candidate_job_profile . ' Place job. We will send you a Zoom/Google Meet link via email for job training. Kindly attend all meetings for a better understanding of the job role.</p>
+                        <p>It is our good pleasure to inform you that your Resume has been selected for the ' . $candidate_job_profile . ' Place job. We will send you a Zoom/Google Meet link via email for Job Orientation . Kindly attend all meetings for a better understanding of the job role.</p>
                         <p>We wish you the best of luck for the subsequent and remaining stages.</p>
                     
                         <div class="footer">
@@ -864,7 +904,7 @@ class AddCandidateControllers extends BaseController
                     ';
       }
       if ($candidate_job_status == 4) {
-        $subject = 'Recruitment Management System -  Not selected ';
+        $subject = 'Maclareen Talent Acquisition System  -  Not selected ';
         $candidateMail = '
                     <!DOCTYPE html>
                             <html>
@@ -932,7 +972,7 @@ class AddCandidateControllers extends BaseController
                     ';
       }
       if ($candidate_job_status == 5) {
-        $subject = 'Recruitment Management System -  Job training 1 ';
+        $subject = 'Maclareen Talent Acquisition System  -  Job Orientation  1 ';
         $candidateMail = '
                 <!DOCTYPE html>
                 <html>
@@ -1032,7 +1072,7 @@ class AddCandidateControllers extends BaseController
                       <h1>Hi ' . $candidate_name . ',</h1>
                     </div>
                     <div class="content">
-                      <p>We’re excited to announce our first Google or Zoom meeting for job training.</p>
+                      <p>We’re excited to announce our first Google or Zoom meeting for Job Orientation .</p>
                       <p>Join us on ' . $job_training_one_humanReadable . '.</p>
                       <p> Meeting Link :' . $job_training_one . ' </p>
                       <p> Meeting ID :' . $job_training_one_meet_id . ' </p>
@@ -1052,7 +1092,7 @@ class AddCandidateControllers extends BaseController
                     ';
       }
       if ($candidate_job_status == 6) {
-        $subject = 'Recruitment Management System -  Job training 2 ';
+        $subject = 'Maclareen Talent Acquisition System  -  Job Orientation  2 ';
         $candidateMail = '
                 <!DOCTYPE html>
                 <html>
@@ -1152,7 +1192,7 @@ class AddCandidateControllers extends BaseController
                       <h1>Hi ' . $candidate_name . ',</h1>
                     </div>
                     <div class="content">
-                      <p>We’re excited to announce our second Google or Zoom meeting for job training.</p>
+                      <p>We’re excited to announce our second Google or Zoom meeting for Job Orientation .</p>
                       <p>Join us on ' . $job_training_two_humanReadable . '.</p>
                       <p> Meeting Link :' . $job_training_two . ' </p>
                       <p> Meeting ID :' . $job_training_two_meet_id . ' </p>
@@ -1172,7 +1212,7 @@ class AddCandidateControllers extends BaseController
                     ';
       }
       if ($candidate_job_status == 7) {
-        $subject = 'Recruitment Management System -  Job training 3 ';
+        $subject = 'Maclareen Talent Acquisition System  -  Job Orientation  3 ';
         $candidateMail = '
                 <!DOCTYPE html>
                 <html>
@@ -1272,7 +1312,7 @@ class AddCandidateControllers extends BaseController
                       <h1>Hi ' . $candidate_name . ',</h1>
                     </div>
                     <div class="content">
-                      <p>We’re excited to announce our third Google or Zoom meeting for job training.</p>
+                      <p>We’re excited to announce our third Google or Zoom meeting for Job Orientation .</p>
                       <p>Join us on ' . $job_training_three_humanReadable . '.</p>
                       <p> Meeting Link :' . $job_training_three . ' </p>
                       <p> Meeting ID :' . $job_training_three_meet_id . ' </p>
@@ -1292,7 +1332,7 @@ class AddCandidateControllers extends BaseController
                     ';
       }
       if ($candidate_job_status == 8) {
-        $subject = 'Recruitment Management System -  Work permit ';
+        $subject = 'Maclareen Talent Acquisition System  -  Work permit ';
         $candidateMail = '
                 <!DOCTYPE html>
                         <html>
@@ -1376,7 +1416,7 @@ class AddCandidateControllers extends BaseController
                     ';
       }
       if ($candidate_job_status == 9) {
-        $subject = 'Recruitment Management System -  Visa filing ';
+        $subject = 'Maclareen Talent Acquisition System  -  Visa filing ';
         $candidateMail = '
                 <!DOCTYPE html>
                 <html>
@@ -1447,7 +1487,7 @@ class AddCandidateControllers extends BaseController
                     ';
       }
       if ($candidate_job_status == 10) {
-        $subject = 'Recruitment Management System -  Training for visa ';
+        $subject = 'Maclareen Talent Acquisition System  -  Training for visa ';
         $candidateMail = '
                 <!DOCTYPE html>
                     <html>
@@ -1570,7 +1610,7 @@ class AddCandidateControllers extends BaseController
                     ';
       }
       if ($candidate_job_status == 11) {
-        $subject = 'Recruitment Management System - Completed ';
+        $subject = 'Maclareen Talent Acquisition System  - Completed ';
         $candidateMail = '
                 <html>
                     <head>
@@ -1701,7 +1741,7 @@ class AddCandidateControllers extends BaseController
 
       //	$token = $email_exist->emp_id;
 
-      $this->email->from('maclareendigital@gmail.com', 'Recruitment Management System');
+      $this->email->from('maclareendigital@gmail.com', 'Maclareen Talent Acquisition System ');
       $this->email->to($candidate_email);
       $this->email->subject($subject);
       $this->email->message($candidateMail);
@@ -1819,7 +1859,7 @@ class AddCandidateControllers extends BaseController
     $this->load->library('email');
 
     //	$token = $email_exist->emp_id;
-    $this->email->from('maclareendata@gmail.com', 'Recruitment Management System ');
+    $this->email->from('maclareendata@gmail.com', 'Maclareen Talent Acquisition System  ');
     $this->email->to($candidate_email);
     $this->email->subject($subject);
     $this->email->message($body);

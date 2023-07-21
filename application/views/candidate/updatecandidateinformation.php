@@ -287,7 +287,7 @@
                             </div>
                         </div>
                         <a href="index.html">
-                            <img class="img-fluid" src="https://maclareenai.com/hrtool/assets/images/logo_new.png" alt="Theme-Logo" style="  width: 160px;">
+                            <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style="  width: 160px;">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -323,7 +323,7 @@
                                             <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
 
                                         <?php } else { ?>
-                                            <img class="img-80 img-radius" src="<?php echo "https://maclareenai.com/hrtool/upload/profile/" . $this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
+                                            <img class="img-80 img-radius" src="<?php echo "http://mtas.net.in/upload/profile/" . $this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
                                         <?php } ?>
                                     <?php } ?>
                                     <div class="user-details">
@@ -360,7 +360,7 @@
                                     <div class="col-md-8">
                                         <div class="page-header-title">
                                             <h5 class="m-b-10">Update Candidate Information</h5>
-                                            <p class="m-b-0">Recruitment Management System</p>
+                                            <p class="m-b-0">Maclareen Talent Acquisition System </p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -445,9 +445,9 @@
                                                             <option value="2">Sent to recruitment review</option>
                                                             <option value="3">Shortlisted</option>
                                                             <option value="4">Not selected</option>
-                                                            <option value="5">Job training 1</option>
-                                                            <option value="6">Job training 2</option>
-                                                            <option value="7">Job training 3</option>
+                                                            <option value="5">Job Orientation  1</option>
+                                                            <option value="6">Job Orientation  2</option>
+                                                            <option value="7">Job Orientation  3</option>
                                                             <option value="8">Work permit</option>
                                                             <option value="9">Visa filing</option>
                                                             <option value="10">Training for visa</option>
@@ -460,15 +460,15 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-4 col-form-label">Job Status</label>
                                                     <div class="col-sm-8">
-                                                        <select name="candidate_job_status" class="form-control" style="border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); background: linear-gradient(to bottom, #f9f9f9, #e8e8e8); outline: none;">
+                                                        <select name="candidate_job_status" class="form-control" style="border: 1px solid #ccc; border-radius: 5px;width: 250px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); background: linear-gradient(to bottom, #f9f9f9, #e8e8e8); outline: none;">
                                                             <option value="opt1" disabled>Select One Value</option>
                                                             <option value="1" <?php echo ($candidate[0]->candidate_job_status === '1') ? 'selected' : ''; ?>>Waiting for document</option>
                                                             <option value="2" <?php echo ($candidate[0]->candidate_job_status === '2') ? 'selected' : ''; ?>>Sent to recruitment review</option>
                                                             <option value="3" <?php echo ($candidate[0]->candidate_job_status === '3') ? 'selected' : ''; ?>>Shortlisted</option>
                                                             <option value="4" <?php echo ($candidate[0]->candidate_job_status === '4') ? 'selected' : ''; ?>>Not selected</option>
-                                                            <option value="5" <?php echo ($candidate[0]->candidate_job_status === '5') ? 'selected' : ''; ?>>Job training 1</option>
-                                                            <option value="6" <?php echo ($candidate[0]->candidate_job_status === '6') ? 'selected' : ''; ?>>Job training 2</option>
-                                                            <option value="7" <?php echo ($candidate[0]->candidate_job_status === '7') ? 'selected' : ''; ?>>Job training 3</option>
+                                                            <option value="5" <?php echo ($candidate[0]->candidate_job_status === '5') ? 'selected' : ''; ?>>Job Orientation 1</option>
+                                                            <option value="6" <?php echo ($candidate[0]->candidate_job_status === '6') ? 'selected' : ''; ?>>Job Orientation 2</option>
+                                                            <option value="7" <?php echo ($candidate[0]->candidate_job_status === '7') ? 'selected' : ''; ?>>Job Orientation 3</option>
                                                             <option value="8" <?php echo ($candidate[0]->candidate_job_status === '8') ? 'selected' : ''; ?>>Work permit</option>
                                                             <option value="9" <?php echo ($candidate[0]->candidate_job_status === '9') ? 'selected' : ''; ?>>Visa filing</option>
                                                             <option value="10" <?php echo ($candidate[0]->candidate_job_status === '10') ? 'selected' : ''; ?>>Training for visa</option>
@@ -517,16 +517,33 @@
 
                                                 </div>
                                             </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Upload Candidate Images </label>
+                                                <div class="col-sm-9">
+
+                                                    <input type="file" name="candidate_photo" accept="image/*">
+
+                                                </div>
+                                            </div>
                                         <?php }  ?>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label"></label>
+                                            <div class="col-sm-9">
+                                                <?php if ($candidate[0]->is_paid == "1") { ?>
+                                                    <input type="checkbox" id="toggle_switch" name="toggle_switch" checked>
+                                                <?php } else { ?>
+                                                    <input type="checkbox" id="toggle_switch" name="toggle_switch" >
+                                                <?php } ?>
+                                            </div>
+                                        </div>
 
 
-
-                                        <div class="title" style="margin-top: 20px;">Job Training</div>
+                                        <div class="title" style="margin-top: 20px;">Job Orientation </div>
 
 
 
                                         <?php if ($candidate[0]->candidate_job_status == "6" || $candidate[0]->candidate_job_status == "7" || $candidate[0]->candidate_job_status == "8"  || $candidate[0]->candidate_job_status == "9" || $candidate[0]->candidate_job_status == "10" || $candidate[0]->candidate_job_status == "11") { ?>
-                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 1</div>
+                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 1</div>
                                             <div class="user-details">
 
                                                 <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
@@ -569,7 +586,7 @@
                                         <?php  } ?>
 
                                         <?php if ($candidate[0]->candidate_job_status == "7" || $candidate[0]->candidate_job_status == "8"  || $candidate[0]->candidate_job_status == "9" || $candidate[0]->candidate_job_status == "10" || $candidate[0]->candidate_job_status == "11") { ?>
-                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 2</div>
+                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 2</div>
                                             <div class="user-details">
 
                                                 <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
@@ -590,7 +607,7 @@
                                                 </div>
                                             </div>
                                         <?php } else { ?>
-                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 2</div>
+                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 2</div>
                                             <div class="user-details">
 
                                                 <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
@@ -612,7 +629,7 @@
                                             </div>
                                         <?php } ?>
                                         <?php if ($candidate[0]->candidate_job_status == "8"  || $candidate[0]->candidate_job_status == "9" || $candidate[0]->candidate_job_status == "10" || $candidate[0]->candidate_job_status == "11") { ?>
-                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 3</div>
+                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 3</div>
                                             <div class="user-details">
 
                                                 <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
@@ -633,7 +650,7 @@
                                                 </div>
                                             </div>
                                         <?php } else { ?>
-                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 3</div>
+                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 3</div>
                                             <div class="user-details">
 
                                                 <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
@@ -700,7 +717,7 @@
                                         <?php } ?>
                                         <div class="form-group row">
                                             <div class="col-sm-12">
-                                                <center> <button type="submit" class="btn btn-primary waves-effect waves-light" onclick="startProgressBar()">>Submit</button></center>
+                                                <center> <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button></center>
                                             </div>
 
                                         </div>

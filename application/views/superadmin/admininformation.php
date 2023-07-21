@@ -118,7 +118,7 @@
                             </div>
                         </div>
                         <a href="index.html">
-                            <img class="img-fluid" src="https://maclareenai.com/hrtool/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px; ">
+                            <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -212,7 +212,7 @@
                                     <div class="col-md-8">
                                         <div class="page-header-title">
                                             <h5 class="m-b-10">Dashboard</h5>
-                                            <p class="m-b-0">Recruitment Management System</p>
+                                            <p class="m-b-0">Maclareen Talent Acquisition System </p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -270,6 +270,7 @@
                                                                 <th>Admin Email</th>
                                                                 <th>Admin Number</th>
                                                                 <th>Emp Id</th>
+                                                                <th>Role</th>
                                                                 <th>Status </th>
                                                                 <th></th>
                                                             </tr>
@@ -285,6 +286,15 @@
                                                                     <td><?php echo $row->user_email ?></td>
                                                                     <td><?php echo $row->user_mobile ?></td>
                                                                     <td><?php echo $row->emp_id ?></td>
+                                                                    <td> <?php if ($row->user_role == "1") { ?>
+                                                                            <div style="display: inline-block; padding: 10px 20px; border: 2px solid #000; border-radius: 5px;">
+                                                                                Admin
+                                                                            </div>
+                                                                        <?php } else if ($row->user_role == "2") { ?>
+                                                                            <div style="display: inline-block; padding: 10px 20px; border: 2px solid #000; border-radius: 5px;">
+                                                                                Super Admin
+                                                                            </div>
+                                                                        <?php } ?>
                                                                     <td> <?php if ($row->id_deleted == "0") { ?>
                                                                             <a href="<?php echo base_url('UpdateStatus/' . $row->id_deleted . '/' . $row->user_id); ?>" style="text-decoration: none;">
                                                                                 <button style="background-color: #2ECC71; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">

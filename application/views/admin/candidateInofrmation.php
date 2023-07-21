@@ -244,7 +244,7 @@
                             </div>
                         </div>
                         <a href="index.html">
-                            <img class="img-fluid" src="https://maclareenai.com/hrtool/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px;">
+                            <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px;">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -280,7 +280,7 @@
                                             <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
 
                                         <?php } else { ?>
-                                            <img class="img-80 img-radius" src="<?php echo "https://maclareenai.com/hrtool/upload/profile/" . $this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
+                                            <img class="img-80 img-radius" src="<?php echo "http://mtas.net.in/upload/profile/" . $this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
                                         <?php } ?>
                                     <?php } ?>
                                     <div class="user-details">
@@ -317,7 +317,7 @@
                                     <div class="col-md-8">
                                         <div class="page-header-title">
                                             <h5 class="m-b-10">Candidate Information</h5>
-                                            <p class="m-b-0">Recruitment Management System</p>
+                                            <p class="m-b-0">Maclareen Talent Acquisition System </p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -351,9 +351,14 @@
 
 
                                     <div class="wrapper">
+                                        <div class="title">
+
+                                            <a class="pull-right btn btn-warning btn-large" style="margin-right:40px;  margin-top: 20px;  background-color: #007bff; border-color: #007bff;" href="<?php echo base_url('Sendmail/' . $candidate[0]->candidate_id); ?>"><i class="fa fa-envelope"></i></a>
+                                            <a class="pull-right btn btn-warning btn-large" style="margin-right:40px;  margin-top: 20px;  background-color: #ffc107; border-color: ##ffc107;" href="<?php echo base_url('ExportData/' .  $candidate[0]->candidate_id); ?>"><i class="fa fa-file-excel-o"></i></a>
+
+                                        </div>
                                         <div class="title">Candidate Information
-                                            <a class="pull-right btn btn-warning btn-large" style="margin-right:40px;    background-color: #007bff; border-color: #007bff;" href="<?php echo base_url('Sendmail/' . $candidate[0]->candidate_id); ?>"><i class="fa fa-envelope"></i>Send Email</a>
-                                            <?php if ($candidate[0]->candidate_job_status == "13") { ?><a class="pull-right btn btn-warning btn-large" style="margin-right:40px;    background-color: #007bff; border-color: #007bff;" href="<?php echo base_url('ExportCandidateInfoLog/' . $candidate[0]->candidate_id); ?>"><i class="fa fa-file-excel-o"></i> Export to Excel</a> <?php } ?>
+
                                         </div>
 
 
@@ -399,15 +404,15 @@
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "5") { ?>
                                                         <button style="background-color: #C0C0C0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Job training 1
+                                                            <span style="font-weight: bold;">Job Status:</span> Job Orientation 1
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "6") { ?>
                                                         <button style="background-color: #A9A9A9; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Job training 2
+                                                            <span style="font-weight: bold;">Job Status:</span> Job Orientation 2
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "7") { ?>
                                                         <button style="background-color: #808080; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Job training 3
+                                                            <span style="font-weight: bold;">Job Status:</span> Job Orientation 3
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "8") { ?>
                                                         <button style="background-color: #009900; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
@@ -465,11 +470,18 @@
                                                 </a>
 
                                             <?php } ?>
+                                            <?php if ($candidate[0]->candidate_resume != "") { ?>
 
-                                            <div class="title" style="margin-top: 20px;">Job Training</div>
+                                                <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/4'); ?>" style="background: #434341;border: none;color: white;padding: 8px 16px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px; margin: 4px 2px;transition-duration: 0.4s; cursor: pointer; border-radius: 4px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); transform-style: preserve-3d;  perspective: 1000px;  transform: translateZ(10px);">
+                                                    View Photo
+                                                </a>
+
+                                            <?php } ?>
+
+                                            <div class="title" style="margin-top: 20px;">Job Orientation </div>
 
                                             <?php if ($candidate[0]->job_training_one != "") { ?>
-                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 1</div>
+                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 1</div>
                                                 <div class="user-details">
 
                                                     <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
@@ -492,7 +504,7 @@
                                             <?php } ?>
 
                                             <?php if ($candidate[0]->job_training_two != "") { ?>
-                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 2</div>
+                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 2</div>
                                                 <div class="user-details">
 
                                                     <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
@@ -514,7 +526,7 @@
                                                 </div>
                                             <?php } ?>
                                             <?php if ($candidate[0]->job_training_three != "") { ?>
-                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Training 3</div>
+                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 3</div>
                                                 <div class="user-details">
 
                                                     <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
@@ -566,7 +578,7 @@
                                     <br>
                                     <h5>Status Log</h5>
 
-                                    <table class="table datatable">
+                                    <table id="my-table" class="table datatable">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -594,11 +606,11 @@
                                                         <?php } else if ($row->status == "4") { ?>
                                                             <button style="background-color: #b30000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Not selected</button>
                                                         <?php } else if ($row->status == "5") { ?>
-                                                            <button style="background-color: #C0C0C0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job training 1</button>
+                                                            <button style="background-color: #C0C0C0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 1</button>
                                                         <?php } else if ($row->status == "6") { ?>
-                                                            <button style="background-color: #A9A9A9; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job training 2</button>
+                                                            <button style="background-color: #A9A9A9; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 2</button>
                                                         <?php } else if ($row->status == "7") { ?>
-                                                            <button style="background-color: #808080; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job training 3</button>
+                                                            <button style="background-color: #808080; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 3</button>
                                                         <?php } else if ($row->status == "8") { ?>
                                                             <button style="background-color: #009900; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Work permit</button>
                                                         <?php } else if ($row->status == "9") { ?>
@@ -626,7 +638,9 @@
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
-
+                                    <div id="pagination-container">
+                                        <ul id="pagination" class="pagination"></ul>
+                                    </div>
                                 </div>
                                 <!-- Page-body end -->
                             </div>
@@ -660,7 +674,44 @@
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/script.js "></script>
 
 
+    <script>
+        const tableBody = document.getElementById('myTable');
+        const paginationContainer = document.getElementById('pagination');
+        const itemsPerPage = 7;
+        let currentPage = 1;
 
+        function displayDataPage(page) {
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const rows = Array.from(tableBody.getElementsByTagName('tr'));
+
+            rows.forEach((row, index) => {
+                if (index >= start && index < end) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            updatePagination(page);
+        }
+
+        function updatePagination(currentPage) {
+            const rowsCount = tableBody.getElementsByTagName('tr').length;
+            const totalPages = Math.ceil(rowsCount / itemsPerPage);
+            let paginationHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                paginationHTML += `<li class="page-item${i === currentPage ? ' active' : ''}">
+        <a class="page-link" href="#" onclick="displayDataPage(${i})">${i}</a>
+      </li>`;
+            }
+
+            paginationContainer.innerHTML = paginationHTML;
+        }
+
+        displayDataPage(currentPage);
+    </script>
 
 
 

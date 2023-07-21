@@ -69,6 +69,7 @@ $route['ViewCandiateDocument/(:num)/(:num)'] = 'admin/AddCandidateControllers/Vi
 
 // super admin
 $route['superadminDashboard'] = 'superadmin/SuperAdminDashboardControllers';
+$route['ExportData/(:num)'] = 'superadmin/SuperAdminDashboardControllers/ExportData/$1';
 $route['admininformation'] = 'admin/DashboardControllers/AdminInformation';
 $route['addnewadmin'] = 'superadmin/SuperAdminDashboardControllers/RegisteNewAdmin';
 $route['UpdateAdminInformation/(:num)'] = 'admin/DashboardControllers/UpdateAdminInformation/$1'; 
