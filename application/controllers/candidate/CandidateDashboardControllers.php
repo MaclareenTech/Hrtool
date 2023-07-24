@@ -12,14 +12,14 @@ class CandidateDashboardControllers extends BaseController
 
         if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
 
-            $this->global['pageTitle'] = 'Hr Tool : Login';
+            $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
         } else {
             $userId = $this->session->userdata('userId');
             $this->load->model('Candidate_model');
 
             $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($userId);
-            $this->global['pageTitle'] = 'Hr Tool : Candidate Dashboard';
+            $this->global['pageTitle'] = 'MTAS : Candidate Dashboard';
             $this->global['candidateId'] = $userId;
             $this->loadViews("candidate/candidatedashbaord", $this->global);
         }

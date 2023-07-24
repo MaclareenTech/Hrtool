@@ -387,9 +387,10 @@
 
 
 
-                        <div class="pcoded-inner-content">
+                        <div class="pcoded-inner-content" >
                             <!-- Main-body start -->
                             <div class="main-body">
+                                
                                 <form action="<?php echo base_url(); ?>send" method="post" style="padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);">
                                     <h1 class="title" style="text-align: center;">Start Email to <?php echo $candidate[0]->candidate_name ?></h1>
                                     <div class="field" style="margin-bottom: 10px;">
@@ -398,10 +399,11 @@
                                     </div>
                                     <div class="field" style="margin-bottom: 10px;">
                                         <p for="body" style="display: block; font-weight: bold; color: black;">Email Body</p>
-                                        <textarea class="textarea" name="body" id="body" style="width: 100%; height: 150px; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" required>Example Email Body</textarea>
+                                        <textarea class="textarea" name="body" id="body" style="width: 100%; height: 150px; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" required>    </textarea>
                                     </div>
                                     <div style="text-align: center;">
                                         <input type="text" value="<?php echo $candidate[0]->candidate_email ?>" style="opacity: 0;" name="candidate_email">
+                                        <input type="text" value="<?php echo $candidate[0]->candidate_name ?>" style="opacity: 0;" name="candidate_name">
                                         <button type="submit" class="button is-primary" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="startProgressBar()">Send Mail</button>
                                     </div>
                                 </form>

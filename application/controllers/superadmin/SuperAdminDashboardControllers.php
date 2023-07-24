@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-require FCPATH.'vendor/autoload.php';
+require FCPATH . 'vendor/autoload.php';
 require APPPATH . '/libraries/BaseController.php';
 class SuperAdminDashboardControllers extends BaseController
 {
@@ -12,7 +12,7 @@ class SuperAdminDashboardControllers extends BaseController
 
         if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
 
-            $this->global['pageTitle'] = 'Hr Tool : Login';
+            $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
         } else {
             $this->load->model('Candidate_model');
@@ -21,7 +21,7 @@ class SuperAdminDashboardControllers extends BaseController
             $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('', '');
             $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
             $this->global['emp'] = $this->Admin_model->viewAdmin('', '', '', '', '1');
-            $this->global['pageTitle'] = 'Hr Tool : Super-Admin Dashboard';
+            $this->global['pageTitle'] = 'MTAS : Super-Admin Dashboard';
             $this->loadViews("superadmin/superAdmindashbaord", $this->global);
         }
     }
@@ -31,7 +31,7 @@ class SuperAdminDashboardControllers extends BaseController
     public function RegisteNewAdmin()
     {
 
-        $this->global['pageTitle'] = 'Hr Tool : Register new admin';
+        $this->global['pageTitle'] = 'MTAS : Register new admin';
         $this->loadViews("superadmin/insertnewadmin", $this->global);
     }
 
@@ -44,19 +44,27 @@ class SuperAdminDashboardControllers extends BaseController
         $this->global['log'] = $this->Admin_model->ViewCandidateInfoLog($id);
         $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('', '');
         $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
-        $this->global['pageTitle'] = 'Hr Tool : Candidate Information';
+        $this->global['pageTitle'] = 'MTAS : Candidate Information';
         $this->global['candidateId'] = $id;
-       $html = $this->load->view('receipt_pdf',$this->global,true);
-       //  $html = $this->load->view('receipt_pdf',"",true);
-       // $this->loadViews("receipt_pdf'", $this->global);
+        $html = $this->load->view('receipt_pdf', $this->global, true);
+
+        // Create the mPDF instance and set watermark
         $mpdf = new \Mpdf\Mpdf([
-            'format'=>'A4',
-            'margin_top'=>0,
-            'margin_right'=>0,
-            'margin_left'=>0,
-            'margin_bottom'=>0,
+            'format' => 'A4',
+            'margin_top' => 0,
+            'margin_right' => 0,
+            'margin_left' => 0,
+            'margin_bottom' => 0,
         ]);
+
+        // Add watermark to each page
+        $mpdf->SetWatermarkImage(base_url('assets/images/logo_new_2.png'));
+        $mpdf->showWatermarkImage = true;
+
+        // Write content to PDF
         $mpdf->WriteHTML($html);
+
+        // Output the PDF
         $mpdf->Output();
     }
 }

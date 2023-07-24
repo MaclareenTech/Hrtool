@@ -12,11 +12,11 @@ class AddCandidateControllers extends BaseController
 
     if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
 
-      $this->global['pageTitle'] = 'Hr Tool : Login';
+      $this->global['pageTitle'] = 'MTAS : Login';
       $this->loadViews("login/login", $this->global);
     } else {
 
-      $this->global['pageTitle'] = 'Hr Tool : Add candidate';
+      $this->global['pageTitle'] = 'MTAS : Add candidate';
 
       $this->loadViews("admin/addcandidate", $this->global);
     }
@@ -27,14 +27,22 @@ class AddCandidateControllers extends BaseController
   public function viewCandidateInformation($id)
   {
     //echo $id;
+    // $this->load->library('encryption');
+
+    //  // Decrypt the number
+    //  $decrypted_id = $this->encryption->decrypt($id);
+
+
+     $decrypted_id = $id;
+    // echo $decrypted_id;
     $this->load->model('Candidate_model');
     $this->load->model('Admin_model');
-    $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($id);
-    $this->global['log'] = $this->Admin_model->ViewCandidateInfoLog($id);
+    $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($decrypted_id);
+    $this->global['log'] = $this->Admin_model->ViewCandidateInfoLog($decrypted_id);
     $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('', '');
     $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
-    $this->global['pageTitle'] = 'Hr Tool : Candidate Information';
-    $this->global['candidateId'] = $id;
+    $this->global['pageTitle'] = 'MTAS : Candidate Information';
+    $this->global['candidateId'] = $decrypted_id;
     $this->loadViews("admin/candidateInofrmation", $this->global);
   }
 
@@ -214,144 +222,235 @@ class AddCandidateControllers extends BaseController
           'admin_id' => $Admin_id,
           'status' => '0'
         );
+        $adminName = $this->session->userdata('name');
+        $adminMail = $this->session->userdata('user_email');
         $test = $this->Admin_model->InsertLog($Logdata);
         $user_id = $this->Admin_model->InsertNew_User($loginCreate);
 
-        $registerMessage = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-                <html xmlns="http://www.w3.org/1999/xhtml"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"><meta content="width=device-width, initial-scale=1" name="viewport"><title> Welcome Email</title><!-- Designed by https://github.com/kaytcat --><!-- Robot header image designed by Freepik.com --><style type="text/css">
-                  @import url(https://fonts.googleapis.com/css?family=Nunito);
-                
-                  /* Take care of image borders and formatting */
-                
-                
-                  html{
-                    margin: 0;
-                    padding:0;
-                  }
-                
-                  a {
-                    text-decoration: none;
-                    border: 0;
-                    outline: none;
-                    color: #bbbbbb;
-                  }
-                
-                  a img {
-                    border: none;
-                  }
-                
-                  /* General styling */
-                
-                  td, h1, h2, h3  {
-                    font-family: Helvetica, Arial, sans-serif;
-                    font-weight: 400;
-                  }
-                
-                  td {
-                    text-align: center;
-                  }
-                
-                  body {
-                    -webkit-font-smoothing:antialiased;
-                    -webkit-text-size-adjust:none;
-                    width: 100%;
-                    height: 100%;
-                    color: #666;
-                    background: #fff;
-                    font-size: 16px;
-                    height: 100vh;
-                    width: 100%;
-                    padding: 0px;
-                    margin: 0px;
-                  }
-                
-                   table {
-                    border-collapse: collapse !important;
-                  }
-                
-                  .headline {
-                    color: #444;
-                    font-size: 36px;
-                  }
-                
-                 .force-full-width {
-                  width: 100% !important;
-                 }
-                
-                
-                  </style><style media="screen" type="text/css">
-                      @media screen {
-                        td, h1, h2, h3 {
-                          font-family: Nunito, Helvetica Neue, Arial, sans-serif !important;
-                        }
-                      }
-                  </style><style media="only screen and (max-width: 480px)" type="text/css">
-                    /* Mobile styles */
-                    @media only screen and (max-width: 480px) {
-                
-                      table[class="w320"] {
-                        width: 320px !important;
-                      }
-                    }
-                  </style>
-                  <style type="text/css"></style>
-                  
-                  </head>
-                  <body bgcolor="#fff" class="body" style="padding:20px; margin:0; display:block; background:#ffffff; -webkit-text-size-adjust:none">
-                <table align="center" cellpadding="0" cellspacing="0" height="100%" width="100%">
-                <tbody><tr>
-                <td align="center" bgcolor="#fff" class="" valign="top" width="100%">
-                <center class=""><table cellpadding="0" cellspacing="0" class="w320" style="margin: 0 auto;" width="600">
-                <tbody><tr>
-                <td align="center" class="" valign="top"><table cellpadding="0" cellspacing="0" style="margin: 0 auto;" width="100%">
+        $registerMessage = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+                <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+                <meta content="width=device-width, initial-scale=1" name="viewport">
+                <title> Welcome Email</title>
+                <!-- Designed by https://github.com/kaytcat -->
+                <!-- Robot header image designed by Freepik.com -->
+                <style type="text/css">
+                          @import url(https://fonts.googleapis.com/css?family=Nunito);
+                        
+                          /* Take care of image borders and formatting */
+                        
+                        
+                          html{
+                            margin: 0;
+                            padding:0;
+                          }
+                        
+                          a {
+                            text-decoration: none;
+                            border: 0;
+                            outline: none;
+                            color: #bbbbbb;
+                          }
+                        
+                          a img {
+                            border: none;
+                          }
+                        
+                          /* General styling */
+                        
+                          td, h1, h2, h3  {
+                            font-family: Helvetica, Arial, sans-serif;
+                            font-weight: 400;
+                          }
+                        
+                          td {
+                            text-align: center;
+                          }
+                        
+                          body {
+                            -webkit-font-smoothing:antialiased;
+                            -webkit-text-size-adjust:none;
+                            width: 100%;
+                            height: 100%;
+                            color: #666;
+                            background: #fff;
+                            font-size: 16px;
+                            height: 100vh;
+                            width: 100%;
+                            padding: 0px;
+                            margin: 0px;
+                          }
+                        
+                           table {
+                            border-collapse: collapse !important;
+                          }
+                        
+                          .headline {
+                            color: #444;
+                            font-size: 36px;
+                          }
+                        
+                         .force-full-width {
+                          width: 100% !important;
+                         }
+                </style>
+                <style media="screen" type="text/css">
+                              @media screen {
+                                td, h1, h2, h3 {
+                                  font-family: Nunito, Helvetica Neue, Arial, sans-serif !important;
+                                }
+                              }
+                </style>
+                <style media="only screen and (max-width: 480px)" type="text/css">
+                            /* Mobile styles */
+                            @media only screen and (max-width: 480px) {
+                        
+                              table[class="w320"] {
+                                width: 320px !important;
+                              }
+                            }
+                </style>
+                <style type="text/css"></style>
+            </head>
+            <body bgcolor="#fff" class="body" style="padding:20px; margin:0; display:block; background:#ffffff; -webkit-text-size-adjust:none">
+                <table
+                    align="center"
+                    cellpadding="0"
+                    cellspacing="0"
+                    height="100%"
+                    width="100%"
+                >
+                    <tbody>
+                        <tr>
+                            <td
+                                align="center"
+                                bgcolor="#fff"
+                                class=""
+                                valign="top"
+                                width="100%"
+                            >
+                                <center class="">
+                                    <table
+                                        cellpadding="0"
+                                        cellspacing="0"
+                                        class="w320"
+                                        style="margin: 0 auto;"
+                                        width="600"
+                                    >
+                                        <tbody>
+                                            <tr>
+                                                <td align="center" class="" valign="top">
+                                                    <table
+                                                        cellpadding="0"
+                                                        cellspacing="0"
+                                                        style="margin: 0 auto;"
+                                                        width="100%"
+                                                    ></table>
+                                                    <table
+                                                        bgcolor="#fff"
+                                                        cellpadding="0"
+                                                        cellspacing="0"
+                                                        class=""
+                                                        style="margin: 0 auto; width: 100%; margin-top: 100px;"
+                                                    >
+                                                        <tbody style="margin-top: 15px;">
+                                                            <tr class="">
+                                                                <td class="headline">Welcome to Maclareen Consulting India Pvt Ltd</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <center class="">
+                                                                        <table
+                                                                            cellpadding="0"
+                                                                            cellspacing="0"
+                                                                            class=""
+                                                                            style="margin: 0 auto;"
+                                                                            width="75%"
+                                                                        >
+                                                                            <tbody class="">
+                                                                                <tr class="">
+                                                                                    <td class="" style="color:#444; font-weight: 400;">
+                                                                                        <br>
+                                                                                        <br>
+                                                                                        Hi  ' . $candidate_name . '
+                                                                                        <br>
+                                                                                        A management application that helps you to track your job application with ease and efficiency.
+                                                                                        <br>
+                                                                                        <br>
+                                                                                        You have successfully been registered to us  for ' . $candidate_job_profile . ' job role
+                                                                                        <br>
+                                                                                        <br>
+                                                                                        Your login credentials are provided below:
+                                                                                        <br>
+                                                                                        <span style="font-weight:bold;">Email: &nbsp;</span>
+                                                                                        <span style="font-weight:lighter;" class="">' . $candidate_email . '</span>
+                                                                                        <br>
+                                                                                        <span style="font-weight:bold;">Password: &nbsp;</span>
+                                                                                        <span style="font-weight:lighter;" class="">' . $candidate_password . '</span>
+                                                                                        <br>
+                                                                                        <br>
+                                                                                        <br>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </center>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="">
+                                                                    <div class="">
+                                                                        <a href="http://mtas.net.in/" style="background-color:#05C6E3;border-radius:4px;color:#fff;display:inline-block;font-family:Helvetica, Arial, sans-serif;font-size:18px;font-weight:normal;line-height:50px;text-align:center;text-decoration:none;width:350px;-webkit-text-size-adjust:none;" href="http://mtas.net.in/">Visit Account and Start Traking</a>
+                                                                    </div>
+                                                                    <br>
+                                                                </td>
+                                                            </tr>
+                                                            <!-- Regards Section -->
+                                                            <tr>
+                                                                <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #444; padding-top: 30px; padding-bottom: 10px;">
+                                                                    <span style="font-weight: bold;">Regards,</span>
+                                                                    <br>
+                                                                    ' . $adminName . '(' . $adminMail . ')
+                                                                </td>
+                                                            </tr>
+                                                            <!-- Footer Section -->
+                                                            <tr>
+                                                                <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #666;">
+                                                                    <div>
+                                                                        For any queries, please contact:
+                                                                        <br>
+                                                                        Email:
+                                                                        <a href="mailto:immigration@maclareen.com" style="color: #666; text-decoration: none;">immigration@maclareen.com</a>
+                                                                        <br>
+                                                                        Email:
+                                                                        <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <table
+                                                        bgcolor="#fff"
+                                                        cellpadding="0"
+                                                        cellspacing="0"
+                                                        class="force-full-width"
+                                                        style="margin: 0 auto; margin-bottom: 5px:"
+                                                    >
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </center>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
-                <table bgcolor="#fff" cellpadding="0" cellspacing="0" class="" style="margin: 0 auto; width: 100%; margin-top: 100px;">
-                <tbody style="margin-top: 15px;">
-                
-                <tr class=""><td class="headline">Welcome to Maclareen Consulting India Pvt Ltd </td></tr>
-                <tr>
-                <td>
-                <center class=""><table cellpadding="0" cellspacing="0" class="" style="margin: 0 auto;" width="75%"><tbody class=""><tr class="">
-                <td class="" style="color:#444; font-weight: 400;"><br><br>
-                  Hi  ' . $candidate_name . '<br> 
-                  A management application that helps you to track your job application with ease and efficiency.
-                  <br><br>
-                  You have successfully been registered to us  for ' . $candidate_job_profile . ' job role  <br>
-                 <br>
-                  Your login credentials are provided below:
-                <br>
-                <span style="font-weight:bold;">Email: &nbsp;</span><span style="font-weight:lighter;" class="">' . $candidate_email . '</span> 
-                 <br>
-                  <span style="font-weight:bold;">Password: &nbsp;</span><span style="font-weight:lighter;" class="">' . $candidate_password . '</span>
-                <br><br>  
-                <br></td>
-                </tr>
-                </tbody></table></center>
-                </td>
-                </tr>
-                <tr>
-                <td class="">
-                <div class="">
-                <a  href="http://mtas.net.in/" style="background-color:#05C6E3;border-radius:4px;color:#fff;display:inline-block;font-family:Helvetica, Arial, sans-serif;font-size:18px;font-weight:normal;line-height:50px;text-align:center;text-decoration:none;width:350px;-webkit-text-size-adjust:none;" href="http://mtas.net.in/">Visit Account and Start Traking</a>
-                </div>
-                 <br>
-                </td>
-                </tr>
-                </tbody>
-                  
-                  </table>
-                
-                <table bgcolor="#fff" cellpadding="0" cellspacing="0" class="force-full-width" style="margin: 0 auto; margin-bottom: 5px:">
-                <tbody>
-                
-                </tbody></table></td>
-                </tr>
-                </tbody></table></center>
-                </td>
-                </tr>
-                </tbody></table>
-                </body></html>';
+            </body>
+        </html>
+        ';
 
         $this->load->config('email');
         $this->load->library('email');
@@ -504,7 +603,8 @@ class AddCandidateControllers extends BaseController
 
     $job_training_visadatetime = new DateTime($visa_training_datetime);
     $job_training_visa_humanReadable = $job_training_visadatetime->format('F j, Y \a\t h:i A');
-
+    $adminName = $this->session->userdata('name');
+    $adminMail = $this->session->userdata('user_email');
     date_default_timezone_set("Asia/Kolkata");
     $today = date("Y-m-d H:i:s");
     $data = array(
@@ -749,8 +849,28 @@ class AddCandidateControllers extends BaseController
                           <p>Once you send all the documents, I will start the further process for your job profile.</p>
                         </div>
                         <div class="footer">
-                          <p>Best regards,</p>
-                          <p>Maclareen Consulting India Pvt Ltd</p>
+                        <!-- Regards Section -->
+                        <tr>
+                            <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #444; padding-top: 30px; padding-bottom: 10px;">
+                                <span style="font-weight: bold;">Regards,</span>
+                                <br>
+                                ' . $adminName . '(' . $adminMail . ')
+                            </td>
+                        </tr>
+                        <!-- Footer Section -->
+                        <tr>
+                            <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #666;">
+                                <div>
+                                    For any queries, please contact:
+                                    <br>
+                                    Email:
+                                    <a href="mailto:immigration@maclareen.com" style="color: #666; text-decoration: none;">immigration@maclareen.com</a>
+                                    <br>
+                                    Email:
+                                    <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
+                                </div>
+                            </td>
+                        </tr>
                         </div>
                       </div>
                     </body>
@@ -821,8 +941,28 @@ class AddCandidateControllers extends BaseController
                         <p>Thank you for applying to the ' . $candidate_job_profile . '  role. Your resume has been forwarded for recruitment review. After the review process, we will inform/update you about your job status.</p>
                         <p>We appreciate your interest in our company and the time you have taken to apply. Should you have any questions, please dont hesitate to contact us.</p>
                         <div class="footer">
-                          <p>Best regards,</p>
-                          <p>Maclareen Consulting India Pvt Ltd</p>
+                        <!-- Regards Section -->
+                        <tr>
+                            <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #444; padding-top: 30px; padding-bottom: 10px;">
+                                <span style="font-weight: bold;">Regards,</span>
+                                <br>
+                                ' . $adminName . '(' . $adminMail . ')
+                            </td>
+                        </tr>
+                        <!-- Footer Section -->
+                        <tr>
+                            <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #666;">
+                                <div>
+                                    For any queries, please contact:
+                                    <br>
+                                    Email:
+                                    <a href="mailto:immigration@maclareen.com" style="color: #666; text-decoration: none;">immigration@maclareen.com</a>
+                                    <br>
+                                    Email:
+                                    <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
+                                </div>
+                            </td>
+                        </tr>
                         </div>
                       </div>
                     </body>
@@ -894,8 +1034,28 @@ class AddCandidateControllers extends BaseController
                         <p>We wish you the best of luck for the subsequent and remaining stages.</p>
                     
                         <div class="footer">
-                          <p>Best regards,</p>
-                          <p>Maclareen Consulting India Pvt Ltd</p>
+                        <!-- Regards Section -->
+                        <tr>
+                            <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #444; padding-top: 30px; padding-bottom: 10px;">
+                                <span style="font-weight: bold;">Regards,</span>
+                                <br>
+                                ' . $adminName . '(' . $adminMail . ')
+                            </td>
+                        </tr>
+                        <!-- Footer Section -->
+                        <tr>
+                            <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #666;">
+                                <div>
+                                    For any queries, please contact:
+                                    <br>
+                                    Email:
+                                    <a href="mailto:immigration@maclareen.com" style="color: #666; text-decoration: none;">immigration@maclareen.com</a>
+                                    <br>
+                                    Email:
+                                    <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
+                                </div>
+                            </td>
+                        </tr>
                         </div>
                       </div>
                     </body>
@@ -964,6 +1124,28 @@ class AddCandidateControllers extends BaseController
                         
                             <p>However, we would like to keep your resume on file for any future opportunities.</p>
                             <p class="signature">Best regards,<br>Maclareen Consulting India Pvt Ltd</p>
+                            <!-- Regards Section -->
+                            <tr>
+                                <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #444; padding-top: 30px; padding-bottom: 10px;">
+                                    <span style="font-weight: bold;">Regards,</span>
+                                    <br>
+                                    ' . $adminName . '(' . $adminMail . ')
+                                </td>
+                            </tr>
+                            <!-- Footer Section -->
+                            <tr>
+                                <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #666;">
+                                    <div>
+                                        For any queries, please contact:
+                                        <br>
+                                        Email:
+                                        <a href="mailto:immigration@maclareen.com" style="color: #666; text-decoration: none;">immigration@maclareen.com</a>
+                                        <br>
+                                        Email:
+                                        <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
+                                    </div>
+                                </td>
+                            </tr>
                         </div>
                     </body>
                     </html>
@@ -1081,8 +1263,28 @@ class AddCandidateControllers extends BaseController
                       <p>Be sure to save the date.</p>
                     </div>
                     <div class="footer">
-                      <p>Best regards,</p>
-                      <p>Maclareen Consulting India Pvt Ltd</p>
+                    <!-- Regards Section -->
+                    <tr>
+                        <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #444; padding-top: 30px; padding-bottom: 10px;">
+                            <span style="font-weight: bold;">Regards,</span>
+                            <br>
+                            ' . $adminName . '(' . $adminMail . ')
+                        </td>
+                    </tr>
+                    <!-- Footer Section -->
+                    <tr>
+                        <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #666;">
+                            <div>
+                                For any queries, please contact:
+                                <br>
+                                Email:
+                                <a href="mailto:immigration@maclareen.com" style="color: #666; text-decoration: none;">immigration@maclareen.com</a>
+                                <br>
+                                Email:
+                                <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
+                            </div>
+                        </td>
+                    </tr>
                     </div>
                   </div>
                 </body>
@@ -1201,8 +1403,28 @@ class AddCandidateControllers extends BaseController
                       <p>Be sure to save the date.</p>
                     </div>
                     <div class="footer">
-                      <p>Best regards,</p>
-                      <p>Maclareen Consulting India Pvt Ltd</p>
+                    <!-- Regards Section -->
+                    <tr>
+                        <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #444; padding-top: 30px; padding-bottom: 10px;">
+                            <span style="font-weight: bold;">Regards,</span>
+                            <br>
+                            ' . $adminName . '(' . $adminMail . ')
+                        </td>
+                    </tr>
+                    <!-- Footer Section -->
+                    <tr>
+                        <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #666;">
+                            <div>
+                                For any queries, please contact:
+                                <br>
+                                Email:
+                                <a href="mailto:immigration@maclareen.com" style="color: #666; text-decoration: none;">immigration@maclareen.com</a>
+                                <br>
+                                Email:
+                                <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
+                            </div>
+                        </td>
+                    </tr>
                     </div>
                   </div>
                 </body>
@@ -1321,8 +1543,28 @@ class AddCandidateControllers extends BaseController
                       <p>Be sure to save the date.</p>
                     </div>
                     <div class="footer">
-                      <p>Best regards,</p>
-                      <p>Maclareen Consulting India Pvt Ltd</p>
+                    <!-- Regards Section -->
+                    <tr>
+                        <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #444; padding-top: 30px; padding-bottom: 10px;">
+                            <span style="font-weight: bold;">Regards,</span>
+                            <br>
+                            ' . $adminName . '(' . $adminMail . ')
+                        </td>
+                    </tr>
+                    <!-- Footer Section -->
+                    <tr>
+                        <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #666;">
+                            <div>
+                                For any queries, please contact:
+                                <br>
+                                Email:
+                                <a href="mailto:immigration@maclareen.com" style="color: #666; text-decoration: none;">immigration@maclareen.com</a>
+                                <br>
+                                Email:
+                                <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
+                            </div>
+                        </td>
+                    </tr>
                     </div>
                   </div>
                 </body>
@@ -1404,8 +1646,28 @@ class AddCandidateControllers extends BaseController
                             <p>Congratulation , this is to inform you that we have received your work contract and we are very much glad to share the sane with you . Kindly go through the work contact and verify whether all mentioned details are correct</p>
                             <p>If you have any further questions, please feel free to contact us.</p>
                             <div class="signature">
-                            <p>Best Regards,</p>
-                            <p>Maclareen Consulting India Pvt Ltd</p>
+                            <!-- Regards Section -->
+                                                            <tr>
+                                                                <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #444; padding-top: 30px; padding-bottom: 10px;">
+                                                                    <span style="font-weight: bold;">Regards,</span>
+                                                                    <br>
+                                                                    ' . $adminName . '(' . $adminMail . ')
+                                                                </td>
+                                                            </tr>
+                                                            <!-- Footer Section -->
+                                                            <tr>
+                                                                <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #666;">
+                                                                    <div>
+                                                                        For any queries, please contact:
+                                                                        <br>
+                                                                        Email:
+                                                                        <a href="mailto:immigration@maclareen.com" style="color: #666; text-decoration: none;">immigration@maclareen.com</a>
+                                                                        <br>
+                                                                        Email:
+                                                                        <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
                             </div>
                         </div>
                         </body>
@@ -1476,7 +1738,28 @@ class AddCandidateControllers extends BaseController
                     <p style="color: #989898; font-weight: bold;">Dear ' . $candidate_name . ',</p>
                     <p>For visa and further process, we will be filling out the visa application on your behalf. After any response or updates, we will promptly inform you.</p>
                     <p>If you have any questions or need more information, please dont hesitate to contact us.</p>
-                    
+                    <!-- Regards Section -->
+                    <tr>
+                        <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #444; padding-top: 30px; padding-bottom: 10px;">
+                            <span style="font-weight: bold;">Regards,</span>
+                            <br>
+                            ' . $adminName . '(' . $adminMail . ')
+                        </td>
+                    </tr>
+                    <!-- Footer Section -->
+                    <tr>
+                        <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #666;">
+                            <div>
+                                For any queries, please contact:
+                                <br>
+                                Email:
+                                <a href="mailto:immigration@maclareen.com" style="color: #666; text-decoration: none;">immigration@maclareen.com</a>
+                                <br>
+                                Email:
+                                <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
+                            </div>
+                        </td>
+                    </tr>
                   </div>
                 </body>
                 </html>
@@ -1596,8 +1879,28 @@ class AddCandidateControllers extends BaseController
                         <p>Be sure to save the date.</p>
                         </div>
                         <div class="footer">
-                        <p>Best regards,</p>
-                        <p>Your Company</p>
+                        <!-- Regards Section -->
+                                                            <tr>
+                                                                <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #444; padding-top: 30px; padding-bottom: 10px;">
+                                                                    <span style="font-weight: bold;">Regards,</span>
+                                                                    <br>
+                                                                    ' . $adminName . '(' . $adminMail . ')
+                                                                </td>
+                                                            </tr>
+                                                            <!-- Footer Section -->
+                                                            <tr>
+                                                                <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #666;">
+                                                                    <div>
+                                                                        For any queries, please contact:
+                                                                        <br>
+                                                                        Email:
+                                                                        <a href="mailto:immigration@maclareen.com" style="color: #666; text-decoration: none;">immigration@maclareen.com</a>
+                                                                        <br>
+                                                                        Email:
+                                                                        <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
                         </div>
                     </div>
                     </body>
@@ -1718,7 +2021,28 @@ class AddCandidateControllers extends BaseController
                     <h1>congratulations !</h1>
                   
                     <p>your visa application has approved you are ready to fly abroad</p>
-                    
+                    <!-- Regards Section -->
+                    <tr>
+                        <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #444; padding-top: 30px; padding-bottom: 10px;">
+                            <span style="font-weight: bold;">Regards,</span>
+                            <br>
+                            ' . $adminName . '(' . $adminMail . ')
+                        </td>
+                    </tr>
+                    <!-- Footer Section -->
+                    <tr>
+                        <td style="text-align: left; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #666;">
+                            <div>
+                                For any queries, please contact:
+                                <br>
+                                Email:
+                                <a href="mailto:immigration@maclareen.com" style="color: #666; text-decoration: none;">immigration@maclareen.com</a>
+                                <br>
+                                Email:
+                                <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
+                            </div>
+                        </td>
+                    </tr>
                     </div>
                     
                 </div>
@@ -1833,7 +2157,7 @@ class AddCandidateControllers extends BaseController
     $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($id);
     $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('', '');
     $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
-    $this->global['pageTitle'] = 'Hr Tool : Update Candidate';
+    $this->global['pageTitle'] = 'MTAS : Update Candidate';
 
     $this->global['candidateId'] = $id;
     $this->loadViews("candidate/updatecandidateinformation", $this->global);
@@ -1844,7 +2168,7 @@ class AddCandidateControllers extends BaseController
   {
     $this->load->model('Candidate_model');
     $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($id);
-    $this->global['pageTitle'] = 'Hr Tool : Send Mail To  Candidate';
+    $this->global['pageTitle'] = 'MTAS : Send Mail To  Candidate';
     $this->global['candidateId'] = $id;
     $this->loadViews("candidate/sendmail", $this->global);
   }
@@ -1854,15 +2178,57 @@ class AddCandidateControllers extends BaseController
     $subject = $this->input->post('subject');
     $body = $this->input->post('body');
     $candidate_email = $this->input->post('candidate_email');
+    $candidate_name = $this->input->post('candidate_name');
 
     $this->load->config('email');
     $this->load->library('email');
 
+    $adminName = $this->session->userdata('name');
+    $adminMail = $this->session->userdata('user_email');
+
+    $mailbody = '<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Email Template</title>
+    </head>
+    <body>
+      <table cellspacing="0" cellpadding="0" border="0" style="width: 100%; max-width: 600px; margin: 0 auto; font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #444; line-height: 1.6;">
+        <!-- Content Section -->
+        <tr>
+          <td style="text-align: left; padding: 20px 0;">
+            <!-- Your email content goes here -->
+            <p>Dear ' . $candidate_name . ',</p>
+            <p>' . $body . '</p>
+          </td>
+        </tr>
+        <!-- Regards Section -->
+        <tr>
+          <td style="text-align: left; font-weight: bold; padding-top: 30px; padding-bottom: 10px;">
+            Regards,<br>
+           ' . $adminName . '(' . $adminMail . ')
+          </td>
+        </tr>
+        <!-- Footer Section -->
+        <tr>
+          <td style="text-align: left; font-size: 14px; color: #666;">
+            <div>
+              For any queries, please contact:<br>
+              Email: <a href="mailto:immigration@maclareen.com" style="color: #666; text-decoration: none;">immigration@maclareen.com</a><br>
+              Email: <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+    ';
     //	$token = $email_exist->emp_id;
     $this->email->from('maclareendata@gmail.com', 'Maclareen Talent Acquisition System  ');
     $this->email->to($candidate_email);
     $this->email->subject($subject);
-    $this->email->message($body);
+    $this->email->message($mailbody);
     $this->email->set_mailtype("html");
     $sendemail = $this->email->send();
     if ($sendemail) {

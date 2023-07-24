@@ -124,6 +124,9 @@ code {
 	padding: 1.8rem;
 	-webkit-transition: all ease-in 0.3s;
 	transition: all ease-in 0.3s;
+
+	
+
 }
 
 
@@ -5324,7 +5327,13 @@ table tbody .border-bottom-info td {
 }
 
 .pcoded-inner-content {
-	padding: 10px;
+	/* padding: 10px; */
+	margin: 0;
+    padding: 0;
+    /* background-image: url('https://mtas.net.in/assets/images/logo_new_2.png'); */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .pcoded .pcoded-navbar .pcoded-item {

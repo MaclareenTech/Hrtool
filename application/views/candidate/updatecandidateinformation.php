@@ -386,7 +386,7 @@
                         <div class="pcoded-inner-content">
                             <!-- Main-body start -->
                             <div class="main-body">
-                                <div class="page-wrapper">
+                                <div class="page-wrapper" >
                                     <!-- Page-body start -->
 
 
@@ -527,7 +527,7 @@
                                             </div>
                                         <?php }  ?>
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label"></label>
+                                            <label class="col-sm-3 col-form-label"><i class="fa fa-inr" aria-hidden="true"></i></label>
                                             <div class="col-sm-9">
                                                 <?php if ($candidate[0]->is_paid == "1") { ?>
                                                     <input type="checkbox" id="toggle_switch" name="toggle_switch" checked>

@@ -12,7 +12,7 @@ class LoginControllers extends BaseController
 
         if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
 
-            $this->global['pageTitle'] = 'Hr Tool : Login';
+            $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
         } else {
             $role = $this->session->userdata('role');

@@ -225,7 +225,7 @@
 
 
 
-                        <div class="pcoded-inner-content">
+                        <div class="pcoded-inner-content" >
                             <!-- Main-body start -->
 
 
@@ -302,7 +302,7 @@
                                                                     <th>Candidate Status Updated Date</th>
                                                                     <th>Candidate Status updated days </th>
                                                                     <th>Candidate Register Date Date</th>
-                                                                    <th></th>
+                                                                    <th><i class="fa fa-inr" aria-hidden="true"></i></th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
@@ -378,12 +378,16 @@
                                                                                 <input type="checkbox" id="toggle_switch" name="toggle_switch" disabled>
                                                                             <?php } ?>
                                                                         </td>
+                                                                        <?php
+                                                                       
+                                                                        $encrypted_number = base64_encode($row->candidate_id);
+                                                                        ?>
                                                                         <td><a class="btn btn-default" href="<?php echo base_url('editCandidateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
                                                                                 <em class="fa fa-pencil"></em>
                                                                             </a> </td>
                                                                         <td><a class="btn btn-default" href="<?php echo base_url('ViewCandiateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
                                                                                 <em class="fa fa-eye"></em>
-                                                                            </a> </td>
+                                                                            </a>  </td>
                                                                         <!-- <td><a class="btn btn-default"   href="<?php echo base_url('admin/AddCandidateControllers/viewCandidateInformation/?id=' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
                                                                             <em class="fa fa-pencil"></em>
                                                                         </a> </td> -->

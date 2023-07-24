@@ -37,7 +37,7 @@
     .wrapper {
         /*    max-width: 700px;*/
         width: 100%;
-        background: #fff;
+        /* background: #fff; */
         padding: 25px 30px;
         border-radius: 5px;
     }
@@ -336,7 +336,7 @@
 
 
 
-                        <div class="pcoded-inner-content">
+                        <div class="pcoded-inner-content" >
                             <!-- Main-body start -->
                             <div class="main-body">
                                 <div class="page-wrapper">

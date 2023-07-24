@@ -39,6 +39,29 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
 </head>
+<style>
+    /* popup notification modal */
+    .modal-body .col-sm-8 {
+    text-align: center;
+}
+.intro-title {
+  margin-bottom: 5px;
+  font-weight: 400;
+  color: #333;
+}
+
+@media (max-width: 575px) {
+  .modal-body .col-sm-4 {
+    text-align: center;
+    margin-top: 25px;
+  }
+}
+@media (min-width: 576px) {
+  .modal-dialog {
+      max-width: 650px;
+  }
+}
+</style>
 
 
 <body>
@@ -313,7 +336,7 @@
                                                                     <th>Candidate Status Updated Date</th>
                                                                     <th>Candidate Status updated days </th>
                                                                     <th>Candidate Register Date Date</th>
-                                                                    <th></th>
+                                                                    <th><i class="fa fa-inr" aria-hidden="true"></i></th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
@@ -388,6 +411,10 @@
                                                                                 <input type="checkbox" id="toggle_switch" name="toggle_switch" disabled>
                                                                             <?php } ?>
                                                                         </td>
+                                                                        <?php
+
+                                                                        $encrypted_number = base64_encode($row->candidate_id);
+                                                                        ?>
                                                                         <td><a class="btn btn-default" href="<?php echo base_url('editCandidateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
                                                                                 <em class="fa fa-pencil"></em>
                                                                             </a> </td>
@@ -465,9 +492,36 @@
 
 
 
+                                    <!-- popup notification Madal start -->
+                                    <div class="modal fade" id="learnMore1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
 
+                                                <div class="modal-body">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </br>
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-sm-8">
+                                                                <img src="http://numbots.com/wp-content/uploads/2018/12/Fairybot-with-shadow.png" alt="" width=80% />
+                                                            </div>
+                                                            <div class="col-sm-4 align-self-center">
+                                                                <h5 class="intro-title"> intro title </h5>
+                                                                <h3> TITLE </h3>
+                                                                <p> some other content, some other, content </p>
 
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- popup notification Madal end -->
 
 
 

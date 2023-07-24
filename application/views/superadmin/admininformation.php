@@ -240,7 +240,7 @@
 
 
                             <div class="main-body">
-                                <div class="page-wrapper">
+                                <div class="page-wrapper" >
                                     <!-- Page-body start -->
 
                                     <!--  Admin table start -->

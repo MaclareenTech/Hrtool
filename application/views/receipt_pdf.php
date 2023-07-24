@@ -17,14 +17,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* background-image: url('https://maclareen.in/img/logo-study.png'); */
-          
-            filter: blur(100px);
-            /* Adjust the blur intensity as needed */
-            pointer-events: none;
-            /* To prevent the container from capturing mouse events */
-            z-index: -1;
-            /* To position the container behind other content */
+            /* background-image: url('http://mtas.net.in/assets/images/01.png');
+            background-image: url('http://mtas.net.in/assets/images/02.png');
+             background-repeat: no-repeat;
+            background-position: center; */
+
+
         }
 
         table {
@@ -171,7 +169,7 @@
 </head>
 
 <body>
-<div class="background-container"></div>
+    <div class="background-container"></div>
     <div class="details">
         <div class="detail-item">
             <h3>Candidate Name</h3>
@@ -192,7 +190,7 @@
                 $datetime = new DateTime($timestamp);
 
                 // Format the DateTime object as a human-readable string
-                $human_readable = $datetime->format('F j, Y, g:i A');
+                $human_readable = $datetime->format('F j, Y,');
 
                 // Output the human-readable string
                 echo $human_readable; ?></p>

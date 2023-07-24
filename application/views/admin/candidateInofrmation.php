@@ -340,10 +340,10 @@
 
 
 
-                        <div class="pcoded-inner-content">
+                        <div class="pcoded-inner-content" >
                             <!-- Main-body start -->
                             <div class="main-body">
-                                <div class="page-wrapper">
+                                <div class="page-wrapper" >
                                     <!-- Page-body start -->
 
 
@@ -354,7 +354,7 @@
                                         <div class="title">
 
                                             <a class="pull-right btn btn-warning btn-large" style="margin-right:40px;  margin-top: 20px;  background-color: #007bff; border-color: #007bff;" href="<?php echo base_url('Sendmail/' . $candidate[0]->candidate_id); ?>"><i class="fa fa-envelope"></i></a>
-                                            <a class="pull-right btn btn-warning btn-large" style="margin-right:40px;  margin-top: 20px;  background-color: #ffc107; border-color: ##ffc107;" href="<?php echo base_url('ExportData/' .  $candidate[0]->candidate_id); ?>"><i class="fa fa-file-excel-o"></i></a>
+                                            <a class="pull-right btn btn-warning btn-large" style="margin-right:40px;  margin-top: 20px;  background-color: #ffc107; border-color: ##ffc107;" href="<?php echo base_url('ExportData/' .  $candidate[0]->candidate_id); ?>"><i class="fa fa-file-pdf-o"></i></a>
 
                                         </div>
                                         <div class="title">Candidate Information

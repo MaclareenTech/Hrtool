@@ -12,15 +12,15 @@ class DashboardControllers extends BaseController
 
         if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
 
-            $this->global['pageTitle'] = 'Hr Tool : Login';
+            $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
         } else {
             $this->load->model('Candidate_model');
             $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo('');
             $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('', '');
             $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
-            $this->global['pageTitle'] = 'Hr Tool : Admin Dashboard';
-            $this->global['name'] = 'Hr Tool : Admin Dashboard';
+            $this->global['pageTitle'] = 'MTAS : Admin Dashboard';
+            $this->global['name'] = 'MTAS : Admin Dashboard';
             $this->loadViews("admin/dashbaord", $this->global);
         }
     }
@@ -33,12 +33,12 @@ class DashboardControllers extends BaseController
 
         if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
 
-            $this->global['pageTitle'] = 'Hr Tool : Login';
+            $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
         } else {
             $this->load->model('Admin_model');
             $this->global['emp'] = $this->Admin_model->viewAdmin('', '', '', '', '');
-            $this->global['pageTitle'] = 'Hr Tool : Super-Admin Emp Information';
+            $this->global['pageTitle'] = 'MTAS : Super-Admin Emp Information';
             $this->loadViews("superadmin/admininformation", $this->global);
         }
     }
@@ -51,12 +51,12 @@ class DashboardControllers extends BaseController
 
         if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
 
-            $this->global['pageTitle'] = 'Hr Tool : Login';
+            $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
         } else {
             $this->load->model('Admin_model');
             $this->global['emp'] = $this->Admin_model->viewAdmin($id, '', '', '', '1');
-            $this->global['pageTitle'] = 'Hr Tool : Update Admin Information';
+            $this->global['pageTitle'] = 'MTAS : Update Admin Information';
             $this->loadViews("superadmin/updateadmininformation", $this->global);
         }
     }
@@ -207,31 +207,25 @@ class DashboardControllers extends BaseController
             redirect('addnewadmin');
         }
     }
-    public function UpdateVendorInformation($delete ,$id)
+    public function UpdateVendorInformation($delete, $id)
     {
-      $this->load->database();
-      $this->load->model('Admin_model');
-  
-  
+        $this->load->database();
+        $this->load->model('Admin_model');
 
-      if ($delete == '1') {
-        $Del = '0';
-      } else {
-        $Del = '1';
-      }
-      $Data['id_deleted'] = $Del;
-      if (!$this->Admin_model->Update($id, $Data)) {
-        $data['message'] = 'No user Found';
-        echo '<script>alert("No user Found")</script>';
-      } else {
-        $role = $this->session->userdata('role');
-        if ($role == "candidate") {
-            redirect('candidateDashboard');
-        } else   if ($role == "admin") {
-            redirect('adminDashboard');;
+
+
+        if ($delete == '1') {
+            $Del = '0';
         } else {
-            redirect('superadminDashboard');
+            $Del = '1';
         }
-      }
+        $Data['id_deleted'] = $Del;
+        if (!$this->Admin_model->Update($id, $Data)) {
+            $data['message'] = 'No user Found';
+            echo '<script>alert("No user Found")</script>';
+        } else {
+
+            redirect('admininformation');
+        }
     }
 }
