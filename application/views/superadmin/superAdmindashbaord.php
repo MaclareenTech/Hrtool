@@ -37,8 +37,10 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-  <!-- serch option for table  -->
+    <!-- serch option for table  -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 <style>
@@ -144,7 +146,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="index.html">
+                        <a>
                             <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -230,14 +232,14 @@
                                         </a>
                                         <ul class="pcoded-submenu">
                                             <li class=" ">
-                                                <a href="" class="waves-effect waves-dark">
+                                                <a href="<?php echo base_url(); ?>Jobopening" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                     <span class="pcoded-mtext">View Job Openings</span>
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                             </li>
                                             <li class=" ">
-                                                <a href="" class="waves-effect waves-dark">
+                                                <a href="<?php echo base_url(); ?>AddJobopeningFrom" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                     <span class="pcoded-mtext">Add Job Openings</span>
                                                     <span class="pcoded-mcaret"></span>
@@ -253,7 +255,17 @@
                                     </li>
                                 </ul>
                             <?php } ?>
-
+                            <div class="pcoded-navigation-label">Add Candidate Source </div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a  href="<?php echo base_url(); ?>viewCandidateSource" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa fa-external-link"></i><b>L</b></span>
+                                        <span class="pcoded-mtext">Add Candidate Source</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <!-- href="<?php echo base_url(); ?>logout" -->
+                            </ul>
                             <div class="pcoded-navigation-label">Logout</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
@@ -281,7 +293,7 @@
                                     <div class="col-md-4">
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                                <a> <i class="fa fa-home"></i> </a>
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!">Dashboard</a>
                                             </li>
@@ -304,6 +316,7 @@
 
                             <div class="main-body">
                                 <div class="page-wrapper">
+
                                     <!-- Page-body start -->
                                     <!-- Project statustic start -->
                                     <div class="col-xl-12">
@@ -312,41 +325,55 @@
                                                 <div class="row">
 
                                                     <div class="col-xl-6 col-md-6">
-                                                        <div class="card mat-clr-stat-card text-white red">
-                                                            <div class="card-block">
-                                                                <div class="row">
-                                                                    <div class="col-3 text-center bg-c-red">
-                                                                        <i class="fa fa-list mat-icon f-24"></i>
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="card mat-clr-stat-card text-white red">
+                                                                    <div class="card-block">
+                                                                        <div class="row">
+                                                                            <div class="col-3 text-center bg-c-red">
+                                                                                <i class="fa fa-list mat-icon f-24"></i>
+                                                                            </div>
+                                                                            <div class="col-9 cst-cont">
+                                                                                <h5><?php echo $pendingCandidate; ?></h5>
+                                                                                <p class="m-b-0">Pending Candidate</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="col-9 cst-cont">
-                                                                        <h5><?php echo $pendingCandidate; ?></h5>
-                                                                        <p class="m-b-0">Pending Candidate</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="card mat-clr-stat-card text-white green">
+                                                                    <div class="card-block">
+                                                                        <div class="row">
+                                                                            <div class="col-3 text-center bg-c-green">
+                                                                                <i class="fas fa-trophy mat-icon f-24"></i>
+                                                                            </div>
+                                                                            <div class="col-9 cst-cont">
+                                                                                <h5><?php echo $CompletedCandidate; ?></h5>
+                                                                                <p class="m-b-0">Completed Candidate</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+
                                                     </div>
-                                                    <div class="col-xl-6 col-md-6">
-                                                        <div class="card mat-clr-stat-card text-white green ">
-                                                            <div class="card-block">
-                                                                <div class="row">
-                                                                    <div class="col-3 text-center bg-c-green">
-                                                                        <i class="fas fa-trophy mat-icon f-24"></i>
-                                                                    </div>
-                                                                    <div class="col-9 cst-cont">
-                                                                        <h5><?php echo $CompletedCandidate; ?></h5>
-                                                                        <p class="m-b-0">Completed Candidate</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                    <div class="col-xl-6 col-md-6 d-flex align-items-center justify-content-center">
+                                                        <div >
+                                                            <canvas id="myPieChart"></canvas>
                                                         </div>
+                                                        <!-- style="width: 100%; height: 400px;" -->
                                                     </div>
+
+
 
 
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                     <!-- Project statustic end -->
 
 
@@ -375,11 +402,10 @@
                                                                     <th>Candidate Number</th>
                                                                     <th>Candidate job profile</th>
                                                                     <th>Candidate Job Status</th>
-                                                                    <th>Status Updated by </th>
                                                                     <th>Candidate Status Updated Date</th>
-                                                                    <th>Candidate Status updated days </th>
                                                                     <th>Candidate Register Date Date</th>
-                                                                    <th><i class="fa fa-inr" aria-hidden="true"></i></th>
+                                                                    <th>Candidate Status updated days </th>
+                                                                    <th>Status Updated by </th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
@@ -393,7 +419,8 @@
                                                                         <td><?php echo $row->candidate_name ?></td>
                                                                         <td><?php echo $row->candidate_email ?></td>
                                                                         <td><?php echo $row->candidate_mobile_no ?></td>
-                                                                        <td><?php echo $row->candidate_job_profile ?></td>
+                                                                        <td><?php $combined_value = $row->job_country . ' - ' . $row->job_position;
+                                                                            echo $combined_value; ?></td>
                                                                         <td> <?php if ($row->candidate_job_status == "0") { ?>
                                                                                 <button style="background-color: #ff3333; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Screening</button>
                                                                             <?php } else if ($row->candidate_job_status == "1") { ?>
@@ -423,37 +450,40 @@
 
 
                                                                         </td>
-                                                                        <td><?php echo $row->user_name ?></td>
+
 
                                                                         <td><?php
                                                                             $timestamp = strtotime($row->candidate_satus_days);
-                                                                            $humanReadableDate = date("Y-m-d", $timestamp);
+                                                                            $humanReadableDate = date("d F Y", $timestamp);
 
                                                                             echo $humanReadableDate; ?></td>
 
+
+                                                                        <td>
+                                                                            <?php
+                                                                            $timestamp = strtotime($row->candidate_join_date);
+                                                                            $humanReadableDate = date("d F Y", $timestamp);
+
+                                                                            echo $humanReadableDate; ?></td>
                                                                         <td><?php
                                                                             $timestamp = strtotime($row->candidate_satus_days);
-                                                                            $humanReadableDate = date("Y-m-d", $timestamp);
+                                                                            $humanReadableDate = date("d F Y", $timestamp);
                                                                             $currentDate = new DateTime();
                                                                             $targetDate = new DateTime($humanReadableDate);
 
                                                                             $diff = $currentDate->diff($targetDate);
                                                                             $days = $diff->days;
                                                                             echo $days; ?></td>
-                                                                        <td>
-                                                                            <?php
-                                                                            $timestamp = strtotime($row->candidate_join_date);
-                                                                            $humanReadableDate = date("Y-m-d", $timestamp);
-
-                                                                            echo $humanReadableDate; ?></td>
-                                                                        <td> <?php if ($candidate[0]->is_paid == "1") { ?>
+                                                                        <td><?php echo $row->user_name ?></td>
+                                                                        <!-- <td> <?php if ($candidate[0]->is_paid == "1") { ?>
                                                                                 <input type="checkbox" id="toggle_switch" name="toggle_switch" checked disabled style="display: none;">
                                                                                 <label for="toggle_switch" style="display: inline-block; width: 15px; height: 15px; border: 1px solid black; background-color: green; vertical-align: middle; text-align: center; line-height: 15px; color: white;">&#10004;</label>
+
 
                                                                             <?php } else { ?>
                                                                                 <input type="checkbox" id="toggle_switch" name="toggle_switch" disabled>
                                                                             <?php } ?>
-                                                                        </td>
+                                                                        </td> -->
                                                                         <?php
 
                                                                         $encrypted_number = base64_encode($row->candidate_id);
@@ -633,6 +663,66 @@
     </script>
     <!-- serch option script end   -->
 
+
+    <script>
+        // Function to create the pie chart using Chart.js.
+        function createPieChart(labels, values) {
+            var ctx = document.getElementById('myPieChart').getContext('2d');
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: getRandomColors(values.length), // Custom function to generate random colors.
+                    }]
+                }
+            });
+        }
+
+        // Function to update the pie chart data using AJAX.
+        function updateChartData() {
+            fetch('/your_controller/index')
+                .then(response => response.json())
+                .then(data => {
+                    // Extract labels and values from the JSON data.
+                    var labels = data.chart_labels;
+                    var values = data.chart_values;
+
+                    // Update the pie chart with the new data.
+                    myPieChart.data.labels = labels;
+                    myPieChart.data.datasets[0].data = values;
+                    myPieChart.update();
+                })
+                .catch(error => {
+                    console.error('Error updating chart data:', error);
+                });
+        }
+
+        // Call the createPieChart function with the initial data.
+        createPieChart(<?php echo $chart_labels; ?>, <?php echo $chart_values; ?>);
+
+        // Update the chart data every 5 seconds (adjust the interval as needed).
+        setInterval(updateChartData, 5000);
+
+        // Function to generate random colors.
+        function getRandomColors(count) {
+            var colors = [];
+            for (var i = 0; i < count; i++) {
+                colors.push(getRandomColor());
+            }
+            return colors;
+        }
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
 
 
     <!-- Required Jquery -->

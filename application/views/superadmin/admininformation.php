@@ -117,7 +117,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="index.html">
+                        <a >
                             <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -192,6 +192,8 @@
                                 </li>
                             </ul>   <?php
                             $role = $this->session->userdata('role'); ?>
+                            <?php
+                            $role = $this->session->userdata('role'); ?>
                             <?php if ($role == "superadmin") { ?>
                                 <div class="pcoded-navigation-label">Job Openings</div>
                                 <ul class="pcoded-item pcoded-left-item">
@@ -203,14 +205,14 @@
                                         </a>
                                         <ul class="pcoded-submenu">
                                             <li class=" ">
-                                                <a href="" class="waves-effect waves-dark">
+                                                <a href="<?php echo base_url(); ?>Jobopening" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                     <span class="pcoded-mtext">View Job Openings</span>
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                             </li>
                                             <li class=" ">
-                                                <a href="" class="waves-effect waves-dark">
+                                                <a href="<?php echo base_url(); ?>AddJobopeningFrom" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                     <span class="pcoded-mtext">Add Job Openings</span>
                                                     <span class="pcoded-mcaret"></span>
@@ -226,6 +228,17 @@
                                     </li>
                                 </ul>
                             <?php } ?>
+                            <div class="pcoded-navigation-label">Add Candidate Source </div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>viewCandidateSource"  class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa fa-external-link"></i><b>L</b></span>
+                                        <span class="pcoded-mtext">Add Candidate Source</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <!-- href="<?php echo base_url(); ?>logout" -->
+                            </ul>
                             <div class="pcoded-navigation-label">Logout</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
@@ -246,14 +259,14 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Dashboard</h5>
+                                            <h5 class="m-b-10">Admin Information</h5>
                                             <p class="m-b-0">Maclareen Talent Acquisition System </p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                                <a > <i class="fa fa-home"></i> </a>
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!">Admin Details</a>
                                             </li>

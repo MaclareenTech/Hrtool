@@ -243,7 +243,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="index.html">
+                        <a >
                             <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px;">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -319,7 +319,7 @@
                                     <div class="col-md-4">
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                                <a > <i class="fa fa-home"></i> </a>
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!"> Candidate Information</a>
                                             </li>
@@ -356,7 +356,7 @@
                                                 </div>
                                                 <div class="input-box">
                                                     <span class="details">Job title</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->candidate_job_profile ?>" disabled>
+                                                    <input type="text" value="<?php   $combined_value = $candidate[0]->job_country . ' - ' . $candidate[0]->job_position; echo $combined_value ; ?>" disabled>
                                                 </div>
                                                 <div class="input-box">
                                                     <span class="details">E-Mail</span>

@@ -88,12 +88,23 @@ $route['Sendmail/(:num)'] = 'admin/AddCandidateControllers/SendmailForm/$1';
 
 
 
+
+// job opening 
+$route['Jobopening'] = 'JobOpening/JobOpeningControllers';
+$route['AddJobopeningFrom'] = 'JobOpening/JobOpeningControllers/AddJobDetails';
+$route['UpdateJobStatus/(:num)/(:num)'] = 'JobOpening/JobOpeningControllers/UpdateOpeningInformation/$1/$2'; 
+$route['AddJobopening'] = 'JobOpening/JobOpeningControllers/AddNewJob';
+
+
+// Source information  
+$route['viewCandidateSource'] = 'candidate/CandidateSourceControllers';
+
+
+
+
 // mail
 $route['registermail'] = 'mail/RegisterMailControllers/RegisterMail';
 $route['UpdateStatus/(:num)/(:num)'] = 'admin/DashboardControllers/UpdateVendorInformation/$1/$2'; 
-
-
-
 
 
 

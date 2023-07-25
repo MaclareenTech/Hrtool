@@ -10,6 +10,7 @@ class MY_Model extends CI_Model
     }
     protected $TBL_ADMIN = 'tbl_user';
     protected $TBL_CANDIDATE = 'tbl_candidate';
+    protected $TBL_JOB_OPENING = 'tbl_job_opening';
 
 
 

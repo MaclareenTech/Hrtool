@@ -22,6 +22,19 @@ class SuperAdminDashboardControllers extends BaseController
             $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
             $this->global['emp'] = $this->Admin_model->viewAdmin('', '', '', '', '1');
             $this->global['pageTitle'] = 'MTAS : Super-Admin Dashboard';
+
+            $this->global['job_profiles'] = $this->Candidate_model->getCandidateJobProfiles();
+
+            // Prepare the data for the pie chart.
+            $labels = array();
+            $values = array();
+            foreach ($this->global['job_profiles'] as $profile) {
+                $labels[] =  $profile['job_country'] . ' - ' . $profile['job_position'];
+                $values[] = (int) $profile['count'];
+            }
+    
+            $this->global['chart_labels'] = json_encode($labels);
+            $this->global['chart_values'] = json_encode($values);
             $this->loadViews("superadmin/superAdmindashbaord", $this->global);
         }
     }

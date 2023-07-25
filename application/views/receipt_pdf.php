@@ -258,7 +258,7 @@
                     <td>
                         <?php
                         $timestamp = strtotime($row->date);
-                        $humanReadableDate = date("Y-m-d", $timestamp);
+                        $humanReadableDate = date("d F Y", $timestamp);
                         echo $humanReadableDate;
                         ?>
                     </td>

@@ -8,6 +8,7 @@ class AddCandidateControllers extends BaseController
 
   public function index()
   {
+    $this->load->model('Job_Opening_model');
     $isLoggedIn = $this->session->userdata('isLoggedIn');
 
     if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
@@ -16,8 +17,8 @@ class AddCandidateControllers extends BaseController
       $this->loadViews("login/login", $this->global);
     } else {
 
+      $this->global['jobdetails'] = $this->Job_Opening_model->View('','','','0');
       $this->global['pageTitle'] = 'MTAS : Add candidate';
-
       $this->loadViews("admin/addcandidate", $this->global);
     }
   }
@@ -117,6 +118,7 @@ class AddCandidateControllers extends BaseController
 
 
     $this->load->model('Candidate_model');
+    $this->load->model('Job_Opening_model');
     $this->load->model('Admin_model');
     $Admin_id = $this->session->userdata('userId');
     date_default_timezone_set("Asia/Kolkata");
@@ -207,7 +209,20 @@ class AddCandidateControllers extends BaseController
 
 
       if ($candidate_id) {
+          $JobDetails = $this->Job_Opening_model->ViewArray('','',$candidate_job_profile,'');
 
+          $job_open_position = $JobDetails[0]['job_open_position'];
+          $job_id = $JobDetails[0]['job_id'];
+          $job_fill_position = $JobDetails[0]['job_fill_position'];
+
+          $JobAddedposition = $job_fill_position +1;
+          $JobRemainingposition = $job_open_position -$JobAddedposition;
+
+           $JobDetailsUpdate = array(
+          'job_fill_position' => $JobAddedposition,
+          'job_remaining_position' => $JobRemainingposition
+        );
+        $this->Job_Opening_model->Update($job_id, $JobDetailsUpdate);
 
         $loginCreate = array(
           'user_name' => $candidate_name,
@@ -2065,7 +2080,7 @@ class AddCandidateControllers extends BaseController
 
       //	$token = $email_exist->emp_id;
 
-      $this->email->from('maclareendigital@gmail.com', 'Maclareen Talent Acquisition System ');
+      $this->email->from('MTAS(Maclareen Talent Acquisition System)', 'Maclareen Talent Acquisition System ');
       $this->email->to($candidate_email);
       $this->email->subject($subject);
       $this->email->message($candidateMail);

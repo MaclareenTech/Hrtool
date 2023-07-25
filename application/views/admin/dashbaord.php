@@ -113,7 +113,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="index.html">
+                        <a >
                             <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px;">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -183,6 +183,17 @@
                                     </a>
                                 </li>
                             </ul>
+                            <div class="pcoded-navigation-label">Add Candidate Source </div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a  href="<?php echo base_url(); ?>viewCandidateSource" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa fa-external-link"></i><b>L</b></span>
+                                        <span class="pcoded-mtext">Add Candidate Source</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <!-- href="<?php echo base_url(); ?>logout" -->
+                            </ul>
                             <div class="pcoded-navigation-label">Logout</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
@@ -210,7 +221,7 @@
                                     <div class="col-md-4">
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                                <a > <i class="fa fa-home"></i> </a>
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!">Dashboard</a>
                                             </li>
@@ -302,11 +313,10 @@
                                                                     <th>Candidate Number</th>
                                                                     <th>Candidate job profile</th>
                                                                     <th>Candidate Job Status</th>
-                                                                    <th>Status Updated by </th>
                                                                     <th>Candidate Status Updated Date</th>
-                                                                    <th>Candidate Status updated days </th>
                                                                     <th>Candidate Register Date Date</th>
-                                                                    <th><i class="fa fa-inr" aria-hidden="true"></i></th>
+                                                                    <th>Candidate Status updated days </th>
+                                                                    <th>Status Updated by </th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
@@ -320,7 +330,7 @@
                                                                         <td><?php echo $row->candidate_name ?></td>
                                                                         <td><?php echo $row->candidate_email ?></td>
                                                                         <td><?php echo $row->candidate_mobile_no ?></td>
-                                                                        <td><?php echo $row->candidate_job_profile ?></td>
+                                                                        <td><?php $combined_value = $row->job_country . ' - ' . $row->job_position; echo $combined_value ; ?></td>
                                                                         <td> <?php if ($row->candidate_job_status == "0") { ?>
                                                                                 <button style="background-color: #ff3333; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Screening</button>
                                                                             <?php } else if ($row->candidate_job_status == "1") { ?>
@@ -350,30 +360,32 @@
 
 
                                                                         </td>
-                                                                        <td><?php echo $row->user_name ?></td>
+                                                                       
 
                                                                         <td><?php
                                                                             $timestamp = strtotime($row->candidate_satus_days);
-                                                                            $humanReadableDate = date("Y-m-d", $timestamp);
+                                                                            $humanReadableDate = date("d F Y", $timestamp);
 
                                                                             echo $humanReadableDate; ?></td>
 
-                                                                        <td><?php
+                                                                    
+                                                                        <td>
+                                                                            <?php
+                                                                            $timestamp = strtotime($row->candidate_join_date);
+                                                                            $humanReadableDate = date("d F Y", $timestamp);
+
+                                                                            echo $humanReadableDate; ?></td>
+                                                                                <td><?php
                                                                             $timestamp = strtotime($row->candidate_satus_days);
-                                                                            $humanReadableDate = date("Y-m-d", $timestamp);
+                                                                            $humanReadableDate = date("d F Y", $timestamp);
                                                                             $currentDate = new DateTime();
                                                                             $targetDate = new DateTime($humanReadableDate);
 
                                                                             $diff = $currentDate->diff($targetDate);
                                                                             $days = $diff->days;
                                                                             echo $days; ?></td>
-                                                                        <td>
-                                                                            <?php
-                                                                            $timestamp = strtotime($row->candidate_join_date);
-                                                                            $humanReadableDate = date("Y-m-d", $timestamp);
-
-                                                                            echo $humanReadableDate; ?></td>
-                                                                        <td> <?php if ($candidate[0]->is_paid == "1") { ?>
+                                                                             <td><?php echo $row->user_name ?></td>
+                                                                        <!-- <td> <?php if ($candidate[0]->is_paid == "1") { ?>
                                                                                 <input type="checkbox" id="toggle_switch" name="toggle_switch" checked disabled style="display: none;">
                                                                                 <label for="toggle_switch" style="display: inline-block; width: 15px; height: 15px; border: 1px solid black; background-color: green; vertical-align: middle; text-align: center; line-height: 15px; color: white;">&#10004;</label>
 
@@ -381,7 +393,7 @@
                                                                             <?php } else { ?>
                                                                                 <input type="checkbox" id="toggle_switch" name="toggle_switch" disabled>
                                                                             <?php } ?>
-                                                                        </td>
+                                                                        </td> -->
                                                                         <?php
                                                                        
                                                                         $encrypted_number = base64_encode($row->candidate_id);

@@ -3,7 +3,13 @@
 
 <head>
     <title><?php echo $pageTitle; ?></title>
-
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -29,39 +35,11 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/jquery.mCustomScrollbar.css">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
 </head>
-<style>
-    .progress-container {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        border: 8px solid #f3f3f3;
-        position: relative;
-        display: none;
-        /* Hide the progress bar initially */
-    }
 
-    .progress-bar {
-        width: 100%;
-        height: 100%;
-        clip: rect(0, 60px, 120px, 0);
-        border-radius: 50%;
-        position: absolute;
-        background-color: #616561;
-        transform-origin: center;
-        animation: progress 5s linear infinite;
-    }
-
-    @keyframes progress {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-</style>
 
 <body>
 
@@ -139,8 +117,8 @@
                                 </div>
                             </div>
                         </div>
-                        <a>
-                            <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px;">
+                        <a href="index.html">
+                            <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -164,33 +142,21 @@
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-                    <nav class="pcoded-navbar">
+                <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <?php
-                                    $role = $this->session->userdata('role'); ?>
-                                    <?php if ($role == "admin") { ?>
-                                        <?php if ($this->session->userdata('user_profile') == "") { ?>
-                                            <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
 
-                                        <?php } else { ?>
-                                            <img class="img-80 img-radius" src="<?php echo "http://mtas.net.in/upload/profile/" . $this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
-                                        <?php } ?>
-                                    <?php } ?>
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="pcoded-navigation-label">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-
-
                                     <a href="<?php
                                                 $role = $this->session->userdata('role'); ?>
                                     <?php if ($role == "admin") { ?>
@@ -204,13 +170,22 @@
                                     </a>
                                 </li>
                             </ul>
-
                             <div class="pcoded-navigation-label">Add Candidate</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="active">
+                                <li class="">
                                     <a href="<?php echo base_url(); ?>addCandidate" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="fa-solid fa-user-plus"></i><b>A</b></span>
+                                        <span class="pcoded-micon"><i class="fa-solid fa-user-plus"></i><b>FC</b></span>
                                         <span class="pcoded-mtext">Add Candidate</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="pcoded-navigation-label">Admin Details</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa-solid fa fa-users"></i><b>AD</b></span>
+                                        <span class="pcoded-mtext">Admin Details</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -218,30 +193,16 @@
                             <?php
                             $role = $this->session->userdata('role'); ?>
                             <?php if ($role == "superadmin") { ?>
-                                <div class="pcoded-navigation-label">Admin Details</div>
-                                <ul class="pcoded-item pcoded-left-item">
-                                    <li class="">
-                                        <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="fa-solid fa fa-users"></i><b>AD</b></span>
-                                            <span class="pcoded-mtext">Admin Details</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            <?php } ?>
-                            <?php
-                            $role = $this->session->userdata('role'); ?>
-                            <?php if ($role == "superadmin") { ?>
                                 <div class="pcoded-navigation-label">Job Openings</div>
                                 <ul class="pcoded-item pcoded-left-item">
-                                    <li class="pcoded-hasmenu">
+                                    <li class="pcoded-hasmenu active pcoded-trigger">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="fa fa-cubes"></i><b>JO</b></span>
                                             <span class="pcoded-mtext">Job Openings</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                         <ul class="pcoded-submenu">
-                                            <li class=" ">
+                                            <li class="active">
                                                 <a href="<?php echo base_url(); ?>Jobopening" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                     <span class="pcoded-mtext">View Job Openings</span>
@@ -268,7 +229,7 @@
                             <div class="pcoded-navigation-label">Add Candidate Source </div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a  href="<?php echo base_url(); ?>viewCandidateSource" class="waves-effect waves-dark">
+                                    <a  class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="fa fa-external-link"></i><b>L</b></span>
                                         <span class="pcoded-mtext">Add Candidate Source</span>
                                         <span class="pcoded-mcaret"></span>
@@ -287,7 +248,7 @@
                                 </li>
                             </ul>
 
-                        </div>
+
                     </nav>
                     <div class="pcoded-content">
                         <!-- Page-header start -->
@@ -296,16 +257,16 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Add Candidate</h5>
+                                            <h5 class="m-b-10">Job Opening</h5>
                                             <p class="m-b-0">Maclareen Talent Acquisition System </p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a> <i class="fa fa-home"></i> </a>
+                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Add Candidate</a>
+                                            <li class="breadcrumb-item"><a>Job Opening</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -322,166 +283,104 @@
 
                         <div class="pcoded-inner-content">
                             <!-- Main-body start -->
+
+
                             <div class="main-body">
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
 
+                                    <!--  Admin table start -->
 
 
+                                    <div class="card">
+                                        <div class="card-header">
 
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <!-- Basic Form Inputs card start -->
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>Add Candidate Information</h5>
-                                                </div>
-                                                <?php
-                                                $this->load->helper('form');
-                                                $error = $this->session->flashdata('error');
-                                                if ($error) {
-                                                ?>
-                                                    <div class="alert alert-danger alert-dismissable">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                        <?php echo $error; ?>
-                                                    </div>
-                                                <?php }
-                                                $success = $this->session->flashdata('success');
-                                                if ($success) {
-                                                ?>
-                                                    <div class="alert alert-success alert-dismissable">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                        <?php echo $success; ?>
-                                                    </div>
-                                                <?php } ?>
-                                                <div class="card-block">
-                                                    <?php echo form_open_multipart('admin/AddCandidateControllers/RegisterCandidate'); ?>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Name </label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_name" placeholder="Ex. john dev" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Email Id</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_email" placeholder="Ex.abc@example.com" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Mobile Number</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_mobile_no" placeholder="Ex.1234567890" pattern="[0-9]{10}" required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Job Profile</label>
-                                                        <div class="col-sm-9">
-                                                            <select name="candidate_job_profile" class="form-control">
-                                                                <option value="opt1" disabled selected>Select One Value</option>
-                                                                <?php  foreach ($jobdetails as $row) : ?>
-                                                                    <option value="<?php echo $row->job_code ?>"><?php $combined_value = $row->job_country . ' - ' . $row->job_position; echo $combined_value ; ?></option>
-                                                                <?php endforeach; ?>
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Password</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="password" class="form-control" name="candidate_password" placeholder="Enter your password" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Addhar Card </label>
-                                                        <div class="col-sm-9">
-                                                            <input type="file" name="candidate_aadhar_card" accept="application/pdf">
-
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Pan Card </label>
-                                                        <div class="col-sm-9">
-
-                                                            <input type="file" name="candidate_pan_card" accept="application/pdf">
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Passport </label>
-                                                        <div class="col-sm-9">
-
-                                                            <input type="file" name="candidate_passport" accept="application/pdf">
-
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Candidate Resume </label>
-                                                        <div class="col-sm-9">
-
-                                                            <input type="file" name="candidate_resume" accept="application/pdf">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Upload Candidate Images </label>
-                                                        <div class="col-sm-9">
-
-                                                            <input type="file" name="candidate_photo" accept="image/*">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label"></label>
-                                                        <div class="col-sm-9">
-
-                                                            <input type="checkbox" id="toggle_switch" name="toggle_switch">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <center> <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button></center>
-                                                        </div>
-
-                                                    </div>
-
-
-
-
-
-                                                    </form>
-
-                                                    <div class="progress-container" id="progressContainer" style="margin-top: -100px;margin-left: 500px;">
-                                                        <div class="progress-bar"></div>
-                                                    </div>
-
-                                                    <script>
-                                                        function startProgressBar() {
-                                                            const progressBar = document.querySelector(".progress-bar");
-                                                            progressBar.style.animationPlayState = "running";
-
-                                                            // Show the progress bar when the button is clicked
-                                                            const progressContainer = document.getElementById("progressContainer");
-                                                            progressContainer.style.display = "block";
-
-                                                            // Reset the progress bar after the animation delay (5 seconds in this example)
-                                                            setTimeout(() => {
-                                                                progressBar.style.animationPlayState = "paused";
-                                                                // Hide the progress bar after the animation is completed
-                                                                progressContainer.style.display = "none";
-                                                            }, 50000);
-                                                        }
-                                                    </script>
-                                                </div>
+                                            <h5>Job Openning  Details</h5>
+                                            <div style="display: flex; justify-content: flex-end;">
+                                                <a href="<?php echo base_url(); ?>AddJobopeningFrom">
+                                                    <button style="background-color: #2ECC71; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        Add new Opening
+                                                    </button>
+                                                </a>
                                             </div>
-                                            <!-- Basic Form Inputs card end -->
+
+                                        </div>
+                                        <div class="card-block table-border-style">
+                                            <div class="table-responsive">
+                                                <div id="candidate-table-container">
+                                                    <table class="table datatable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Job Country</th>
+                                                                <th>Job Position</th>
+                                                                <th>Job Code</th>
+                                                                <th>Open Positon</th>
+                                                                <th>Filled Position</th>
+                                                                <th>Remaining Position</th>
+                                                                <th>Valid From</th>
+                                                                <th>Valid Till</th>
+                                                                <th>Status</th>
+                                                                <!-- <th></th> -->
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody id="myTable">
+                                                            <?php $counter = 0; ?>
+                                                            <?php foreach ($jobdetails as $row) : ?>
+                                                                <tr>
+                                                                    <?php $counter++; ?>
+                                                                    <td><?php echo $counter; ?></td>
+                                                                    <td><?php echo $row->job_country ?></td>
+                                                                    <td><?php echo $row->job_position ?></td>
+                                                                    <td><?php echo $row->job_code ?></td>
+                                                                    <td><?php echo $row->job_open_position ?></td>
+                                                                    <td><?php echo $row->job_fill_position ?></td>
+                                                                    <td><?php echo $row->job_remaining_position ?></td>
+                                                                    <td><?php $timestamp = strtotime($row->job_open_from);
+                                                                        $formattedDate = date("d F Y", $timestamp);
+                                                                        echo $formattedDate; ?></td>
+                                                                    <td><?php $timestamp = strtotime($row->job_open_till);
+                                                                        $formattedDate = date("d F Y", $timestamp);
+                                                                        echo $formattedDate; ?></td>
+                                                                    <td> <?php if ($row->is_open == "0") { ?>
+                                                                            <a href="<?php echo base_url('UpdateJobStatus/' . $row->is_open . '/' . $row->job_id); ?>" style="text-decoration: none;">
+                                                                                <button style="background-color: #2ECC71; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                                                    Active
+                                                                                </button>
+                                                                            </a>
+                                                                        <?php } else if ($row->is_open == "1") { ?>
+                                                                            <a href="<?php echo base_url('UpdateJobStatus/' . $row->is_open . '/' . $row->job_id); ?>" style="text-decoration: none;">
+                                                                                <button style="background-color: #E40505; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                                                    Deactivate
+                                                                                </button>
+                                                                            </a> <?php } ?>
+
+                                                                    <!-- <td> <a class="btn btn-default" href="<?php echo base_url('UpdateAdminInformation/' . $row->job_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
+                                                                            <em class="fa fa-pencil"></em>
+                                                                        </a> </td> -->
+
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+
+                                            </div>
                                         </div>
                                     </div>
+                                    <!--  Admin table end -->
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -520,10 +419,18 @@
 
 
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#candidate-table').DataTable({
+                "paging": true
+            });
+        });
+    </script>
 
 
 
 </body>
+
 
 
 </html>

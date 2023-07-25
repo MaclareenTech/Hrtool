@@ -1,13 +1,130 @@
 <?php
 
-class Candidate_model extends MY_Model
+class Job_Opening_model extends MY_Model
 {
     protected $table;
     public function __construct()
     {
         parent::__construct();
-        $this->table = $this->TBL_CANDIDATE;
+        $this->table = $this->TBL_JOB_OPENING;
     }
+
+
+    public function View($job_id = '', $job_country = '', $job_code = '', $is_open = '',  $oder_by_column = 'job_id')
+    {
+        if ($job_id !== "") {
+            $this->db->where('job_id', $job_id);
+        }
+        if ($job_country !== "") {
+            $this->db->where('job_country=', $job_country);
+        }
+        if ($job_code !== "") {
+            $this->db->where('job_code', $job_code);
+        }
+        if ($is_open !== "") {
+            $this->db->where('is_open', $is_open);
+        }
+
+        // Set the order by column and direction (asc for ascending)
+         // Replace 'column_name' with the actual column you want to use for ordering
+        $this->db->order_by($oder_by_column, 'asc');
+
+        // Get the results from the database using the table name specified in $this->table
+        $query = $this->db->get($this->table);
+
+        // Return the results as an array of objects
+        return $query->result();
+    }
+
+    public function ViewArray($job_id = '', $job_country = '', $job_code = '', $is_open = '',  $oder_by_column = 'job_id')
+    {
+        if ($job_id !== "") {
+            $this->db->where('job_id', $job_id);
+        }
+        if ($job_country !== "") {
+            $this->db->where('job_country=', $job_country);
+        }
+        if ($job_code !== "") {
+            $this->db->where('job_code', $job_code);
+        }
+        if ($is_open !== "") {
+            $this->db->where('is_open', $is_open);
+        }
+
+        // Set the order by column and direction (asc for ascending)
+         // Replace 'column_name' with the actual column you want to use for ordering
+        $this->db->order_by($oder_by_column, 'asc');
+
+        // Get the results from the database using the table name specified in $this->table
+        $query = $this->db->get($this->table);
+
+        // Return the results as an array of objects
+        return $query->result_array();
+    }
+
+
+    public function view_count($job_id = '', $job_country = '', $job_position = '', $is_open = '',)
+    {
+        if ($job_id !== "") {
+            $this->db->where('job_id', $job_id);
+        }
+        if ($job_country !== "") {
+            $this->db->where('job_country=', $job_country);
+        }
+        if ($job_position !== "") {
+            $this->db->where('job_position', $job_position);
+        }
+        if ($is_open !== "") {
+            $this->db->where('is_open', $is_open);
+        }
+
+
+        // Get the results from the database using the table name specified in $this->table
+        $query = $this->db->get($this->table);
+        // echo $this->db->last_query();
+        return $query->num_rows();
+    }
+
+
+
+
+    public function Insert($data)
+    {
+        if ($this->db->insert($this->table, $data)) {
+            return $this->db->insert_id();
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+    public function Update($job_id, $data)
+    {
+        $this->db->where('job_id', $job_id);
+        if ($this->db->update($this->table, $data)) {
+            return $this->db->where('job_id', $job_id)->get($this->table)->result();
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
 
 
     public function viewCandidate_count($candidate_id = '', $candidate_job_status = '')
@@ -37,51 +154,7 @@ class Candidate_model extends MY_Model
         }
     }
 
-    public function UpdateCandidate($candidate_id, $data)
-    {
-        $this->db->where('candidate_id', $candidate_id);
-        if ($this->db->update($this->table, $data)) {
-            return $this->db->where('candidate_id', $candidate_id)->get($this->table)->result();
-        } else {
-            return false;
-        }
-    }
-
-
-
-
-
-
-    public function getCandidateJobProfiles() {
-        // Fetch candidate_job_profile data and dynamically count occurrences of each job profile.
-        $this->db->select('tbl_candidate.*,
-            tbl_user.user_name,
-            tbl_job_opening.*,
-            tbl_user.user_email,
-            tbl_user.user_mobile,
-            tbl_user.emp_id, 
-            COUNT(tbl_candidate.candidate_job_profile) as count');
-        $this->db->from($this->table);
-        $this->db->join('tbl_user', 'tbl_candidate.updated_by = tbl_user.user_id');
-        $this->db->join('tbl_job_opening', 'tbl_candidate.candidate_job_profile = tbl_job_opening.job_code');
-        $this->db->group_by('tbl_candidate.candidate_job_profile');
-        $query = $this->db->get();
-
-        return $query->result_array();
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
 
@@ -91,23 +164,19 @@ class Candidate_model extends MY_Model
         if ($id !== "") {
             $query = $this->db->select('tbl_candidate.*,
         tbl_user.user_name,
-        tbl_job_opening.*,
         tbl_user.user_email,
         tbl_user.user_mobile,
         tbl_user.emp_id')->where(['candidate_id' => $id])
             ->join('tbl_user', 'tbl_candidate.updated_by=tbl_user.user_id')
-            ->join('tbl_job_opening', 'tbl_candidate.candidate_job_profile=tbl_job_opening.job_code')
              ->order_by('candidate_job_status', 'asc')->get($this->table);
         return $query->result();
         } else {
             $query = $this->db->select('tbl_candidate.*,
         tbl_user.user_name,
-        tbl_job_opening.*,
         tbl_user.user_email,
         tbl_user.user_mobile,
         tbl_user.emp_id')
             ->join('tbl_user', 'tbl_candidate.updated_by=tbl_user.user_id')
-            ->join('tbl_job_opening', 'tbl_candidate.candidate_job_profile=tbl_job_opening.job_code')
              ->order_by('candidate_job_status', 'asc')->get($this->table);
         return $query->result();
         }
@@ -119,22 +188,18 @@ class Candidate_model extends MY_Model
         if ($id !== "") {
             $query = $this->db->select('tbl_candidate.*,
         tbl_user.user_name,
-        tbl_job_opening.*,
         tbl_user.user_email,
         tbl_user.user_mobile,
         tbl_user.emp_id')->where(['candidate_id' => $id])
             ->join('tbl_user', 'tbl_candidate.updated_by=tbl_user.user_id')
-            ->join('tbl_job_opening', 'tbl_candidate.candidate_job_profile=tbl_job_opening.job_code')
              ->order_by('candidate_job_status', 'asc')->get($this->table);
         return $query->result_array();
         } else { $query = $this->db->select('tbl_candidate.*,
             tbl_user.user_name,
             tbl_user.user_email,
-            tbl_job_opening.*,
             tbl_user.user_mobile,
             tbl_user.emp_id')
                 ->join('tbl_user', 'tbl_candidate.updated_by=tbl_user.user_id')
-                ->join('tbl_job_opening', 'tbl_candidate.candidate_job_profile=tbl_job_opening.job_code')
                  ->order_by('candidate_job_status', 'asc')->get($this->table);
             return $query->result_array();
            
@@ -151,10 +216,8 @@ class Candidate_model extends MY_Model
         tbl_user.user_name,
         tbl_user.user_email,
         tbl_user.user_mobile,
-        tbl_job_opening.*,
         tbl_user.emp_id')->where(['candidate_id' => $id])
             ->join('tbl_user', 'tbl_candidate.updated_by=tbl_user.user_id')
-            ->join('tbl_job_opening', 'tbl_candidate.candidate_job_profile=tbl_job_opening.job_code')
              ->order_by('candidate_job_status', 'asc')->get($this->table);
         return $query->result();
      
@@ -256,13 +319,13 @@ class Candidate_model extends MY_Model
     }
 
 
-    public function Update($user_email, $data)
-    {
-        $this->db->where('user_email', $user_email);
-        if ($this->db->update($this->table, $data)) {
-            return $this->db->where('user_email', $user_email)->get($this->table)->result_array();
-        } else {
-            return false;
-        }
-    }
+    // public function Update($user_email, $data)
+    // {
+    //     $this->db->where('user_email', $user_email);
+    //     if ($this->db->update($this->table, $data)) {
+    //         return $this->db->where('user_email', $user_email)->get($this->table)->result_array();
+    //     } else {
+    //         return false;
+    //     }
+    // }
 }
