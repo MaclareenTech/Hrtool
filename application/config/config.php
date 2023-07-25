@@ -26,7 +26,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 $config['base_url'] = 'http://mtas.net.in/';
 // $config['base_url'] = 'https://maclareenai.com/mtas';
-// $config['base_url'] = 'http://localhost:8888/hrtool/';
+// $config['base_url'] = 'http://localhost:8888/hrtool/';   
 
 /*
 |--------------------------------------------------------------------------
