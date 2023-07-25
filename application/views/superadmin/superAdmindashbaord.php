@@ -37,30 +37,34 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <!-- serch option for table  -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 <style>
     /* popup notification modal */
     .modal-body .col-sm-8 {
-    text-align: center;
-}
-.intro-title {
-  margin-bottom: 5px;
-  font-weight: 400;
-  color: #333;
-}
+        text-align: center;
+    }
 
-@media (max-width: 575px) {
-  .modal-body .col-sm-4 {
-    text-align: center;
-    margin-top: 25px;
-  }
-}
-@media (min-width: 576px) {
-  .modal-dialog {
-      max-width: 650px;
-  }
-}
+    .intro-title {
+        margin-bottom: 5px;
+        font-weight: 400;
+        color: #333;
+    }
+
+    @media (max-width: 575px) {
+        .modal-body .col-sm-4 {
+            text-align: center;
+            margin-top: 25px;
+        }
+    }
+
+    @media (min-width: 576px) {
+        .modal-dialog {
+            max-width: 650px;
+        }
+    }
 </style>
 
 
@@ -213,6 +217,43 @@
                                     </a>
                                 </li>
                             </ul>
+                            <?php
+                            $role = $this->session->userdata('role'); ?>
+                            <?php if ($role == "superadmin") { ?>
+                                <div class="pcoded-navigation-label">Job Openings</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa fa-cubes"></i><b>JO</b></span>
+                                            <span class="pcoded-mtext">Job Openings</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li class=" ">
+                                                <a href="" class="waves-effect waves-dark">
+                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                    <span class="pcoded-mtext">View Job Openings</span>
+                                                    <span class="pcoded-mcaret"></span>
+                                                </a>
+                                            </li>
+                                            <li class=" ">
+                                                <a href="" class="waves-effect waves-dark">
+                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                    <span class="pcoded-mtext">Add Job Openings</span>
+                                                    <span class="pcoded-mcaret"></span>
+                                                </a>
+                                            </li>
+
+
+
+
+
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+
                             <div class="pcoded-navigation-label">Logout</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
@@ -323,6 +364,8 @@
                                             <div class="table-responsive">
                                                 <div id="candidate-table-container">
                                                     <div id="table-container">
+                                                        <input id="search" type="text" class="form-control" placeholder="Search for name and email......">
+                                                        <br>
                                                         <table id="my-table" class="table datatable">
                                                             <thead>
                                                                 <tr>
@@ -578,50 +621,19 @@
         displayDataPage(currentPage);
     </script>
 
-    <!-- Warning Section Starts -->
-    <!-- Older IE warning message -->
-    <!--[if lt IE 10]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/chrome.png" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/firefox.png" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/opera.png" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/safari.png" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="<?php echo base_url(); ?>assets/images/browser/ie.png" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
-    <!-- Warning Section Ends -->
+
+    <!-- serch option script start  -->
+    <script>
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    </script>
+    <!-- serch option script end   -->
+
+
 
     <!-- Required Jquery -->
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery/jquery.min.js "></script>

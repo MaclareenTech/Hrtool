@@ -31,8 +31,10 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-
+  <!-- serch option for table  -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 
 
 <body>
@@ -289,6 +291,8 @@
                                             <div class="table-responsive">
                                                 <div id="candidate-table-container">
                                                     <div id="table-container">
+                                                    <input id="search" type="text" class="form-control" placeholder="Search for name and email......">
+                                                        <br>
                                                         <table id="my-table" class="table datatable">
                                                             <thead>
                                                                 <tr>
@@ -430,6 +434,19 @@
         </div>
     </div>
     </div>
+
+
+        <!-- serch option script start  -->
+        <script>
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    </script>
+    <!-- serch option script end   -->
+    
     <script>
         const tableBody = document.getElementById('myTable');
         const paginationContainer = document.getElementById('pagination');

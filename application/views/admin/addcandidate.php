@@ -217,9 +217,7 @@
                             </ul>
                             <?php
                             $role = $this->session->userdata('role'); ?>
-                            <?php if ($role == "admin") { ?>
-
-                            <?php } else { ?>
+                            <?php if ($role == "superadmin") { ?>
                                 <div class="pcoded-navigation-label">Admin Details</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li class="">
@@ -228,6 +226,42 @@
                                             <span class="pcoded-mtext">Admin Details</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+                            <?php
+                            $role = $this->session->userdata('role'); ?>
+                            <?php if ($role == "superadmin") { ?>
+                                <div class="pcoded-navigation-label">Job Openings</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa fa-cubes"></i><b>JO</b></span>
+                                            <span class="pcoded-mtext">Job Openings</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li class=" ">
+                                                <a href="" class="waves-effect waves-dark">
+                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                    <span class="pcoded-mtext">View Job Openings</span>
+                                                    <span class="pcoded-mcaret"></span>
+                                                </a>
+                                            </li>
+                                            <li class=" ">
+                                                <a href="" class="waves-effect waves-dark">
+                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                    <span class="pcoded-mtext">Add Job Openings</span>
+                                                    <span class="pcoded-mcaret"></span>
+                                                </a>
+                                            </li>
+
+
+
+
+
+
+                                        </ul>
                                     </li>
                                 </ul>
                             <?php } ?>
@@ -341,6 +375,7 @@
                                                                 <option value="Armenia Casino">Armenia Casino</option>
                                                                 <option value="Poland Warehouse">Poland Warehouse</option>
                                                                 <option value="Poland Worker">Poland Worker</option>
+                                                                <option value="Schengen Business Visa">Schengen Business Visa</option>
                                                                 <option value="Poland General Helper">Poland General Helper</option>
 
                                                             </select>
