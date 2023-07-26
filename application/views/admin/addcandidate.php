@@ -164,33 +164,21 @@
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-                    <nav class="pcoded-navbar">
+                <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <?php
-                                    $role = $this->session->userdata('role'); ?>
-                                    <?php if ($role == "admin") { ?>
-                                        <?php if ($this->session->userdata('user_profile') == "") { ?>
-                                            <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
 
-                                        <?php } else { ?>
-                                            <img class="img-80 img-radius" src="<?php echo "http://mtas.net.in/upload/profile/" . $this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
-                                        <?php } ?>
-                                    <?php } ?>
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="pcoded-navigation-label">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-
-
                                     <a href="<?php
                                                 $role = $this->session->userdata('role'); ?>
                                     <?php if ($role == "admin") { ?>
@@ -204,12 +192,11 @@
                                     </a>
                                 </li>
                             </ul>
-
                             <div class="pcoded-navigation-label">Add Candidate</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="active">
                                     <a href="<?php echo base_url(); ?>addCandidate" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="fa-solid fa-user-plus"></i><b>A</b></span>
+                                        <span class="pcoded-micon"><i class="fa-solid fa-user-plus"></i><b>FC</b></span>
                                         <span class="pcoded-mtext">Add Candidate</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
@@ -230,25 +217,39 @@
                                 </ul>
                             <?php } ?>
                             <?php
+                            $mail = $this->session->userdata('user_email'); ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com"  ) { ?>
+                                <div class="pcoded-navigation-label">Invoice</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="<?php echo base_url(); ?>invlicelist" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa fa-list-alt"></i><b>IN</b></span>
+                                            <span class="pcoded-mtext">Invoice</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+                            <?php
                             $role = $this->session->userdata('role'); ?>
                             <?php if ($role == "superadmin") { ?>
                                 <div class="pcoded-navigation-label">Job Openings</div>
                                 <ul class="pcoded-item pcoded-left-item">
-                                    <li class="pcoded-hasmenu">
+                                    <li class="pcoded-hasmenu ">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="fa fa-cubes"></i><b>JO</b></span>
                                             <span class="pcoded-mtext">Job Openings</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                         <ul class="pcoded-submenu">
-                                            <li class=" ">
+                                            <li class="">
                                                 <a href="<?php echo base_url(); ?>Jobopening" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                     <span class="pcoded-mtext">View Job Openings</span>
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                             </li>
-                                            <li class=" ">
+                                            <li class="">
                                                 <a href="<?php echo base_url(); ?>AddJobopeningFrom" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                     <span class="pcoded-mtext">Add Job Openings</span>
@@ -268,7 +269,7 @@
                             <div class="pcoded-navigation-label">Add Candidate Source </div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a  href="<?php echo base_url(); ?>viewCandidateSource" class="waves-effect waves-dark">
+                                    <a href="<?php echo base_url(); ?>viewCandidateSource" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="fa fa-external-link"></i><b>L</b></span>
                                         <span class="pcoded-mtext">Add Candidate Source</span>
                                         <span class="pcoded-mcaret"></span>
@@ -287,7 +288,7 @@
                                 </li>
                             </ul>
 
-                        </div>
+
                     </nav>
                     <div class="pcoded-content">
                         <!-- Page-header start -->
@@ -378,10 +379,22 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Job Profile</label>
                                                         <div class="col-sm-9">
-                                                            <select name="candidate_job_profile" class="form-control">
-                                                                <option value="opt1" disabled selected>Select One Value</option>
+                                                            <select name="candidate_job_profile" class="form-control" required >
+                                                                
                                                                 <?php  foreach ($jobdetails as $row) : ?>
                                                                     <option value="<?php echo $row->job_code ?>"><?php $combined_value = $row->job_country . ' - ' . $row->job_position; echo $combined_value ; ?></option>
+                                                                <?php endforeach; ?>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Candidate Source</label>
+                                                        <div class="col-sm-9">
+                                                            <select name="candidate_source_id" class="form-control" required>
+                                                               
+                                                                <?php  foreach ($sourcedetails as $row) : ?>
+                                                                    <option value="<?php echo $row->source_id ?>"><?php  echo $row->source_name ; ?></option>
                                                                 <?php endforeach; ?>
 
                                                             </select>
@@ -445,7 +458,7 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-sm-12">
-                                                            <center> <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button></center>
+                                                            <center> <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: #2ecc71; ">Submit</button></center>
                                                         </div>
 
                                                     </div>

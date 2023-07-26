@@ -243,7 +243,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a >
+                        <a>
                             <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px;">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -273,26 +273,16 @@
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <?php
-                                    $role = $this->session->userdata('role'); ?>
-                                    <?php if ($role == "admin") { ?>
-                                        <?php if ($this->session->userdata('user_profile') == "") { ?>
-                                            <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
 
-                                        <?php } else { ?>
-                                            <img class="img-80 img-radius" src="<?php echo "http://mtas.net.in/upload/profile/" . $this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
-                                        <?php } ?>
-                                    <?php } ?>
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="pcoded-navigation-label">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
+                                <li class="active">
                                     <a href="<?php
                                                 $role = $this->session->userdata('role'); ?>
                                     <?php if ($role == "admin") { ?>
@@ -302,6 +292,101 @@
                                     <?php } ?>" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext">Dashboard</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="pcoded-navigation-label">Add Candidate</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>addCandidate" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa-solid fa-user-plus"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext">Add Candidate</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <?php
+                            $role = $this->session->userdata('role'); ?>
+                            <?php if ($role == "superadmin") { ?>
+                                <div class="pcoded-navigation-label">Admin Details</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa-solid fa fa-users"></i><b>AD</b></span>
+                                            <span class="pcoded-mtext">Admin Details</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+                            <?php
+                            $mail = $this->session->userdata('user_email'); ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com"  ) { ?>
+                                <div class="pcoded-navigation-label">Invoice</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="<?php echo base_url(); ?>invlicelist" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa fa-list-alt"></i><b>IN</b></span>
+                                            <span class="pcoded-mtext">Invoice</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+                            <?php
+                            $role = $this->session->userdata('role'); ?>
+                            <?php if ($role == "superadmin") { ?>
+                                <div class="pcoded-navigation-label">Job Openings</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="pcoded-hasmenu ">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa fa-cubes"></i><b>JO</b></span>
+                                            <span class="pcoded-mtext">Job Openings</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li class="">
+                                                <a href="<?php echo base_url(); ?>Jobopening" class="waves-effect waves-dark">
+                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                    <span class="pcoded-mtext">View Job Openings</span>
+                                                    <span class="pcoded-mcaret"></span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="<?php echo base_url(); ?>AddJobopeningFrom" class="waves-effect waves-dark">
+                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                    <span class="pcoded-mtext">Add Job Openings</span>
+                                                    <span class="pcoded-mcaret"></span>
+                                                </a>
+                                            </li>
+
+
+
+
+
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+                            <div class="pcoded-navigation-label">Add Candidate Source </div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>viewCandidateSource" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa fa-external-link"></i><b>L</b></span>
+                                        <span class="pcoded-mtext">Add Candidate Source</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <!-- href="<?php echo base_url(); ?>logout" -->
+                            </ul>
+                            <div class="pcoded-navigation-label">Logout</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>logout" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa fa-sign-out"></i><b>L</b></span>
+                                        <span class="pcoded-mtext">Logout</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -323,9 +408,9 @@
                                     <div class="col-md-4">
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a > <i class="fa fa-home"></i> </a>
+                                                <a> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a > Candidate Information</a>
+                                            <li class="breadcrumb-item"><a> Candidate Information</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -340,10 +425,10 @@
 
 
 
-                        <div class="pcoded-inner-content" >
+                        <div class="pcoded-inner-content">
                             <!-- Main-body start -->
                             <div class="main-body">
-                                <div class="page-wrapper" >
+                                <div class="page-wrapper">
                                     <!-- Page-body start -->
 
 
@@ -370,7 +455,8 @@
                                                 </div>
                                                 <div class="input-box">
                                                     <span class="details">Job title</span>
-                                                    <input type="text" value="<?php $combined_value = $row->job_country . ' - ' . $row->job_position; echo $combined_value ; ?>" disabled>
+                                                    <input type="text" value="<?php $combined_value = $candidate[0]->job_country . ' - ' . $candidate[0]->job_position;
+                                                                                echo $combined_value; ?>" disabled>
                                                 </div>
                                                 <div class="input-box">
                                                     <span class="details">E-Mail</span>
@@ -380,7 +466,11 @@
                                                     <span class="details">Phone Number</span>
                                                     <input type="number" value="<?php echo $candidate[0]->candidate_mobile_no ?>" disabled>
                                                 </div>
+                                                <div class="input-box">
+                                                    <span class="details">Candidate Source</span>
 
+                                                    <input type="email" value="<?php echo $candidate[0]->source_name ?>" name="source_name" disabled>
+                                                </div>
                                                 <div class="button">
                                                     <?php if ($candidate[0]->candidate_job_status == "0") { ?>
                                                         <button style="background-color: #ff3333; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">

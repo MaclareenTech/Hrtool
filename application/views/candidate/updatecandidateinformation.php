@@ -311,31 +311,21 @@
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-                    <nav class="pcoded-navbar">
+                <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <?php
-                                    $role = $this->session->userdata('role'); ?>
-                                    <?php if ($role == "admin") { ?>
-                                        <?php if ($this->session->userdata('user_profile') == "") { ?>
-                                            <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
 
-                                        <?php } else { ?>
-                                            <img class="img-80 img-radius" src="<?php echo "http://mtas.net.in/upload/profile/" . $this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
-                                        <?php } ?>
-                                    <?php } ?>
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="pcoded-navigation-label">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
+                                <li class="active">
                                     <a href="<?php
                                                 $role = $this->session->userdata('role'); ?>
                                     <?php if ($role == "admin") { ?>
@@ -345,6 +335,101 @@
                                     <?php } ?>" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext">Dashboard</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="pcoded-navigation-label">Add Candidate</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>addCandidate" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa-solid fa-user-plus"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext">Add Candidate</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <?php
+                            $role = $this->session->userdata('role'); ?>
+                            <?php if ($role == "superadmin") { ?>
+                                <div class="pcoded-navigation-label">Admin Details</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa-solid fa fa-users"></i><b>AD</b></span>
+                                            <span class="pcoded-mtext">Admin Details</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+                            <?php
+                            $mail = $this->session->userdata('user_email'); ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com"  ) { ?>
+                                <div class="pcoded-navigation-label">Invoice</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="<?php echo base_url(); ?>invlicelist" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa fa-list-alt"></i><b>IN</b></span>
+                                            <span class="pcoded-mtext">Invoice</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+                            <?php
+                            $role = $this->session->userdata('role'); ?>
+                            <?php if ($role == "superadmin") { ?>
+                                <div class="pcoded-navigation-label">Job Openings</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="pcoded-hasmenu ">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa fa-cubes"></i><b>JO</b></span>
+                                            <span class="pcoded-mtext">Job Openings</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li class="">
+                                                <a href="<?php echo base_url(); ?>Jobopening" class="waves-effect waves-dark">
+                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                    <span class="pcoded-mtext">View Job Openings</span>
+                                                    <span class="pcoded-mcaret"></span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="<?php echo base_url(); ?>AddJobopeningFrom" class="waves-effect waves-dark">
+                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                    <span class="pcoded-mtext">Add Job Openings</span>
+                                                    <span class="pcoded-mcaret"></span>
+                                                </a>
+                                            </li>
+
+
+
+
+
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+                            <div class="pcoded-navigation-label">Add Candidate Source </div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>viewCandidateSource" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa fa-external-link"></i><b>L</b></span>
+                                        <span class="pcoded-mtext">Add Candidate Source</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <!-- href="<?php echo base_url(); ?>logout" -->
+                            </ul>
+                            <div class="pcoded-navigation-label">Logout</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>logout" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa fa-sign-out"></i><b>L</b></span>
+                                        <span class="pcoded-mtext">Logout</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -421,7 +506,7 @@
                                             </div>
                                             <div class="input-box">
                                                 <span class="details">Job title</span>
-                                                <input type="text" value="<?php $combined_value = $row->job_country . ' - ' . $row->job_position; echo $combined_value ; ?>" name="candidate_job_profile" disabled>
+                                                <input type="text" value="<?php $combined_value = $candidate[0]->job_country . ' - ' . $candidate[0]->job_position; echo $combined_value ; ?>" name="candidate_job_profile" disabled>
                                             </div>
                                             <div class="input-box">
                                                 <span class="details">E-Mail</span>
@@ -429,33 +514,20 @@
                                                 <input type="email" value="<?php echo $candidate[0]->candidate_email ?>" name="candidate_email" disabled>
                                             </div>
                                             <div class="input-box">
+                                                <span class="details">Candidate Source</span>
+
+                                                <input type="email" value="<?php echo $candidate[0]->source_name ?>" name="source_name" disabled>
+                                            </div>
+                                            <div class="input-box">
                                                 <span class="details">Phone Number</span>
                                                 <input type="tel" value="<?php echo $candidate[0]->candidate_mobile_no ?>" name="candidate_mobile_no">
                                                 <input type="text" value="<?php echo $candidateId ?>" style="opacity: 0;" name="candidate_id">
 
                                             </div>
-
-                                            <!-- <div class="button">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-4 col-form-label">Job Status</label>
-                                                    <div class="col-sm-8">
-                                                        <select name="candidate_job_status" class="form-control" style="border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); background: linear-gradient(to bottom, #f9f9f9, #e8e8e8); outline: none;">
-                                                            <option value="opt1" disabled selected>Select One Value</option>
-                                                            <option value="1">Waiting for document</option>
-                                                            <option value="2">Sent to recruitment review</option>
-                                                            <option value="3">Shortlisted</option>
-                                                            <option value="4">Not selected</option>
-                                                            <option value="5">Job Orientation  1</option>
-                                                            <option value="6">Job Orientation  2</option>
-                                                            <option value="7">Job Orientation  3</option>
-                                                            <option value="8">Work permit</option>
-                                                            <option value="9">Visa filing</option>
-                                                            <option value="10">Training for visa</option>
-                                                            <option value="11">Completed</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div> -->
+                                            <div class="input-box">
+                                               
+                                            </div>
+                                           
                                             <div class="button">
                                                 <div class="form-group row">
                                                     <label class="col-sm-4 col-form-label">Job Status</label>
@@ -717,7 +789,7 @@
                                         <?php } ?>
                                         <div class="form-group row">
                                             <div class="col-sm-12">
-                                                <center> <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button></center>
+                                                <center> <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: #2ecc71; ">Submit</button></center>
                                             </div>
 
                                         </div>

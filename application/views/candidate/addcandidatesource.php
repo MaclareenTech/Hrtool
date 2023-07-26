@@ -142,7 +142,7 @@
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-                <nav class="pcoded-navbar">
+                    <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
@@ -213,7 +213,7 @@
                             <?php if ($role == "superadmin") { ?>
                                 <div class="pcoded-navigation-label">Job Openings</div>
                                 <ul class="pcoded-item pcoded-left-item">
-                                    <li class="pcoded-hasmenu active pcoded-trigger">
+                                    <li class="pcoded-hasmenu ">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="fa fa-cubes"></i><b>JO</b></span>
                                             <span class="pcoded-mtext">Job Openings</span>
@@ -227,7 +227,7 @@
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                             </li>
-                                            <li class="active">
+                                            <li class="">
                                                 <a href="<?php echo base_url(); ?>AddJobopeningFrom" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                     <span class="pcoded-mtext">Add Job Openings</span>
@@ -246,7 +246,7 @@
                             <?php } ?>
                             <div class="pcoded-navigation-label">Add Candidate Source </div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
+                                <li class="active">
                                     <a href="<?php echo base_url(); ?>viewCandidateSource" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="fa fa-external-link"></i><b>L</b></span>
                                         <span class="pcoded-mtext">Add Candidate Source</span>
@@ -275,7 +275,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Add Job Opening</h5>
+                                            <h5 class="m-b-10">Add Candidate Source</h5>
                                             <p class="m-b-0">Maclareen Talent Acquisition System </p>
                                         </div>
                                     </div>
@@ -284,7 +284,7 @@
                                             <li class="breadcrumb-item">
                                                 <a href="index.html"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a>Add Job Opening</a>
+                                            <li class="breadcrumb-item"><a>Add Candidate Source</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -328,45 +328,40 @@
                                             </div>
                                         <?php } ?>
                                         <div class="card-header">
-                                            <h5>Add Job Details</h5>
+                                            <h5>Add Candidate Source</h5>
                                             <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
                                         </div>
                                         <div class="card-block">
-                                            <form class="form-material" action="<?php echo base_url(); ?>AddJobopening" method="post">
+                                            <form class="form-material" action="<?php echo base_url(); ?>AddnewsourceType" method="post">
                                                 <div class="form-group form-default form-static-label">
-                                                    <input type="text" name="job_country" class="form-control" id="jobCountryInput" required>
+                                                    <input type="text" name="source_name" class="form-control" required>
                                                     <span class="form-bar"></span>
-                                                    <label class="float-label">Job Country</label>
+                                                    <label class="float-label">Source Name</label>
                                                 </div>
                                                 <div class="form-group form-default form-static-label">
-                                                    <input type="text" name="job_position" class="form-control" id="jobPositionInput" onkeyup="generateJobCode()" required>
+                                                    <input type="email" name="source_email" class="form-control">
                                                     <span class="form-bar"></span>
-                                                    <label class="float-label">Job Position</label>
+                                                    <label class="float-label">Source Email</label>
+                                                </div>
+                                                <div class="form-group form-default form-static-label">
+                                                    <input type="tel" name="source_mobile_number" class="form-control"  pattern="[0-9]{10}" maxlength="10">
+                                                    <span class="form-bar"></span>
+                                                    <label class="float-label">Source Mobile Number (10 digits)</label>
                                                 </div>
 
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="text" name="job_code" class="form-control" id="jobCodeInput" readonly required>
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Job Code</label>
-                                                </div>
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="number" name="job_open_position" class="form-control" pattern="[0-9]+" required> 
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Job Open Position</label>
-                                                </div>
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="date" name="job_open_from" class="form-control" min="<?= date('d F Y') ?>" required>
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Valid From</label>
-                                                </div>
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="date" name="job_open_till" class="form-control" min="<?= date('d F Y') ?>" required>
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Valid Till</label>
+                                                <div class="form-group">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="source_type" value="1" required> Social Media
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="source_type" value="0" required> Person
+                                                    </label>
                                                 </div>
 
                                                 <button class="btn btn-success waves-effect waves-light">Add Opening</button>
                                             </form>
+
+
                                         </div>
                                     </div>
                                     <!--  add position  form end -->
@@ -414,23 +409,6 @@
 
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/script.js "></script>
 
-
-    <!-- job id Creater start -->
-
-    <script>
-        function generateJobCode() {
-            const countryInput = document.getElementById('jobCountryInput');
-            const positionInput = document.getElementById('jobPositionInput');
-            const jobCodeInput = document.getElementById('jobCodeInput');
-
-            const country = countryInput.value.substring(0, 2).toUpperCase();
-            const position = positionInput.value.substring(0, 2).toUpperCase();
-            const randomNumbers = '<?php echo $nextID; ?>';
-
-            jobCodeInput.value = country + position + randomNumbers;
-        }
-    </script>
-    <!-- job id Creater end -->
 
     <script type="text/javascript">
         $(document).ready(function() {

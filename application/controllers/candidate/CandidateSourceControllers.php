@@ -15,16 +15,20 @@ class CandidateSourceControllers extends BaseController
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
         } else {
-            // $this->load->model('Job_Opening_model');
-            // $this->global['jobdetails'] = $this->Job_Opening_model->View();
-              $this->global['pageTitle'] = 'MTAS : Admin Dashboard';
-            $this->global['name'] = 'MTAS : Job Opening Dashboard';
-            $this->loadViews("other/viewCandidateSource", $this->global);
+            $this->load->model('Candidate_source_model');
+            $this->global['sourcedetails'] = $this->Candidate_source_model->View();
+            $this->global['pageTitle'] = 'MTAS : Admin Dashboard';
+            $this->global['name'] = 'MTAS : Candiate Source Dashboard';
+            $this->loadViews("candidate/viewCandidateSource", $this->global);
         }
     }
 
 
-    public function AddJobDetails()
+
+
+
+
+    public function AddNewCandidateSourceDetails()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
 
@@ -35,72 +39,71 @@ class CandidateSourceControllers extends BaseController
         } else {
             $this->load->model('Job_Opening_model');
             $currentId = $this->Job_Opening_model->view_count();
-              $this->global['pageTitle'] = 'MTAS : Admin Dashboard';
-              $this->global['nextID'] = $currentId + 1;
-            $this->global['name'] = 'MTAS :  Add Job Opening ';
-            $this->loadViews("jobOpening/addjobopening", $this->global);
+            $this->global['pageTitle'] = 'MTAS : Admin Dashboard';
+            $this->global['nextID'] = $currentId + 1;
+            $this->global['name'] = 'MTAS :  Adsd Candidate Source ';
+            $this->loadViews("candidate/addcandidatesource", $this->global);
         }
     }
-    // nextID
 
 
-    public function AddNewJob()
+
+
+
+
+    public function AddNewSourceType()
     {
         $this->load->library('form_validation');
-        $this->load->model('Job_Opening_model');
-        $this->form_validation->set_rules('job_country', 'job_country', 'required');
-        $this->form_validation->set_rules('job_position', 'job_position', 'required');
-        $this->form_validation->set_rules('job_code', 'job_code', 'required');
-        $this->form_validation->set_rules('job_open_position', 'job_open_position', 'required');
-        $this->form_validation->set_rules('job_open_from', 'job_open_from', 'required');
-        $this->form_validation->set_rules('job_open_till', 'job_open_till', 'required');
-
+        $this->load->model('Candidate_source_model');
+        $this->form_validation->set_rules('source_name', 'source_name', 'required');
+        $source_name = $this->input->post('source_name');
+        $source_type = $this->input->post('source_type');
+        $source_email = $this->input->post('source_email');
+        $source_mobile_number = $this->input->post('source_mobile_number');
+    
         if ($this->form_validation->run() == FALSE) {
-            $this->AddJobDetails();
+            $this->AddNewCandidateSourceDetails();
         } else {
-            $job_country = $this->input->post('job_country');
-            $job_position = $this->input->post('job_position');
-            $job_code = $this->input->post('job_code');
-            $job_open_position = $this->input->post('job_open_position');
-            $job_open_from = $this->input->post('job_open_from');
-            $job_open_till = $this->input->post('job_open_till');
-            $result = $this->Job_Opening_model->view_count('',$job_country,$job_position,0);
-            if ($result <1) {
-
-                $OpenFrom = date('Y-m-d', strtotime(strtr($job_open_from, '/', '-')));
-                $OpenTo = date('Y-m-d', strtotime(strtr($job_open_till, '/', '-')));
-                $JobData = array(
-                    'job_country' => $job_country,
-                    'job_position' => $job_position,
-                    'job_code' => $job_code,
-                    'job_open_position' => $job_open_position,
-                    'job_open_from' => $OpenFrom,
-                    'job_open_till' => $OpenTo
-
+            if ($source_type == "0" && (empty($source_email) || empty($source_mobile_number))) {
+                $this->session->set_flashdata('error', 'If you select person, kindly fill email and mobile number');
+                redirect('AddNewCandidateSourceDetailsForm');
+            }
+    
+            if ($source_type == "1" && (!empty($source_email) || !empty($source_mobile_number))) {
+                $this->session->set_flashdata('error', 'You cannot enter social media mobile number and email id');
+                redirect('AddNewCandidateSourceDetailsForm');
+            }
+    
+            $result = $this->Candidate_source_model->view_count('', $source_name, $source_email, '', $source_type);
+    
+            if ($result < 1) {
+                $SourceData = array(
+                    'source_name' => $source_name,
+                    'source_email' => $source_email,
+                    'source_mobile_number' => $source_mobile_number,
+                    'is_social_media' => $source_type
                 );
-                if($this->Job_Opening_model->Insert($JobData))
-                {
-                    redirect('Jobopening');
-                }else
-                {
-                    $this->session->set_flashdata('error', 'Try Again ');
-                redirect('AddJobopeningFrom');
+    
+                if ($this->Candidate_source_model->Insert($SourceData)) {
+                    redirect('viewCandidateSource');
+                } else {
+                    $this->session->set_flashdata('error', 'Try Again');
+                    redirect('AddNewCandidateSourceDetailsForm');
                 }
             } else {
-                $this->session->set_flashdata('error', 'This Position Already Exists');
-                redirect('AddJobopeningFrom');
+                $this->session->set_flashdata('error', 'This Source Already Exists');
+                redirect('AddNewCandidateSourceDetailsForm');
             }
         }
     }
+    
 
 
 
-
-
-    public function UpdateOpeningInformation($open, $id)
+    public function UpdateSourceInformation($open, $id)
     {
         $this->load->database();
-        $this->load->model('Job_Opening_model');
+        $this->load->model('Candidate_source_model');
 
 
 
@@ -109,8 +112,8 @@ class CandidateSourceControllers extends BaseController
         } else {
             $Ope = '1';
         }
-        $Data['is_open'] = $Ope;
-        if (!$this->Job_Opening_model->Update($id, $Data)) {
+        $Data['is_active'] = $Ope;
+        if (!$this->Candidate_source_model->Update($id, $Data)) {
             $data['message'] = 'No user Found';
             echo '<script>alert("No user Found")</script>';
         } else {
@@ -127,6 +130,7 @@ class CandidateSourceControllers extends BaseController
 
 
 
+    // nextID
 
 
 
@@ -136,7 +140,24 @@ class CandidateSourceControllers extends BaseController
 
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function AdminInformation()
     {

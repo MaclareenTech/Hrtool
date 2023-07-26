@@ -1,13 +1,73 @@
 <?php
 
-class Candidate_model extends MY_Model
+class Invoice_model extends MY_Model
 {
     protected $table;
     public function __construct()
     {
         parent::__construct();
-        $this->table = $this->TBL_CANDIDATE;
+        $this->table = $this->TBL_INVOICE;
     }
+
+
+    public function View($id = '')
+    {
+        if ($id !== "") {
+            $query = $this->db->select('tbl_invoice.*,
+            tbl_user.user_name')->where(['invoice_id' => $id])
+            ->join('tbl_user', 'tbl_invoice.admin_id=tbl_user.user_id')
+           ->get($this->table);
+        return $query->result();
+        } else {
+            $query = $this->db->select('tbl_invoice.*,
+            tbl_user.user_name')
+                ->join('tbl_user', 'tbl_invoice.admin_id=tbl_user.user_id')
+               ->get($this->table);
+        return $query->result();
+        }
+       
+       
+    }
+
+
+
+
+
+    public function Insert($data)
+    {
+        if ($this->db->insert($this->table, $data)) {
+            return $this->db->insert_id();
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public function viewCandidate_count($candidate_id = '', $candidate_job_status = '')
@@ -54,7 +114,7 @@ class Candidate_model extends MY_Model
 
     public function getCandidateJobProfiles() {
         // Fetch candidate_job_profile data and dynamically count occurrences of each job profile.
-        $this->db->select('tbl_candidate.*,
+        $this->db->select('tbl_invoice.*,
             tbl_user.user_name,
             tbl_job_opening.*,
             tbl_user.user_email,
@@ -86,38 +146,7 @@ class Candidate_model extends MY_Model
 
 
 
-    public function ViewCandidateInfo($id = '')
-    {
-        if ($id !== "") {
-            $query = $this->db->select('tbl_candidate.*,
-        tbl_user.user_name,
-        tbl_job_opening.*,
-        tbl_candidate_source.*,
-        tbl_user.user_email,
-        tbl_user.user_mobile,
-        tbl_user.emp_id')->where(['candidate_id' => $id])
-            ->join('tbl_user', 'tbl_candidate.updated_by=tbl_user.user_id')
-            ->join('tbl_job_opening', 'tbl_candidate.candidate_job_profile=tbl_job_opening.job_code')
-            ->join('tbl_candidate_source', 'tbl_candidate.candidate_source_id=tbl_candidate_source.source_id')
-             ->order_by('candidate_job_status', 'asc')->get($this->table);
-        return $query->result();
-        } else {
-            $query = $this->db->select('tbl_candidate.*,
-        tbl_user.user_name,
-        tbl_job_opening.*,
-        tbl_candidate_source.*,
-        tbl_user.user_email,
-        tbl_user.user_mobile,
-        tbl_user.emp_id')
-            ->join('tbl_user', 'tbl_candidate.updated_by=tbl_user.user_id')
-            ->join('tbl_job_opening', 'tbl_candidate.candidate_job_profile=tbl_job_opening.job_code')
-            ->join('tbl_candidate_source', 'tbl_candidate.candidate_source_id=tbl_candidate_source.source_id')
-             ->order_by('candidate_job_status', 'asc')->get($this->table);
-        return $query->result();
-        }
-       
-       
-    }
+
     public function ViewCandidateInfoForMail($id = '')
     {
         if ($id !== "") {

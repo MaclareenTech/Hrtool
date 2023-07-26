@@ -9,6 +9,7 @@ class AddCandidateControllers extends BaseController
   public function index()
   {
     $this->load->model('Job_Opening_model');
+    $this->load->model('Candidate_source_model');
     $isLoggedIn = $this->session->userdata('isLoggedIn');
 
     if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
@@ -18,6 +19,7 @@ class AddCandidateControllers extends BaseController
     } else {
 
       $this->global['jobdetails'] = $this->Job_Opening_model->View('','','','0');
+      $this->global['sourcedetails'] = $this->Candidate_source_model->View('','','','','0');
       $this->global['pageTitle'] = 'MTAS : Add candidate';
       $this->loadViews("admin/addcandidate", $this->global);
     }
@@ -93,6 +95,7 @@ class AddCandidateControllers extends BaseController
     $this->form_validation->set_rules('candidate_email', 'Candidate Email', 'required|valid_email');
     $this->form_validation->set_rules('candidate_mobile_no', 'Candidate Mobile Number', 'required|regex_match[/^[0-9]{10}$/]');
     $this->form_validation->set_rules('candidate_job_profile', 'Job Profile', 'required');
+    $this->form_validation->set_rules('candidate_source_id', 'Source ID', 'required');
     $this->form_validation->set_rules('candidate_password', 'Job Profile', 'required');
 
     // Check if form validation passes
@@ -106,6 +109,7 @@ class AddCandidateControllers extends BaseController
     $candidate_mobile_no = $this->input->post('candidate_mobile_no');
     $candidate_job_profile = $this->input->post('candidate_job_profile');
     $candidate_password = $this->input->post('candidate_password');
+    $candidate_source_id = $this->input->post('candidate_source_id');
     $hashedPassword = md5($candidate_password);
 
     // Upload files
@@ -134,6 +138,7 @@ class AddCandidateControllers extends BaseController
       'candidate_mobile_no' => $candidate_mobile_no,
       'candidate_job_profile' => $candidate_job_profile,
       'updated_by' => $Admin_id,
+      'candidate_source_id' => $candidate_source_id,
       'candidate_satus_days' => $today,
       'is_paid' => $is_paid,
       'candidate_password' => $hashedPassword
@@ -197,7 +202,7 @@ class AddCandidateControllers extends BaseController
 
       // Upload Candidate image
       if ($this->upload->do_upload('candidate_photo')) {
-        $file_name = $candidate_email . '_img.pnd';
+        $file_name = $candidate_email . '_img.png';
         $uploaded_files['image'] = $file_name;
         rename($this->upload->data('full_path'), './upload/image/' . $file_name);
         $data['candidate_photo'] = $uploaded_files['image'];
@@ -440,6 +445,8 @@ class AddCandidateControllers extends BaseController
                                                                         <br>
                                                                         Email:
                                                                         <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
+                                                                        <br>
+          <p style="color: #666; font-size: 14px;"><strong>This is an auto-generated email. Please do not reply.</strong></p>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -475,6 +482,7 @@ class AddCandidateControllers extends BaseController
         $this->email->to($candidate_email);
         $this->email->subject($subject);
         $this->email->message($registerMessage);
+        $this->email->set_header('Reply-To', 'immigration@maclareen.com');
         $this->email->set_mailtype("html");
         $sendemail = $this->email->send();
 
@@ -883,7 +891,9 @@ class AddCandidateControllers extends BaseController
                                     <br>
                                     Email:
                                     <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
-                                </div>
+                                    <br>
+                                    <p style="color: #666; font-size: 14px;"><strong>This is an auto-generated email. Please do not reply.</strong></p>
+                                    </div>
                             </td>
                         </tr>
                         </div>
@@ -975,7 +985,9 @@ class AddCandidateControllers extends BaseController
                                     <br>
                                     Email:
                                     <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
-                                </div>
+                                    <br>
+                                    <p style="color: #666; font-size: 14px;"><strong>This is an auto-generated email. Please do not reply.</strong></p>
+                                    </div>
                             </td>
                         </tr>
                         </div>
@@ -1068,7 +1080,9 @@ class AddCandidateControllers extends BaseController
                                     <br>
                                     Email:
                                     <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
-                                </div>
+                                    <br>
+                                    <p style="color: #666; font-size: 14px;"><strong>This is an auto-generated email. Please do not reply.</strong></p>
+                                    </div>
                             </td>
                         </tr>
                         </div>
@@ -1158,7 +1172,9 @@ class AddCandidateControllers extends BaseController
                                         <br>
                                         Email:
                                         <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
-                                    </div>
+                                        <br>
+                                        <p style="color: #666; font-size: 14px;"><strong>This is an auto-generated email. Please do not reply.</strong></p>
+                                        </div>
                                 </td>
                             </tr>
                         </div>
@@ -1297,7 +1313,9 @@ class AddCandidateControllers extends BaseController
                                 <br>
                                 Email:
                                 <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
-                            </div>
+                                <br>
+                                <p style="color: #666; font-size: 14px;"><strong>This is an auto-generated email. Please do not reply.</strong></p>
+                                </div>
                         </td>
                     </tr>
                     </div>
@@ -1437,7 +1455,9 @@ class AddCandidateControllers extends BaseController
                                 <br>
                                 Email:
                                 <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
-                            </div>
+                                <br>
+                                <p style="color: #666; font-size: 14px;"><strong>This is an auto-generated email. Please do not reply.</strong></p>
+                                </div>
                         </td>
                     </tr>
                     </div>
@@ -1577,7 +1597,9 @@ class AddCandidateControllers extends BaseController
                                 <br>
                                 Email:
                                 <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
-                            </div>
+                                <br>
+                                <p style="color: #666; font-size: 14px;"><strong>This is an auto-generated email. Please do not reply.</strong></p>
+                                </div>
                         </td>
                     </tr>
                     </div>
@@ -1680,7 +1702,9 @@ class AddCandidateControllers extends BaseController
                                                                         <br>
                                                                         Email:
                                                                         <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
-                                                                    </div>
+                                                                        <br>
+                                                                        <p style="color: #666; font-size: 14px;"><strong>This is an auto-generated email. Please do not reply.</strong></p>
+                                                                        </div>
                                                                 </td>
                                                             </tr>
                             </div>
@@ -1772,7 +1796,9 @@ class AddCandidateControllers extends BaseController
                                 <br>
                                 Email:
                                 <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
-                            </div>
+                                <br>
+                                <p style="color: #666; font-size: 14px;"><strong>This is an auto-generated email. Please do not reply.</strong></p>
+                                </div>
                         </td>
                     </tr>
                   </div>
@@ -1913,7 +1939,9 @@ class AddCandidateControllers extends BaseController
                                                                         <br>
                                                                         Email:
                                                                         <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
-                                                                    </div>
+                                                                        <br>
+                                                                        <p style="color: #666; font-size: 14px;"><strong>This is an auto-generated email. Please do not reply.</strong></p>
+                                                                        </div>
                                                                 </td>
                                                             </tr>
                         </div>
@@ -2055,7 +2083,9 @@ class AddCandidateControllers extends BaseController
                                 <br>
                                 Email:
                                 <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
-                            </div>
+                                <br>
+                                <p style="color: #666; font-size: 14px;"><strong>This is an auto-generated email. Please do not reply.</strong></p>
+                                </div>
                         </td>
                     </tr>
                     </div>
@@ -2084,6 +2114,7 @@ class AddCandidateControllers extends BaseController
       $this->email->to($candidate_email);
       $this->email->subject($subject);
       $this->email->message($candidateMail);
+      $this->email->set_header('Reply-To', 'immigration@maclareen.com');
       $this->email->set_mailtype("html");
       $sendemail = $this->email->send();
       $test = $this->Admin_model->InsertLog($Logdata);
@@ -2232,7 +2263,9 @@ class AddCandidateControllers extends BaseController
               For any queries, please contact:<br>
               Email: <a href="mailto:immigration@maclareen.com" style="color: #666; text-decoration: none;">immigration@maclareen.com</a><br>
               Email: <a href="mailto:recruitment@maclareen.com" style="color: #666; text-decoration: none;">recruitment@maclareen.com</a>
-            </div>
+              <br>
+              <p style="color: #666; font-size: 14px;"><strong>This is an auto-generated email. Please do not reply.</strong></p>
+              </div>
           </td>
         </tr>
       </table>
@@ -2244,6 +2277,7 @@ class AddCandidateControllers extends BaseController
     $this->email->to($candidate_email);
     $this->email->subject($subject);
     $this->email->message($mailbody);
+    $this->email->set_header('Reply-To', 'immigration@maclareen.com');
     $this->email->set_mailtype("html");
     $sendemail = $this->email->send();
     if ($sendemail) {

@@ -209,36 +209,54 @@
                                     </a>
                                 </li>
                             </ul>
-                            <div class="pcoded-navigation-label">Admin Details</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="fa-solid fa fa-users"></i><b>AD</b></span>
-                                        <span class="pcoded-mtext">Admin Details</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                            </ul>
+                            <?php
+                            $role = $this->session->userdata('role'); ?>
+                            <?php if ($role == "superadmin") { ?>
+                                <div class="pcoded-navigation-label">Admin Details</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa-solid fa fa-users"></i><b>AD</b></span>
+                                            <span class="pcoded-mtext">Admin Details</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+                            <?php
+                            $mail = $this->session->userdata('user_email'); ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com"  ) { ?>
+                                <div class="pcoded-navigation-label">Invoice</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="<?php echo base_url(); ?>invlicelist" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa fa-list-alt"></i><b>IN</b></span>
+                                            <span class="pcoded-mtext">Invoice</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php } ?>
                             <?php
                             $role = $this->session->userdata('role'); ?>
                             <?php if ($role == "superadmin") { ?>
                                 <div class="pcoded-navigation-label">Job Openings</div>
                                 <ul class="pcoded-item pcoded-left-item">
-                                    <li class="pcoded-hasmenu">
+                                    <li class="pcoded-hasmenu ">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="fa fa-cubes"></i><b>JO</b></span>
                                             <span class="pcoded-mtext">Job Openings</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                         <ul class="pcoded-submenu">
-                                            <li class=" ">
+                                            <li class="">
                                                 <a href="<?php echo base_url(); ?>Jobopening" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                     <span class="pcoded-mtext">View Job Openings</span>
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                             </li>
-                                            <li class=" ">
+                                            <li class="">
                                                 <a href="<?php echo base_url(); ?>AddJobopeningFrom" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                     <span class="pcoded-mtext">Add Job Openings</span>
@@ -258,7 +276,7 @@
                             <div class="pcoded-navigation-label">Add Candidate Source </div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a  href="<?php echo base_url(); ?>viewCandidateSource" class="waves-effect waves-dark">
+                                    <a href="<?php echo base_url(); ?>viewCandidateSource" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="fa fa-external-link"></i><b>L</b></span>
                                         <span class="pcoded-mtext">Add Candidate Source</span>
                                         <span class="pcoded-mcaret"></span>
@@ -360,7 +378,7 @@
 
                                                     </div>
                                                     <div class="col-xl-6 col-md-6 d-flex align-items-center justify-content-center">
-                                                        <div >
+                                                        <div>
                                                             <canvas id="myPieChart"></canvas>
                                                         </div>
                                                         <!-- style="width: 100%; height: 400px;" -->
@@ -406,6 +424,7 @@
                                                                     <th>Candidate Register Date Date</th>
                                                                     <th>Candidate Status updated days </th>
                                                                     <th>Status Updated by </th>
+                                                                    <th>Candidate Source</th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
@@ -488,6 +507,24 @@
 
                                                                         $encrypted_number = base64_encode($row->candidate_id);
                                                                         ?>
+                                                                        <td> <?php if ($row->source_name == "Facebook" || $row->source_name == "facebook") { ?>
+                                                                                <a class="btn btn-default" style="padding: 10px 20px; border: 1px solid #3b5998; border-radius: 5px; background-color: #3b5998; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;"> <!-- Set the color to white (#fff) -->
+                                                                                    <em class="fab fa-facebook-f" style="color: #fff;"></em> <!-- Facebook Icon with white color -->
+                                                                                </a>
+
+                                                                            <?php } else if ($row->source_name == "WhatsApp" || $row->source_name == "whatsapp") { ?>
+                                                                                <a class="btn btn-default whatsapp-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: #25d366; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;">
+                                                                                    <em class="fab fa-whatsapp"></em> <!-- WhatsApp Icon -->
+                                                                                </a>
+                                                                            <?php } else if ($row->source_name == "Instagram" || $row->source_name == "instagram") { ?>
+                                                                                <a class="btn btn-default instagram-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: linear-gradient(to right, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80); box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;">
+                                                                                    <em class="fab fa-instagram"></em> <!-- Instagram Icon -->
+                                                                                </a>
+                                                                            <?php } else {
+                                                                                    echo $row->source_name;
+                                                                                } ?>
+
+                                                                        </td>
                                                                         <td><a class="btn btn-default" href="<?php echo base_url('editCandidateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
                                                                                 <em class="fa fa-pencil"></em>
                                                                             </a> </td>

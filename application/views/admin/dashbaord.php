@@ -31,8 +31,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-  <!-- serch option for table  -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- serch option for table  -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -113,7 +113,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a >
+                        <a>
                             <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px;">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -143,17 +143,11 @@
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <?php if ($this->session->userdata('user_profile') == "") { ?>
-                                        <img class="img-80 img-radius" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="User-Profile-Image">
 
-                                    <?php } else { ?>
-                                        <img class="img-80 img-radius" src="<?php echo "http://mtas.net.in/upload/profile/" . $this->session->userdata('user_profile'); ?>" alt="User-Profile-Image">
-                                    <?php } ?>
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="pcoded-navigation-label">Home</div>
@@ -172,7 +166,6 @@
                                     </a>
                                 </li>
                             </ul>
-
                             <div class="pcoded-navigation-label">Add Candidate</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
@@ -183,10 +176,74 @@
                                     </a>
                                 </li>
                             </ul>
+                            <?php
+                            $role = $this->session->userdata('role'); ?>
+                            <?php if ($role == "superadmin") { ?>
+                                <div class="pcoded-navigation-label">Admin Details</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa-solid fa fa-users"></i><b>AD</b></span>
+                                            <span class="pcoded-mtext">Admin Details</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+                            <?php
+                            $mail = $this->session->userdata('user_email'); ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com"  ) { ?>
+                                <div class="pcoded-navigation-label">Invoice</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="<?php echo base_url(); ?>invlicelist" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa fa-list-alt"></i><b>IN</b></span>
+                                            <span class="pcoded-mtext">Invoice</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+                            <?php
+                            $role = $this->session->userdata('role'); ?>
+                            <?php if ($role == "superadmin") { ?>
+                                <div class="pcoded-navigation-label">Job Openings</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="pcoded-hasmenu ">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa fa-cubes"></i><b>JO</b></span>
+                                            <span class="pcoded-mtext">Job Openings</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li class="">
+                                                <a href="<?php echo base_url(); ?>Jobopening" class="waves-effect waves-dark">
+                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                    <span class="pcoded-mtext">View Job Openings</span>
+                                                    <span class="pcoded-mcaret"></span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="<?php echo base_url(); ?>AddJobopeningFrom" class="waves-effect waves-dark">
+                                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                    <span class="pcoded-mtext">Add Job Openings</span>
+                                                    <span class="pcoded-mcaret"></span>
+                                                </a>
+                                            </li>
+
+
+
+
+
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                            <?php } ?>
                             <div class="pcoded-navigation-label">Add Candidate Source </div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a  href="<?php echo base_url(); ?>viewCandidateSource" class="waves-effect waves-dark">
+                                    <a href="<?php echo base_url(); ?>viewCandidateSource" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="fa fa-external-link"></i><b>L</b></span>
                                         <span class="pcoded-mtext">Add Candidate Source</span>
                                         <span class="pcoded-mcaret"></span>
@@ -205,7 +262,7 @@
                                 </li>
                             </ul>
 
-                        </div>
+
                     </nav>
                     <div class="pcoded-content">
                         <!-- Page-header start -->
@@ -221,7 +278,7 @@
                                     <div class="col-md-4">
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a > <i class="fa fa-home"></i> </a>
+                                                <a> <i class="fa fa-home"></i> </a>
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!">Dashboard</a>
                                             </li>
@@ -238,7 +295,7 @@
 
 
 
-                        <div class="pcoded-inner-content" >
+                        <div class="pcoded-inner-content">
                             <!-- Main-body start -->
 
 
@@ -302,7 +359,7 @@
                                             <div class="table-responsive">
                                                 <div id="candidate-table-container">
                                                     <div id="table-container">
-                                                    <input id="search" type="text" class="form-control" placeholder="Search for name and email......">
+                                                        <input id="search" type="text" class="form-control" placeholder="Search for name and email......">
                                                         <br>
                                                         <table id="my-table" class="table datatable">
                                                             <thead>
@@ -317,6 +374,7 @@
                                                                     <th>Candidate Register Date Date</th>
                                                                     <th>Candidate Status updated days </th>
                                                                     <th>Status Updated by </th>
+                                                                    <th>Candidate Source</th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
@@ -330,7 +388,8 @@
                                                                         <td><?php echo $row->candidate_name ?></td>
                                                                         <td><?php echo $row->candidate_email ?></td>
                                                                         <td><?php echo $row->candidate_mobile_no ?></td>
-                                                                        <td><?php $combined_value = $row->job_country . ' - ' . $row->job_position; echo $combined_value ; ?></td>
+                                                                        <td><?php $combined_value = $row->job_country . ' - ' . $row->job_position;
+                                                                            echo $combined_value; ?></td>
                                                                         <td> <?php if ($row->candidate_job_status == "0") { ?>
                                                                                 <button style="background-color: #ff3333; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Screening</button>
                                                                             <?php } else if ($row->candidate_job_status == "1") { ?>
@@ -360,7 +419,7 @@
 
 
                                                                         </td>
-                                                                       
+
 
                                                                         <td><?php
                                                                             $timestamp = strtotime($row->candidate_satus_days);
@@ -368,14 +427,14 @@
 
                                                                             echo $humanReadableDate; ?></td>
 
-                                                                    
+
                                                                         <td>
                                                                             <?php
                                                                             $timestamp = strtotime($row->candidate_join_date);
                                                                             $humanReadableDate = date("d F Y", $timestamp);
 
                                                                             echo $humanReadableDate; ?></td>
-                                                                                <td><?php
+                                                                        <td><?php
                                                                             $timestamp = strtotime($row->candidate_satus_days);
                                                                             $humanReadableDate = date("d F Y", $timestamp);
                                                                             $currentDate = new DateTime();
@@ -384,7 +443,7 @@
                                                                             $diff = $currentDate->diff($targetDate);
                                                                             $days = $diff->days;
                                                                             echo $days; ?></td>
-                                                                             <td><?php echo $row->user_name ?></td>
+                                                                        <td><?php echo $row->user_name ?></td>
                                                                         <!-- <td> <?php if ($candidate[0]->is_paid == "1") { ?>
                                                                                 <input type="checkbox" id="toggle_switch" name="toggle_switch" checked disabled style="display: none;">
                                                                                 <label for="toggle_switch" style="display: inline-block; width: 15px; height: 15px; border: 1px solid black; background-color: green; vertical-align: middle; text-align: center; line-height: 15px; color: white;">&#10004;</label>
@@ -395,15 +454,33 @@
                                                                             <?php } ?>
                                                                         </td> -->
                                                                         <?php
-                                                                       
+
                                                                         $encrypted_number = base64_encode($row->candidate_id);
                                                                         ?>
+                                                                        <td> <?php if ($row->source_name == "Facebook" || $row->source_name == "facebook") { ?>
+                                                                                <a class="btn btn-default" style="padding: 10px 20px; border: 1px solid #3b5998; border-radius: 5px; background-color: #3b5998; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;"> <!-- Set the color to white (#fff) -->
+                                                                                    <em class="fab fa-facebook-f" style="color: #fff;"></em> <!-- Facebook Icon with white color -->
+                                                                                </a>
+
+                                                                            <?php } else if ($row->source_name == "WhatsApp" || $row->source_name == "whatsapp") { ?>
+                                                                                <a class="btn btn-default whatsapp-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: #25d366; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;">
+                                                                                    <em class="fab fa-whatsapp"></em> <!-- WhatsApp Icon -->
+                                                                                </a>
+                                                                            <?php } else if ($row->source_name == "Instagram" || $row->source_name == "instagram") { ?>
+                                                                                <a class="btn btn-default instagram-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: linear-gradient(to right, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80); box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;">
+                                                                                    <em class="fab fa-instagram"></em> <!-- Instagram Icon -->
+                                                                                </a>
+                                                                            <?php } else {
+                                                                                    echo $row->source_name;
+                                                                                } ?>
+
+                                                                        </td>
                                                                         <td><a class="btn btn-default" href="<?php echo base_url('editCandidateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
                                                                                 <em class="fa fa-pencil"></em>
                                                                             </a> </td>
                                                                         <td><a class="btn btn-default" href="<?php echo base_url('ViewCandiateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
                                                                                 <em class="fa fa-eye"></em>
-                                                                            </a>  </td>
+                                                                            </a> </td>
                                                                         <!-- <td><a class="btn btn-default"   href="<?php echo base_url('admin/AddCandidateControllers/viewCandidateInformation/?id=' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
                                                                             <em class="fa fa-pencil"></em>
                                                                         </a> </td> -->
@@ -448,8 +525,8 @@
     </div>
 
 
-        <!-- serch option script start  -->
-        <script>
+    <!-- serch option script start  -->
+    <script>
         $("#search").on("keyup", function() {
             var value = $(this).val().toLowerCase();
             $("#myTable tr").filter(function() {
@@ -458,7 +535,7 @@
         });
     </script>
     <!-- serch option script end   -->
-    
+    <!-- pagination Start   -->
     <script>
         const tableBody = document.getElementById('myTable');
         const paginationContainer = document.getElementById('pagination');
@@ -497,7 +574,7 @@
 
         displayDataPage(currentPage);
     </script>
-
+    <!-- pagination end   -->
 
     <!-- Required Jquery -->
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery/jquery.min.js "></script>

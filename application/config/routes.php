@@ -98,8 +98,9 @@ $route['AddJobopening'] = 'JobOpening/JobOpeningControllers/AddNewJob';
 
 // Source information  
 $route['viewCandidateSource'] = 'candidate/CandidateSourceControllers';
-
-
+$route['AddNewCandidateSourceDetailsForm'] = 'candidate/CandidateSourceControllers/AddNewCandidateSourceDetails';
+$route['AddnewsourceType'] = 'candidate/CandidateSourceControllers/AddNewSourceType';
+$route['UpdateSourceStatus/(:num)/(:num)'] = 'candidate/CandidateSourceControllers/UpdateSourceInformation/$1/$2'; 
 
 
 // mail
@@ -109,8 +110,10 @@ $route['UpdateStatus/(:num)/(:num)'] = 'admin/DashboardControllers/UpdateVendorI
 
 
 
-// $route['pdf/upload'] = 'PdfController/uploadPdf';  RegisterCandidate
-// $route['pdf/view/(:num)'] = 'PdfController/viewPdf/$1';   get value as parameter
+// invoice
+$route['invlicelist'] = 'invoice/InvoiceControllers';
+$route['createinvoiceform'] = 'invoice/InvoiceControllers/CreateInvoiceform';
+
 
 
 

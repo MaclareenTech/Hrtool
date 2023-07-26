@@ -37,6 +37,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+     <!-- serch option for table  -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 
@@ -142,7 +144,7 @@
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-                <nav class="pcoded-navbar">
+                    <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
@@ -180,16 +182,34 @@
                                     </a>
                                 </li>
                             </ul>
-                            <div class="pcoded-navigation-label">Admin Details</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="fa-solid fa fa-users"></i><b>AD</b></span>
-                                        <span class="pcoded-mtext">Admin Details</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                            </ul>
+                            <?php
+                            $role = $this->session->userdata('role'); ?>
+                            <?php if ($role == "superadmin") { ?>
+                                <div class="pcoded-navigation-label">Admin Details</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa-solid fa fa-users"></i><b>AD</b></span>
+                                            <span class="pcoded-mtext">Admin Details</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+                            <?php
+                            $mail = $this->session->userdata('user_email'); ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com"  ) { ?>
+                                <div class="pcoded-navigation-label">Invoice</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="<?php echo base_url(); ?>invlicelist" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa fa-list-alt"></i><b>IN</b></span>
+                                            <span class="pcoded-mtext">Invoice</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php } ?>
                             <?php
                             $role = $this->session->userdata('role'); ?>
                             <?php if ($role == "superadmin") { ?>
@@ -229,7 +249,7 @@
                             <div class="pcoded-navigation-label">Add Candidate Source </div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="active">
-                                    <a  href="<?php echo base_url(); ?>viewCandidateSource" class="waves-effect waves-dark">
+                                    <a href="<?php echo base_url(); ?>viewCandidateSource" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="fa fa-external-link"></i><b>L</b></span>
                                         <span class="pcoded-mtext">Add Candidate Source</span>
                                         <span class="pcoded-mcaret"></span>
@@ -297,7 +317,7 @@
 
                                             <h5>Candidate Resource Details</h5>
                                             <div style="display: flex; justify-content: flex-end;">
-                                                <a href="<?php echo base_url(); ?>AddJobopeningFrom">
+                                                <a href="<?php echo base_url(); ?>AddNewCandidateSourceDetailsForm">
                                                     <button style="background-color: #2ECC71; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                         Add new Candidate Resource
                                                     </button>
@@ -307,10 +327,56 @@
                                         </div>
                                         <div class="card-block table-border-style">
                                             <div class="table-responsive">
+                                                
                                                 <div id="candidate-table-container">
-                                                    
-                                                </div>
+                                                <input id="search" type="text" class="form-control" placeholder="Search for name and email......">
+                                                        <br>
+                                                    <table class="table datatable" id="my-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Source Name</th>
+                                                                <th>Source Email</th>
+                                                                <th>Source Number</th>
+                                                                <th>Status</th>
+                                                                <!-- <th></th> -->
+                                                            </tr>
+                                                        </thead>
 
+                                                        <tbody id="myTable">
+                                                            <?php $counter = 0; ?>
+                                                            <?php foreach ($sourcedetails as $row) : ?>
+                                                                <tr>
+                                                                    <?php $counter++; ?>
+                                                                    <td><?php echo $counter; ?></td>
+                                                                    <td><?php echo $row->source_name ?></td>
+                                                                    <td><?php echo $row->source_email == "" ? "-----" : $row->source_email; ?></td>
+                                                                    <td><?php echo $row->source_mobile_number == "" ? "-----" : $row->source_mobile_number; ?></td>
+                                                                    <td> <?php if ($row->is_active == "0") { ?>
+                                                                            <a href="<?php echo base_url('UpdateSourceStatus/' . $row->is_active . '/' . $row->source_id); ?>" style="text-decoration: none;">
+                                                                                <button style="background-color: #2ECC71; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                                                    Active
+                                                                                </button>
+                                                                            </a>
+                                                                        <?php } else if ($row->is_active == "1") { ?>
+                                                                            <a href="<?php echo base_url('UpdateSourceStatus/' . $row->is_active . '/' . $row->source_id); ?>" style="text-decoration: none;">
+                                                                                <button style="background-color: #E40505; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                                                    Deactivate
+                                                                                </button>
+                                                                            </a> <?php } ?>
+
+                                                                        <!-- <td> <a class="btn btn-default" href="<?php echo base_url('UpdateAdminInformation/' . $row->job_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
+                                                                            <em class="fa fa-pencil"></em>
+                                                                        </a> </td> -->
+
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div id="pagination-container">
+                                                        <ul id="pagination" class="pagination"></ul>
+                                                    </div>
 
                                             </div>
                                         </div>
@@ -373,6 +439,58 @@
     </script>
 
 
+
+        <!-- serch option script start  -->
+        <script>
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    </script>
+    <!-- serch option script end   -->
+    
+        <!-- pagination Start   -->
+        <script>
+        const tableBody = document.getElementById('myTable');
+        const paginationContainer = document.getElementById('pagination');
+        const itemsPerPage = 7;
+        let currentPage = 1;
+
+        function displayDataPage(page) {
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const rows = Array.from(tableBody.getElementsByTagName('tr'));
+
+            rows.forEach((row, index) => {
+                if (index >= start && index < end) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            updatePagination(page);
+        }
+
+        function updatePagination(currentPage) {
+            const rowsCount = tableBody.getElementsByTagName('tr').length;
+            const totalPages = Math.ceil(rowsCount / itemsPerPage);
+            let paginationHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                paginationHTML += `<li class="page-item${i === currentPage ? ' active' : ''}">
+        <a class="page-link" href="#" onclick="displayDataPage(${i})">${i}</a>
+      </li>`;
+            }
+
+            paginationContainer.innerHTML = paginationHTML;
+        }
+
+        displayDataPage(currentPage);
+    </script>
+ <!-- pagination end   -->
 
 </body>
 
