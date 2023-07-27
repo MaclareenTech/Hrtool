@@ -328,7 +328,17 @@
                                         <div class="card-block table-border-style">
                                             <div class="table-responsive">
                                                 <div id="candidate-table-container">
-                                                <input id="search" type="text" class="form-control" placeholder="Search for name and email......">
+                                                <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div style="margin: 0 auto; padding: 20px; background-color: #f2f2f2; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
+                                                                    <form method="POST" style="display: flex; align-items: center;">
+                                                                        <input id="search" type="text" placeholder="Search for name and email......" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                                                                    </form>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
                                                         <br>
                                                     <table class="table datatable" id="my-table">
                                                         <thead>

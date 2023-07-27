@@ -118,7 +118,7 @@ class CandidateSourceControllers extends BaseController
             echo '<script>alert("No user Found")</script>';
         } else {
 
-            redirect('Jobopening');
+            redirect('viewCandidateSource');
         }
     }
 
@@ -357,7 +357,7 @@ class CandidateSourceControllers extends BaseController
             echo '<script>alert("No user Found")</script>';
         } else {
 
-            redirect('admininformation');
+            redirect('viewCandidateSource');
         }
     }
 }

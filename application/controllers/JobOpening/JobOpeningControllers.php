@@ -2,6 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 require APPPATH . '/libraries/BaseController.php';
+require FCPATH . 'vendor/autoload.php';
 class JobOpeningControllers extends BaseController
 {
 
@@ -120,9 +121,36 @@ class JobOpeningControllers extends BaseController
     }
 
 
+    public function viewJobOpeningCandidateReport($job_code)
+    {
+       // echo $job_code;
+        $this->load->model('Candidate_model');
+        $this->load->model('Job_Opening_model');
+        $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfoUsingJobId($job_code);
+        $this->global['job'] = $this->Job_Opening_model->View('','',$job_code,'');
+        // $job = $this->Candidate_model->ViewCandidateInfoUsingJobId($job_code);
+        // print_r($job);
+        $html = $this->load->view('pdf/jobopeningcandidatereport', $this->global, true);
 
+        // Create the mPDF instance and set watermark
+        $mpdf = new \Mpdf\Mpdf([
+            'format' => 'A3',
+            'margin_top' => 0,
+            'margin_right' => 0,
+            'margin_left' => 0,
+            'margin_bottom' => 0,
+        ]);
 
+        // Add watermark to each page
+        $mpdf->SetWatermarkImage(base_url('assets/images/watrermark.jpg'));
+        $mpdf->showWatermarkImage = true;
 
+        // Write content to PDF
+        $mpdf->WriteHTML($html);
+
+        // Output the PDF
+        $mpdf->Output();
+    }
 
 
 

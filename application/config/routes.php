@@ -94,6 +94,7 @@ $route['Jobopening'] = 'JobOpening/JobOpeningControllers';
 $route['AddJobopeningFrom'] = 'JobOpening/JobOpeningControllers/AddJobDetails';
 $route['UpdateJobStatus/(:num)/(:num)'] = 'JobOpening/JobOpeningControllers/UpdateOpeningInformation/$1/$2'; 
 $route['AddJobopening'] = 'JobOpening/JobOpeningControllers/AddNewJob';
+$route['ViewJobOpeningReport/(:any)'] = 'JobOpening/JobOpeningControllers/viewJobOpeningCandidateReport/$1';
 
 
 // Source information  
@@ -113,6 +114,7 @@ $route['UpdateStatus/(:num)/(:num)'] = 'admin/DashboardControllers/UpdateVendorI
 // invoice
 $route['invlicelist'] = 'invoice/InvoiceControllers';
 $route['createinvoiceform'] = 'invoice/InvoiceControllers/CreateInvoiceform';
+$route['CreateInvoice'] = 'invoice/InvoiceControllers/CreateInvoice';
 
 
 

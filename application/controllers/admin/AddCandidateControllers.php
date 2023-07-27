@@ -127,11 +127,7 @@ class AddCandidateControllers extends BaseController
     $Admin_id = $this->session->userdata('userId');
     date_default_timezone_set("Asia/Kolkata");
     $today = date("Y-m-d H:i:s");
-    if (isset($_POST["toggle_switch"])) {
-      $is_paid = "1";
-    } else {
-      $is_paid = "0";
-    }
+   
     $data = array(
       'candidate_name' => $candidate_name,
       'candidate_email' => $candidate_email,
@@ -140,7 +136,6 @@ class AddCandidateControllers extends BaseController
       'updated_by' => $Admin_id,
       'candidate_source_id' => $candidate_source_id,
       'candidate_satus_days' => $today,
-      'is_paid' => $is_paid,
       'candidate_password' => $hashedPassword
     );
 
@@ -691,12 +686,7 @@ class AddCandidateControllers extends BaseController
     //         redirect('editCandidateInfo/' . $candidate_id);
     //     }
     // }
-    if (isset($_POST["toggle_switch"])) {
-      $is_paid = "1";
-    } else {
-      $is_paid = "0";
-    }
-    $data['is_paid'] = $is_paid;
+
 
 
 

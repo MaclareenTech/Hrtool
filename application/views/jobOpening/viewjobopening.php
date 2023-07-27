@@ -37,8 +37,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-     <!-- serch option for table  -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- serch option for table  -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 
@@ -144,7 +144,7 @@
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-                <nav class="pcoded-navbar">
+                    <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
@@ -198,7 +198,7 @@
                             <?php } ?>
                             <?php
                             $mail = $this->session->userdata('user_email'); ?>
-                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com"  ) { ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com") { ?>
                                 <div class="pcoded-navigation-label">Invoice</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li class="">
@@ -328,8 +328,18 @@
                                         <div class="card-block table-border-style">
                                             <div class="table-responsive">
                                                 <div id="candidate-table-container">
-                                                <input id="search" type="text" class="form-control" placeholder="Search for name and email......">
-                                                        <br>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div style="margin: 0 auto; padding: 20px; background-color: #f2f2f2; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
+                                                                <form method="POST" style="display: flex; align-items: center;">
+                                                                    <input id="search" type="text" placeholder="Search for name and email......" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                                                                </form>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                    <br>
                                                     <table class="table datatable" id="my-table">
                                                         <thead>
                                                             <tr>
@@ -343,7 +353,7 @@
                                                                 <th>Valid From</th>
                                                                 <th>Valid Till</th>
                                                                 <th>Status</th>
-                                                                <!-- <th></th> -->
+                                                                <th></th>
                                                             </tr>
                                                         </thead>
 
@@ -377,10 +387,14 @@
                                                                                     Deactivate
                                                                                 </button>
                                                                             </a> <?php } ?>
-
-                                                                        <!-- <td> <a class="btn btn-default" href="<?php echo base_url('UpdateAdminInformation/' . $row->job_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
-                                                                            <em class="fa fa-pencil"></em>
-                                                                        </a> </td> -->
+                                                                    <td>
+                                                                        
+                                                                        <a href="<?php echo base_url('ViewJobOpeningReport/' . $row->job_code); ?>" style="text-decoration: none;">
+                                                                                <button style="background-color: #1abc9c; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                                                View Candidate
+                                                                                </button>
+                                                                            </a>
+                                                                    </td>
 
                                                                 </tr>
                                                             <?php endforeach; ?>
@@ -389,8 +403,8 @@
                                                 </div>
 
                                                 <div id="pagination-container">
-                                                        <ul id="pagination" class="pagination"></ul>
-                                                    </div>
+                                                    <ul id="pagination" class="pagination"></ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -453,8 +467,8 @@
 
 
 
-        <!-- serch option script start  -->
-        <script>
+    <!-- serch option script start  -->
+    <script>
         $("#search").on("keyup", function() {
             var value = $(this).val().toLowerCase();
             $("#myTable tr").filter(function() {
@@ -463,9 +477,9 @@
         });
     </script>
     <!-- serch option script end   -->
-    
-            <!-- pagination Start   -->
-            <script>
+
+    <!-- pagination Start   -->
+    <script>
         const tableBody = document.getElementById('myTable');
         const paginationContainer = document.getElementById('pagination');
         const itemsPerPage = 7;
@@ -503,7 +517,7 @@
 
         displayDataPage(currentPage);
     </script>
- <!-- pagination end   -->
+    <!-- pagination end   -->
 
 </body>
 

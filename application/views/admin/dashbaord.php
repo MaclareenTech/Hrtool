@@ -35,7 +35,19 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
+<style>@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+</style>
 
 <body>
 
@@ -307,7 +319,7 @@
                                         <div class="card proj-progress-card">
                                             <div class="card-block">
                                                 <div class="row">
-                                                    <div class="col-xl-6 col-md-6">
+                                                    <div class="col-xl-6 col-md-6 fade-in">
                                                         <div class="card mat-clr-stat-card text-white red">
                                                             <div class="card-block">
                                                                 <div class="row">
@@ -322,7 +334,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xl-6 col-md-6">
+                                                    <div class="col-xl-6 col-md-6 fade-in" >
                                                         <div class="card mat-clr-stat-card text-white green ">
                                                             <div class="card-block">
                                                                 <div class="row">
@@ -359,7 +371,17 @@
                                             <div class="table-responsive">
                                                 <div id="candidate-table-container">
                                                     <div id="table-container">
-                                                        <input id="search" type="text" class="form-control" placeholder="Search for name and email......">
+                                                    <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div style="margin: 0 auto; padding: 20px; background-color: #f2f2f2; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
+                                                                    <form method="POST" style="display: flex; align-items: center;">
+                                                                        <input id="search" type="text" placeholder="Search for name and email......" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                                                                    </form>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
                                                         <br>
                                                         <table id="my-table" class="table datatable">
                                                             <thead>
@@ -457,7 +479,7 @@
 
                                                                         $encrypted_number = base64_encode($row->candidate_id);
                                                                         ?>
-                                                                        <td> <?php if ($row->source_name == "Facebook" || $row->source_name == "facebook") { ?>
+                                                                     <td> <?php if ($row->source_name == "Facebook" || $row->source_name == "facebook") { ?>
                                                                                 <a class="btn btn-default" style="padding: 10px 20px; border: 1px solid #3b5998; border-radius: 5px; background-color: #3b5998; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;"> <!-- Set the color to white (#fff) -->
                                                                                     <em class="fab fa-facebook-f" style="color: #fff;"></em> <!-- Facebook Icon with white color -->
                                                                                 </a>
@@ -470,9 +492,15 @@
                                                                                 <a class="btn btn-default instagram-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: linear-gradient(to right, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80); box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;">
                                                                                     <em class="fab fa-instagram"></em> <!-- Instagram Icon -->
                                                                                 </a>
-                                                                            <?php } else {
-                                                                                    echo $row->source_name;
-                                                                                } ?>
+                                                                            <?php } else  if ($row->source_name == "Walk-In") { ?>
+                                                                                <a class="btn btn-default walk-in-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: #FF7814; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;">     
+                                                                                <em class="fa fa-user-o"></em> <!-- wail in Icon -->
+                                                                                </a>
+                                                                               <?php  } else {?> 
+                                                                                <a class="btn btn-default a-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: #3D9CDD; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;"> 
+                                                                                    <em class="fa fa-handshake-o"></em> <!-- a  Icon -->
+                                                                                </a>
+                                                                                <?php }?>
 
                                                                         </td>
                                                                         <td><a class="btn btn-default" href="<?php echo base_url('editCandidateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">

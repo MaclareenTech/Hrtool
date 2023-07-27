@@ -448,14 +448,14 @@
 
                                                         </div>
                                                     </div>
-                                                    <div class="form-group row">
+                                                    <!-- <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label"></label>
                                                         <div class="col-sm-9">
 
                                                             <input type="checkbox" id="toggle_switch" name="toggle_switch">
 
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group row">
                                                         <div class="col-sm-12">
                                                             <center> <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: #2ecc71; ">Submit</button></center>

@@ -78,7 +78,7 @@ class Candidate_model extends MY_Model
 
 
 
-
+   
 
 
 
@@ -150,6 +150,40 @@ class Candidate_model extends MY_Model
        
        
     } 
+    public function ViewCandidateInfoUsingJobIdArray($candidate_job_status)
+    {
+        $query = $this->db->select('tbl_candidate.*,
+        tbl_user.user_name,
+        tbl_job_opening.*,
+        tbl_candidate_source.*,
+        tbl_user.user_email,
+        tbl_user.user_mobile,
+        tbl_user.emp_id')->where(['candidate_job_status' => $candidate_job_status])
+            ->join('tbl_user', 'tbl_candidate.updated_by=tbl_user.user_id')
+            ->join('tbl_job_opening', 'tbl_candidate.candidate_job_profile=tbl_job_opening.job_code')
+            ->join('tbl_candidate_source', 'tbl_candidate.candidate_source_id=tbl_candidate_source.source_id')
+             ->order_by('candidate_job_status', 'asc')->get($this->table);
+        return $query->result_array();
+
+    }
+    public function ViewCandidateInfoUsingJobId($candidate_job_profile)
+    {
+        $query = $this->db->select('tbl_candidate.*,
+        tbl_user.user_name,
+        tbl_job_opening.*,
+        tbl_candidate_source.*,
+        tbl_user.user_email,
+        tbl_user.user_mobile,
+        tbl_user.emp_id')->where(['candidate_job_profile' => $candidate_job_profile])
+            ->join('tbl_user', 'tbl_candidate.updated_by=tbl_user.user_id')
+            ->join('tbl_job_opening', 'tbl_candidate.candidate_job_profile=tbl_job_opening.job_code')
+            ->join('tbl_candidate_source', 'tbl_candidate.candidate_source_id=tbl_candidate_source.source_id')
+             ->order_by('candidate_job_status', 'asc')->get($this->table);
+        //             $str = $this->db->last_query();
+        // echo $str;
+        return $query->result();
+
+    }
     
     
     public function ViewCandidateInfoUsingId($id)

@@ -2,6 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 require APPPATH . '/libraries/BaseController.php';
+require FCPATH . 'vendor/autoload.php';
 class InvoiceControllers extends BaseController
 {
 
@@ -38,10 +39,135 @@ class InvoiceControllers extends BaseController
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
         } else {
-          
+            $this->load->model('Invoice_model');
+            $currentId = $this->Invoice_model->view_count();
+            $this->global['nextID'] = "M23" . ($currentId + 1);
             $this->global['pageTitle'] = 'MTAS : Create Invoice';
             $this->loadViews("invoice/createinvoice", $this->global);
         }
+    }
+
+    public function CreateInvoice()
+    {
+        // Retrieve form data
+        $invoiceNumber = $this->input->post('invoiceNumber');
+        $invoiceDate = $this->input->post('invoiceDate');
+        $candidate_name = $this->input->post('candidate_name');
+        $candidate_address = $this->input->post('candidate_address');
+        $candidate_state = $this->input->post('candidate_state');
+        $candidate_number = $this->input->post('candidate_number');
+        $candidate_mail = $this->input->post('candidate_mail');
+
+        $total_amount = $this->input->post('total_amount');
+        $total_amount_words = $this->input->post('total_amount_words');
+
+        // Retrieve table data (dynamic rows)
+        $particulars = $this->input->post('particulars');
+        $amounts = $this->input->post('amount');
+        $hsnNumbers = $this->input->post('Hsnumber');
+        $gstRates = $this->input->post('gst_rate');
+
+
+
+        $particularsArray = array();
+        $amountsArray = array();
+        $hsnNumbersArray = array();
+        $gstRateArray = array();
+        $dataArray = array();
+
+        for ($i = 0; $i < count($particulars); $i++) {
+            $particular = $particulars[$i];
+            $amount = $amounts[$i];
+            $hsn = $hsnNumbers[$i];
+            $gstRate = $gstRates[$i];
+
+            $particularsArray[] = $particular;
+            $amountsArray[] = $amount;
+            $hsnNumbersArray[] = $hsn;
+            $gstRateArray[] = $gstRate;
+
+            // Create an object for each row
+            $rowObject = new stdClass();
+            $rowObject->particular = $particular;
+            $rowObject->amount = $amount;
+            $rowObject->hsn = $hsn;
+            $rowObject->gstRate = $gstRate;
+
+            // Add the row object to the dataArray
+            $dataArray[] = $rowObject;
+        }
+        $user = array();
+
+        // Create an object to hold the data
+        $dataObject = new stdClass();
+        $dataObject->invoiceNumber = $invoiceNumber;
+        $dataObject->invoiceDate = $invoiceDate;
+        $dataObject->candidate_name = $candidate_name;
+        $dataObject->candidate_address = $candidate_address;
+        $dataObject->candidate_state = $candidate_state;
+        $dataObject->candidate_number = $candidate_number;
+        $dataObject->candidate_mail = $candidate_mail;
+        $dataObject->total_amount = $total_amount;
+        $dataObject->total_amount_words = $total_amount_words;
+        
+        // Add the object to the user array
+        $user[] = $dataObject;
+      //  print_r($dataArray);
+
+
+        $Admin_id = $this->session->userdata('userId');
+        $date = date('Y-m-d', strtotime(strtr($invoiceDate, '/', '-')));
+        $serializedDataArray = json_encode($dataArray);
+        $InvoiceData = array(
+            'invoice_unique_id' => $invoiceNumber,
+            'candidate_name' => $candidate_name,
+            'candidate_address' => $candidate_address,
+            'candidate_mail' => $candidate_mail,
+            'invoice_date' => $date,
+            'candidate_state' => $candidate_state,
+            'admin_id' => $Admin_id,
+            'invoice_paeticulars' => $serializedDataArray,
+            'invoice_amount' => $total_amount,
+            'invoice_amount_in_word' => $total_amount_words
+
+        );
+        $this->load->model('Invoice_model');
+        if($this->Invoice_model->Insert($InvoiceData))
+        {
+            // $this->load->model('Candidate_model');
+            // $this->load->model('Admin_model');
+            // $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($id);
+            // $this->global['log'] = $this->Admin_model->ViewCandidateInfoLog($id);
+            // $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('', '');
+            // $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
+            // $this->global['pageTitle'] = 'MTAS : Candidate Information';
+            // $this->global['candidateId'] = $id;
+            $html = $this->load->view('invoice/viewinvoice', $this->global, true);
+    
+            // Create the mPDF instance and set watermark
+            $mpdf = new \Mpdf\Mpdf([
+                'format' => 'A4',
+                'margin_top' => 0,
+                'margin_right' => 0,
+                'margin_left' => 0,
+                'margin_bottom' => 0,
+            ]);
+    
+            // Add watermark to each page
+            $mpdf->SetWatermarkImage(base_url('assets/images/logo_new_2.png'));
+            $mpdf->showWatermarkImage = true;
+    
+            // Write content to PDF
+            $mpdf->WriteHTML($html);
+    
+            // Output the PDF
+            $mpdf->Output();
+        }else
+        {
+            $this->session->set_flashdata('error', 'Try Again ');
+        redirect('createinvoiceform');
+        }
+    
     }
 
 

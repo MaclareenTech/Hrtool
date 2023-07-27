@@ -46,7 +46,17 @@ class Invoice_model extends MY_Model
 
 
 
-
+    public function view_count($invoice_id = '')
+    {
+        if ($invoice_id !== "") {
+            $this->db->where('invoice_id', $invoice_id);
+        }
+        
+        $this->db->order_by('invoice_id', 'asc');
+        $Query = $this->db->get($this->table);
+        // echo $this->db->last_query();
+        return $Query->num_rows();
+    }
 
 
 
@@ -70,23 +80,7 @@ class Invoice_model extends MY_Model
 
 
 
-    public function viewCandidate_count($candidate_id = '', $candidate_job_status = '')
-    {
-        if ($candidate_id !== "") {
-            $this->db->where('candidate_id', $candidate_id);
-        }
-        if ($candidate_job_status !== "") {
-            $this->db->where('candidate_job_status=', $candidate_job_status);
-        }else
-        {
-            $this->db->where('candidate_job_status != 11 ');
-        }
-      
-        $this->db->order_by('candidate_id', 'asc');
-        $Query = $this->db->get($this->table);
-        // echo $this->db->last_query();
-        return $Query->num_rows();
-    }
+
 
     public function InsertNew_Candidate($data)
     {

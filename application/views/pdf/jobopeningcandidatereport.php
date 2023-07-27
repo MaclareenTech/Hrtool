@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candidate Data</title>
+    <title>Job Opening Data</title>
     <style>
         body {
             margin: 0;
@@ -170,98 +170,74 @@
 
 <body>
     <div class="background-container"></div>
-    <div class="details">
-        <div class="detail-item">
-            <h3>Candidate Name</h3>
-            <p><?php echo $candidate[0]->candidate_name ?></p>
-        </div>
-        <div class="detail-item">
-            <h3>Email ID</h3>
-            <p><?php echo $candidate[0]->candidate_email ?></p>
-        </div>
-        <div class="detail-item">
-            <h3>Job Role</h3>
-            <p><?php echo $candidate[0]->candidate_job_profile ?></p>
-        </div>
-        <div class="detail-item">
-            <h3>Registration Date</h3>
-            <p><?php
-                $timestamp = $candidate[0]->candidate_join_date;
-                $datetime = new DateTime($timestamp);
-
-                // Format the DateTime object as a human-readable string
-                $human_readable = $datetime->format('F j, Y,');
-
-                // Output the human-readable string
-                echo $human_readable; ?></p>
-        </div>
-        <div class="detail-item">
-            <h3>Mobile Number</h3>
-
-            <p><?php echo $candidate[0]->candidate_mobile_no ?>1</p>
-        </div>
-        <?php if ($candidate[0]->is_paid == "1") { ?>
-            <div class="dot green-dot"></div>
+    <p style="text-align: center; font-size: 20px; margin-top: 15px;">Candidate List of <b><?php $combined_value = $job[0]->job_country . ' - ' . $job[0]->job_position;
+                                                                                            echo $combined_value; ?></b> Job Openings</p>
 
 
-        <?php } else { ?>
-            <div class="dot red-dot"></div>
-
-        <?php } ?>
-    </div>
 
     <table>
         <thead>
             <tr>
                 <th>#</th>
-                <th>Status</th>
-                <th>Admin Name</th>
-                <th>Admin Emp Id</th>
-                <th>date</th>
+                <th>Candidate Name </th>
+                <th>Candidate Email</th>
+                <th>Candidate Mobile Number</th>
+                <th>Current Status</th>
+                <th>Candidate Resource</th>
+                <th>Register Date</th>
             </tr>
         </thead>
         <tbody id="myTable">
             <?php $counter = 0; ?>
-            <?php foreach ($log as $row) : ?>
+            <?php foreach ($candidate as $row) : ?>
                 <tr>
                     <?php $counter++; ?>
                     <td><?php echo $counter; ?></td>
+                    <td><?php echo $row->candidate_name ?></td>
+                    <td><?php echo $row->candidate_email ?></td>
+                    <td><?php echo $row->candidate_mobile_no ?></td>
                     <td>
-                        <?php if ($row->status == "0") { ?>
+                        <?php if ($row->candidate_job_status == "0") { ?>
                             <button class="status-button">Screening</button>
-                        <?php } else if ($row->status == "1") { ?>
+                        <?php } else if ($row->candidate_job_status == "1") { ?>
                             <button class="status-button">Waiting for document</button>
-                        <?php } else if ($row->status == "2") { ?>
+                        <?php } else if ($row->candidate_job_status == "2") { ?>
                             <button class="status-button">Sent to recruitment review</button>
-                        <?php } else if ($row->status == "3") { ?>
+                        <?php } else if ($row->candidate_job_status == "3") { ?>
                             <button class="status-button">Shortlisted</button>
-                        <?php } else if ($row->status == "4") { ?>
+                        <?php } else if ($row->candidate_job_status == "4") { ?>
                             <button class="status-button">Not selected</button>
-                        <?php } else if ($row->status == "5") { ?>
+                        <?php } else if ($row->candidate_job_status == "5") { ?>
                             <button class="status-button">Job Orientation 1</button>
-                        <?php } else if ($row->status == "6") { ?>
+                        <?php } else if ($row->candidate_job_status == "6") { ?>
                             <button class="status-button">Job Orientation 2</button>
-                        <?php } else if ($row->status == "7") { ?>
+                        <?php } else if ($row->candidate_job_status == "7") { ?>
                             <button class="status-button">Job Orientation 3</button>
-                        <?php } else if ($row->status == "8") { ?>
+                        <?php } else if ($row->candidate_job_status == "8") { ?>
                             <button class="status-button">Work permit</button>
-                        <?php } else if ($row->status == "9") { ?>
+                        <?php } else if ($row->candidate_job_status == "9") { ?>
                             <button class="status-button">Visa filing</button>
-                        <?php } else if ($row->status == "10") { ?>
+                        <?php } else if ($row->candidate_job_status == "10") { ?>
                             <button class="status-button">Training for visa</button>
-                        <?php } else if ($row->status == "11") { ?>
+                        <?php } else if ($row->candidate_job_status == "11") { ?>
                             <button class="status-button">Completed</button>
                         <?php } ?>
                     </td>
-                    <td><?php echo $row->user_name ?></td>
-                    <td><?php echo $row->emp_id ?></td>
                     <td>
                         <?php
-                        $timestamp = strtotime($row->date);
+                        echo $row->source_name;
+                        ?>
+
+                    </td>
+                    <td>
+                        <?php
+                        $timestamp = strtotime($row->candidate_join_date);
                         $humanReadableDate = date("d F Y", $timestamp);
                         echo $humanReadableDate;
                         ?>
                     </td>
+
+
                 </tr>
             <?php endforeach; ?>
         </tbody>

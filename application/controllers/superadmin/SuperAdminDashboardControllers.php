@@ -59,7 +59,7 @@ class SuperAdminDashboardControllers extends BaseController
         $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
         $this->global['pageTitle'] = 'MTAS : Candidate Information';
         $this->global['candidateId'] = $id;
-        $html = $this->load->view('receipt_pdf', $this->global, true);
+        $html = $this->load->view('pdf/candidatereport', $this->global, true);
 
         // Create the mPDF instance and set watermark
         $mpdf = new \Mpdf\Mpdf([

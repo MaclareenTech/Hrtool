@@ -343,7 +343,25 @@
                                                     <div class="row">
                                                         <div class="col-md-12 grid-margin stretch-card">
                                                             <div class="card">
-                                                                <form method="post" enctype="multipart/form-data" action="{% url 'create_invoice' %}">
+                                                                <?php
+                                                                $this->load->helper('form');
+                                                                $error = $this->session->flashdata('error');
+                                                                if ($error) {
+                                                                ?>
+                                                                    <div class="alert alert-danger alert-dismissable">
+                                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                                        <?php echo $error; ?>
+                                                                    </div>
+                                                                <?php }
+                                                                $success = $this->session->flashdata('success');
+                                                                if ($success) {
+                                                                ?>
+                                                                    <div class="alert alert-success alert-dismissable">
+                                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                                        <?php echo $success; ?>
+                                                                    </div>
+                                                                <?php } ?>
+                                                                <form method="post" enctype="multipart/form-data" action="<?php echo base_url(); ?>CreateInvoice">
 
                                                                     <div class="card-body" style="padding: 35px;">
                                                                         <center>
@@ -353,14 +371,14 @@
                                                                         <br>
 
                                                                         <div class="row">
-                                                                            <div class="col-2">
+                                                                            <!-- <div class="col-2">
                                                                                 <img src="http://mtas.net.in/assets/images/105 x 70 (2).png" alt="logo" class="responsive-image">
 
-                                                                            </div>
-                                                                            <div class="col-10">
+                                                                            </div> -->
+                                                                            <div class="col-12">
                                                                                 <div class="form-group">
                                                                                     <label for="bank">Invoice Number:</label>
-                                                                                    <input type="text" name="invoiceNumber" placeholder="" value="" class="form-control" id="invoiceNumber" required readonly>
+                                                                                    <input type="text" name="invoiceNumber" placeholder="" value="<?php echo $nextID ?>" class="form-control" id="invoiceNumber" required readonly>
                                                                                 </div>
                                                                                 <div class="row">
                                                                                     <div class="col-6">
@@ -369,12 +387,7 @@
                                                                                             <input type="date" name="invoiceDate" class="form-control" id="invoiceDate" required>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-6">
-                                                                                        <div class="form-group">
-                                                                                            <label for="ifscCode">Due Date:</label>
-                                                                                            <input type="date" name="dueDate" class="form-control" id="dueDate" required>
-                                                                                        </div>
-                                                                                    </div>
+
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -384,15 +397,15 @@
                                                                                 <h4>Bill To</h4>
                                                                                 <div class="form-group">
                                                                                     <label for="bank">Client's Name:</label>
-                                                                                    <input type="text" name="bankName" placeholder="john does" class="form-control" id="bankName">
+                                                                                    <input type="text" name="candidate_name" placeholder="john does" class="form-control" id="bankName" required>
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="accountNo">Clien't Address</label>
-                                                                                    <input type="text" name="accountNo" placeholder="Enter client address" class="form-control" id="accountNo">
+                                                                                    <input type="text" name="candidate_address" placeholder="Enter client address" class="form-control" id="accountNo" required>
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="bank">State</label>
-                                                                                    <select class="form-control" name="clientscompanyState" placeholder="Enter State" id="clientscompanyState" required>
+                                                                                    <select class="form-control" name="candidate_state" placeholder="Enter State" id="clientscompanyState" required>
                                                                                         <option value="">Please Select</option>
                                                                                         <option value="Andhra Pradesh">Andhra Pradesh</option>
                                                                                         <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -427,11 +440,11 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="accountNo">Client's Contact No: </label>
-                                                                                    <input type="tel" class="form-control" name="clientsmobileNo" placeholder="Your client contact's name" id="clientsmobileNo" required>
+                                                                                    <input type="tel" class="form-control" name="candidate_number" placeholder="Your client contact's name" id="clientsmobileNo" required>
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="accountNo">Client's Email ID: </label>
-                                                                                    <input type="email" class="form-control" name="clientsemail" placeholder="Your client's email ID" id="clientsemail" required>
+                                                                                    <input type="email" class="form-control" name="candidate_mail" placeholder="Your client's email ID" id="clientsemail" required>
                                                                                 </div>
                                                                             </div>
 
@@ -444,9 +457,9 @@
                                                                                     <tr>
                                                                                         <th scope="col">SR. NO.</th>
                                                                                         <th scope="col">Particulars</th>
-                                                                                        <th scope="col">Amount</th>
                                                                                         <th scope="col">HSN/UIN</th>
                                                                                         <th scope="col">GST Rate</th>
+                                                                                        <th scope="col">Amount</th>
                                                                                         <th scope="col">Remove</th> <!-- New column header for "Remove" button -->
                                                                                     </tr>
                                                                                 </thead>
@@ -457,180 +470,182 @@
                                                                                         <td>
                                                                                             <div class="form-row">
                                                                                                 <div class="col">
-                                                                                                    <input type="text" class="form-control" placeholder="Enter Particulars">
+                                                                                                    <input type="text" name="particulars[]" class="form-control" placeholder="Enter Particulars" required>
                                                                                                 </div>
                                                                                             </div>
-                                                                        </div>
-                                                                        </td>
-                                                                        <td><input type="text" class="form-control" placeholder="Enter Amount"></td>
-                                                                        <td>
-                                                                            <div class="form-row">
-                                                                                <div class="col">
-                                                                                    <select class="form-control" name="Hsnumber" placeholder="Enter HSN Number" id="Hsnumber" required>
-                                                                                        <option value="">Please Select</option>
-                                                                                        <option value="100">HSN 100 - Description 1</option>
-                                                                                        <option value="200">HSN 200 - Description 2</option>
-                                                                                        <option value="300">HSN 300 - Description 3</option>
-                                                                                        <option value="400">HSN 400 - Description 4</option>
-                                                                                        <option value="500">HSN 500 - Description 5</option>
-                                                                                        <option value="600">HSN 600 - Description 6</option>
-                                                                                        <option value="700">HSN 700 - Description 7</option>
-                                                                                        <option value="800">HSN 800 - Description 8</option>
-                                                                                        <option value="900">HSN 900 - Description 9</option>
-                                                                                        <option value="1000">HSN 1000 - Description 10</option>
-                                                                                        <!-- Add more HSN numbers with descriptions as needed -->
-                                                                                    </select>
 
-                                                                                </div>
-                                                                            </div>
+                                                                                        </td>
+
+                                                                                        <td>
+                                                                                            <div class="form-row">
+                                                                                                <div class="col">
+                                                                                                    <select class="form-control" name="Hsnumber[]" placeholder="Enter HSN Number" id="Hsnumber" required>
+                                                                                                        <option value="">Please Select</option>
+                                                                                                        <option value="100">HSN 100 - Description 1</option>
+                                                                                                        <option value="200">HSN 200 - Description 2</option>
+                                                                                                        <option value="300">HSN 300 - Description 3</option>
+                                                                                                        <option value="400">HSN 400 - Description 4</option>
+                                                                                                        <option value="500">HSN 500 - Description 5</option>
+                                                                                                        <option value="600">HSN 600 - Description 6</option>
+                                                                                                        <option value="700">HSN 700 - Description 7</option>
+                                                                                                        <option value="800">HSN 800 - Description 8</option>
+                                                                                                        <option value="900">HSN 900 - Description 9</option>
+                                                                                                        <option value="1000">HSN 1000 - Description 10</option>
+                                                                                                        <!-- Add more HSN numbers with descriptions as needed -->
+                                                                                                    </select>
+
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="form-row">
+                                                                                                <div class="col">
+                                                                                                    <input type="text" name="gst_rate[]" class="form-control" placeholder="Enter GST Rate" required>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                        </td>
+                                                                                        <td> <input type="text" name="amount[]" class="form-control" placeholder="Enter Amount" oninput="updateTotal()" required></td>
+                                                                                        <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td> <!-- Remove button -->
+                                                                                    </tr>
+                                                                                <tfoot>
+                                                                                    <!-- "Total" row -->
+                                                                                    <tr>
+                                                                                        <td colspan="2" class="text-center">Total :</td>
+                                                                                        <td colspan="4"><input type="text" name="total_amount" class="form-control" placeholder="Enter Total Amount" required></td>
+                                                                                        <!-- Empty cell for "Remove" column in the total row -->
+                                                                                    </tr>
+                                                                                    <!-- "Amount In Words" row -->
+                                                                                    <tr>
+                                                                                        <td colspan="2" class="text-center">Amount In Words:</td>
+                                                                                        <td colspan="4"><input type="text" name="total_amount_words" class="form-control" placeholder="Enter Amount In Words" required></td>
+                                                                                        <!-- Empty cell for "Remove" column in the Amount In Words row -->
+                                                                                    </tr>
+                                                                                </tfoot>
+
+
+                                                                            </table>
+                                                                        </div>
+                                                                        <hr>
+                                                                        <button type="button" class="btn btn-info waves-effect waves-light" onclick="addRow()">Add Row</button>
+                                                                        <hr>
+
+
+                                                                        <center> <button type="submit" class="btn btn-success waves-effect waves-light">Create Invoice</button></center>
                                                                     </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="form-row">
-                                                                            <div class="col">
-                                                                                <input type="text" class="form-control" placeholder="Enter Particulars">
-                                                                            </div>
-                                                                        </div>
+                                                                </form>
                                                             </div>
-                                                            </td>
-
-                                                            <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td> <!-- Remove button -->
-                                                            </tr>
-                                                            <tfoot>
-                                                                <!-- "Total" row -->
-                                                                <tr>
-                                                                    <td colspan="2" class="text-center">Total :</td>
-                                                                    <td colspan="4"><input type="text" class="form-control" placeholder="Enter Total Amount" readonly></td>
-                                                                    <!-- Empty cell for "Remove" column in the total row -->
-                                                                </tr>
-                                                                <!-- "Amount In Words" row -->
-                                                                <tr>
-                                                                    <td colspan="2" class="text-center">Amount In Words:</td>
-                                                                    <td colspan="4"><input type="text" class="form-control" placeholder="Enter Amount In Words"></td>
-                                                                    <!-- Empty cell for "Remove" column in the Amount In Words row -->
-                                                                </tr>
-                                                            </tfoot>
-
-
-                                                            </table>
                                                         </div>
-                                                        <hr>
-                                                        <button type="button" class="btn btn-info waves-effect waves-light" onclick="addRow()">Add Row</button>
-                                                        <hr>
-
-
-                                                        <center> <button type="submit" class="btn btn-success waves-effect waves-light">Create Invoice</button></center>
                                                     </div>
-                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-                        <script>
-                            // Get the current date
-                            const today = new Date();
+                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                                    <script>
+                                        // Get the current date
+                                        const today = new Date();
 
-                            // Format the date in YYYY-MM-DD format
-                            const year = today.getFullYear();
-                            const month = String(today.getMonth() + 1).padStart(2, '0');
-                            const day = String(today.getDate()).padStart(2, '0');
-                            const formattedDate = `${year}-${month}-${day}`;
+                                        // Format the date in YYYY-MM-DD format
+                                        const year = today.getFullYear();
+                                        const month = String(today.getMonth() + 1).padStart(2, '0');
+                                        const day = String(today.getDate()).padStart(2, '0');
+                                        const formattedDate = `${year}-${month}-${day}`;
 
-                            // Set the formatted date as the default value for the "Invoice Date" input field
-                            document.getElementById("invoiceDate").value = formattedDate;
-                        </script>
-                        <script>
-                            function addRow() {
-                                var table = document.getElementById("orderTable").getElementsByTagName('tbody')[0];
-                                var newRow = table.insertRow(table.rows.length - 2); // Insert the new row above the "Total" row
+                                        // Set the formatted date as the default value for the "Invoice Date" input field
+                                        document.getElementById("invoiceDate").value = formattedDate;
+                                    </script>
+                                    <script>
+                                        function addRow() {
+                                            var table = document.getElementById("orderTable").getElementsByTagName('tbody')[0];
+                                            var newRow = table.insertRow(table.rows.length - 2); // Insert the new row above the "Total" row
 
-                                var srNoCell = newRow.insertCell(0);
-                                srNoCell.innerHTML = table.rows.length - 2 + ".";
+                                            var srNoCell = newRow.insertCell(0);
+                                            srNoCell.innerHTML = table.rows.length - 2 + ".";
 
-                                var particularsCell = newRow.insertCell(1);
-                                particularsCell.innerHTML = `
+                                            var particularsCell = newRow.insertCell(1);
+                                            particularsCell.innerHTML = `
                                                 <div class="form-row">
                                                     <div class="col">
-                                                    <input type="text" class="form-control" placeholder="Enter Particulars">
+                                                    <input type="text" name="particulars[]" class="form-control" placeholder="Enter Particulars" required>
                                                     </div>
                                                 </div>
                                                 `;
 
-                                var amountCell = newRow.insertCell(2);
-                                amountCell.innerHTML = '<input type="text" class="form-control" placeholder="Enter Amount" oninput="updateTotal()">';
-                                var amountCell = newRow.insertCell(3);
-                                amountCell.innerHTML = '<select class="form-control" name="Hsnumber" placeholder="Enter HSN Number" id="Hsnumber" required>\
-            <option value="">Please Select</option>\
-            <option value="100">HSN 100 - Description 1</option>\
-            <option value="200">HSN 200 - Description 2</option>\
-            <option value="300">HSN 300 - Description 3</option>\
-            <option value="400">HSN 400 - Description 4</option>\
-            <option value="500">HSN 500 - Description 5</option>\
-            <option value="600">HSN 600 - Description 6</option>\
-            <option value="700">HSN 700 - Description 7</option>\
-            <option value="800">HSN 800 - Description 8</option>\
-            <option value="900">HSN 900 - Description 9</option>\
-            <option value="1000">HSN 1000 - Description 10</option>\
-        </select>';
-                                var amountCell = newRow.insertCell(4);
-                                amountCell.innerHTML = '<input type="text" class="form-control" placeholder="Enter Amount" oninput="updateTotal()">';
+
+                                            var amountCell = newRow.insertCell(2);
+                                            amountCell.innerHTML = '<select class="form-control" name="Hsnumber[]" placeholder="Enter HSN Number" id="Hsnumber" required>\
+                                                        <option value="">Please Select</option>\
+                                                        <option value="100">HSN 100 - Description 1</option>\
+                                                        <option value="200">HSN 200 - Description 2</option>\
+                                                        <option value="300">HSN 300 - Description 3</option>\
+                                                        <option value="400">HSN 400 - Description 4</option>\
+                                                        <option value="500">HSN 500 - Description 5</option>\
+                                                        <option value="600">HSN 600 - Description 6</option>\
+                                                        <option value="700">HSN 700 - Description 7</option>\
+                                                        <option value="800">HSN 800 - Description 8</option>\
+                                                        <option value="900">HSN 900 - Description 9</option>\
+                                                        <option value="1000">HSN 1000 - Description 10</option>\
+                                                    </select>';
+
+                                            var amountCell = newRow.insertCell(3);
+                                            amountCell.innerHTML = '   <input type="text" name="gst_rate[]" class="form-control" placeholder="Enter GST Rate" required>';
+
+
+                                            var amountCell = newRow.insertCell(4);
+                                            amountCell.innerHTML = '   <input type="text" name="amount[]" class="form-control" placeholder="Enter Amount" oninput="updateTotal()" required> ';
 
 
 
-                                var removeCell = newRow.insertCell(5);
-                                removeCell.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
+                                            var removeCell = newRow.insertCell(5);
+                                            removeCell.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
 
-                                // Renumber the SR. NO. series
-                                updateSrNoSeries();
-                                // Update the total amount
-                                updateTotal();
-                            }
+                                            // Renumber the SR. NO. series
+                                            updateSrNoSeries();
+                                            // Update the total amount
+                                            updateTotal();
+                                        }
 
-                            function removeRow(button) {
-                                var row = button.parentNode.parentNode;
-                                var rowIndex = row.rowIndex;
-                                row.parentNode.removeChild(row);
+                                        function removeRow(button) {
+                                            var row = button.parentNode.parentNode;
+                                            var rowIndex = row.rowIndex;
+                                            row.parentNode.removeChild(row);
 
-                                // Renumber the SR. NO. series after a row is removed
-                                updateSrNoSeries();
-                                // Update the total amount
-                                updateTotal();
-                            }
+                                            // Renumber the SR. NO. series after a row is removed
+                                            updateSrNoSeries();
+                                            // Update the total amount
+                                            updateTotal();
+                                        }
 
-                            function updateSrNoSeries() {
-                                var table = document.getElementById("orderTable").getElementsByTagName('tbody')[0];
-                                var rows = table.getElementsByTagName("tr");
+                                        function updateSrNoSeries() {
+                                            var table = document.getElementById("orderTable").getElementsByTagName('tbody')[0];
+                                            var rows = table.getElementsByTagName("tr");
 
-                                for (var i = 0; i < rows.length - 2; i++) {
-                                    var srNoCell = rows[i].cells[0];
-                                    srNoCell.innerHTML = i + 1 + ".";
-                                }
-                            }
+                                            for (var i = 0; i < rows.length - 2; i++) {
+                                                var srNoCell = rows[i].cells[0];
+                                                srNoCell.innerHTML = i + 1 + ".";
+                                            }
+                                        }
 
-                            function updateTotal() {
-                                var table = document.getElementById("orderTable").getElementsByTagName('tbody')[0];
-                                var rows = table.getElementsByTagName("tr");
-                                var totalAmount = 0;
+                                        function updateTotal() {
+                                            var table = document.getElementById("orderTable").getElementsByTagName('tbody')[0];
+                                            var rows = table.getElementsByTagName("tr");
+                                            var totalAmount = 0;
 
-                                for (var i = 0; i < rows.length - 2; i++) {
-                                    var amountCell = rows[i].cells[2].getElementsByTagName("input")[0];
-                                    var amount = parseFloat(amountCell.value);
-                                    if (!isNaN(amount)) {
-                                        totalAmount += amount;
-                                    }
-                                }
+                                            for (var i = 0; i < rows.length - 2; i++) {
+                                                var amountCell = rows[i].cells[2].getElementsByTagName("input")[0];
+                                                var amount = parseFloat(amountCell.value);
+                                                if (!isNaN(amount)) {
+                                                    totalAmount += amount;
+                                                }
+                                            }
 
-                                var totalCell = rows[rows.length - 2].cells[2].getElementsByTagName("input")[0];
-                                totalCell.value = totalAmount.toFixed(2);
-                            }
-                        </script>
-
-
+                                            var totalCell = rows[rows.length - 2].cells[2].getElementsByTagName("input")[0];
+                                            totalCell.value = totalAmount.toFixed(2);
+                                        }
+                                    </script>
 
 
 
@@ -638,15 +653,17 @@
 
 
 
+
+
+                                </div>
+                                <!-- Page-body end -->
+                            </div>
+                            <div id="styleSelector"> </div>
+                        </div>
                     </div>
-                    <!-- Page-body end -->
                 </div>
-                <div id="styleSelector"> </div>
             </div>
         </div>
-    </div>
-    </div>
-    </div>
     </div>
     </div>
 

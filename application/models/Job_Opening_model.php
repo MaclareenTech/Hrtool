@@ -57,7 +57,8 @@ class Job_Opening_model extends MY_Model
 
         // Get the results from the database using the table name specified in $this->table
         $query = $this->db->get($this->table);
-
+        // $str = $this->db->last_query();
+        // echo $str;
         // Return the results as an array of objects
         return $query->result_array();
     }

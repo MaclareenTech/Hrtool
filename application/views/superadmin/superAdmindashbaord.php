@@ -67,6 +67,18 @@
             max-width: 650px;
         }
     }
+    @keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
 </style>
 
 
@@ -225,7 +237,7 @@
                             <?php } ?>
                             <?php
                             $mail = $this->session->userdata('user_email'); ?>
-                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com"  ) { ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com") { ?>
                                 <div class="pcoded-navigation-label">Invoice</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li class="">
@@ -339,12 +351,17 @@
                                     <!-- Project statustic start -->
                                     <div class="col-xl-12">
                                         <div class="card proj-progress-card">
-                                            <div class="card-block">
+                                            <div class="card-block" style="
+    background-image: url(https://maclareenai.com/mtas/assets/images/bg/bg-new.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;"
+>
                                                 <div class="row">
 
-                                                    <div class="col-xl-6 col-md-6">
+                                                    <div class="col-xl-6 col-md-6 ">
                                                         <div class="row">
-                                                            <div class="col-12">
+                                                            <div class="col-12 fade-in">
                                                                 <div class="card mat-clr-stat-card text-white red">
                                                                     <div class="card-block">
                                                                         <div class="row">
@@ -359,7 +376,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-12">
+                                                            <div class="col-12 fade-in">
                                                                 <div class="card mat-clr-stat-card text-white green">
                                                                     <div class="card-block">
                                                                         <div class="row">
@@ -409,92 +426,103 @@
                                             <div class="table-responsive">
                                                 <div id="candidate-table-container">
                                                     <div id="table-container">
-                                                        <input id="search" type="text" class="form-control" placeholder="Search for name and email......">
-                                                        <br>
-                                                        <table id="my-table" class="table datatable">
-                                                            <thead>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div style="margin: 0 auto; padding: 20px; background-color: #f2f2f2; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
+                                                                    <form method="POST" style="display: flex; align-items: center;">
+                                                                        <input id="search" type="text" placeholder="Search for name and email......" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                                                                    </form>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <table id="my-table" class="table datatable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Candidate Name</th>
+                                                                <th>Candidate Email</th>
+                                                                <th>Candidate Number</th>
+                                                                <th>Candidate job profile</th>
+                                                                <th>Candidate Job Status</th>
+                                                                <th>Candidate Status Updated Date</th>
+                                                                <th>Candidate Register Date Date</th>
+                                                                <th>Candidate Status updated days </th>
+                                                                <th>Status Updated by </th>
+                                                                <th>Candidate Source</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody id="myTable">
+                                                            <?php $counter = 0; ?>
+                                                            <?php foreach ($candidate as $row) : ?>
                                                                 <tr>
-                                                                    <th>#</th>
-                                                                    <th>Candidate Name</th>
-                                                                    <th>Candidate Email</th>
-                                                                    <th>Candidate Number</th>
-                                                                    <th>Candidate job profile</th>
-                                                                    <th>Candidate Job Status</th>
-                                                                    <th>Candidate Status Updated Date</th>
-                                                                    <th>Candidate Register Date Date</th>
-                                                                    <th>Candidate Status updated days </th>
-                                                                    <th>Status Updated by </th>
-                                                                    <th>Candidate Source</th>
-                                                                    <th></th>
-                                                                </tr>
-                                                            </thead>
+                                                                    <?php $counter++; ?>
+                                                                    <td><?php echo $counter; ?></td>
+                                                                    <td><?php echo $row->candidate_name ?></td>
+                                                                    <td><?php echo $row->candidate_email ?></td>
+                                                                    <td><?php echo $row->candidate_mobile_no ?></td>
+                                                                    <td><?php $combined_value = $row->job_country . ' - ' . $row->job_position;
+                                                                        echo $combined_value; ?></td>
+                                                                    <td> <?php if ($row->candidate_job_status == "0") { ?>
+                                                                            <button style="background-color: #ff3333; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Screening</button>
+                                                                        <?php } else if ($row->candidate_job_status == "1") { ?>
+                                                                            <button style="background-color: #e60000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Waiting for document </button>
+                                                                        <?php } else if ($row->candidate_job_status == "2") { ?>
+                                                                            <button style="background-color: #00e600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Sent to recruitment review</button>
+                                                                        <?php } else if ($row->candidate_job_status == "3") { ?>
+                                                                            <button style="background-color: #00b300; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Shortlisted</button>
+                                                                        <?php } else if ($row->candidate_job_status == "4") { ?>
+                                                                            <button style="background-color: #b30000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Not selected</button>
+                                                                        <?php } else if ($row->candidate_job_status == "5") { ?>
+                                                                            <button style="background-color: #C0C0C0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 1</button>
+                                                                        <?php } else if ($row->candidate_job_status == "6") { ?>
+                                                                            <button style="background-color: #A9A9A9; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 2</button>
+                                                                        <?php } else if ($row->candidate_job_status == "7") { ?>
+                                                                            <button style="background-color: #808080; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 3</button>
+                                                                        <?php } else if ($row->candidate_job_status == "8") { ?>
+                                                                            <button style="background-color: #009900; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Work permit</button>
+                                                                        <?php } else if ($row->candidate_job_status == "9") { ?>
+                                                                            <button style="background-color: #008000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Visa filing</button>
+                                                                        <?php } else if ($row->candidate_job_status == "10") { ?>
+                                                                            <button style="background-color: #696969; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Training for visa</button>
+                                                                        <?php } else if ($row->candidate_job_status == "11") { ?>
+                                                                            <button style="background-color: #006600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Completed</button>
 
-                                                            <tbody id="myTable">
-                                                                <?php $counter = 0; ?>
-                                                                <?php foreach ($candidate as $row) : ?>
-                                                                    <tr>
-                                                                        <?php $counter++; ?>
-                                                                        <td><?php echo $counter; ?></td>
-                                                                        <td><?php echo $row->candidate_name ?></td>
-                                                                        <td><?php echo $row->candidate_email ?></td>
-                                                                        <td><?php echo $row->candidate_mobile_no ?></td>
-                                                                        <td><?php $combined_value = $row->job_country . ' - ' . $row->job_position;
-                                                                            echo $combined_value; ?></td>
-                                                                        <td> <?php if ($row->candidate_job_status == "0") { ?>
-                                                                                <button style="background-color: #ff3333; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Screening</button>
-                                                                            <?php } else if ($row->candidate_job_status == "1") { ?>
-                                                                                <button style="background-color: #e60000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Waiting for document </button>
-                                                                            <?php } else if ($row->candidate_job_status == "2") { ?>
-                                                                                <button style="background-color: #00e600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Sent to recruitment review</button>
-                                                                            <?php } else if ($row->candidate_job_status == "3") { ?>
-                                                                                <button style="background-color: #00b300; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Shortlisted</button>
-                                                                            <?php } else if ($row->candidate_job_status == "4") { ?>
-                                                                                <button style="background-color: #b30000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Not selected</button>
-                                                                            <?php } else if ($row->candidate_job_status == "5") { ?>
-                                                                                <button style="background-color: #C0C0C0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 1</button>
-                                                                            <?php } else if ($row->candidate_job_status == "6") { ?>
-                                                                                <button style="background-color: #A9A9A9; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 2</button>
-                                                                            <?php } else if ($row->candidate_job_status == "7") { ?>
-                                                                                <button style="background-color: #808080; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 3</button>
-                                                                            <?php } else if ($row->candidate_job_status == "8") { ?>
-                                                                                <button style="background-color: #009900; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Work permit</button>
-                                                                            <?php } else if ($row->candidate_job_status == "9") { ?>
-                                                                                <button style="background-color: #008000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Visa filing</button>
-                                                                            <?php } else if ($row->candidate_job_status == "10") { ?>
-                                                                                <button style="background-color: #696969; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Training for visa</button>
-                                                                            <?php } else if ($row->candidate_job_status == "11") { ?>
-                                                                                <button style="background-color: #006600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Completed</button>
-
-                                                                            <?php } ?>
+                                                                        <?php } ?>
 
 
-                                                                        </td>
+                                                                    </td>
 
 
-                                                                        <td><?php
-                                                                            $timestamp = strtotime($row->candidate_satus_days);
-                                                                            $humanReadableDate = date("d F Y", $timestamp);
+                                                                    <td><?php
+                                                                        $timestamp = strtotime($row->candidate_satus_days);
+                                                                        $humanReadableDate = date("d F Y", $timestamp);
 
-                                                                            echo $humanReadableDate; ?></td>
+                                                                        echo $humanReadableDate; ?></td>
 
 
-                                                                        <td>
-                                                                            <?php
-                                                                            $timestamp = strtotime($row->candidate_join_date);
-                                                                            $humanReadableDate = date("d F Y", $timestamp);
+                                                                    <td>
+                                                                        <?php
+                                                                        $timestamp = strtotime($row->candidate_join_date);
+                                                                        $humanReadableDate = date("d F Y", $timestamp);
 
-                                                                            echo $humanReadableDate; ?></td>
-                                                                        <td><?php
-                                                                            $timestamp = strtotime($row->candidate_satus_days);
-                                                                            $humanReadableDate = date("d F Y", $timestamp);
-                                                                            $currentDate = new DateTime();
-                                                                            $targetDate = new DateTime($humanReadableDate);
+                                                                        echo $humanReadableDate; ?></td>
+                                                                    <td><?php
+                                                                        $timestamp = strtotime($row->candidate_satus_days);
+                                                                        $humanReadableDate = date("d F Y", $timestamp);
+                                                                        $currentDate = new DateTime();
+                                                                        $targetDate = new DateTime($humanReadableDate);
 
-                                                                            $diff = $currentDate->diff($targetDate);
-                                                                            $days = $diff->days;
-                                                                            echo $days; ?></td>
-                                                                        <td><?php echo $row->user_name ?></td>
-                                                                        <!-- <td> <?php if ($candidate[0]->is_paid == "1") { ?>
+                                                                        $diff = $currentDate->diff($targetDate);
+                                                                        $days = $diff->days;
+                                                                        echo $days; ?></td>
+                                                                    <td><?php echo $row->user_name ?></td>
+                                                                    <!-- <td> <?php if ($candidate[0]->is_paid == "1") { ?>
                                                                                 <input type="checkbox" id="toggle_switch" name="toggle_switch" checked disabled style="display: none;">
                                                                                 <label for="toggle_switch" style="display: inline-block; width: 15px; height: 15px; border: 1px solid black; background-color: green; vertical-align: middle; text-align: center; line-height: 15px; color: white;">&#10004;</label>
 
@@ -503,11 +531,11 @@
                                                                                 <input type="checkbox" id="toggle_switch" name="toggle_switch" disabled>
                                                                             <?php } ?>
                                                                         </td> -->
-                                                                        <?php
+                                                                    <?php
 
-                                                                        $encrypted_number = base64_encode($row->candidate_id);
-                                                                        ?>
-                                                                        <td> <?php if ($row->source_name == "Facebook" || $row->source_name == "facebook") { ?>
+                                                                    $encrypted_number = base64_encode($row->candidate_id);
+                                                                    ?>
+                                                                     <td> <?php if ($row->source_name == "Facebook" || $row->source_name == "facebook") { ?>
                                                                                 <a class="btn btn-default" style="padding: 10px 20px; border: 1px solid #3b5998; border-radius: 5px; background-color: #3b5998; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;"> <!-- Set the color to white (#fff) -->
                                                                                     <em class="fab fa-facebook-f" style="color: #fff;"></em> <!-- Facebook Icon with white color -->
                                                                                 </a>
@@ -520,133 +548,139 @@
                                                                                 <a class="btn btn-default instagram-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: linear-gradient(to right, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80); box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;">
                                                                                     <em class="fab fa-instagram"></em> <!-- Instagram Icon -->
                                                                                 </a>
-                                                                            <?php } else {
-                                                                                    echo $row->source_name;
-                                                                                } ?>
+                                                                            <?php } else  if ($row->source_name == "Walk-In") { ?>
+                                                                                <a class="btn btn-default walk-in-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: #FF7814; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;">     
+                                                                                <em class="fa fa-user-o"></em> <!-- wail in Icon -->
+                                                                                </a>
+                                                                               <?php  } else {?> 
+                                                                                <a class="btn btn-default a-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: #3D9CDD; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;"> 
+                                                                                    <em class="fa fa-handshake-o"></em> <!-- a  Icon -->
+                                                                                </a>
+                                                                                <?php }?>
 
                                                                         </td>
-                                                                        <td><a class="btn btn-default" href="<?php echo base_url('editCandidateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
-                                                                                <em class="fa fa-pencil"></em>
-                                                                            </a> </td>
-                                                                        <td><a class="btn btn-default" href="<?php echo base_url('ViewCandiateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
-                                                                                <em class="fa fa-eye"></em>
-                                                                            </a> </td>
-                                                                        <!-- <td><a class="btn btn-default"   href="<?php echo base_url('admin/AddCandidateControllers/viewCandidateInformation/?id=' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
+                                                                    <td><a class="btn btn-default" href="<?php echo base_url('editCandidateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
+                                                                            <em class="fa fa-pencil"></em>
+                                                                        </a> </td>
+                                                                    <td><a class="btn btn-default" href="<?php echo base_url('ViewCandiateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
+                                                                            <em class="fa fa-eye"></em>
+                                                                        </a> </td>
+                                                                    <!-- <td><a class="btn btn-default"   href="<?php echo base_url('admin/AddCandidateControllers/viewCandidateInformation/?id=' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
                                                                             <em class="fa fa-pencil"></em>
                                                                         </a> </td> -->
 
-                                                                    </tr>
-                                                                <?php endforeach; ?>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div id="pagination-container">
-                                                        <ul id="pagination" class="pagination"></ul>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Basic table candidate end -->
-
-
-                                    <!--  Admin table start -->
-
-                                    <div class="card table-card">
-                                        <div class="card-header">
-                                            <h5>Employee information</h5>
-
-                                        </div>
-                                        <div class="card-block">
-                                            <div class="table-responsive">
-                                                <div id="table-container2">
-                                                    <table class="table table-hover m-b-0 without-header">
-                                                        <tbody id="my-tableee">
-                                                            <?php $counter1 = 0; ?>
-                                                            <?php foreach ($emp as $row) : ?>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="d-inline-block align-middle">
-                                                                            <?php if ($row->user_profile == "") { ?>
-                                                                                <img src="assets/images/avatar-4.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                            <?php } else { ?>
-                                                                                <img src="<?php echo  "http://mtas.net.in/upload/profile/" . $row->user_profile; ?>" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                            <?php } ?>
-
-                                                                            <div class="d-inline-block">
-                                                                                <h6><?php echo $row->user_name ?></h6>
-                                                                                <p class="text-muted m-b-0"><?php echo $row->user_email ?></p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td class="text-right">
-                                                                        <h6 class="f-w-700"><?php echo $row->emp_id ?></h6>
-                                                                    </td>
                                                                 </tr>
-
                                                             <?php endforeach; ?>
                                                         </tbody>
                                                     </table>
-
                                                 </div>
-
+                                                <div id="pagination-container">
+                                                    <ul id="pagination" class="pagination"></ul>
+                                                </div>
                                             </div>
+
+
                                         </div>
                                     </div>
-
-                                    <!--  Admin table end -->
-
-
+                                </div>
+                                <!-- Basic table candidate end -->
 
 
+                                <!--  Admin table start -->
 
-                                    <!-- popup notification Madal start -->
-                                    <div class="modal fade" id="learnMore1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
+                                <div class="card table-card">
+                                    <div class="card-header">
+                                        <h5>Employee information</h5>
 
-                                                <div class="modal-body">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                    </br>
-                                                    <div class="container">
-                                                        <div class="row">
-                                                            <div class="col-sm-8">
-                                                                <img src="http://numbots.com/wp-content/uploads/2018/12/Fairybot-with-shadow.png" alt="" width=80% />
-                                                            </div>
-                                                            <div class="col-sm-4 align-self-center">
-                                                                <h5 class="intro-title"> intro title </h5>
-                                                                <h3> TITLE </h3>
-                                                                <p> some other content, some other, content </p>
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="table-responsive">
+                                            <div id="table-container2">
+                                                <table class="table table-hover m-b-0 without-header">
+                                                    <tbody id="my-tableee">
+                                                        <?php $counter1 = 0; ?>
+                                                        <?php foreach ($emp as $row) : ?>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="d-inline-block align-middle">
+                                                                        <?php if ($row->user_profile == "") { ?>
+                                                                            <img src="assets/images/avatar-4.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                                                        <?php } else { ?>
+                                                                            <img src="<?php echo  "http://mtas.net.in/upload/profile/" . $row->user_profile; ?>" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                                                        <?php } ?>
 
-                                                            </div>
+                                                                        <div class="d-inline-block">
+                                                                            <h6><?php echo $row->user_name ?></h6>
+                                                                            <p class="text-muted m-b-0"><?php echo $row->user_email ?></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <h6 class="f-w-700"><?php echo $row->emp_id ?></h6>
+                                                                </td>
+                                                            </tr>
+
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--  Admin table end -->
+
+
+
+
+
+                                <!-- popup notification Madal start -->
+                                <div class="modal fade" id="learnMore1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+
+                                            <div class="modal-body">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </br>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-sm-8">
+                                                            <img src="http://numbots.com/wp-content/uploads/2018/12/Fairybot-with-shadow.png" alt="" width=80% />
+                                                        </div>
+                                                        <div class="col-sm-4 align-self-center">
+                                                            <h5 class="intro-title"> intro title </h5>
+                                                            <h3> TITLE </h3>
+                                                            <p> some other content, some other, content </p>
+
                                                         </div>
                                                     </div>
-
                                                 </div>
 
                                             </div>
+
                                         </div>
                                     </div>
-                                    <!-- popup notification Madal end -->
-
-
-
-
-
-
                                 </div>
-                                <!-- Page-body end -->
+                                <!-- popup notification Madal end -->
+
+
+
+
+
+
                             </div>
-                            <div id="styleSelector"> </div>
+                            <!-- Page-body end -->
                         </div>
+                        <div id="styleSelector"> </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     </div>
     <script>
