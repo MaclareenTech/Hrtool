@@ -115,6 +115,7 @@ $route['UpdateStatus/(:num)/(:num)'] = 'admin/DashboardControllers/UpdateVendorI
 $route['invlicelist'] = 'invoice/InvoiceControllers';
 $route['createinvoiceform'] = 'invoice/InvoiceControllers/CreateInvoiceform';
 $route['CreateInvoice'] = 'invoice/InvoiceControllers/CreateInvoice';
+$route['ViewInvoicePdf/(:num)'] = 'invoice/InvoiceControllers/ViewCandiatenvoiceDocument/$1'; 
 
 
 

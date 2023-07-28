@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Maclareen Consign India Pvt Ltd</title>
+
     <style>
         /* .container {
             display: flex;
@@ -11,15 +13,19 @@
         .address {
             margin-bottom: 10px;
         }
+
         .label {
             font-weight: bold;
         }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
-        
+
+
+
         /* .red-strip {
           height: 45px;
           background-color: red;
@@ -37,17 +43,16 @@
         margin-bottom: 20px;
         } */
 
-        .red-strip img{
-        height: 60px;
-        width: calc(100% ); 
-        /* margin-left: 10px; 
-        margin-right: 10px; */
-        margin-top: 20px;
-        margin-bottom: 20px;
-        }   
+        .red-strip img {
+            height: 70px !important;
+            width: 100% !important;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
 
         .invoice-container {
-            width: 700px; /* Adjust this value to change the container width */
+            width: 700px;
+            /* Adjust this value to change the container width */
             margin: 20px auto;
             border: 1px solid #000;
             padding: 20px;
@@ -95,21 +100,24 @@
             font-size: 18px;
             font-weight: bold;
         }
-        
+
         table li {
             text-align: left;
         }
+
         table {
-        border-collapse: collapse;
-        width: 100%;
+            border-collapse: collapse;
+            width: 100%;
         }
 
-        th, td {
-        /* border: 1px solid #ccc; */
-        
-        text-align: left;
-        min-height: 50px; /* Set your desired minimum height here */
-        word-wrap: break-word;
+        th,
+        td {
+            /* border: 1px solid #ccc; */
+
+            text-align: left;
+            min-height: 50px;
+            /* Set your desired minimum height here */
+            word-wrap: break-word;
         }
 
         /* Optional: Add some styling to the table header */
@@ -121,153 +129,166 @@
             background-color: #f2f2f2;
         } */
     </style>
+
 </head>
+
 <body>
     <div class="invoice-container">
-        <div class="red-strip"><img src="C:\Users\User\Downloads\invoice-logo-strip.png" alt=""></div>
-        <h4>Bill To</h4>
+        <div class="red-strip"><img src="https://maclareenai.com/mtas/assets/images/strip.png" alt=""></div>
+       <center> <h4 style="font-size: 23px;">Invoice</h4> </center>
 
-        <table>
-            <tr>
-                <th>Maclareen Consign India Pvt Ltd</th>
-            </tr>
-            <tr>
-                <td>110, Lodha Supremus 2, Rd Number 22, Besides New Passport Office, Wagle Industrial Estate,Thane West, 400604</td>
-            </tr>
-        </table>
-        <div class="invoice-details">
-    
-        <table>
-            <tr>
-                <th>GSTIN / UIN : </th>
-                <td>27AANCM5396F1ZY</td>
-            </tr>
-            <tr>
-                <th>State Name:</th>
-                <td>Maharashtra</td>
-            </tr>
-            <tr>
-                <th>Phone No. :</th>
-                <td>1234567890</td>
-            </tr>
-        </table>
-        
-        <table>
-            <tr>
-                <th>CIN :</th>
-                <td>U74140MH2020PTC341437</td>
-            </tr>
-            <tr>
-                <th>Code :</th>
-                <td>27</td>
-            </tr>
-            <tr>
-                <th>Email :</th>
-                <td>info@maclareen.com</td>
-            </tr>
-        </table>    
-    </div>
-    <h4>Ship To</h4>
+       
+
+
+        <h4 style="font-size: 22px;">Bill To</h4>
+            <table class="invoice-items">
+                <tr>
+                    <td style="width: 50%;"><b>Maclareen Consulting India Pvt. Ltd. </b></td>
+                    <td colspan="2" style="text-align: left;"><b>GSTIN / UIN : 27AANCM5396F1ZY </b></td>
+                </tr>
+                <tr>
+                    <td rowspan="4" style="text-align: left; line-height: 1.3; word-wrap: break-word;">
+                        <b> 110, Lodha Supremus 2, Rd Number 22</b><br>
+                        Besides New Passport Office, <br>
+                        Wagle Industrial Estate <br>
+                        Thane West, 400604 
+                    </td>
+                    <td colspan="2" style="text-align: left;"><b>State Name: Maharashtra </b></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: left;"><b>Email : info@maclareen.com </b></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: left;"><b>CIN : U74140MH2020PTC341437</b></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: left;"><b>Code : 27 </b></td>
+                </tr>
+            </table>
+
+     
+
+        <h4 style="font-size: 22px;">Ship To</h4>
         <div class="table-responsive">
 
             <table class="invoice-items">
                 <tr>
-                    <td colspan="2" style="text-align: left;"><b>Company's Name :</b></td>  
+                    <td style="width: 50%;"><b>Company's Name : <?php echo $user[0]->candidate_company_name ?> </b></td>
+                    <td colspan="2" style="text-align: left;"><b>Invoice No. : <?php echo $user[0]->invoiceNumber ?> </b></td>
                 </tr>
                 <tr>
-                  <td style="width: 50%;"><b>Customer Details</b></td>  
-                  <td style="text-align: left;"><b>Invoice No. :</b></td>  
+                    <td rowspan="4" style="text-align: left; line-height: 1.3; word-wrap: break-word;">
+                        <b> <?php echo $user[0]->candidate_name ?> </b><br>
+                        <?php echo $user[0]->candidate_address ?> <br>
+                        <?php echo $user[0]->candidate_number ?> <br>
+                        <?php echo $user[0]->candidate_mail ?>
+                    </td>
+                    <td colspan="2" style="text-align: left;"><b>Invoice Date : <?php echo $user[0]->invoiceDate ?> </b></td>
                 </tr>
                 <tr>
-                    <td rowspan="4" style="text-align: left; line-height: 1.3;word-wrap: break-word; "><b>Nisha Minsariya</b><br>Akshya Nagar 1st Block 1st Cross,Rammurthy nagar, Bangalore-560016 <br>0987654321<br>info@maclareen.com</td>  
-                    <td colspan="2" style="text-align: left;"><b>Invoice Date :</b></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2" style="text-align: left;"><b>Mode Of Payment :</b></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2" style="text-align: left;"><b>Terms :</b></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2" style="text-align: left;"><b>Client's GST :</b></td>
-                  </tr>
-              </table>
-              <br>
+                    <td colspan="2" style="text-align: left;"><b>Mode Of Payment : <?php echo $user[0]->payment_mode ?> </b></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: left;"><b>Company’s Pan : <?php echo $user[0]->candidate_company_pan ?> </b></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: left;"><b>Company’s GST : <?php echo $user[0]->candidate_gstin_no ?> </b></td>
+                </tr>
+            </table>
+
+
+            <br>
             <table class="invoice-items">
                 <thead>
                     <tr>
-                        <th style="width: 2%;">SR. NO.</th>
+                        <th style="width: 10%;">SR. NO.</th>
                         <th style="width: 50%;">Particulars</th>
-                        <th style="width: 20%;">HSN/SAC</th>
-                        <th>GST Rate</th>
-                        <th>Amount</th>
+                        <th style="width: 10%;">HSN/SAC</th>
+                        <th style="width: 10%;">GST Rate</th>
+                        <th style="width: 10%;">Rate</th>
+                        <th style="width: 10%;">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+                    <?php $counter = 0; ?>
+                    <?php foreach ($dataArray as $row) : ?>
+                        <tr>
+                            <?php $counter++; ?>
+                            <td><?php echo $counter; ?></td>
+                            <td><?php echo $row->particular ?></td>
+                            <td><?php echo $row->hsn ?></td>
+                            <td><?php echo $row->gstRate ?></td>
+                            <td><?php echo $row->amount ?></td>
+                            <td><?php echo $row->amountwithGST ?></td>
+
+
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+
+                <tfoot>
+                    <!-- "Total" row -->
+                    <tr>
+                        <td colspan="3" class="text-center"><b>Total Amount Received Without GST</b></td>
+                        <td colspan="4"> <?php echo $user[0]->total_amount ?> </td>
+                        <!-- Empty cell for "Remove" column in the total row -->
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-center"><b>Total Amount Received With GST</b></td>
+                        <td colspan="4"> <?php echo $user[0]->invoice_amount_with_gst ?> </td>
+                        <!-- Empty cell for "Remove" column in the total row -->
+                    </tr>
+
+                    <!-- "Amount In Words" row -->
+                    <tr>
+                        <td colspan="3" class="text-center"><b>Amount Chargeable (In Words)</b>:</td>
+                        <td colspan="4"> <?php echo $user[0]->total_amount_words ?> </td>
+                        <!-- Empty cell for "Remove" column in the Amount In Words row -->
+                    </tr>
+                </tfoot>
+            </table>
+            <br>
+
+            <table class="invoice-items">
+                <thead>
+                    <tr>
+                        <th>HSN/SAC</th>
+                        <th>Tax</th>
+                        <th>Amount Without Tax</th>
+                        <th>Amount With Tax</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td padding: 19px;></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td colspan="2"><b>Total Amount Received</b></td>
-                      <td colspan="2"></td>
-                    </tr>
-                    <tr>
-                      <td colspan="3" style="text-align: left;">Amount Chargable (In Words)</td>
-                      <td colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="5" style='padding: 15px;'></td>
-                    </tr>
-                </tbody>
-            </table>    
-            <table class="invoice-items">
-                <tbody>
-                    <tr>
-                        <td colspan="2" style="width: 40%;">HSN/SAC</td>
-                        <td style="width: 18%;">Taxable Value</td>
-                        <td colspan="2">Integrated Tax</td>
-                        <td  style="width: 21%;">Total Tax Amount</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"></td>
-                        <td></td>
-                        <td  style="width: 18%;">Rate</td>
-                        <td>Amount</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">Total</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style='padding: 15px;'></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left; width: 21%">Company’s Pan</td>
-                        <td></td>
-                        <td colspan="4">For Maclareen Consulting Pvt Ltd</td>
-                    </tr>
 
-                    <tr>
-                        <td colspan="2" style='padding: 19px;'></td>
-                        <td colspan="4" style="padding: 15px;"></td>
-                    </tr>
+                    <?php foreach ($dataArray as $row) : ?>
+                        <tr>
+                            <td><?php echo $row->hsn ?></td>
+                            <td><?php echo $row->gstRate ?></td>
+                            <td><?php echo $row->amount ?></td>
+                            <td><?php echo $row->amountwithGST ?></td>
+
+                        </tr>
+                    <?php endforeach; ?>
+
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" class="text-center"><b>Total </b></td>
+                        <td colspan="2"> <?php echo $user[0]->invoice_amount_with_gst ?> </td>
+                        <!-- Empty cell for "Remove" column in the total row -->
+                    </tr>
+                </tfoot>
             </table>
-        </div>
-        <center><p><b>This Invoice is generated electronically. No signature required.</b></p></center>
+            <br>
 
+
+        </div>
+
+        <center>
+            <p><b style="color: red; font-size: 10px;">This Invoice is generated electronically. No signature required.</b></p>
+
+        </center>
+    </div>
 </body>
+
 </html>

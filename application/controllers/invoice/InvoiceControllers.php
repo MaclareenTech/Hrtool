@@ -57,8 +57,14 @@ class InvoiceControllers extends BaseController
         $candidate_state = $this->input->post('candidate_state');
         $candidate_number = $this->input->post('candidate_number');
         $candidate_mail = $this->input->post('candidate_mail');
+        $payment_mode = $this->input->post('payment_mode');
+        $candidate_company_name = $this->input->post('candidate_company_name');
+        $candidate_company_pan = $this->input->post('candidate_company_pan');
+        $candidate_gstin_no = $this->input->post('candidate_gstin_no');
+
 
         $total_amount = $this->input->post('total_amount');
+        $invoice_amount_with_gst = $this->input->post('invoice_amount_with_gst');
         $total_amount_words = $this->input->post('total_amount_words');
 
         // Retrieve table data (dynamic rows)
@@ -66,6 +72,7 @@ class InvoiceControllers extends BaseController
         $amounts = $this->input->post('amount');
         $hsnNumbers = $this->input->post('Hsnumber');
         $gstRates = $this->input->post('gst_rate');
+        $amountwithGSTs = $this->input->post('amountwithGST');
 
 
 
@@ -73,6 +80,7 @@ class InvoiceControllers extends BaseController
         $amountsArray = array();
         $hsnNumbersArray = array();
         $gstRateArray = array();
+        $amountwithGSTArray = array();
         $dataArray = array();
 
         for ($i = 0; $i < count($particulars); $i++) {
@@ -80,11 +88,13 @@ class InvoiceControllers extends BaseController
             $amount = $amounts[$i];
             $hsn = $hsnNumbers[$i];
             $gstRate = $gstRates[$i];
+            $amountwithGST = $amountwithGSTs[$i];
 
             $particularsArray[] = $particular;
             $amountsArray[] = $amount;
             $hsnNumbersArray[] = $hsn;
             $gstRateArray[] = $gstRate;
+            $amountwithGSTArray[] = $amountwithGST;
 
             // Create an object for each row
             $rowObject = new stdClass();
@@ -92,6 +102,7 @@ class InvoiceControllers extends BaseController
             $rowObject->amount = $amount;
             $rowObject->hsn = $hsn;
             $rowObject->gstRate = $gstRate;
+            $rowObject->amountwithGST = $amountwithGST;
 
             // Add the row object to the dataArray
             $dataArray[] = $rowObject;
@@ -109,12 +120,30 @@ class InvoiceControllers extends BaseController
         $dataObject->candidate_mail = $candidate_mail;
         $dataObject->total_amount = $total_amount;
         $dataObject->total_amount_words = $total_amount_words;
-        
+        $dataObject->candidate_gstin_no = $candidate_gstin_no;
+        $dataObject->invoice_amount_with_gst = $invoice_amount_with_gst;
+        $dataObject->candidate_company_pan = $candidate_company_pan;
+        $dataObject->candidate_company_name = $candidate_company_name;
+        $dataObject->payment_mode = $payment_mode;
+
         // Add the object to the user array
         $user[] = $dataObject;
-      //  print_r($dataArray);
+        //  print_r($dataArray);
+        // candidate_gstin_no
 
+        $cleanCandidateName = preg_replace('/[^A-Za-z0-9\-]/', '', $candidate_name);
 
+        // Get the current date in the desired format (e.g., YYYY-MM-DD)
+        $currentDate = date("Y-m-d");
+
+        // Generate a unique ID
+        $uniqueID = uniqid();
+
+        // Combine the candidate's name, date, and unique ID to form the file name
+        $fileName = $cleanCandidateName . "_" . $currentDate . "_" . $uniqueID . ".pdf";
+
+        // Output the file name
+      
         $Admin_id = $this->session->userdata('userId');
         $date = date('Y-m-d', strtotime(strtr($invoiceDate, '/', '-')));
         $serializedDataArray = json_encode($dataArray);
@@ -126,14 +155,18 @@ class InvoiceControllers extends BaseController
             'invoice_date' => $date,
             'candidate_state' => $candidate_state,
             'admin_id' => $Admin_id,
+            'invoice_path' => $fileName,
             'invoice_paeticulars' => $serializedDataArray,
             'invoice_amount' => $total_amount,
+            'invoice_amount_with_gst' => $invoice_amount_with_gst,
+            'candidate_company_name' => $candidate_company_name,
+            'candidate_company_pan' => $candidate_company_pan,
+            'payment_mode' => $payment_mode,
             'invoice_amount_in_word' => $total_amount_words
 
         );
         $this->load->model('Invoice_model');
-        if($this->Invoice_model->Insert($InvoiceData))
-        {
+        if ($this->Invoice_model->Insert($InvoiceData)) {
             // $this->load->model('Candidate_model');
             // $this->load->model('Admin_model');
             // $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($id);
@@ -141,9 +174,10 @@ class InvoiceControllers extends BaseController
             // $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('', '');
             // $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
             // $this->global['pageTitle'] = 'MTAS : Candidate Information';
-            // $this->global['candidateId'] = $id;
+            $this->global['user'] = $user;
+            $this->global['dataArray'] = $dataArray;
             $html = $this->load->view('invoice/viewinvoice', $this->global, true);
-    
+
             // Create the mPDF instance and set watermark
             $mpdf = new \Mpdf\Mpdf([
                 'format' => 'A4',
@@ -152,31 +186,74 @@ class InvoiceControllers extends BaseController
                 'margin_left' => 0,
                 'margin_bottom' => 0,
             ]);
-    
+
             // Add watermark to each page
             $mpdf->SetWatermarkImage(base_url('assets/images/logo_new_2.png'));
             $mpdf->showWatermarkImage = true;
-    
+
             // Write content to PDF
             $mpdf->WriteHTML($html);
-    
+            $pdfContent = $mpdf->Output('', 'S');
+          
+
+            // Set the file name
+
+
+            // Set the destination directory
+            $destinationDir = 'upload/invoice';
+
+            // Construct the destination path on the server
+            $destinationPath = FCPATH . $destinationDir . '/' . $fileName;
+
+            // Save the PDF content to the destination path on the server
+            if (!is_dir(FCPATH . $destinationDir)) {
+                mkdir(FCPATH . $destinationDir, 0755, true); // Create the directory if it doesn't exist
+            }
+
+            file_put_contents($destinationPath, $pdfContent);
+
+            // Generate the public URL for the saved PDF
+            $pdfUrl = base_url($destinationDir . '/' . $fileName);
+
             // Output the PDF
             $mpdf->Output();
-        }else
-        {
+        } else {
             $this->session->set_flashdata('error', 'Try Again ');
-        redirect('createinvoiceform');
+            redirect('createinvoiceform');
         }
-    
+
+
+
+
+
+        // Set the HTML content
+
+
+        // Output the PDF content to a variable
+
+        // Provide the download link to users using $pdfUrl
+
+
+
     }
 
 
 
 
 
-
-
-
+    public function ViewCandiatenvoiceDocument($id)
+    {
+      // echo $id;
+      // echo $documentType;
+      $this->load->model('Invoice_model');
+      $candidate = $this->Invoice_model->View($id);
+      $Document = '';
+      $cognate3Url = '';
+        $Document = $candidate[0]->invoice_path;
+        $cognate3Url = "https://maclareenai.com/mtas/upload/invoice/" . $Document;
+        return Redirect($cognate3Url);
+     
+    }
 
 
 

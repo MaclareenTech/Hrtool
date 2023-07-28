@@ -135,7 +135,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="index.html">
+                        <a>
                             <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -218,7 +218,7 @@
                                 <div class="pcoded-navigation-label">Invoice</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li class="active">
-                                        <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
+                                        <a href="<?php echo base_url(); ?>invlicelist" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="fa fa-list-alt"></i><b>IN</b></span>
                                             <span class="pcoded-mtext">Invoice</span>
                                             <span class="pcoded-mcaret"></span>
@@ -300,7 +300,7 @@
                                     <div class="col-md-4">
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                                <a> <i class="fa fa-home"></i> </a>
                                             </li>
                                             <li class="breadcrumb-item"><a>Invoice</a>
                                             </li>
@@ -446,6 +446,27 @@
                                                                                     <label for="accountNo">Client's Email ID: </label>
                                                                                     <input type="email" class="form-control" name="candidate_mail" placeholder="Your client's email ID" id="clientsemail" required>
                                                                                 </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="mode_of_payments">Mode of Payments: </label>
+                                                                                    <!-- <input type="text" class="form-control" name="mode_of_payments" placeholder="Mode of Payments" id="mode_of_payments" required> -->
+                                                                                    <select class="form-control" name="payment_mode" placeholder="Mode of Payments" id="mode_of_payments" required>
+                                                                                        <option value="Cash Payment">Cash Payment</option>
+                                                                                        <option value="Cheque">Cheque</option>
+                                                                                        <option value="Online Payment">Online Payment</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="company_pan">Client Company Name: </label>
+                                                                                    <input type="text" class="form-control" name="candidate_company_name" placeholder="Company Name" id="candidate_company_name">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="company_pan">Client Company Pan: </label>
+                                                                                    <input type="text" class="form-control" name="candidate_company_pan" placeholder="Company Pan" id="company_pan">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="company_pan">Client Company GSTIN no : </label>
+                                                                                    <input type="text" class="form-control" name="candidate_gstin_no" placeholder="Client Company GSTIN no " id="candidate_gstin_no">
+                                                                                </div>
                                                                             </div>
 
                                                                         </div>
@@ -459,7 +480,8 @@
                                                                                         <th scope="col">Particulars</th>
                                                                                         <th scope="col">HSN/UIN</th>
                                                                                         <th scope="col">GST Rate</th>
-                                                                                        <th scope="col">Amount</th>
+                                                                                        <th scope="col">Rate</th>
+                                                                                        <th scope="col">Total with GST</th>
                                                                                         <th scope="col">Remove</th> <!-- New column header for "Remove" button -->
                                                                                     </tr>
                                                                                 </thead>
@@ -479,18 +501,12 @@
                                                                                         <td>
                                                                                             <div class="form-row">
                                                                                                 <div class="col">
-                                                                                                    <select class="form-control" name="Hsnumber[]" placeholder="Enter HSN Number" id="Hsnumber" required>
+                                                                                                    <select class="form-control" name="Hsnumber[]" placeholder="Enter HSN Number" id="Hsnumber" required onchange="updateGSTRate()">
                                                                                                         <option value="">Please Select</option>
-                                                                                                        <option value="100">HSN 100 - Description 1</option>
-                                                                                                        <option value="200">HSN 200 - Description 2</option>
-                                                                                                        <option value="300">HSN 300 - Description 3</option>
-                                                                                                        <option value="400">HSN 400 - Description 4</option>
-                                                                                                        <option value="500">HSN 500 - Description 5</option>
-                                                                                                        <option value="600">HSN 600 - Description 6</option>
-                                                                                                        <option value="700">HSN 700 - Description 7</option>
-                                                                                                        <option value="800">HSN 800 - Description 8</option>
-                                                                                                        <option value="900">HSN 900 - Description 9</option>
-                                                                                                        <option value="1000">HSN 1000 - Description 10</option>
+                                                                                                        <option value="9992">9992 - Education services</option>
+                                                                                                        <option value="999210">999210- Pre-Primary Education Services</option>
+                                                                                                        <option value="999299">999299 - Other Educational Support Services</option>
+
                                                                                                         <!-- Add more HSN numbers with descriptions as needed -->
                                                                                                     </select>
 
@@ -501,19 +517,30 @@
                                                                                         <td>
                                                                                             <div class="form-row">
                                                                                                 <div class="col">
-                                                                                                    <input type="text" name="gst_rate[]" class="form-control" placeholder="Enter GST Rate" required>
+                                                                                                    <input type="text" name="gst_rate[]" id="gst_rate" class="form-control" placeholder="Enter GST Rate" required pattern="[0-9]+(\.\d{1,2})?|[Ss]pecial" title="Please enter numbers, decimals, or 'Special'">
+
                                                                                                 </div>
                                                                                             </div>
 
                                                                                         </td>
-                                                                                        <td> <input type="text" name="amount[]" class="form-control" placeholder="Enter Amount" oninput="updateTotal()" required></td>
+                                                                                        <td> <input type="text" name="amount[]" class="form-control" placeholder="Enter Amount" oninput="updateTotal()" required pattern="[0-9]+" title="Please enter numbers only"></td>
+                                                                                        <td> <input type="text" name="amountwithGST[]" class="form-control" placeholder="Enter Total with GST" oninput="updateTotal()" required pattern="[0-9]+" title="Please enter numbers only"></td>
                                                                                         <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td> <!-- Remove button -->
                                                                                     </tr>
                                                                                 <tfoot>
                                                                                     <!-- "Total" row -->
                                                                                     <tr>
-                                                                                        <td colspan="2" class="text-center">Total :</td>
-                                                                                        <td colspan="4"><input type="text" name="total_amount" class="form-control" placeholder="Enter Total Amount" required></td>
+                                                                                        <td colspan="2" class="text-center">Total Without GST :</td>
+                                                                                        <td colspan="4">
+                                                                                            <input type="text" name="total_amount" class="form-control" placeholder="Enter Total Amount" required pattern="[0-9]+" title="Please enter numbers only">
+                                                                                        </td>
+                                                                                        <!-- Empty cell for "Remove" column in the total row -->
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td colspan="2" class="text-center">Total with GST :</td>
+                                                                                        <td colspan="4">
+                                                                                            <input type="text" name="invoice_amount_with_gst" class="form-control" placeholder="Enter Total Amount with GST" required pattern="[0-9]+" title="Please enter numbers only">
+                                                                                        </td>
                                                                                         <!-- Empty cell for "Remove" column in the total row -->
                                                                                     </tr>
                                                                                     <!-- "Amount In Words" row -->
@@ -576,30 +603,26 @@
 
 
                                             var amountCell = newRow.insertCell(2);
-                                            amountCell.innerHTML = '<select class="form-control" name="Hsnumber[]" placeholder="Enter HSN Number" id="Hsnumber" required>\
+                                            amountCell.innerHTML = '<select class="form-control" name="Hsnumber[]" placeholder="Enter HSN Number" id="Hsnumber" required onchange="updateGSTRate()">\
                                                         <option value="">Please Select</option>\
-                                                        <option value="100">HSN 100 - Description 1</option>\
-                                                        <option value="200">HSN 200 - Description 2</option>\
-                                                        <option value="300">HSN 300 - Description 3</option>\
-                                                        <option value="400">HSN 400 - Description 4</option>\
-                                                        <option value="500">HSN 500 - Description 5</option>\
-                                                        <option value="600">HSN 600 - Description 6</option>\
-                                                        <option value="700">HSN 700 - Description 7</option>\
-                                                        <option value="800">HSN 800 - Description 8</option>\
-                                                        <option value="900">HSN 900 - Description 9</option>\
-                                                        <option value="1000">HSN 1000 - Description 10</option>\
+                                                        <option value="9992">9992 - Education services</option>\
+                                                        <option value="999210">999210- Pre-Primary Education Services</option>\
+                                                        <option value="999299">999299 - Other Educational Support Services</option>\
                                                     </select>';
 
                                             var amountCell = newRow.insertCell(3);
-                                            amountCell.innerHTML = '   <input type="text" name="gst_rate[]" class="form-control" placeholder="Enter GST Rate" required>';
+                                            amountCell.innerHTML = ' <input type="text" name="gst_rate[]" id="gst_rate" class="form-control" placeholder="Enter GST Rate" required pattern="[0-9]+(\.\d{1,2})?|[Ss]pecial" title="Please enter numbers, decimals, or Special">';
 
 
                                             var amountCell = newRow.insertCell(4);
-                                            amountCell.innerHTML = '   <input type="text" name="amount[]" class="form-control" placeholder="Enter Amount" oninput="updateTotal()" required> ';
+                                            amountCell.innerHTML = '   <input type="text" name="amount[]" class="form-control" placeholder="Enter Amount" oninput="updateTotal()" required pattern="[0-9]+" title="Please enter numbers only"> ';
 
 
+                                            var amountCell = newRow.insertCell(5);
+                                            amountCell.innerHTML = '   <input type="text" name="amountwithGST[]" class="form-control" placeholder="Enter Total with GST" oninput="updateTotal()" required pattern="[0-9]+" title="Please enter numbers only"> ';
 
-                                            var removeCell = newRow.insertCell(5);
+
+                                            var removeCell = newRow.insertCell(6);
                                             removeCell.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
 
                                             // Renumber the SR. NO. series
@@ -645,6 +668,26 @@
                                             var totalCell = rows[rows.length - 2].cells[2].getElementsByTagName("input")[0];
                                             totalCell.value = totalAmount.toFixed(2);
                                         }
+
+                                        function updateGSTRate() {
+                                            const hsnDropdown = document.getElementById('Hsnumber');
+                                            const gstRateInput = document.getElementById('gst_rate');
+                                            const selectedHsn = hsnDropdown.value;
+
+                                            // Map HSN numbers to GST rates
+                                            const hsnToGstRate = {
+                                                "9992": 10,
+                                                "999210": 20,
+                                                "999299": 3.40,
+                                                // Add more mappings as needed
+                                            };
+
+                                            // Lookup the GST rate based on the selected HSN number
+                                            const gstRate = hsnToGstRate[selectedHsn];
+
+                                            // Update the GST rate input field
+                                            gstRateInput.value = gstRate !== undefined ? gstRate : '';
+                                        }
                                     </script>
 
 
@@ -666,7 +709,30 @@
         </div>
     </div>
     </div>
+    <!--  gst rate code start -->
 
+    <!-- <script>
+        function updateGSTRate() {
+            const hsnDropdown = document.getElementById('Hsnumber');
+            const gstRateInput = document.getElementById('gst_rate');
+            const selectedHsn = hsnDropdown.value;
+
+            // Map HSN numbers to GST rates
+            const hsnToGstRate = {
+                "9992": 10,
+                "999210": 20,
+                "999299": 3.40,
+                // Add more mappings as needed
+            };
+
+            // Lookup the GST rate based on the selected HSN number
+            const gstRate = hsnToGstRate[selectedHsn];
+
+            // Update the GST rate input field
+            gstRateInput.value = gstRate !== undefined ? gstRate : '';
+        }
+    </script> -->
+    <!--  gst rate code end -->
 
     <!-- Required Jquery -->
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery/jquery.min.js "></script>

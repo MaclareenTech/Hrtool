@@ -18,8 +18,8 @@ class AddCandidateControllers extends BaseController
       $this->loadViews("login/login", $this->global);
     } else {
 
-      $this->global['jobdetails'] = $this->Job_Opening_model->View('','','','0');
-      $this->global['sourcedetails'] = $this->Candidate_source_model->View('','','','','0');
+      $this->global['jobdetails'] = $this->Job_Opening_model->View('', '', '', '0');
+      $this->global['sourcedetails'] = $this->Candidate_source_model->View('', '', '', '', '0');
       $this->global['pageTitle'] = 'MTAS : Add candidate';
       $this->loadViews("admin/addcandidate", $this->global);
     }
@@ -36,7 +36,7 @@ class AddCandidateControllers extends BaseController
     //  $decrypted_id = $this->encryption->decrypt($id);
 
 
-     $decrypted_id = $id;
+    $decrypted_id = $id;
     // echo $decrypted_id;
     $this->load->model('Candidate_model');
     $this->load->model('Admin_model');
@@ -127,7 +127,7 @@ class AddCandidateControllers extends BaseController
     $Admin_id = $this->session->userdata('userId');
     date_default_timezone_set("Asia/Kolkata");
     $today = date("Y-m-d H:i:s");
-   
+
     $data = array(
       'candidate_name' => $candidate_name,
       'candidate_email' => $candidate_email,
@@ -209,16 +209,16 @@ class AddCandidateControllers extends BaseController
 
 
       if ($candidate_id) {
-          $JobDetails = $this->Job_Opening_model->ViewArray('','',$candidate_job_profile,'');
+        $JobDetails = $this->Job_Opening_model->ViewArray('', '', $candidate_job_profile, '');
 
-          $job_open_position = $JobDetails[0]['job_open_position'];
-          $job_id = $JobDetails[0]['job_id'];
-          $job_fill_position = $JobDetails[0]['job_fill_position'];
+        $job_open_position = $JobDetails[0]['job_open_position'];
+        $job_id = $JobDetails[0]['job_id'];
+        $job_fill_position = $JobDetails[0]['job_fill_position'];
 
-          $JobAddedposition = $job_fill_position +1;
-          $JobRemainingposition = $job_open_position -$JobAddedposition;
+        $JobAddedposition = $job_fill_position + 1;
+        $JobRemainingposition = $job_open_position - $JobAddedposition;
 
-           $JobDetailsUpdate = array(
+        $JobDetailsUpdate = array(
           'job_fill_position' => $JobAddedposition,
           'job_remaining_position' => $JobRemainingposition
         );

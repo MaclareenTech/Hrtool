@@ -119,7 +119,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="index.html">
+                        <a >
                             <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -202,7 +202,7 @@
                                 <div class="pcoded-navigation-label">Invoice</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li class="active">
-                                        <a href="<?php echo base_url(); ?>admininformation" class="waves-effect waves-dark">
+                                        <a href="<?php echo base_url(); ?>invlicelist" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="fa fa-list-alt"></i><b>IN</b></span>
                                             <span class="pcoded-mtext">Invoice</span>
                                             <span class="pcoded-mcaret"></span>
@@ -284,7 +284,7 @@
                                     <div class="col-md-4">
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                                <a > <i class="fa fa-home"></i> </a>
                                             </li>
                                             <li class="breadcrumb-item"><a>Invoice</a>
                                             </li>
@@ -347,7 +347,6 @@
                                                                 <th>Candidate Name</th>
                                                                 <th>Candidate Mobile Number</th>
                                                                 <th>Candidate Mail Id</th>
-                                                                <th>Job Position</th>
                                                                 <th>Candidate Address</th>
                                                                 <th>Payment Mode</th>
                                                                 <th>Invoice Date</th>
@@ -366,7 +365,6 @@
                                                                     <td><?php echo $row->candidate_name ?></td>
                                                                     <td><?php echo $row->candidate_number ?></td>
                                                                     <td><?php echo $row->candidate_mail ?></td>
-                                                                    <td><?php echo $row->candidate_job ?></td>
                                                                     <td><?php echo $row->candidate_address ?></td>
                                                                     <td><?php echo $row->payment_mode ?></td>
                                                                     <td><?php $timestamp = strtotime($row->invoice_date);
@@ -376,7 +374,7 @@
                                                                         $formattedDate = date("d F Y", $timestamp);
                                                                         echo $formattedDate; ?></td>
                                                                         <td><?php echo $row->user_name ?></td>
-                                                                        <td><a class="btn btn-default" href="<?php echo base_url('ViewCandiateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
+                                                                        <td><a class="btn btn-default" href="<?php echo base_url('ViewInvoicePdf/' . $row->invoice_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
                                                                                 <em class="fa fa-eye"></em>
                                                                             </a> </td>
                                                             
