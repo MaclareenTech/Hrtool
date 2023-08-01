@@ -136,7 +136,7 @@
                             </div>
                         </div>
                         <a>
-                            <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px; ">
+                            <img class="img-fluid" src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -168,6 +168,7 @@
 
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
+
                                     </div>
                                 </div>
                             </div>
@@ -273,6 +274,16 @@
                                 </li>
                                 <!-- href="<?php echo base_url(); ?>logout" -->
                             </ul>
+                            <div class="pcoded-navigation-label">Profile</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>profile" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa fa-cog"></i><b>L</b></span>
+                                        <span class="pcoded-mtext">Profile</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
                             <div class="pcoded-navigation-label">Logout</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
@@ -372,7 +383,7 @@
 
                                                                         <div class="row">
                                                                             <!-- <div class="col-2">
-                                                                                <img src="http://mtas.net.in/assets/images/105 x 70 (2).png" alt="logo" class="responsive-image">
+                                                                                <img src="https://maclareenai.com/mtas/assets/images/105 x 70 (2).png" alt="logo" class="responsive-image">
 
                                                                             </div> -->
                                                                             <div class="col-12">
@@ -399,6 +410,22 @@
                                                                                     <label for="bank">Client's Name:</label>
                                                                                     <input type="text" name="candidate_name" placeholder="john does" class="form-control" id="bankName" required>
                                                                                 </div>
+                                                                                <!-- <div class="form-group">
+                                                                                    <label for="bank">Client's Name:</label>
+                                                                                    <div class="custom-select-container" style="position: relative; display: inline-block;">
+                                                                                        <select name="candidate_name_select" class="select-input" onchange="toggleCustomInput(this.value)" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url('path-to-custom-arrow-icon.png'); background-position: right center; background-repeat: no-repeat;">
+                                                                                            <?php foreach ($candidate as $row) : ?>
+                                                                                                <option value="<?php echo $row->candidate_id ?>"><?php echo $row->candidate_name; ?></option>
+                                                                                            <?php endforeach; ?>
+                                                                                            <option value="custom">Other</option>
+                                                                                        </select>
+                                                                                        <input type="text" name="candidate_name" class="custom-input form-control" placeholder="Type your custom option" required style="position: absolute; top: 0; left: 0; width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; display: none;">
+                                                                                    </div>
+                                                                                </div> -->
+
+
+
+
                                                                                 <div class="form-group">
                                                                                     <label for="accountNo">Clien't Address</label>
                                                                                     <input type="text" name="candidate_address" placeholder="Enter client address" class="form-control" id="accountNo" required>
@@ -501,11 +528,38 @@
                                                                                         <td>
                                                                                             <div class="form-row">
                                                                                                 <div class="col">
-                                                                                                    <select class="form-control" name="Hsnumber[]" placeholder="Enter HSN Number" id="Hsnumber" required onchange="updateGSTRate()">
-                                                                                                        <option value="">Please Select</option>
-                                                                                                        <option value="9992">9992 - Education services</option>
-                                                                                                        <option value="999210">999210- Pre-Primary Education Services</option>
-                                                                                                        <option value="999299">999299 - Other Educational Support Services</option>
+                                                                                                    <select class="form-control" name="Hsnumber[]" placeholder="Enter HSN Number" id="Hsnumber" required onchange="updateGSTRate(this)">
+
+                                                                                                        <option value="9985">9985 - Support Services - 18%</option>
+                                                                                                        <option value="998511">998511- Executive/Retained Personnel Search Services - 18%</option>
+                                                                                                        <option value="998512">998512 - Permanent Placement Services, Other Than Executive Search Servicess - 18%</option>
+                                                                                                        <option value="998513">998513 - Contract Staffing Services - 18%</option>
+                                                                                                        <option value="998514">998514 - Temporary Staffing Services - 18%</option>
+                                                                                                        <option value="998515">998515 - Long-Term Staffing (Pay Rolling) Services - 18%</option>
+                                                                                                        <option value="998516">998516 - Temporary Staffing-To-Permanent Placement Services - 18%</option>
+                                                                                                        <option value="998517">998517 - Co-Employment Staffing Services - 18%</option>
+                                                                                                        <option value="998519">998519 - Other Employment & Labour Supply Services N.E.C - 18%</option>
+                                                                                                        <option value="998521">998521 - Investigation Services - 18%</option>
+                                                                                                        <option value="998522">998522 - Security Consulting Services - 18%</option>
+                                                                                                        <option value="998523">998523 - Security Systems Services - 18%</option>
+                                                                                                        <option value="998524">998524 - Armoured Car Services - 18%</option>
+                                                                                                        <option value="48211010">48211010 - PAPER TAG Products - 18%</option>
+                                                                                                        <option value="9964">9964 - Passengers Transport Services - 18%</option>
+                                                                                                        <option value="996411">996411 - Local Land Transport Services Of Passengers By Railways, Metro, Monorail, Bus, Tramway, Autos, Three Wheelers, Scooters And Other Motor Vehicles - 18%</option>
+                                                                                                        <option value="996412">996412 - Taxi Services Including Radio Taxi & Other Similar Services - 18%</option>
+                                                                                                        <option value="996413">996413 - Non-Scheduled Local Bus And Coach Charter Services - 18%</option>
+                                                                                                        <option value="996414">996414 - Other Land Transportation Services Of Passengers - 18% </option>
+                                                                                                        <option value="996415">996415 - Local Water Transport Services Of Passengers By Ferries, Cruises Etc - 18%</option>
+                                                                                                        <option value="996416">996416 - Sightseeing Transportation Services By Rail, Land, Water & Air - 18%</option>
+                                                                                                        <option value="996419">996419 - Other Local Transportation Services Of Passengers N.E.C. - 18% </option>
+                                                                                                        <option value="996421">996421 - Long-Distance Transport Services Of Passengers Through Rail Network By Railways, Metro Etc - 18%</option>
+                                                                                                        <option value="996422">996422 - Long-Distance Transport Services Of Passengers Through Road By Bus, Car, Non-Scheduled Long Distance Bus And Coach Services, Stage Carriage Etc - 18%</option>
+                                                                                                        <option value="996423">996423 - Taxi Services Including Radio Taxi & Other Similar Services - 18%</option>
+                                                                                                        <option value="996424">996424 - Coastal And Transoceanic (Overseas) Water Transport Services Of Passengers By Ferries, Cruise Ships Etc - 18%</option>
+                                                                                                        <option value="996425">996425 - Domestic/International Scheduled Air Transport Services Of Passengers - 18%</option>
+                                                                                                        <option value="996427">996427 - Space Transport Services Of Passengers - 18%</option>
+                                                                                                        <option value="996429">996429 - Other Long-Distance Transportation Services Of Passengers N.E.C. - 18%</option>
+
 
                                                                                                         <!-- Add more HSN numbers with descriptions as needed -->
                                                                                                     </select>
@@ -584,7 +638,7 @@
                                         // Set the formatted date as the default value for the "Invoice Date" input field
                                         document.getElementById("invoiceDate").value = formattedDate;
                                     </script>
-                                    <script>
+                                    <!-- <script>
                                         function addRow() {
                                             var table = document.getElementById("orderTable").getElementsByTagName('tbody')[0];
                                             var newRow = table.insertRow(table.rows.length - 2); // Insert the new row above the "Total" row
@@ -604,10 +658,35 @@
 
                                             var amountCell = newRow.insertCell(2);
                                             amountCell.innerHTML = '<select class="form-control" name="Hsnumber[]" placeholder="Enter HSN Number" id="Hsnumber" required onchange="updateGSTRate()">\
-                                                        <option value="">Please Select</option>\
-                                                        <option value="9992">9992 - Education services</option>\
-                                                        <option value="999210">999210- Pre-Primary Education Services</option>\
-                                                        <option value="999299">999299 - Other Educational Support Services</option>\
+                                            <option value="9985">9985 - Support Services</option>\
+                                                                                                        <option value="998511">998511- Executive/Retained Personnel Search Services</option>\
+                                                                                                        <option value="998512">998512 - Permanent Placement Services, Other Than Executive Search Servicess</option>\
+                                                                                                        <option value="998513">998513 - Contract Staffing Services</option>\
+                                                                                                        <option value="998514">998514 - Temporary Staffing Services</option>\
+                                                                                                        <option value="998515">998515 - Long-Term Staffing (Pay Rolling) Services</option>\
+                                                                                                        <option value="998516">998516 - Temporary Staffing-To-Permanent Placement Services</option>\
+                                                                                                        <option value="998517">998517 - Co-Employment Staffing Services</option>\
+                                                                                                        <option value="998519">998519 - Other Employment & Labour Supply Services N.E.C</option>\
+                                                                                                        <option value="998521">998521 - Investigation Services</option>\
+                                                                                                        <option value="998522">998522 - Security Consulting Services</option>\
+                                                                                                        <option value="998523">998523 - Security Systems Services</option>\
+                                                                                                        <option value="998524">998524 - Armoured Car Services</option>\
+                                                                                                        <option value="48211010">48211010 - PAPER TAG Products </option>\
+                                                                                                        <option value="9964">9964 - Passengers Transport Services </option>\
+                                                                                                        <option value="996411">996411 - Local Land Transport Services Of Passengers By Railways, Metro, Monorail, Bus, Tramway, Autos, Three Wheelers, Scooters And Other Motor Vehicles </option>\
+                                                                                                        <option value="996412">996412 - Taxi Services Including Radio Taxi & Other Similar Services </option>\
+                                                                                                        <option value="996413">996413 - Non-Scheduled Local Bus And Coach Charter Services </option>\
+                                                                                                        <option value="996414">996414 - Other Land Transportation Services Of Passengers. </option>\
+                                                                                                        <option value="996415">996415 - Local Water Transport Services Of Passengers By Ferries, Cruises Etc </option>\
+                                                                                                        <option value="996416">996416 - Sightseeing Transportation Services By Rail, Land, Water & Air </option>\
+                                                                                                        <option value="996419">996419 - Other Local Transportation Services Of Passengers N.E.C. </option>\
+                                                                                                        <option value="996421">996421 - Long-Distance Transport Services Of Passengers Through Rail Network By Railways, Metro Etc </option>\
+                                                                                                        <option value="996422">996422 - Long-Distance Transport Services Of Passengers Through Road By Bus, Car, Non-Scheduled Long Distance Bus And Coach Services, Stage Carriage Etc </option>\
+                                                                                                        <option value="996423">996423 - Taxi Services Including Radio Taxi & Other Similar Services </option>\
+                                                                                                        <option value="996424">996424 - Coastal And Transoceanic (Overseas) Water Transport Services Of Passengers By Ferries, Cruise Ships Etc </option>\
+                                                                                                        <option value="996425">996425 - Domestic/International Scheduled Air Transport Services Of Passengers </option>\
+                                                                                                        <option value="996427">996427 - Space Transport Services Of Passengers </option>\
+                                                                                                        <option value="996429">996429 - Other Long-Distance Transportation Services Of Passengers N.E.C. </option>\
                                                     </select>';
 
                                             var amountCell = newRow.insertCell(3);
@@ -675,11 +754,184 @@
                                             const selectedHsn = hsnDropdown.value;
 
                                             // Map HSN numbers to GST rates
+                                            // const hsnToGstRate = {
+                                            //     "9992": 10,
+                                            //     "999210": 20,
+                                            //     "999299": 3.40,
+                                            //     // Add more mappings as needed
+                                            // };
+
+                                            // Lookup the GST rate based on the selected HSN number
+                                            const gstRate = hsnToGstRate[selectedHsn];
+
+                                            // Update the GST rate input field
+                                            gstRateInput.value = gstRate !== undefined ? gstRate : '';
+                                        }
+                                    </script> -->
+                                    <!--  script for adding new row start -->
+                                    <script>
+                                        function addRow() {
+                                            var table = document.getElementById("orderTable").getElementsByTagName('tbody')[0];
+                                            var newRow = table.insertRow(table.rows.length - 2); // Insert the new row above the "Total" row
+
+                                            var srNoCell = newRow.insertCell(0);
+                                            srNoCell.innerHTML = table.rows.length - 2 + ".";
+
+                                            var particularsCell = newRow.insertCell(1);
+                                            particularsCell.innerHTML = `
+                <div class="form-row">
+                    <div class="col">
+                    <input type="text" name="particulars[]" class="form-control" placeholder="Enter Particulars" required>
+                    </div>
+                </div>
+                `;
+
+                                            var hsnCell = newRow.insertCell(2);
+                                            hsnCell.innerHTML = `
+                                            <div class="form-row">
+                                                                                                <div class="col">
+                                                                                                    <select class="form-control" name="Hsnumber[]" placeholder="Enter HSN Number" id="Hsnumber" required oonchange="updateGSTRate(this)">
+
+                                                                                                    <option value="9985">9985 - Support Services - 18%</option>
+                                                                                                        <option value="998511">998511- Executive/Retained Personnel Search Services - 18%</option>
+                                                                                                        <option value="998512">998512 - Permanent Placement Services, Other Than Executive Search Servicess - 18%</option>
+                                                                                                        <option value="998513">998513 - Contract Staffing Services - 18%</option>
+                                                                                                        <option value="998514">998514 - Temporary Staffing Services - 18%</option>
+                                                                                                        <option value="998515">998515 - Long-Term Staffing (Pay Rolling) Services - 18%</option>
+                                                                                                        <option value="998516">998516 - Temporary Staffing-To-Permanent Placement Services - 18%</option>
+                                                                                                        <option value="998517">998517 - Co-Employment Staffing Services - 18%</option>
+                                                                                                        <option value="998519">998519 - Other Employment & Labour Supply Services N.E.C - 18%</option>
+                                                                                                        <option value="998521">998521 - Investigation Services - 18%</option>
+                                                                                                        <option value="998522">998522 - Security Consulting Services - 18%</option>
+                                                                                                        <option value="998523">998523 - Security Systems Services - 18%</option>
+                                                                                                        <option value="998524">998524 - Armoured Car Services - 18%</option>
+                                                                                                        <option value="48211010">48211010 - PAPER TAG Products - 18%</option>
+                                                                                                        <option value="9964">9964 - Passengers Transport Services - 18%</option>
+                                                                                                        <option value="996411">996411 - Local Land Transport Services Of Passengers By Railways, Metro, Monorail, Bus, Tramway, Autos, Three Wheelers, Scooters And Other Motor Vehicles - 18%</option>
+                                                                                                        <option value="996412">996412 - Taxi Services Including Radio Taxi & Other Similar Services - 18%</option>
+                                                                                                        <option value="996413">996413 - Non-Scheduled Local Bus And Coach Charter Services - 18%</option>
+                                                                                                        <option value="996414">996414 - Other Land Transportation Services Of Passengers - 18% </option>
+                                                                                                        <option value="996415">996415 - Local Water Transport Services Of Passengers By Ferries, Cruises Etc - 18%</option>
+                                                                                                        <option value="996416">996416 - Sightseeing Transportation Services By Rail, Land, Water & Air - 18%</option>
+                                                                                                        <option value="996419">996419 - Other Local Transportation Services Of Passengers N.E.C. - 18% </option>
+                                                                                                        <option value="996421">996421 - Long-Distance Transport Services Of Passengers Through Rail Network By Railways, Metro Etc - 18%</option>
+                                                                                                        <option value="996422">996422 - Long-Distance Transport Services Of Passengers Through Road By Bus, Car, Non-Scheduled Long Distance Bus And Coach Services, Stage Carriage Etc - 18%</option>
+                                                                                                        <option value="996423">996423 - Taxi Services Including Radio Taxi & Other Similar Services - 18%</option>
+                                                                                                        <option value="996424">996424 - Coastal And Transoceanic (Overseas) Water Transport Services Of Passengers By Ferries, Cruise Ships Etc - 18%</option>
+                                                                                                        <option value="996425">996425 - Domestic/International Scheduled Air Transport Services Of Passengers - 18%</option>
+                                                                                                        <option value="996427">996427 - Space Transport Services Of Passengers - 18%</option>
+                                                                                                        <option value="996429">996429 - Other Long-Distance Transportation Services Of Passengers N.E.C. - 18%</option>
+
+
+
+                                                                                                        <!-- Add more HSN numbers with descriptions as needed -->
+                                                                                                    </select>
+
+                                                                                                </div>
+                                                                                            </div>
+            `;
+
+                                            var gstRateCell = newRow.insertCell(3);
+                                            gstRateCell.innerHTML = `
+                <div class="form-row">
+                    <div class="col">
+                        <input type="text" name="gst_rate[]" class="form-control" placeholder="Enter GST Rate" required pattern="[0-9]+(\.\d{1,2})?|[Ss]pecial" title="Please enter numbers, decimals, or 'Special'">
+                    </div>
+                </div>
+            `;
+
+                                            var amountCell = newRow.insertCell(4);
+                                            amountCell.innerHTML = ' <input type="text" name="amount[]" class="form-control" placeholder="Enter Amount" oninput="updateTotal()" required pattern="[0-9]+" title="Please enter numbers only"> ';
+
+                                            var amountWithGSTCell = newRow.insertCell(5);
+                                            amountWithGSTCell.innerHTML = ' <input type="text" name="amountwithGST[]" class="form-control" placeholder="Enter Total with GST" oninput="updateTotal()" required pattern="[0-9]+" title="Please enter numbers only"> ';
+
+                                            var removeCell = newRow.insertCell(6);
+                                            removeCell.innerHTML = '<button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>';
+
+                                            // Renumber the SR. NO. series
+                                            updateSrNoSeries();
+                                            // Update the GST rate for the newly added row
+                                         //   updateGSTRate(hsnCell.getElementsByTagName("select")[0]);
+                                        }
+
+                                        function removeRow(button) {
+                                            var row = button.parentNode.parentNode;
+                                            var rowIndex = row.rowIndex;
+                                            row.parentNode.removeChild(row);
+
+                                            // Renumber the SR. NO. series after a row is removed
+                                            updateSrNoSeries();
+                                            // Update the total amount
+                                            updateTotal();
+                                        }
+
+                                        function updateSrNoSeries() {
+                                            var table = document.getElementById("orderTable").getElementsByTagName('tbody')[0];
+                                            var rows = table.getElementsByTagName("tr");
+
+                                            for (var i = 1; i < rows.length - 1; i++) {
+                                                var srNoCell = rows[i].cells[0];
+                                                srNoCell.innerHTML = i + 1 + ".";
+                                            }
+                                        }
+
+                                        function updateTotal() {
+                                            var table = document.getElementById("orderTable").getElementsByTagName('tbody')[0];
+                                            var rows = table.getElementsByTagName("tr");
+                                            var totalAmount = 0;
+
+                                            for (var i = 0; i < rows.length - 2; i++) {
+                                                var amountCell = rows[i].cells[4].getElementsByTagName("input")[0];
+                                                var amount = parseFloat(amountCell.value);
+                                                if (!isNaN(amount)) {
+                                                    totalAmount += amount;
+                                                }
+                                            }
+
+                                            var totalCell = rows[rows.length - 2].cells[4].getElementsByTagName("input")[0];
+                                            totalCell.value = totalAmount.toFixed(2);
+                                        }
+
+                                        function updateGSTRate(selectElement) {
+                                            const gstRateInput = selectElement.parentNode.parentNode.nextElementSibling.getElementsByTagName("input")[0];
+                                            const selectedHsn = selectElement.value;
+
+                                            // Map HSN numbers to GST rates
                                             const hsnToGstRate = {
-                                                "9992": 10,
-                                                "999210": 20,
-                                                "999299": 3.40,
-                                                // Add more mappings as needed
+                                                "9985": 18,
+                                                "998511": 18,
+                                                "998512": 18,
+                                                "998513": 18,
+                                                "998514": 18,
+                                                "998515": 18,
+                                                "998516": 18,
+                                                "998517": 18,
+                                                "998519": 18,       
+                                                 "998521": 18,
+                                                 "998522": 18,
+                                                 "998523": 18,
+                                                 "998524": 18,
+                                                 "48211010": 18,
+                                                 "9964": 18,
+                                                 "996411": 18,
+                                                 "996412": 18,
+                                                 "996413": 18,
+                                                 "996414": 18,
+                                                 "996415": 18,
+                                                 "996416": 18,
+                                                 "996419": 18,
+                                                 "996421": 18,
+                                                 "996422": 18,
+                                                 "996423": 18,
+                                                 "996424": 18,
+                                                 "996425": 18,
+                                                 "996427": 18,
+                                                 "996429": 18
+                                              
+
+
+                                                
                                             };
 
                                             // Lookup the GST rate based on the selected HSN number
@@ -689,7 +941,7 @@
                                             gstRateInput.value = gstRate !== undefined ? gstRate : '';
                                         }
                                     </script>
-
+                                    <!-- script for  adding new row end  -->
 
 
 
@@ -765,6 +1017,7 @@
 
 
 
+
     <!-- serch option script start  -->
     <script>
         $("#search").on("keyup", function() {
@@ -775,6 +1028,9 @@
         });
     </script>
     <!-- serch option script end   -->
+
+
+
 
     <!-- pagination Start   -->
     <script>
@@ -816,6 +1072,25 @@
         displayDataPage(currentPage);
     </script>
     <!-- pagination end   -->
+
+
+
+
+    <!-- start of user select option -->
+    <script>
+        function toggleCustomInput(selectedValue) {
+            const customInput = document.querySelector('.custom-input');
+            if (selectedValue === 'custom') {
+                customInput.style.display = 'block';
+                customInput.setAttribute('required', 'required');
+            } else {
+                customInput.style.display = 'none';
+                customInput.removeAttribute('required');
+            }
+        }
+    </script>
+
+    <!-- end of user select option -->
 
 </body>
 

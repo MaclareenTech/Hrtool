@@ -40,6 +40,8 @@ class InvoiceControllers extends BaseController
             $this->loadViews("login/login", $this->global);
         } else {
             $this->load->model('Invoice_model');
+            $this->load->model('Candidate_model');
+            $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo('');
             $currentId = $this->Invoice_model->view_count();
             $this->global['nextID'] = "M23" . ($currentId + 1);
             $this->global['pageTitle'] = 'MTAS : Create Invoice';
@@ -61,6 +63,7 @@ class InvoiceControllers extends BaseController
         $candidate_company_name = $this->input->post('candidate_company_name');
         $candidate_company_pan = $this->input->post('candidate_company_pan');
         $candidate_gstin_no = $this->input->post('candidate_gstin_no');
+        $candidate_name_select = $this->input->post('candidate_name_select');
 
 
         $total_amount = $this->input->post('total_amount');
@@ -74,7 +77,10 @@ class InvoiceControllers extends BaseController
         $gstRates = $this->input->post('gst_rate');
         $amountwithGSTs = $this->input->post('amountwithGST');
 
-
+        // if ($candidate_name_select === "custom") {
+        //     $customInput = $_POST["custom_input"];
+        //     // Process the custom input value here or do something with it
+        //   }
 
         $particularsArray = array();
         $amountsArray = array();
@@ -143,7 +149,7 @@ class InvoiceControllers extends BaseController
         $fileName = $cleanCandidateName . "_" . $currentDate . "_" . $uniqueID . ".pdf";
 
         // Output the file name
-      
+
         $Admin_id = $this->session->userdata('userId');
         $date = date('Y-m-d', strtotime(strtr($invoiceDate, '/', '-')));
         $serializedDataArray = json_encode($dataArray);
@@ -188,13 +194,13 @@ class InvoiceControllers extends BaseController
             ]);
 
             // Add watermark to each page
-            $mpdf->SetWatermarkImage(base_url('assets/images/logo_new_2.png'));
+            $mpdf->SetWatermarkImage(base_url('assets/images/bg/438-x-292-watermark.png'));
             $mpdf->showWatermarkImage = true;
 
             // Write content to PDF
             $mpdf->WriteHTML($html);
             $pdfContent = $mpdf->Output('', 'S');
-          
+
 
             // Set the file name
 
@@ -243,16 +249,15 @@ class InvoiceControllers extends BaseController
 
     public function ViewCandiatenvoiceDocument($id)
     {
-      // echo $id;
-      // echo $documentType;
-      $this->load->model('Invoice_model');
-      $candidate = $this->Invoice_model->View($id);
-      $Document = '';
-      $cognate3Url = '';
+        // echo $id;
+        // echo $documentType;
+        $this->load->model('Invoice_model');
+        $candidate = $this->Invoice_model->View($id);
+        $Document = '';
+        $cognate3Url = '';
         $Document = $candidate[0]->invoice_path;
         $cognate3Url = "https://maclareenai.com/mtas/upload/invoice/" . $Document;
         return Redirect($cognate3Url);
-     
     }
 
 

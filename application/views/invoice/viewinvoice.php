@@ -24,27 +24,12 @@
             padding: 0;
         }
 
-
-
-        /* .red-strip {
-          height: 45px;
-          background-color: red;
-          width: 100%;
-          margin-top: 100px;
-          margin-bottom: 20px;
-        } */
-        /* .red-strip {
-        height: 50px;
-        
-        width: calc(100% + 40px); 
-        margin-left: 20px; 
-        margin-right: 20px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        } */
+        .red-strip{
+            margin-bottom:-18px;
+        }
 
         .red-strip img {
-            height: 70px !important;
+            height: 49px !important;
             width: 100% !important;
             margin-top: 20px;
             margin-bottom: 20px;
@@ -128,19 +113,46 @@
         /* td{
             background-color: #f2f2f2;
         } */
+
+        /* Center the content horizontally */
+        .centered-content {
+        text-align: center;
+        }
+
+        .centered-content h4{
+            margin-bottom:-4px;
+            margin-top:13px;
+        }
+        /* disclaimer the content horizontally */
+        .disclaimer-content {
+        text-align: right;
+        }
+
+        /* Reduce top and bottom margin of the centered-content */
+        .disclaimer-content p {
+        margin-top: 0;
+        margin-bottom: 0;
+        }
+
+        /* Style for the red text */
+        .disclaimer-content b {
+        color: red;
+        font-size: 10px;
+        }
     </style>
 
 </head>
 
 <body>
     <div class="invoice-container">
+        <!-- <div class="red-strip"><img src="https://maclareenai.com/mtas/assets/images/strip.png" alt=""></div> -->
         <div class="red-strip"><img src="https://maclareenai.com/mtas/assets/images/strip.png" alt=""></div>
-       <center> <h4 style="font-size: 23px;">Invoice</h4> </center>
+        <div class="centered-content"> <h4 style="font-size: 23px;">INVOICE</h4></div>
 
        
 
 
-        <h4 style="font-size: 22px;">Bill To</h4>
+        <h4 style="font-size: 20px;margin-bottom:10px;margin-top:10px;">Bill To</h4>
             <table class="invoice-items">
                 <tr>
                     <td style="width: 50%;"><b>Maclareen Consulting India Pvt. Ltd. </b></td>
@@ -168,7 +180,7 @@
 
      
 
-        <h4 style="font-size: 22px;">Ship To</h4>
+        <h4 style="font-size: 20px;margin-bottom:10px;">Ship To</h4>
         <div class="table-responsive">
 
             <table class="invoice-items">
@@ -284,10 +296,12 @@
 
         </div>
 
-        <center>
+        <!-- <center>
             <p><b style="color: red; font-size: 10px;">This Invoice is generated electronically. No signature required.</b></p>
-
-        </center>
+        </center> -->
+        <div class="disclaimer-content">
+            <p><b>*This Invoice is generated electronically. No signature required.</b></p>
+        </div>
     </div>
 </body>
 

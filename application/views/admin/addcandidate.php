@@ -140,7 +140,7 @@
                             </div>
                         </div>
                         <a>
-                            <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px;">
+                            <img class="img-fluid" src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="Theme-Logo" style=" width: 160px;">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -164,7 +164,7 @@
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-                <nav class="pcoded-navbar">
+                    <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
@@ -172,6 +172,7 @@
 
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
+
                                     </div>
                                 </div>
                             </div>
@@ -218,7 +219,7 @@
                             <?php } ?>
                             <?php
                             $mail = $this->session->userdata('user_email'); ?>
-                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com"  ) { ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com") { ?>
                                 <div class="pcoded-navigation-label">Invoice</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li class="">
@@ -276,6 +277,16 @@
                                     </a>
                                 </li>
                                 <!-- href="<?php echo base_url(); ?>logout" -->
+                            </ul>
+                            <div class="pcoded-navigation-label">Profile</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>profile" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa fa-cog"></i><b>L</b></span>
+                                        <span class="pcoded-mtext">Profile</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
                             </ul>
                             <div class="pcoded-navigation-label">Logout</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -379,10 +390,11 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Job Profile</label>
                                                         <div class="col-sm-9">
-                                                            <select name="candidate_job_profile" class="form-control" required >
-                                                                
-                                                                <?php  foreach ($jobdetails as $row) : ?>
-                                                                    <option value="<?php echo $row->job_code ?>"><?php $combined_value = $row->job_country . ' - ' . $row->job_position; echo $combined_value ; ?></option>
+                                                            <select name="candidate_job_profile" class="form-control" required>
+
+                                                                <?php foreach ($jobdetails as $row) : ?>
+                                                                    <option value="<?php echo $row->job_code ?>"><?php $combined_value = $row->job_country . ' - ' . $row->job_position;
+                                                                                                                    echo $combined_value; ?></option>
                                                                 <?php endforeach; ?>
 
                                                             </select>
@@ -392,9 +404,9 @@
                                                         <label class="col-sm-3 col-form-label">Candidate Source</label>
                                                         <div class="col-sm-9">
                                                             <select name="candidate_source_id" class="form-control" required>
-                                                               
-                                                                <?php  foreach ($sourcedetails as $row) : ?>
-                                                                    <option value="<?php echo $row->source_id ?>"><?php  echo $row->source_name ; ?></option>
+
+                                                                <?php foreach ($sourcedetails as $row) : ?>
+                                                                    <option value="<?php echo $row->source_id ?>"><?php echo $row->source_name; ?></option>
                                                                 <?php endforeach; ?>
 
                                                             </select>

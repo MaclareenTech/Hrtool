@@ -17,8 +17,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* background-image: url('http://mtas.net.in/assets/images/01.png');
-            background-image: url('http://mtas.net.in/assets/images/02.png');
+            /* background-image: url('https://maclareenai.com/mtas/assets/images/01.png');
+            background-image: url('https://maclareenai.com/mtas/assets/images/02.png');
              background-repeat: no-repeat;
             background-position: center; */
 

@@ -55,6 +55,9 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['loginMe'] = 'LoginControllers/loginMe';
 $route['logout'] = 'LogOutControllers';
+$route['optscreen'] = 'LoginControllers/OtpScreen';
+$route['resendOtp'] = 'LoginControllers/ResendOtp';
+$route['verifyOtp'] = 'LoginControllers/VerifyOtp';
 
 
 // admin 
@@ -116,6 +119,17 @@ $route['invlicelist'] = 'invoice/InvoiceControllers';
 $route['createinvoiceform'] = 'invoice/InvoiceControllers/CreateInvoiceform';
 $route['CreateInvoice'] = 'invoice/InvoiceControllers/CreateInvoice';
 $route['ViewInvoicePdf/(:num)'] = 'invoice/InvoiceControllers/ViewCandiatenvoiceDocument/$1'; 
+
+
+
+
+
+
+
+// profile
+$route['profile'] = 'profile/ProfileControllers';
+$route['changePasswordForm'] = 'profile/ProfileControllers/ChangePasswordForm';
+$route['changePassword'] = 'profile/ProfileControllers/ChangePassword';
 
 
 

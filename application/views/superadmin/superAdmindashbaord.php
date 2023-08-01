@@ -159,7 +159,7 @@
                             </div>
                         </div>
                         <a>
-                            <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px; ">
+                            <img class="img-fluid" src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -191,6 +191,7 @@
 
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -295,6 +296,16 @@
                                     </a>
                                 </li>
                                 <!-- href="<?php echo base_url(); ?>logout" -->
+                            </ul>
+                            <div class="pcoded-navigation-label">Profile</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>profile" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa fa-cog"></i><b>L</b></span>
+                                        <span class="pcoded-mtext">Profile</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
                             </ul>
                             <div class="pcoded-navigation-label">Logout</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -606,7 +617,7 @@
                                                                         <?php if ($row->user_profile == "") { ?>
                                                                             <img src="assets/images/avatar-4.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
                                                                         <?php } else { ?>
-                                                                            <img src="<?php echo  "http://mtas.net.in/upload/profile/" . $row->user_profile; ?>" alt="user image" class="img-radius img-40 align-top m-r-15">
+                                                                            <img src="<?php echo  "https://maclareenai.com/mtas/upload/profile/" . $row->user_profile; ?>" alt="user image" class="img-radius img-40 align-top m-r-15">
                                                                         <?php } ?>
 
                                                                         <div class="d-inline-block">

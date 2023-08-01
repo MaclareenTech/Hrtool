@@ -61,23 +61,23 @@ class AddCandidateControllers extends BaseController
     $cognate3Url = '';
     if ($documentType == '0') {
       $Document = $candidate[0]->candidate_aadhar_card;
-      $cognate3Url = "http://mtas.net.in/upload/aadhar/" . $Document;
+      $cognate3Url = "https://maclareenai.com/mtas/upload/aadhar/" . $Document;
       return Redirect($cognate3Url);
     } else if ($documentType == '1') {
       $Document = $candidate[0]->candidate_pan_card;
-      $cognate3Url = "http://mtas.net.in/upload/pan/" . $Document;
+      $cognate3Url = "https://maclareenai.com/mtas/upload/pan/" . $Document;
       return Redirect($cognate3Url);
     } else if ($documentType == '2') {
       $Document = $candidate[0]->candidate_resume;
-      $cognate3Url = "http://mtas.net.in/upload/resume/" . $Document;
+      $cognate3Url = "https://maclareenai.com/mtas/upload/resume/" . $Document;
       return Redirect($cognate3Url);
     } else if ($documentType == '3') {
       $Document = $candidate[0]->candidate_passport;
-      $cognate3Url = "http://mtas.net.in/upload/passport/" . $Document;
+      $cognate3Url = "https://maclareenai.com/mtas/upload/passport/" . $Document;
       return Redirect($cognate3Url);
     } else if ($documentType == '4') {
       $Document = $candidate[0]->candidate_photo;
-      $cognate3Url = "http://mtas.net.in/upload/image/" . $Document;
+      $cognate3Url = "https://maclareenai.com/mtas/upload/image/" . $Document;
       return Redirect($cognate3Url);
     }
   }
@@ -167,7 +167,7 @@ class AddCandidateControllers extends BaseController
 
       // Upload Pan Card
       if ($this->upload->do_upload('candidate_pan_card')) {
-        $file_name = $candidate_email . '_pan.pdf';
+        $file_name = $candidate_name.$candidate_mobile_no . '_pan.pdf';
         $uploaded_files['pan_card'] = $file_name;
         rename($this->upload->data('full_path'), './upload/pan/' . $file_name);
         $data['candidate_pan_card'] = $uploaded_files['pan_card'];
@@ -177,7 +177,7 @@ class AddCandidateControllers extends BaseController
 
       // Upload Passport
       if ($this->upload->do_upload('candidate_passport')) {
-        $file_name = $candidate_email . '_passport.pdf';
+        $file_name = $candidate_name.$candidate_mobile_no . '_passport.pdf';
         $uploaded_files['passport'] = $file_name;
         rename($this->upload->data('full_path'), './upload/passport/' . $file_name);
         $data['candidate_passport'] = $uploaded_files['passport'];
@@ -187,7 +187,7 @@ class AddCandidateControllers extends BaseController
 
       // Upload Candidate Resume
       if ($this->upload->do_upload('candidate_resume')) {
-        $file_name = $candidate_email . '_resume.pdf';
+        $file_name = $candidate_name.$candidate_mobile_no . '_resume.pdf';
         $uploaded_files['resume'] = $file_name;
         rename($this->upload->data('full_path'), './upload/resume/' . $file_name);
         $data['candidate_resume'] = $uploaded_files['resume'];
@@ -197,7 +197,7 @@ class AddCandidateControllers extends BaseController
 
       // Upload Candidate image
       if ($this->upload->do_upload('candidate_photo')) {
-        $file_name = $candidate_email . '_img.png';
+        $file_name = $candidate_name.$candidate_mobile_no . '_img.png';
         $uploaded_files['image'] = $file_name;
         rename($this->upload->data('full_path'), './upload/image/' . $file_name);
         $data['candidate_photo'] = $uploaded_files['image'];
@@ -416,7 +416,7 @@ class AddCandidateControllers extends BaseController
                                                             <tr>
                                                                 <td class="">
                                                                     <div class="">
-                                                                        <a href="http://mtas.net.in/" style="background-color:#05C6E3;border-radius:4px;color:#fff;display:inline-block;font-family:Helvetica, Arial, sans-serif;font-size:18px;font-weight:normal;line-height:50px;text-align:center;text-decoration:none;width:350px;-webkit-text-size-adjust:none;" href="http://mtas.net.in/">Visit Account and Start Traking</a>
+                                                                        <a href="https://maclareenai.com/mtas/" style="background-color:#05C6E3;border-radius:4px;color:#fff;display:inline-block;font-family:Helvetica, Arial, sans-serif;font-size:18px;font-weight:normal;line-height:50px;text-align:center;text-decoration:none;width:350px;-webkit-text-size-adjust:none;" href="https://maclareenai.com/mtas/">Visit Account and Start Traking</a>
                                                                     </div>
                                                                     <br>
                                                                 </td>
@@ -714,7 +714,7 @@ class AddCandidateControllers extends BaseController
 
     // Upload Aadhar Card
     if ($this->upload->do_upload('candidate_aadhar_card')) {
-      $file_name = $candidate_email . '_aadhar.pdf';
+      $file_name = $candidate_name.$candidate_mobile_no . '_aadhar.pdf';
       $uploaded_files['aadhar_card'] = $file_name;
       rename($this->upload->data('full_path'), './upload/aadhar/' . $file_name);
       $data['candidate_aadhar_card'] = $uploaded_files['aadhar_card'];
@@ -725,7 +725,7 @@ class AddCandidateControllers extends BaseController
 
     // Upload Pan Card
     if ($this->upload->do_upload('candidate_pan_card')) {
-      $file_name = $candidate_email . '_pan.pdf';
+      $file_name = $candidate_name.$candidate_mobile_no . '_pan.pdf';
       $uploaded_files['pan_card'] = $file_name;
       rename($this->upload->data('full_path'), './upload/pan/' . $file_name);
       $data['candidate_pan_card'] = $uploaded_files['pan_card'];
@@ -736,7 +736,7 @@ class AddCandidateControllers extends BaseController
 
     // Upload Passport
     if ($this->upload->do_upload('candidate_passport')) {
-      $file_name = $candidate_email . '_passport.pdf';
+      $file_name = $candidate_name.$candidate_mobile_no . '_passport.pdf';
       $uploaded_files['passport'] = $file_name;
       rename($this->upload->data('full_path'), './upload/passport/' . $file_name);
       $data['candidate_passport'] = $uploaded_files['passport'];
@@ -747,7 +747,7 @@ class AddCandidateControllers extends BaseController
 
     // Upload Candidate Resume
     if ($this->upload->do_upload('candidate_resume')) {
-      $file_name = $candidate_email . '_resume.pdf';
+      $file_name = $candidate_name.$candidate_mobile_no . '_resume.pdf';
       $uploaded_files['resume'] = $file_name;
       rename($this->upload->data('full_path'), './upload/resume/' . $file_name);
       $data['candidate_resume'] = $uploaded_files['resume'];
@@ -758,7 +758,7 @@ class AddCandidateControllers extends BaseController
 
     // Upload Candidate image
     if ($this->upload->do_upload('candidate_photo')) {
-      $file_name = $candidate_email . '_img.png';
+      $file_name = $candidate_name.$candidate_mobile_no . '_img.png';
       $uploaded_files['image'] = $file_name;
       rename($this->upload->data('full_path'), './upload/image/' . $file_name);
       $data['candidate_photo'] = $uploaded_files['image'];
@@ -916,7 +916,7 @@ class AddCandidateControllers extends BaseController
                     
                         /* Heading styles */
                         h1 {
-                          color: #989898;
+                          color: #D8D8D8;
                           font-size: 24px;
                           margin-top: 0;
                         }
@@ -931,7 +931,7 @@ class AddCandidateControllers extends BaseController
                         /* Button styles */
                         .button {
                           display: inline-block;
-                          background-color: #989898;
+                          background-color: #D8D8D8;
                           color: #ffffff;
                           text-decoration: none;
                           padding: 10px 20px;
@@ -1010,7 +1010,7 @@ class AddCandidateControllers extends BaseController
                     
                         /* Heading styles */
                         h1 {
-                          color: #989898;
+                          color: #D8D8D8;
                           font-size: 24px;
                           margin-top: 0;
                         }
@@ -1025,7 +1025,7 @@ class AddCandidateControllers extends BaseController
                         /* Button styles */
                         .button {
                           display: inline-block;
-                          background-color: #989898;
+                          background-color: #D8D8D8;
                           color: #ffffff;
                           text-decoration: none;
                           padding: 10px 20px;
@@ -1122,7 +1122,7 @@ class AddCandidateControllers extends BaseController
                         }
 
                         .reasons li {
-                            color: #989898;
+                            color: #D8D8D8;
                             font-size: 16px;
                             line-height: 1.5;
                             margin-bottom: 10px;
@@ -1254,7 +1254,7 @@ class AddCandidateControllers extends BaseController
                     /* Add color and 3D effect to specific elements */
                 
                     .header h1 {
-                      color: #989898;
+                      color: #D8D8D8;
                       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
                     }
                 
@@ -1264,7 +1264,7 @@ class AddCandidateControllers extends BaseController
                 
                     .container:before,
                     .container:after {
-                      border: 2px solid #989898;
+                      border: 2px solid #D8D8D8;
                       opacity: 0.5;
                     }
                   </style>
@@ -1396,7 +1396,7 @@ class AddCandidateControllers extends BaseController
                     /* Add color and 3D effect to specific elements */
                 
                     .header h1 {
-                      color: #989898;
+                      color: #D8D8D8;
                       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
                     }
                 
@@ -1406,7 +1406,7 @@ class AddCandidateControllers extends BaseController
                 
                     .container:before,
                     .container:after {
-                      border: 2px solid #989898;
+                      border: 2px solid #D8D8D8;
                       opacity: 0.5;
                     }
                   </style>
@@ -1538,7 +1538,7 @@ class AddCandidateControllers extends BaseController
                     /* Add color and 3D effect to specific elements */
                 
                     .header h1 {
-                      color: #989898;
+                      color: #D8D8D8;
                       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
                     }
                 
@@ -1548,7 +1548,7 @@ class AddCandidateControllers extends BaseController
                 
                     .container:before,
                     .container:after {
-                      border: 2px solid #989898;
+                      border: 2px solid #D8D8D8;
                       opacity: 0.5;
                     }
                   </style>
@@ -1624,11 +1624,11 @@ class AddCandidateControllers extends BaseController
                             }
 
                             h1 {
-                            color: #989898;
+                            color: #D8D8D8;
                             font-size: 28px;
                             margin: 0;
                             padding-bottom: 10px;
-                            border-bottom: 2px solid #989898;
+                            border-bottom: 2px solid #D8D8D8;
                             }
 
                             p {
@@ -1639,7 +1639,7 @@ class AddCandidateControllers extends BaseController
                             }
 
                             .button {
-                            background-color: #989898;
+                            background-color: #D8D8D8;
                             border-radius: 5px;
                             color: #ffffff;
                             display: inline-block;
@@ -1651,7 +1651,7 @@ class AddCandidateControllers extends BaseController
                             }
 
                             .button:hover {
-                            background-color: #989898;
+                            background-color: #D8D8D8;
                             }
 
                             .signature {
@@ -1731,7 +1731,7 @@ class AddCandidateControllers extends BaseController
                     }
                     
                     h1 {
-                      color: #989898;
+                      color: #D8D8D8;
                       font-size: 28px;
                       margin: 0;
                       text-align: center;
@@ -1745,7 +1745,7 @@ class AddCandidateControllers extends BaseController
                     }
                     
                     .button {
-                      background-color: #989898;
+                      background-color: #D8D8D8;
                       border-radius: 5px;
                       color: #ffffff;
                       display: inline-block;
@@ -1757,14 +1757,14 @@ class AddCandidateControllers extends BaseController
                     }
                     
                     .button:hover {
-                      background-color: #989898;
+                      background-color: #D8D8D8;
                     }
                   </style>
                 </head>
                 <body>
                   <div class="container">
                     <h1 >Visa Application Process</h1>
-                    <p style="color: #989898; font-weight: bold;">Dear ' . $candidate_name . ',</p>
+                    <p style="color: #D8D8D8; font-weight: bold;">Dear ' . $candidate_name . ',</p>
                     <p>For visa and further process, we will be filling out the visa application on your behalf. After any response or updates, we will promptly inform you.</p>
                     <p>If you have any questions or need more information, please dont hesitate to contact us.</p>
                     <!-- Regards Section -->
@@ -1880,7 +1880,7 @@ class AddCandidateControllers extends BaseController
                         /* Add color and 3D effect to specific elements */
 
                         .header h1 {
-                        color: #989898;
+                        color: #D8D8D8;
                         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
                         }
 
@@ -1890,7 +1890,7 @@ class AddCandidateControllers extends BaseController
 
                         .container:before,
                         .container:after {
-                        border: 2px solid #989898;
+                        border: 2px solid #D8D8D8;
                         opacity: 0.5;
                         }
                     </style>

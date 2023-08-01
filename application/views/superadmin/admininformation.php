@@ -117,8 +117,8 @@
                                 </div>
                             </div>
                         </div>
-                        <a >
-                            <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px; ">
+                        <a>
+                            <img class="img-fluid" src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -142,7 +142,7 @@
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-                <nav class="pcoded-navbar">
+                    <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
@@ -150,6 +150,7 @@
 
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +197,7 @@
                             <?php } ?>
                             <?php
                             $mail = $this->session->userdata('user_email'); ?>
-                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com"  ) { ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com") { ?>
                                 <div class="pcoded-navigation-label">Invoice</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li class="">
@@ -255,6 +256,16 @@
                                 </li>
                                 <!-- href="<?php echo base_url(); ?>logout" -->
                             </ul>
+                            <div class="pcoded-navigation-label">Profile</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>profile" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa fa-cog"></i><b>L</b></span>
+                                        <span class="pcoded-mtext">Profile</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
                             <div class="pcoded-navigation-label">Logout</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
@@ -282,7 +293,7 @@
                                     <div class="col-md-4">
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a > <i class="fa fa-home"></i> </a>
+                                                <a> <i class="fa fa-home"></i> </a>
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!">Admin Details</a>
                                             </li>
@@ -304,7 +315,7 @@
 
 
                             <div class="main-body">
-                                <div class="page-wrapper" >
+                                <div class="page-wrapper">
                                     <!-- Page-body start -->
 
                                     <!--  Admin table start -->
@@ -335,6 +346,7 @@
                                                                 <th>Admin Number</th>
                                                                 <th>Emp Id</th>
                                                                 <th>Role</th>
+                                                                <th>Login Time</th>
                                                                 <th>Status </th>
                                                                 <th></th>
                                                             </tr>
@@ -359,6 +371,14 @@
                                                                                 Super Admin
                                                                             </div>
                                                                         <?php } ?>
+                                                                    <td><?php $inputDateTime =  $row->login_time; // Create a DateTime object from the input string
+                                                                        $dateObj = new DateTime($inputDateTime);
+
+                                                                        // Format the DateTime object into a human-readable format
+                                                                        $humanReadableFormat = $dateObj->format('F j, Y, g:i A');
+
+                                                                        // Output the human-readable format
+                                                                        echo $humanReadableFormat; ?></td>
                                                                     <td> <?php if ($row->id_deleted == "0") { ?>
                                                                             <a href="<?php echo base_url('UpdateStatus/' . $row->id_deleted . '/' . $row->user_id); ?>" style="text-decoration: none;">
                                                                                 <button style="background-color: #2ECC71; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">

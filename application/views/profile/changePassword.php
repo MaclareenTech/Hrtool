@@ -37,9 +37,107 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <!-- serch option for table  -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 
+<style>
+    .profileheader.panel-mask {
+        overflow: hidden;
+    }
+
+    .border-default-light {
+        border: solid 1px #e6e6e6;
+    }
+
+    .panel {
+        margin-bottom: 15px;
+        background-color: #fff;
+        border-radius: 4px;
+    }
+
+    .profileheader .coverprofile {
+        height: 158px;
+        margin-bottom: -75px;
+    }
+
+    .bg-cover,
+    .bg-page {
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .text-center,
+    .strike-center {
+        text-align: center !important;
+    }
+
+    .margbot-none {
+        margin-bottom: 0 !important;
+    }
+
+    .avatar-150 {
+        width: 150px;
+        height: 150px;
+    }
+
+    .photo,
+    .modal-header .close,
+    .modal-body .close,
+    .preview-form .close,
+    .timeline>li:before,
+    .circle-icon,
+    .numbering-circle,
+    .notif.unread .notif-counter,
+    .notif.read:before,
+    .notification-counter {
+        border-radius: 50% !important;
+    }
+
+    .panel-body {
+        padding: 15px;
+    }
+
+
+    .dropdown,
+    .dropup {
+        position: relative;
+    }
+
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+    }
+
+    .btn-capsule {
+        border-radius: 20px;
+        padding: 5px 20px;
+    }
+
+    .margbot,
+    .polling-result .polling-result-item {
+        margin-bottom: 15px !important;
+    }
+
+    .btn-primary,
+    .introjs-donebutton,
+    .introjs-nextbutton {
+        color: #fff;
+        background-color: #00A5AF;
+        border-color: #008d96;
+    }
+</style>
 
 <body>
 
@@ -117,7 +215,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a >
+                        <a>
                             <img class="img-fluid" src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -142,7 +240,7 @@
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-                <nav class="pcoded-navbar">
+                    <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
@@ -150,7 +248,7 @@
 
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -197,7 +295,7 @@
                             <?php } ?>
                             <?php
                             $mail = $this->session->userdata('user_email'); ?>
-                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com"  ) { ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com") { ?>
                                 <div class="pcoded-navigation-label">Invoice</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li class="">
@@ -214,7 +312,7 @@
                             <?php if ($role == "superadmin") { ?>
                                 <div class="pcoded-navigation-label">Job Openings</div>
                                 <ul class="pcoded-item pcoded-left-item">
-                                    <li class="pcoded-hasmenu active pcoded-trigger">
+                                    <li class="pcoded-hasmenu ">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="fa fa-cubes"></i><b>JO</b></span>
                                             <span class="pcoded-mtext">Job Openings</span>
@@ -228,7 +326,7 @@
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                             </li>
-                                            <li class="active">
+                                            <li class="">
                                                 <a href="<?php echo base_url(); ?>AddJobopeningFrom" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                     <span class="pcoded-mtext">Add Job Openings</span>
@@ -258,7 +356,7 @@
                             </ul>
                             <div class="pcoded-navigation-label">Profile</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
+                                <li class="active">
                                     <a href="<?php echo base_url(); ?>profile" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="fa fa-cog"></i><b>L</b></span>
                                         <span class="pcoded-mtext">Profile</span>
@@ -286,16 +384,16 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Add Job Opening</h5>
+                                            <h5 class="m-b-10">Change Password</h5>
                                             <p class="m-b-0">Maclareen Talent Acquisition System </p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a > <i class="fa fa-home"></i> </a>
+                                                <a> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a>Add Job Opening</a>
+                                            <li class="breadcrumb-item"><a>Change Password </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -318,90 +416,110 @@
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
 
-                                    <!-- add position form start -->
-                                    <div class="card">
-                                        <?php
-                                        $this->load->helper('form');
-                                        $error = $this->session->flashdata('error');
-                                        if ($error) {
-                                        ?>
-                                            <div class="alert alert-danger alert-dismissable">
-                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                <?php echo $error; ?>
-                                            </div>
-                                        <?php }
-                                        $success = $this->session->flashdata('success');
-                                        if ($success) {
-                                        ?>
-                                            <div class="alert alert-success alert-dismissable">
-                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                <?php echo $success; ?>
-                                            </div>
-                                        <?php } ?>
-                                        <div class="card-header">
-                                            <h5>Add Job Details</h5>
-                                            <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
-                                        </div>
-                                        <div class="card-block">
-                                            <form class="form-material" action="<?php echo base_url(); ?>AddJobopening" method="post">
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="text" name="job_country" class="form-control" id="jobCountryInput" required>
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Job Country</label>
-                                                </div>
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="text" name="job_position" class="form-control" id="jobPositionInput" onkeyup="generateJobCode()" required>
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Job Position</label>
+
+
+
+
+                                    <div class="panel panel-mask profileheader border-default-light">
+
+
+                                        <div class="panel-body">
+                                            <div class="text-center">
+                                                <div class="dropdown inblock">
+                                                    <h1 class="font-3x margtop-none inblock"><?php echo $this->session->userdata('name');; ?></h1>
                                                 </div>
 
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="text" name="job_code" class="form-control" id="jobCodeInput" readonly required>
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Job Code</label>
-                                                </div>
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="number" name="job_open_position" class="form-control" pattern="[0-9]+" required> 
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Job Open Position</label>
-                                                </div>
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="date" name="job_open_from" class="form-control" min="<?= date('d F Y') ?>" required>
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Valid From</label>
-                                                </div>
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="date" name="job_open_till" class="form-control" min="<?= date('d F Y') ?>" required>
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Valid Till</label>
-                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <div class="card-block">
+                                                <?php
+                                                $this->load->helper('form');
+                                                $error = $this->session->flashdata('error');
+                                                if ($error) {
+                                                ?>
+                                                    <div class="alert alert-danger alert-dismissable">
+                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                        <?php echo $error; ?>
+                                                    </div>
+                                                <?php }
+                                                $success = $this->session->flashdata('success');
+                                                if ($success) {
+                                                ?>
+                                                    <div class="alert alert-success alert-dismissable">
+                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                        <?php echo $success; ?>
+                                                    </div>
+                                                <?php } ?>
+                                                <form class="form-material" action="<?php echo base_url(); ?>changePassword" method="post">
+                                                    <div class="row">
 
-                                                <button class="btn btn-success waves-effect waves-light">Add Opening</button>
-                                            </form>
+                                                        <div class="col-xl-12 col-md-12">
+                                                            <!-- Basic Form Inputs card start -->
+
+                                                            <div class="form-group form-primary">
+                                                                <input type="password" name="old_password" class="form-control">
+                                                                <span class="form-bar"></span>
+                                                                <label class="float-label">Old Password</label>
+                                                            </div>
+                                                            <div class="form-group form-primary">
+                                                                <input type="password" name="new_password" class="form-control">
+                                                                <span class="form-bar"></span>
+                                                                <label class="float-label">New Password</label>
+                                                            </div>
+                                                            <div class="form-group form-primary">
+                                                                <input type="password" name="confirm_password" class="form-control">
+                                                                <span class="form-bar"></span>
+                                                                <label class="float-label">Confirm Password</label>
+                                                            </div>
+
+                                                            <!-- Basic Form Inputs card end -->
+                                                        </div>
+                                 
+
+                                            
+                                                <div class="col-sm-12">
+                                                    <center>
+                                                        <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: linear-gradient(to bottom, #2ecc71, #27ae60); padding: 12px 20px; box-shadow: 0 4px 0 #1f8c4d; color: white; font-size: 16px; border-radius: 6px; border: none; transition: all 0.3s ease;">Change Password</button>
+                                                    </center>
+
+                                                </div>
+                                                </form>
+
+                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
                                         </div>
                                     </div>
-                                    <!--  add position  form end -->
-
-
-
-
-
-
-
-
-
-
-
-
                                 </div>
-                                <!-- Page-body end -->
+
+
+
+
+
+
+
+
+
                             </div>
-                            <div id="styleSelector"> </div>
+                            <!-- Page-body end -->
                         </div>
+                        <div id="styleSelector"> </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     </div>
 
@@ -426,30 +544,9 @@
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/script.js "></script>
 
 
-    <!-- job id Creater start -->
 
-    <script>
-        function generateJobCode() {
-            const countryInput = document.getElementById('jobCountryInput');
-            const positionInput = document.getElementById('jobPositionInput');
-            const jobCodeInput = document.getElementById('jobCodeInput');
 
-            const country = countryInput.value.substring(0, 2).toUpperCase();
-            const position = positionInput.value.substring(0, 2).toUpperCase();
-            const randomNumbers = '<?php echo $nextID; ?>';
 
-            jobCodeInput.value = country + position + randomNumbers;
-        }
-    </script>
-    <!-- job id Creater end -->
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#candidate-table').DataTable({
-                "paging": true
-            });
-        });
-    </script>
 
 
 

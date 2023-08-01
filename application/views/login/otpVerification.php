@@ -34,6 +34,55 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
 </head>
+<style>
+    .bgWhite {
+        background: white;
+        box-shadow: 0px 3px 6px 0px #cacaca;
+    }
+
+    .title {
+        font-weight: 600;
+        margin-top: 20px;
+        font-size: 24px
+    }
+
+    .customBtn {
+        border-radius: 0px;
+        padding: 10px;
+        background: rgb(46, 204, 113);
+    }
+
+    form input {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        margin: 5px;
+    }
+
+    #resendOTP {
+        color: red;
+        display: none;
+    }
+
+    .resend-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #fffcfc00;
+        /* You can change this to your desired button color */
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Style for when the link is hovered over */
+    .resend-button:hover {
+        background-color: #fffcfc00;
+        /* You can change this to the hover color you prefer */
+    }
+</style>
+
 
 <body themebg-pattern="theme1">
     <?php $this->load->helper('form'); ?>
@@ -113,122 +162,129 @@
         <?php } ?>
         <!-- Container-fluid starts -->
         <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <!-- Authentication card start -->
-
-                    <form class="md-float-material form-material" action="<?php echo base_url(); ?>loginMe" method="post">
-                        <div class="text-center">
-                            <img src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="bg/main_logo.png" style="width: 300px;">
-                        </div>
-                        <div class="auth-box card">
-                            <div class="card-block">
-                                <div class="row m-b-20">
-                                    <div class="col-md-12">
-                                        <h3 class="text-center">Sign In</h3>
-                                    </div>
-                                </div>
-                                <div class="form-group form-primary">
-                                    <input type="email" name="email" class="form-control" required>
-                                    <span class="form-bar"></span>
-                                    <label class="float-label">Your Email Address</label>
-                                </div>
-                                <div class="form-group form-primary">
-                                    <input type="password" name="password" class="form-control" required>
-                                    <span class="form-bar"></span>
-                                    <label class="float-label">Password</label>
-                                </div>
-                                
-                                
-                                <div class="row m-t-30">
-                                    <div class="col-md-12">
-                                    <button type="submit" id="getLocationBtn" class="btn btn-md btn-block waves-effect waves-light text-center m-b-20" style="background: #2ecc71; display: none;">Sign in</button> </div>
-                                </div>
-                                <hr />
-
-                            </div>
-                        </div>
-                        <input type="text" name="submitted_longitude" id="submitted_longitude" class="form-control" style="opacity: 0;">
-                        <input type="text" name="submitted_latitude" id="submitted_latitude" class="form-control" style="opacity: 0;">
-                              
-                    </form>
-                    <!-- end of form -->
-                </div>
-                <!-- end of col-sm-12 -->
+            <div class="text-center">
+                <img src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="bg/main_logo.png" style="width: 300px;">
             </div>
-            <!-- end of row -->
+            <div class="row justify-content-md-center">
+                <div class="col-md-4 text-center">
+                    <div class="row">
+                        <div class="col-sm-12 mt-5 bgWhite">
+                            <div class="title">
+                                Verify OTP
+                            </div>
+
+                            <form action="<?php echo base_url(); ?>verifyOtp" method="post" class="mt-5">
+                                <input class="otp" type="text" name="otp1" oninput='digitValidate(this)' onkeyup='tabChange(1)' maxlength=1 required style="
+    width: 50px;
+    height: 50px;
+">
+                                <input class="otp" type="text" name="otp2" oninput='digitValidate(this)' onkeyup='tabChange(2)' maxlength=1 required style="
+    width: 50px;
+    height: 50px;
+">
+                                <input class="otp" type="text" name="otp3" oninput='digitValidate(this)' onkeyup='tabChange(3)' maxlength=1 required style="
+    width: 50px;
+    height: 50px;
+">
+                                <input class="otp" type="text" name="otp4" oninput='digitValidate(this)' onkeyup='tabChange(4)' maxlength=1 required style="
+    width: 50px;
+    height: 50px;
+">
+
+                                <hr class="mt-4">
+                                <button type="submit" id="getLocationBtn" class="btn btn-md btn-block waves-effect waves-light text-center m-b-20" style="background: #2ecc71;">Verify</button>
+                                <input id="targetField" type="text" name="otpexpire" value="no" style="opacity: 0;margin: -20px;display: none;">
+                                <hr class="mt-4">
+                            </form>
+
+                            <p id="timerText"> Resend OTP in <span id="countdowntimer">60</span> Seconds</p>
+                            <p id="resendOTP" class="resend-button" style="display: none;">Resend OTP</p>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- end of container-fluid -->
     </section>
 
 
 
+    <!-- opt edittext script start -->
 
-    <!-- location get start  -->
     <script>
-        // Function to show the popup asking the user to enable location
-        function showLocationPopup() {
-            var popup = confirm("To use this feature, please enable location access in your browser settings.");
-            if (popup) {
-                // Redirect the user to the browser settings page to enable location
-                window.location.href = "chrome://settings/content/location";
-            }
+        let digitValidate = function(ele) {
+            console.log(ele.value);
+            ele.value = ele.value.replace(/[^0-9]/g, '');
         }
 
-        // Function to get the user's location
-        function getUserLocation() {
-    if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(
-            function(position) {
-                var latitude = position.coords.latitude;
-                var longitude = position.coords.longitude;
-
-                // Set the values of the input fields with the retrieved latitude and longitude
-                document.getElementById('submitted_latitude').value = latitude;  
-                document.getElementById('submitted_longitude').value = longitude;
-
-                // document.getElementById('submitted_latitude').value = longitude;  
-                // document.getElementById('submitted_longitude').value = latitude;
-
-
-                // Show the button after successfully obtaining the user's location
-                document.getElementById('getLocationBtn').style.display = "block";
-            },
-            function(error) {
-                // Handle error if geolocation is not available or user denied permission
-                console.error('Error getting user location:', error.message);
-
-                // If user denied or blocked location access, show the popup
-                if (error.code === error.PERMISSION_DENIED || error.code === error.POSITION_UNAVAILABLE) {
-                    showLocationPopup();
-                }
+        let tabChange = function(val) {
+            let ele = document.querySelectorAll('input');
+            if (ele[val - 1].value != '') {
+                ele[val].focus()
+            } else if (ele[val - 1].value == '') {
+                ele[val - 2].focus()
             }
-        );
-    } else {
-        console.error('Geolocation is not available in this browser.');
-        // If geolocation is not available, show the popup
-        showLocationPopup();
-    }
-}
-
-function showLocationPopup() {
-    // Implement your logic to show the location popup here
-    console.log("Location popup is shown.");
-}
-
-
-
-
-// Call the function to get the user's location
-
-
-
-        // Call the function when the page is fully loaded
-        window.onload = function() {
-            getUserLocation();
-        };
+        }
     </script>
-    <!-- location get end  -->
+    <!-- opt edittext script end -->
+
+    <!-- Timer strat -->
+
+    <script>
+        var timeleft = 60;
+        var downloadTimer;
+
+        function startTimer() {
+            document.getElementById("countdowntimer").textContent = timeleft;
+            downloadTimer = setInterval(function() {
+                timeleft--;
+                document.getElementById("countdowntimer").textContent = timeleft;
+
+                if (timeleft <= 0) {
+                    clearInterval(downloadTimer);
+                    document.getElementById("timerText").style.display = "none";
+                    document.getElementById("countdowntimer").style.display = "none";
+                    document.getElementById("resendOTP").style.display = "block";
+                    //  window.location.href = "<?php echo base_url(); ?>optscreen";
+                    var otpValue = 'yes';
+
+                    // Set the value into the target text field
+                    document.getElementById("targetField").value = otpValue;
+                }
+            }, 1000);
+        }
+
+        startTimer();
+
+        document.getElementById("resendOTP").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+            timeleft = 10;
+            // document.getElementById("timerText").style.display = "inline";
+            // document.getElementById("countdowntimer").style.display = "inline";
+            // document.getElementById("resendOTP").style.display = "none";
+            // var otpValue = 'no';
+            window.location.href = "<?php echo base_url(); ?>resendOtp";
+            // Set the value into the target text field
+            // document.getElementById("targetField").value = otpValue;
+            // startTimer();
+        });
+    </script>
+    <!-- Timer end -->
+
+    <!-- hide time start -->
+
+    <script>
+        const error = "<?php echo $error ? 'true' : 'false'; ?>";
+        if (error === "true") {
+            // If there is an error, hide the form elements and show the error message
+            document.getElementById("timerText").style.display = "none";
+            document.getElementById("countdowntimer").style.display = "none";
+            document.getElementById("resendOTP").style.display = "block";
+        }
+    </script>
+    <!-- hide time end -->
 
     <!-- Required Jquery -->
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery/jquery.min.js "></script>

@@ -184,7 +184,7 @@
                             </div>
                         </div>
                         <a >
-                            <img class="img-fluid" src="http://mtas.net.in/assets/images/logo_new.png" alt="Theme-Logo" style=" width: 160px; ">
+                            <img class="img-fluid" src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -216,6 +216,7 @@
 
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -321,6 +322,16 @@
                                 </li>
                                 <!-- href="<?php echo base_url(); ?>logout" -->
                             </ul>
+                            <div class="pcoded-navigation-label">Profile</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>profile" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa fa-cog"></i><b>L</b></span>
+                                        <span class="pcoded-mtext">Profile</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
                             <div class="pcoded-navigation-label">Logout</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
@@ -407,14 +418,14 @@
 
                                                             <!-- src ="<?= base_url($row->place_img) ?>" -->
 
-                                                            <div class="left">
+                                                            <!-- <div class="left">
 
                                                                 <img id="avatarImg" src="<?php echo base_url(); ?>assets/images/avatar-4.jpg" alt="">
 
 
                                                                 <label for="replaceImage">Upload Profile image</label>
                                                                 <input type="file" name="user_profile" id="replaceImage" accept="image/*" onchange="loadImage(event)">
-                                                            </div>
+                                                            </div> -->
 
                                                             <script>
                                                                 function loadImage(event) {
@@ -437,7 +448,7 @@
 
                                                             <!-- Basic Form Inputs card end -->
                                                         </div>
-                                                        <div class="col-xl-8 col-md-8">
+                                                        <div class="col-xl-12 col-md-12">
                                                             <!-- Basic Form Inputs card start -->
 
 
@@ -510,7 +521,7 @@
 
 
 
-                                                    </form>
+                                                 
 
 
                                                 </div>

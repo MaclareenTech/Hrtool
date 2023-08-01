@@ -71,6 +71,17 @@ class Admin_model extends MY_Model
         return $query->result_array();
     }
 
+    public function UpdateUsingEmailId($user_email, $data)
+    {
+        $this->db->where('user_email', $user_email);
+        if ($this->db->update($this->table, $data)) {
+            return $this->db->where('user_email', $user_email)->get($this->table)->result_array();
+        } else {
+            return false;
+        }
+        // echo $this->db->last_query();
+    }
+
     public function InsertNew_User($data)
     {
         if ($this->db->insert($this->table, $data)) {
@@ -129,6 +140,19 @@ class Admin_model extends MY_Model
     public function CheckAvailable($user_email)
     {
         $count = $this->db->where(['user_email' => $user_email])->where(['id_deleted' => '0'])
+            ->get($this->table);
+
+        if ($count->num_rows()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function VerifyOTP($user_email,$login_otp)
+    {
+        $count = $this->db->where(['user_email' => $user_email])->where(['id_deleted' => '0'])->where(['login_otp' => $login_otp])
             ->get($this->table);
 
         if ($count->num_rows()) {
