@@ -410,20 +410,6 @@
                                                                                     <label for="bank">Client's Name:</label>
                                                                                     <input type="text" name="candidate_name" placeholder="john does" class="form-control" id="bankName" required>
                                                                                 </div>
-                                                                                <!-- <div class="form-group">
-                                                                                    <label for="bank">Client's Name:</label>
-                                                                                    <div class="custom-select-container" style="position: relative; display: inline-block;">
-                                                                                        <select name="candidate_name_select" class="select-input" onchange="toggleCustomInput(this.value)" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url('path-to-custom-arrow-icon.png'); background-position: right center; background-repeat: no-repeat;">
-                                                                                            <?php foreach ($candidate as $row) : ?>
-                                                                                                <option value="<?php echo $row->candidate_id ?>"><?php echo $row->candidate_name; ?></option>
-                                                                                            <?php endforeach; ?>
-                                                                                            <option value="custom">Other</option>
-                                                                                        </select>
-                                                                                        <input type="text" name="candidate_name" class="custom-input form-control" placeholder="Type your custom option" required style="position: absolute; top: 0; left: 0; width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; display: none;">
-                                                                                    </div>
-                                                                                </div> -->
-
-
 
 
                                                                                 <div class="form-group">
@@ -571,7 +557,7 @@
                                                                                         <td>
                                                                                             <div class="form-row">
                                                                                                 <div class="col">
-                                                                                                    <input type="text" name="gst_rate[]" id="gst_rate" class="form-control" placeholder="Enter GST Rate" required pattern="[0-9]+(\.\d{1,2})?|[Ss]pecial" title="Please enter numbers, decimals, or 'Special'">
+                                                                                                    <input type="text" name="gst_rate[]" id="gst_rate" class="form-control" placeholder="Enter GST Rate" required pattern="[0-9]+(\.\d{1,2})?|[Ss]pecial" title="Please enter Proper Value ">
 
                                                                                                 </div>
                                                                                             </div>
@@ -852,7 +838,7 @@
                                             // Renumber the SR. NO. series
                                             updateSrNoSeries();
                                             // Update the GST rate for the newly added row
-                                         //   updateGSTRate(hsnCell.getElementsByTagName("select")[0]);
+                                            //   updateGSTRate(hsnCell.getElementsByTagName("select")[0]);
                                         }
 
                                         function removeRow(button) {
@@ -907,31 +893,31 @@
                                                 "998515": 18,
                                                 "998516": 18,
                                                 "998517": 18,
-                                                "998519": 18,       
-                                                 "998521": 18,
-                                                 "998522": 18,
-                                                 "998523": 18,
-                                                 "998524": 18,
-                                                 "48211010": 18,
-                                                 "9964": 18,
-                                                 "996411": 18,
-                                                 "996412": 18,
-                                                 "996413": 18,
-                                                 "996414": 18,
-                                                 "996415": 18,
-                                                 "996416": 18,
-                                                 "996419": 18,
-                                                 "996421": 18,
-                                                 "996422": 18,
-                                                 "996423": 18,
-                                                 "996424": 18,
-                                                 "996425": 18,
-                                                 "996427": 18,
-                                                 "996429": 18
-                                              
+                                                "998519": 18,
+                                                "998521": 18,
+                                                "998522": 18,
+                                                "998523": 18,
+                                                "998524": 18,
+                                                "48211010": 18,
+                                                "9964": 18,
+                                                "996411": 18,
+                                                "996412": 18,
+                                                "996413": 18,
+                                                "996414": 18,
+                                                "996415": 18,
+                                                "996416": 18,
+                                                "996419": 18,
+                                                "996421": 18,
+                                                "996422": 18,
+                                                "996423": 18,
+                                                "996424": 18,
+                                                "996425": 18,
+                                                "996427": 18,
+                                                "996429": 18
 
 
-                                                
+
+
                                             };
 
                                             // Lookup the GST rate based on the selected HSN number

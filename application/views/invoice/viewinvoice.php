@@ -145,8 +145,7 @@
 
 <body>
     <div class="invoice-container">
-        <!-- <div class="red-strip"><img src="https://maclareenai.com/mtas/assets/images/strip.png" alt=""></div> -->
-        <div class="red-strip"><img src="https://maclareenai.com/mtas/assets/images/strip.png" alt=""></div>
+        <div class="red-strip"><img src="https://maclareenai.com/mtas/assets/images/invoice.png" alt=""></div>
         <div class="centered-content"> <h4 style="font-size: 23px;">INVOICE</h4></div>
 
        
@@ -260,37 +259,14 @@
                 </tfoot>
             </table>
             <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            
 
-            <table class="invoice-items">
-                <thead>
-                    <tr>
-                        <th>HSN/SAC</th>
-                        <th>Tax</th>
-                        <th>Amount Without Tax</th>
-                        <th>Amount With Tax</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <?php foreach ($dataArray as $row) : ?>
-                        <tr>
-                            <td><?php echo $row->hsn ?></td>
-                            <td><?php echo $row->gstRate ?></td>
-                            <td><?php echo $row->amount ?></td>
-                            <td><?php echo $row->amountwithGST ?></td>
-
-                        </tr>
-                    <?php endforeach; ?>
-
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="2" class="text-center"><b>Total </b></td>
-                        <td colspan="2"> <?php echo $user[0]->invoice_amount_with_gst ?> </td>
-                        <!-- Empty cell for "Remove" column in the total row -->
-                    </tr>
-                </tfoot>
-            </table>
+          
             <br>
 
 
