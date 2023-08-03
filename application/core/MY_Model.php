@@ -13,11 +13,12 @@ class MY_Model extends CI_Model
     protected $TBL_JOB_OPENING = 'tbl_job_opening';
     protected $TBL_CANDIDATE_SOURCE = 'tbl_candidate_source';
     protected $TBL_INVOICE = 'tbl_invoice';
+    protected $TBL_CHAT = 'tbl_chat';
     
     
 
     
-    protected $TBL_DISTRIBUTOR = 'tbl_distributor';
+  
     protected $TBL_LICENSE_KEY = 'tbl_license_key';
     protected $TBL_SHOP = 'tbl_shop';
     protected $TBL_USER = 'tbl_user';

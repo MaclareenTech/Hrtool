@@ -165,6 +165,140 @@
         letter-spacing: 1px;
         background: #434341;
     }
+
+    /* card animation  start*/
+
+    .wrapperanimation {
+        flex: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            margin-bottom: 100px; /* Add spacing between cards */
+            margin-top: 1000px;
+    }
+
+    .outer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: center;
+        bottom: 0;
+    }
+
+    .card {
+        background: #D8D8D8;
+        width: 300px;
+        /* Set the width of the cards */
+        height: 550px;
+        /* Increase the height of the cards */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        justify-content: space-between;
+        border-radius: 50px;
+        /* Make the cards rounded */
+        box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+        animation: animate 15s linear infinite;
+        animation-delay: calc(3s * var(--delay));
+        margin-left: 5px;
+        margin-right: 5px;
+              
+        /* Add spacing between cards */
+    }
+
+    .outer:hover .card {
+        animation-play-state: paused;
+    }
+
+    .wrapperanimation .card:last-child {
+        animation-delay: calc(-3s * var(--delay));
+    }
+
+    /* Increased animation delay for the second card */
+    .wrapperanimation .card:nth-child(2) {
+        animation-delay: calc(7s * var(--delay));
+    }
+
+    @keyframes animate {
+        0% {
+            opacity: 0;
+            transform: translateY(100%) scale(0.5);
+        }
+
+        5%,
+        20% {
+            opacity: 0.4;
+            transform: translateY(100%) scale(0.7);
+        }
+
+        25%,
+        40% {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0%) scale(1);
+        }
+
+        45%,
+        60% {
+            opacity: 1;
+            transform: translateY(-100%) scale(0.7);
+        }
+
+        65%,
+        100% {
+            opacity: 0;
+            transform: translateY(-100%) scale(0.5);
+        }
+    }
+
+    .card .img {
+        width: 100%;
+        height: 50%;
+        /* Set the height of the image to 50% of the card height */
+        border-radius: 20px 20px 0 0;
+        /* Rounded corners for the top of the image */
+        overflow: hidden;
+        /* Clip the image within the rounded corners */
+    }
+
+    .card .img img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .card h1 {
+        margin-top: 20px;
+        font-size: 24px;
+    }
+
+    .card p {
+        margin-top: 10px;
+        font-size: 16px;
+        line-height: 1.6;
+        text-align: center;
+    }
+
+    .card a {
+        margin-top: 20px;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        color: #fff;
+        background: linear-gradient(to bottom, #e33737 0%, #8e2828 100%);
+        transition: all 0.3s ease;
+    }
+
+    .card a:hover {
+        transform: scale(0.94);
+    }
+
+
+    /* card animation  end */
 </style>
 
 <body>
@@ -243,7 +377,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a >
+                        <a>
                             <img class="img-fluid" src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="Theme-Logo" style=" width: 160px;">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -303,6 +437,36 @@
                                 </li>
                             </ul>
 
+                            <!--slider code start -->
+                            <ul class="pcoded-item pcoded-left-item">
+                            <div class="wrapperanimation">
+                                <div class="outer">
+                                    <!-- Add more .card elements as needed -->
+                                    <div class="card" style="--delay: -1;">
+                                        <div class="img">
+                                            <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" alt="Card Image">
+                                        </div>
+                                        <h1 style = "font-size: 25px;">Card Heading</h1>
+                                        <p style = "font-size: 19px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget mauris vel risus fringilla tincidunt.</p>
+                                        <a href="#" style = "font-size: 15px;">Click Me</a>
+                                    </div>
+                                    <div class="card" style="--delay: -1;">
+
+                                        <div class="img">
+                                            <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" alt="Card Image">
+                                        </div>
+                                        <h1 style = "font-size: 25px;">Card Heading</h1>
+                                        <p style = "font-size: 19px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget mauris vel risus fringilla tincidunt.</p>
+                                        <a href="#" style = "font-size: 15px;">Click Me</a>
+                                    </div>
+                                    <!-- Add more cards here -->
+                                </div>
+                            </div>
+                            </ul>
+                            
+                            <!--slider code end  -->
+
+                        </div>
 
                     </nav>
                     <div class="pcoded-content">
@@ -319,7 +483,7 @@
                                     <div class="col-md-4">
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a > <i class="fa fa-home"></i> </a>
+                                                <a> <i class="fa fa-home"></i> </a>
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!"> Candidate Information</a>
                                             </li>
@@ -336,7 +500,7 @@
 
 
 
-                        <div class="pcoded-inner-content" >
+                        <div class="pcoded-inner-content">
                             <!-- Main-body start -->
                             <div class="main-body">
                                 <div class="page-wrapper">
@@ -356,7 +520,8 @@
                                                 </div>
                                                 <div class="input-box">
                                                     <span class="details">Job title</span>
-                                                    <input type="text" value="<?php   $combined_value = $candidate[0]->job_country . ' - ' . $candidate[0]->job_position; echo $combined_value ; ?>" disabled>
+                                                    <input type="text" value="<?php $combined_value = $candidate[0]->job_country . ' - ' . $candidate[0]->job_position;
+                                                                                echo $combined_value; ?>" disabled>
                                                 </div>
                                                 <div class="input-box">
                                                     <span class="details">E-Mail</span>

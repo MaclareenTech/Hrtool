@@ -43,118 +43,140 @@
 </head>
 
 <style>
-    .profileheader.panel-mask {
-        overflow: hidden;
+    .app-wrapper {
+        height: 100%;
     }
 
-    .border-default-light {
-        border: solid 1px #e6e6e6;
-    }
-
-    .panel {
-        margin-bottom: 15px;
-        background-color: #fff;
-        border-radius: 4px;
-    }
-
-    .profileheader .coverprofile {
-        height: 158px;
-        margin-bottom: -75px;
-    }
-
-    .bg-cover,
-    .bg-page {
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-    .text-center,
-    .strike-center {
-        text-align: center !important;
-    }
-
-    .margbot-none {
-        margin-bottom: 0 !important;
-    }
-
-    .avatar-150 {
-        width: 150px;
-        height: 150px;
-    }
-
-    .photo,
-    .modal-header .close,
-    .modal-body .close,
-    .preview-form .close,
-    .timeline>li:before,
-    .circle-icon,
-    .numbering-circle,
-    .notif.unread .notif-counter,
-    .notif.read:before,
-    .notification-counter {
-        border-radius: 50% !important;
-    }
-
-    .panel-body {
-        padding: 15px;
-    }
-
-
-    .dropdown,
-    .dropup {
-        position: relative;
-    }
-
-    .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        margin: -1px;
-        padding: 0;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        border: 0;
-    }
-
-    .btn-capsule {
-        border-radius: 20px;
-        padding: 5px 20px;
-    }
-
-    .margbot,
-    .polling-result .polling-result-item {
-        margin-bottom: 15px !important;
-    }
-
-    .btn-primary,
-    .introjs-donebutton,
-    .introjs-nextbutton {
+    .app-header {
+        border-radius: 10px 10px 0 0;
+        background: linear-gradient(#ff0000, #981515);
+        padding: 20px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         color: #fff;
-        background-color: #00A5AF;
-        border-color: #008d96;
     }
-    .float{
-	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:40px;
-	right:40px;
-	background-color:#981515;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-  font-size:30px;
-	box-shadow: 2px 2px 3px #999;
-  z-index:100;
-}
 
-.my-float{
-	margin-top:16px;
-}
+    h2 {
+        font-size: 1.222rem;
+        font-weight: 800;
+    }
+
+    span.friend-status {
+        font-size: 0.666rem;
+    }
+
+
+    .app-message-body {
+        background-color: rgba(233, 233, 233, 0.6);
+        padding: 24px 16px 0;
+
+
+
+    }
+
+    .message-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .message-wrapper:nth-child(2n+1) {
+        align-items: flex-start;
+    }
+
+    .message-meta {
+        justify-content: flex-start;
+    }
+
+
+    .message-wrapper:nth-child(2n) {
+        align-items: flex-end;
+    }
+
+    .message-meta {
+        flex-direction: row-reverse;
+    }
+
+
+
+    .message {
+        max-width: 66.6%;
+        background-color: #fff;
+        padding: 8px;
+        border-radius: 5px;
+        box-shadow: 4px 4px rgba(200, 200, 200, 0.25);
+        font-size: 0.9rem;
+        display: flex;
+        flex: 1 auto;
+    }
+
+    .message-meta {
+        display: flex;
+        flex: 1 auto;
+        margin: 10px 5px 15px;
+    }
+
+    .sender-avatar {
+        width: 24px;
+        height: 24px;
+        border-radius: 9999px;
+        background: linear-gradient(#e71b1b, #bb1c1c);
+        color: #fff;
+        line-height: 24px;
+        text-align: center;
+        font-size: 0.666rem;
+        font-weight: 600;
+    }
+
+    .timestamp {
+        color: #999;
+        font-size: 0.666rem;
+        line-height: 24px;
+        display: inline-block;
+        margin: 0 5px;
+    }
+
+
+    .app-input-area {
+
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #f9f9f9;
+        padding: 10px;
+        box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+    }
+
+    .app-input-area form {
+        flex: 1;
+        display: flex;
+    }
+
+    .app-input-area input[type="text"] {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-right: 10px;
+    }
+
+    .app-input-area button[type="submit"] {
+
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    /* Adjust the SVG icon size */
+    .app-input-area svg {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+    }
 </style>
 
 <body>
@@ -402,7 +424,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Profile</h5>
+                                            <h5 class="m-b-10">Chat</h5>
                                             <p class="m-b-0">Maclareen Talent Acquisition System </p>
                                         </div>
                                     </div>
@@ -411,7 +433,7 @@
                                             <li class="breadcrumb-item">
                                                 <a> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a>Profile</a>
+                                            <li class="breadcrumb-item"><a>Chat</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -435,114 +457,100 @@
                                     <!-- Page-body start -->
 
 
-
-
-
-                                    <div class="panel panel-mask profileheader border-default-light">
-                                        <div class="coverprofile bg-cover" style="background: linear-gradient(to right, #c8081f , #050505);"></div>
-                                        <div class="text-center">
-                                            <img alt="" src="assets/images/avatar-4.jpg" class="avatar avatar-150 photo" height="120" width="120">
+                                    <?php
+                                    $this->load->helper('form');
+                                    $error = $this->session->flashdata('error');
+                                    if ($error) {
+                                    ?>
+                                        <div class="alert alert-danger alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <?php echo $error; ?>
                                         </div>
-                                        <div class="panel-body">
-                                            <div class="text-center">
-                                                <div class="dropdown inblock">
-                                                    <h1 class="font-3x margtop-none inblock"><?php echo $this->session->userdata('name');; ?></h1>
-                                                </div>
+                                    <?php }
+                                    $success = $this->session->flashdata('success');
+                                    if ($success) {
+                                    ?>
+                                        <div class="alert alert-success alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <?php echo $success; ?>
+                                        </div>
+                                    <?php } ?>
 
-                                            </div>
-                                            <br>
-                                            <br>
-                                            <div class="card-block">
-                                                <?php
-                                                $this->load->helper('form');
-                                                $error = $this->session->flashdata('error');
-                                                if ($error) {
-                                                ?>
-                                                    <div class="alert alert-danger alert-dismissable">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                        <?php echo $error; ?>
-                                                    </div>
-                                                <?php }
-                                                $success = $this->session->flashdata('success');
-                                                if ($success) {
-                                                ?>
-                                                    <div class="alert alert-success alert-dismissable">
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                        <?php echo $success; ?>
-                                                    </div>
-                                                <?php } ?>
-                                                <form class="form-material" action="<?php echo base_url(); ?>AddJobopening" method="post">
-                                                    <div class="row">
+                                    <div class="app-wrapper">
+                                        <div class="app-header">
+                                            <h2>MTAS</h2>
 
-                                                        <div class="col-xl-12 col-md-12">
-                                                            <!-- Basic Form Inputs card start -->
-
-
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-3 col-form-label"> Name </label>
-                                                                <div class="col-sm-9">
-                                                                    <input type="text" class="form-control" name="user_name" value="<?php echo $emp[0]->user_name ?>"disabled>
-                                                                </div>
+                                        </div>
+                                        <div class="app-message-body">
+                                            <?php if (!empty($chatdata)) : ?>
+                                                <?php foreach ($chatdata as $row) : ?>
+                                                    <?php
+                                                    $Admin_id = $this->session->userdata('userId');
+                                                    $isSentByAdmin = ($row->sender_id == $Admin_id);
+                                                    ?>
+                                                    <?php if ($isSentByAdmin) { ?>
+                                                        <div class="message-wrapper" style="display: flex; flex-direction: column;  align-items: end;;  margin-bottom: 15px;">
+                                                            <div class="message" style="max-width: 66.6%; background-color: #fff; padding: 8px; border-radius: 5px; box-shadow: 4px 4px rgba(200, 200, 200, 0.25); font-size: 0.9rem; display: flex; flex: 1 auto;">
+                                                                <span><?php echo $row->chat_message; ?></span>
                                                             </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-3 col-form-label"> Email Id</label>
-                                                                <div class="col-sm-9">
-                                                                    <input type="text" class="form-control" name="user_email" value="<?php echo $emp[0]->user_email ?>" disabled>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-3 col-form-label"> Mobile Number</label>
-                                                                <div class="col-sm-9">
-                                                                    <input type="text" class="form-control" name="user_mobile" value="<?php echo $emp[0]->user_mobile ?>"disabled>
-                                                                </div>
-                                                            </div>
+                                                            <div class="message-meta" style="display: flex; flex: 1 auto; margin: 10px 5px 15px; justify-content: flex-end;">
+                                                                <div class="sender-avatar" style="width: 82px; height: 24px; border-radius: 9999px; background: linear-gradient(180deg, #fb551c, #f7b633); color: #fff; line-height: 24px; text-align: center; font-size: 0.666rem; font-weight: 600;">
+                                                                    <?php
+                                                                    $first_name = strtok($row->user_name, ' '); // Get the first part before the space
 
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-3 col-form-label">Employee Id</label>
-                                                                <div class="col-sm-9">
-                                                                    <input type="text" class="form-control" name="emp_id" value="<?php echo $emp[0]->emp_id ?>"disabled>
+                                                                    echo $first_name; ?>
                                                                 </div>
+                                                                <span class="timestamp" style="color: #999; font-size: 0.666rem; line-height: 24px; display: inline-block; margin: 0 5px;">
+                                                                    <?php
+                                                                    $formattedDate = date('j M g:i A', strtotime($row->chat_time));
+                                                                    echo $formattedDate;
+                                                                    ?>
+                                                                </span>
                                                             </div>
-
-
-       <!-- Basic Form Inputs card end -->
                                                         </div>
-                                                        <div class="form-group row">
+                                                    <?php } else { ?>
+                                                        <div class="message-wrapper" style="display: flex; flex-direction: column; align-items: start;; margin-bottom: 15px;">
+                                                            <div class="message" style="max-width: 66.6%; background-color: #fff; padding: 8px; border-radius: 5px; box-shadow: 4px 4px rgba(200, 200, 200, 0.25); font-size: 0.9rem; display: flex; flex: 1 auto;">
+                                                                <span><?php echo $row->chat_message; ?></span>
+                                                            </div>
+                                                            <div class="message-meta" style="display: flex; flex: 1 auto; margin: 10px 5px 15px; justify-content:flex-start;">
+                                                            <div class="sender-avatar" style="width: 82px; height: 24px; border-radius: 9999px; background: linear-gradient(180deg, #fb551c, #f7b633); color: #fff; line-height: 24px; text-align: center; font-size: 0.666rem; font-weight: 600;">
+                                                                    <?php
+                                                                    $first_name = strtok($row->user_name, ' '); // Get the first part before the space
 
+                                                                    echo $first_name; ?>
+                                                                </div>
+                                                                <span class="timestamp" style="color: #999; font-size: 0.666rem; line-height: 24px; display: inline-block; margin: 0 5px;">
+                                                                    <?php
+                                                                    $formattedDate = date('j M g:i A', strtotime($row->chat_time));
+                                                                    echo $formattedDate;
+                                                                    ?>
+                                                                </span>
+                                                            </div>
                                                         </div>
+                                                    <?php } ?>
 
-                                                </form>
-                                                <div class="col-sm-12">
-                                                    <center>
-                                                        <!-- <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: linear-gradient(to bottom, #2ecc71, #27ae60); padding: 12px 20px; box-shadow: 0 4px 0 #1f8c4d; color: white; font-size: 16px; border-radius: 6px; border: none; transition: all 0.3s ease;">Submit</button> -->
-                                                        <a href="<?php echo base_url(); ?>changePasswordForm">
-                                                            <button type="button" class="btn btn-secondary waves-effect waves-light" style="background: linear-gradient(to bottom, #3498db, #2980b9); padding: 12px 20px; box-shadow: 0 4px 0 #1b698f; color: white; font-size: 16px; border-radius: 6px; border: none; margin-left: 10px; transition: all 0.3s ease;">
-                                                                Change Password
-                                                            </button>
-                                                        </a>
+                                                <?php endforeach; ?>
+                                            <?php else : ?>
+                                                <p>No chat available.</p>
+                                            <?php endif; ?>
+                                        </div>
 
-                                                    </center>
-
-                                                </div>
-
-                                            </div>
-
-<!-- chat icon start -->
-                                            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<a href="<?php echo base_url(); ?>Chat" class="float" >
-<i class="fa fa-comments-o my-float"></i>
-</a>
-<!-- chat icon end -->
-
-
-
-
-
-
-
-
+                                        <div class="app-input-area">
+                                            <form class="form-material" action="<?php echo base_url(); ?>AddChat" method="post">
+                                                <input type="text" placeholder="Your message here..." name="message" required />
+                                                <button type="submit">
+                                                    <svg viewBox="0 0 512 512" x="0px" y="0px" style="enable-background: new 0 0 512 512" title="paper-plane">
+                                                        <path fill="" d="M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z" />
+                                                    </svg>
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
+
+
+
+
                                 </div>
 
 

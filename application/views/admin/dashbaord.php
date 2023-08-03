@@ -414,7 +414,7 @@
 
                                                             <tbody id="myTable">
                                                                 <?php $counter = 0; ?>
-                                                                <?php foreach ($candidate as $row) : ?>
+                                                                <?php foreach ($candidate as $row) : ?> 
                                                                     <tr>
                                                                         <?php $counter++; ?>
                                                                         <td><?php echo $counter; ?></td>
