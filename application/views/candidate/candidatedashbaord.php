@@ -168,137 +168,44 @@
 
     /* card animation  start*/
 
-    .wrapperanimation {
-        flex: 1;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            margin-bottom: 100px; /* Add spacing between cards */
-            margin-top: 1000px;
-    }
+    
 
-    .outer {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        position: center;
-        bottom: 0;
-    }
-
-    .card {
-        background: #D8D8D8;
-        width: 300px;
-        /* Set the width of the cards */
-        height: 550px;
-        /* Increase the height of the cards */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        opacity: 0;
-        pointer-events: none;
-        position: absolute;
-        justify-content: space-between;
-        border-radius: 50px;
-        /* Make the cards rounded */
-        box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
-        animation: animate 15s linear infinite;
-        animation-delay: calc(3s * var(--delay));
-        margin-left: 5px;
-        margin-right: 5px;
-              
-        /* Add spacing between cards */
-    }
-
-    .outer:hover .card {
-        animation-play-state: paused;
-    }
-
-    .wrapperanimation .card:last-child {
-        animation-delay: calc(-3s * var(--delay));
-    }
-
-    /* Increased animation delay for the second card */
-    .wrapperanimation .card:nth-child(2) {
-        animation-delay: calc(7s * var(--delay));
-    }
-
-    @keyframes animate {
-        0% {
-            opacity: 0;
-            transform: translateY(100%) scale(0.5);
-        }
-
-        5%,
-        20% {
-            opacity: 0.4;
-            transform: translateY(100%) scale(0.7);
-        }
-
-        25%,
-        40% {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0%) scale(1);
-        }
-
-        45%,
-        60% {
-            opacity: 1;
-            transform: translateY(-100%) scale(0.7);
-        }
-
-        65%,
-        100% {
-            opacity: 0;
-            transform: translateY(-100%) scale(0.5);
-        }
-    }
-
-    .card .img {
-        width: 100%;
-        height: 50%;
-        /* Set the height of the image to 50% of the card height */
-        border-radius: 20px 20px 0 0;
-        /* Rounded corners for the top of the image */
-        overflow: hidden;
-        /* Clip the image within the rounded corners */
-    }
-
-    .card .img img {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-    }
-
-    .card h1 {
-        margin-top: 20px;
-        font-size: 24px;
-    }
-
-    .card p {
-        margin-top: 10px;
-        font-size: 16px;
-        line-height: 1.6;
-        text-align: center;
-    }
-
-    .card a {
-        margin-top: 20px;
-        text-decoration: none;
-        padding: 10px 20px;
-        border-radius: 25px;
-        color: #fff;
-        background: linear-gradient(to bottom, #e33737 0%, #8e2828 100%);
-        transition: all 0.3s ease;
-    }
-
-    .card a:hover {
-        transform: scale(0.94);
-    }
 
 
     /* card animation  end */
+</style>
+<style>
+    .container1 {
+     width: 640px;
+    height: 480px;
+    margin: 0 auto;
+    overflow: hidden;
+    background: white;
+    position: relative;
+    box-sizing: border-box; 
+    /* background-color: #317a5c; */
+}
+
+.marquee {
+    width: 320px;
+    top: 480px;
+    position: relative;
+    box-sizing: border-box;
+    animation: marquee 100s linear infinite;
+    /* margin: 0 auto;
+    text-align: center; */
+    color: #ffffff;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-150%);
+  }
+}
+ 
 </style>
 
 <body>
@@ -435,39 +342,28 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                            </ul>
-
-                            <!--slider code start -->
-                            <ul class="pcoded-item pcoded-left-item">
-                            <div class="wrapperanimation">
-                                <div class="outer">
-                                    <!-- Add more .card elements as needed -->
-                                    <div class="card" style="--delay: -1;">
-                                        <div class="img">
-                                            <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" alt="Card Image">
-                                        </div>
-                                        <h1 style = "font-size: 25px;">Card Heading</h1>
-                                        <p style = "font-size: 19px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget mauris vel risus fringilla tincidunt.</p>
-                                        <a href="#" style = "font-size: 15px;">Click Me</a>
-                                    </div>
-                                    <div class="card" style="--delay: -1;">
-
-                                        <div class="img">
-                                            <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" alt="Card Image">
-                                        </div>
-                                        <h1 style = "font-size: 25px;">Card Heading</h1>
-                                        <p style = "font-size: 19px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget mauris vel risus fringilla tincidunt.</p>
-                                        <a href="#" style = "font-size: 15px;">Click Me</a>
-                                    </div>
-                                    <!-- Add more cards here -->
-                                </div>
-                            </div>
-                            </ul>
+                            </ul> 
                             
-                            <!--slider code end  -->
+                            
+                            <div class="container1">
+  <div class="marquee">
+    <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" id="image1" style="width:200px;">
+    <p>This is some text about image 1.</p>
+    
+    <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" id="image2" style="width:200px;">
+    <p>This is some text about image 2.</p>
+    
+    <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" id="image3" style="width:200px;">
+    <p>This is some text about image 3</p>
+    
+    <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" id="image4" style="width:200px;">
+    <p>This is some text about image 4.</p>
+    
+  </div>
+</div>
+
 
                         </div>
-
                     </nav>
                     <div class="pcoded-content">
                         <!-- Page-header start -->
@@ -737,6 +633,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
     </div>
@@ -760,12 +658,26 @@
     <script src="<?php echo base_url(); ?>assets/js/vertical/vertical-layout.min.js "></script>
 
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/script.js "></script>
+    <script>
+        $(function() {
+  var image1_bg_color = '#317a5c';
+  var image2_bg_color = '#dedede';
+  var image3_bg_color = '#ff0000';
+  var image4_bg_color = '#000000';
 
+// pseudo-code...
 
+// When #image2 becomes visible fade .container bg color from image1_bg_color to image2_bg_color
 
+// When #image3 becomes visible fade .container bg color from image2_bg_color to image3_bg_color
 
+// When #image4 becomes visible fade .container bg color from image3_bg_color to image4_bg_color
 
+// When #image1 re-enters view fade .container bg color from image4_bg_color to image1_bg_color
 
+// etc.
+});
+    </script>
 </body>
 
 

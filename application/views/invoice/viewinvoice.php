@@ -121,7 +121,7 @@
 
         .centered-content h4{
             margin-bottom:-4px;
-            margin-top:13px;
+            margin-top:17px;
         }
         /* disclaimer the content horizontally */
         .disclaimer-content {
@@ -145,7 +145,7 @@
 
 <body>
     <div class="invoice-container">
-        <div class="red-strip"><img src="https://maclareenai.com/mtas/assets/images/invoice.png" alt=""></div>
+        <div class="red-strip"><img src="https://maclareenai.com/mtas/assets/images/bg/invoice.png" alt=""></div>
         <div class="centered-content"> <h4 style="font-size: 23px;">INVOICE</h4></div>
 
        
@@ -184,7 +184,7 @@
 
             <table class="invoice-items">
                 <tr>
-                    <td style="width: 50%;"><b>Company's Name : <?php echo $user[0]->candidate_company_name ?> </b></td>
+                    <td style="width: 50%;"><b><?php echo $user[0]->candidate_company_name ?> </b></td>
                     <td colspan="2" style="text-align: left;"><b>Invoice No. : <?php echo $user[0]->invoiceNumber ?> </b></td>
                 </tr>
                 <tr>

@@ -67,18 +67,147 @@
             max-width: 650px;
         }
     }
-    @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 
-.fade-in {
-  animation: fadeIn 1s ease-in-out;
-}
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .fade-in {
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .box-container {
+            align-items: center;
+            display: flex;
+            flex-direction: column; /* Updated to vertical column */
+            justify-content: space-around;
+            padding: 35px 15px;
+            width: 100%;
+        }
+
+        @media screen and (min-width: 1380px) {
+            .box-container {
+                flex-direction: row; /* Horizontal row for larger screens */
+            }
+        }
+
+        .box-item {
+            position: relative;
+            -webkit-backface-visibility: hidden;
+            width: 415px;
+            margin-bottom: 35px;
+            max-width: 100%;
+        }
+
+        .flip-box {
+            -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+            perspective: 1000px;
+            -webkit-perspective: 1000px;
+        }
+
+        .flip-box-front,
+        .flip-box-back {
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            min-height: 475px;
+            -ms-transition: transform 0.7s cubic-bezier(.4,.2,.2,1);
+            transition: transform 0.7s cubic-bezier(.4,.2,.2,1);
+            -webkit-transition: transform 0.7s cubic-bezier(.4,.2,.2,1);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .flip-box-front {
+            -ms-transform: rotateY(0deg);
+            -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+            -webkit-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+
+        .flip-box:hover .flip-box-front {
+            -ms-transform: rotateY(-180deg);
+            -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+            -webkit-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+
+        .flip-box-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+
+            -ms-transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+            -webkit-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+
+        .flip-box:hover .flip-box-back {
+            -ms-transform: rotateY(0deg);
+            -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+            -webkit-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+
+        .flip-box .inner {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            padding: 60px;
+            outline: 1px solid transparent;
+            -webkit-perspective: inherit;
+            perspective: inherit;
+            z-index: 2;
+
+            transform: translateY(-50%) translateZ(60px) scale(.94);
+            -webkit-transform: translateY(-50%) translateZ(60px) scale(.94);
+            -ms-transform: translateY(-50%) translateZ(60px) scale(.94);
+            top: 50%;
+        }
+
+        .flip-box-header {
+            font-size: 34px;
+        }
+
+        .flip-box p {
+            font-size: 20px;
+            line-height: 1.5em;
+        }
+
+        .flip-box-img {
+            margin-top: 25px;
+        }
+
+        .flip-box-button {
+            background-color: transparent;
+            border: 2px solid #fff;
+            border-radius: 2px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 25px;
+            padding: 15px 20px;
+            text-transform: uppercase;
+        }
 </style>
 
 
@@ -178,13 +307,13 @@
                         </ul>
                         <ul class="nav-right">
                             <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
+                                <a href="<?php echo base_url(); ?>Chat" class="waves-effect waves-light">
                                     <i class="ti-bell"></i>
                                     <span class="badge bg-c-red"></span>
                                 </a>
                                 <ul class="show-notification">
                                     <li>
-                                        <h6>Notifications</h6>
+                                        <h6>New chat</h6>
                                         <label class="label label-danger">New</label>
                                     </li>
                                     <!-- <li class="waves-effect waves-light">
@@ -218,7 +347,7 @@
 
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -384,17 +513,57 @@
 
                             <div class="main-body">
                                 <div class="page-wrapper">
-
+                                    <div class="box-container">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="box-item">
+                                                    <div class="flip-box">
+                                                        <div class="flip-box-front text-center" style="background: linear-gradient(45deg, #ffcccc, #ff0000);">
+                                                            <div class="inner color-white">
+                                                                <h3 class="flip-box-header">Pending Candidate</h3>
+                                                                <p>A Count of pending Candidate</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flip-box-back text-center" style="background: linear-gradient(45deg, #ffcccc, #ff0000);">
+                                                            <div class="inner color-white">
+                                                                <h3 class="flip-box-header">Pending Candidate</h3>
+                                                                <p>A Count of pending Candidate</p>
+                                                                <button class="flip-box-button">10</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="box-item">
+                                                    <div class="flip-box">
+                                                        <div class="flip-box-front text-center" style="background: linear-gradient(45deg, #4CAF50, #45a049);">
+                                                            <div class="inner color-white">
+                                                                <h3 class="flip-box-header">Completed Candidate</h3>
+                                                                <p>A Count of completed Candidate</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flip-box-back text-center" style="background: linear-gradient(45deg, #4CAF50, #45a049);">
+                                                            <div class="inner color-white">
+                                                                <h3 class="flip-box-header">Completed Candidate</h3>
+                                                                <p>A Count of completed Candidate</p>
+                                                                <button class="flip-box-button">10</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- Page-body start -->
                                     <!-- Project statustic start -->
                                     <div class="col-xl-12">
                                         <div class="card proj-progress-card">
                                             <div class="card-block" style="
-    background-image: url(https://maclareenai.com/mtas/assets/images/bg/bg-new.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;"
->
+                                            background-image: url(https://maclareenai.com/mtas/assets/images/bg/bg-new.png);
+                                            background-size: cover;
+                                            background-position: center;
+                                            background-repeat: no-repeat;">
                                                 <div class="row">
 
                                                     <div class="col-xl-6 col-md-6 ">
@@ -573,30 +742,30 @@
 
                                                                     $encrypted_number = base64_encode($row->candidate_id);
                                                                     ?>
-                                                                     <td> <?php if ($row->source_name == "Facebook" || $row->source_name == "facebook") { ?>
-                                                                                <a class="btn btn-default" style="padding: 10px 20px; border: 1px solid #3b5998; border-radius: 5px; background-color: #3b5998; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;"> <!-- Set the color to white (#fff) -->
-                                                                                    <em class="fab fa-facebook-f" style="color: #fff;"></em> <!-- Facebook Icon with white color -->
-                                                                                </a>
+                                                                    <td> <?php if ($row->source_name == "Facebook" || $row->source_name == "facebook") { ?>
+                                                                            <a class="btn btn-default" style="padding: 10px 20px; border: 1px solid #3b5998; border-radius: 5px; background-color: #3b5998; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;"> <!-- Set the color to white (#fff) -->
+                                                                                <em class="fab fa-facebook-f" style="color: #fff;"></em> <!-- Facebook Icon with white color -->
+                                                                            </a>
 
-                                                                            <?php } else if ($row->source_name == "WhatsApp" || $row->source_name == "whatsapp") { ?>
-                                                                                <a class="btn btn-default whatsapp-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: #25d366; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;">
-                                                                                    <em class="fab fa-whatsapp"></em> <!-- WhatsApp Icon -->
-                                                                                </a>
-                                                                            <?php } else if ($row->source_name == "Instagram" || $row->source_name == "instagram") { ?>
-                                                                                <a class="btn btn-default instagram-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: linear-gradient(to right, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80); box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;">
-                                                                                    <em class="fab fa-instagram"></em> <!-- Instagram Icon -->
-                                                                                </a>
-                                                                            <?php } else  if ($row->source_name == "Walk-In") { ?>
-                                                                                <a class="btn btn-default walk-in-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: #FF7814; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;">     
+                                                                        <?php } else if ($row->source_name == "WhatsApp" || $row->source_name == "whatsapp") { ?>
+                                                                            <a class="btn btn-default whatsapp-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: #25d366; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;">
+                                                                                <em class="fab fa-whatsapp"></em> <!-- WhatsApp Icon -->
+                                                                            </a>
+                                                                        <?php } else if ($row->source_name == "Instagram" || $row->source_name == "instagram") { ?>
+                                                                            <a class="btn btn-default instagram-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: linear-gradient(to right, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80); box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;">
+                                                                                <em class="fab fa-instagram"></em> <!-- Instagram Icon -->
+                                                                            </a>
+                                                                        <?php } else  if ($row->source_name == "Walk-In") { ?>
+                                                                            <a class="btn btn-default walk-in-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: #FF7814; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;">
                                                                                 <em class="fa fa-user-o"></em> <!-- wail in Icon -->
-                                                                                </a>
-                                                                               <?php  } else {?> 
-                                                                                <a class="btn btn-default a-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: #3D9CDD; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;"> 
-                                                                                    <em class="fa fa-handshake-o"></em> <!-- a  Icon -->
-                                                                                </a>
-                                                                                <?php }?>
+                                                                            </a>
+                                                                        <?php  } else { ?>
+                                                                            <a class="btn btn-default a-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background: #3D9CDD; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #fff;">
+                                                                                <em class="fa fa-handshake-o"></em> <!-- a  Icon -->
+                                                                            </a>
+                                                                        <?php } ?>
 
-                                                                        </td>
+                                                                    </td>
                                                                     <td><a class="btn btn-default" href="<?php echo base_url('editCandidateInfo/' . $row->candidate_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
                                                                             <em class="fa fa-pencil"></em>
                                                                         </a> </td>

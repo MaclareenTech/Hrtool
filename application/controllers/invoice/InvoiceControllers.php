@@ -194,7 +194,7 @@ class InvoiceControllers extends BaseController
             ]);
 
             // Add watermark to each page
-            $mpdf->SetWatermarkImage(base_url('assets/images/logo_new_1.png'));
+            $mpdf->SetWatermarkImage(base_url('assets/images/bg/watermark.png'));
             $mpdf->showWatermarkImage = true;
 
             // Write content to PDF

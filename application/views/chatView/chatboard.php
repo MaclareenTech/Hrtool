@@ -275,13 +275,13 @@
                         </ul>
                         <ul class="nav-right">
                             <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
+                                <a href="<?php echo base_url(); ?>Chat" class="waves-effect waves-light">
                                     <i class="ti-bell"></i>
                                     <span class="badge bg-c-red"></span>
                                 </a>
                                 <ul class="show-notification">
                                     <li>
-                                        <h6>Notifications</h6>
+                                        <h6>New chat</h6>
                                         <label class="label label-danger">New</label>
                                     </li>
                                     <!-- <li class="waves-effect waves-light">
@@ -517,7 +517,7 @@
                                                         $isSentByAdmin = ($row->sender_id == $Admin_id);
                                                         ?>
                                                         <?php if ($isSentByAdmin) { ?>
-                                                            <div class="message-wrapper" style="display: flex; flex-direction: column;  align-items: end;;  margin-bottom: 15px;">
+                                                            <div class="message-wrapper" id="message-<?php echo $row->chat_id;?>" style="display: flex; flex-direction: column;  align-items: end;;  margin-bottom: 15px;">
                                                                 <div class="message" style="max-width: 66.6%; background-color: #fff; padding: 8px; border-radius: 5px; box-shadow: 4px 4px rgba(200, 200, 200, 0.25); font-size: 0.9rem; display: flex; flex: 1 auto;">
                                                                     <span><?php echo $row->chat_message; ?></span>
                                                                 </div>
@@ -537,7 +537,7 @@
                                                                 </div>
                                                             </div>
                                                         <?php } else { ?>
-                                                            <div class="message-wrapper" style="display: flex; flex-direction: column; align-items: start;; margin-bottom: 15px;">
+                                                            <div class="message-wrapper" id="message-<?php echo $row->chat_id;?>" style="display: flex; flex-direction: column; align-items: start;; margin-bottom: 15px;">
                                                                 <div class="message" style="max-width: 66.6%; background-color: #fff; padding: 8px; border-radius: 5px; box-shadow: 4px 4px rgba(200, 200, 200, 0.25); font-size: 0.9rem; display: flex; flex: 1 auto;">
                                                                     <span><?php echo $row->chat_message; ?></span>
                                                                 </div>
@@ -610,12 +610,14 @@
 
                                                             if (data.length > 0) {
                                                                 data.forEach(function(row) {
+                                                                    var existingMessage = document.getElementById('message-' + row.chat_id);
+                                                if (!existingMessage) {
                                                                     var Admin_id = <?php echo $this->session->userdata('userId'); ?>;
                                                                     var isSentByAdmin = row.sender_id == Admin_id;
 
                                                                     var messageWrapper = document.createElement('div');
                                                                     messageWrapper.className = 'message-wrapper';
-
+                                                                    messageWrapper.id = 'message-' + row.chat_id;
                                                                     var message = document.createElement('div');
                                                                     message.className = 'message';
                                                                     message.style.maxWidth = '66.6%';
@@ -678,6 +680,7 @@
                                                                     }
 
                                                                     chatBox.appendChild(messageWrapper);
+                                                                }
                                                                 });
                                                                 chatBox.scrollTop = chatBox.scrollHeight;
                                                             }

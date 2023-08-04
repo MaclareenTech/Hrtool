@@ -3,7 +3,13 @@
 
 <head>
     <title><?php echo $pageTitle; ?></title>
-
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -29,141 +35,147 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/jquery.mCustomScrollbar.css">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <!-- serch option for table  -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
+
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
-
-
-    .wrapper {
-        /*    max-width: 700px;*/
-        width: 100%;
-        background: #fff;
-        padding: 25px 30px;
-        border-radius: 5px;
+    .app-wrapper {
+        height: 100%;
     }
 
-    .wrapper .title {
-        font-size: 25px;
-        font-weight: 500;
-        position: relative;
-    }
-
-    .wrapper .title::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        height: 3px;
-        width: 40px;
-        background: #434341;
-    }
-
-    .wrapper form .user-details {
+    .app-header {
+        border-radius: 10px 10px 0 0;
+        background: linear-gradient(#ff0000, #981515);
+        padding: 20px 0;
         display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin: 20px 0 12px 0;
-    }
-
-    form .user-details .input-box {
-        margin-bottom: 15px;
-        width: calc(100% / 2 - 20px);
-    }
-
-    .user-details .input-box input {
-        height: 45px;
-        width: 100%;
-    }
-
-    .user-details .input-box .details {
-        font-weight: 500;
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    .user-details .input-box input {
-        height: 45px;
-        width: 100%;
-        outline: none;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        padding-left: 15px;
-        font-size: 16px;
-        border-bottom-width: 2px;
-        transition: all .3s ease;
-    }
-
-    .user-details .input-box input:focus,
-    .user-details .input-box input:valid {
-        border-color: #9B59B6;
-    }
-
-
-
-    form input[type="radio"] {
-        display: none;
-    }
-
-    form .button {
-        height: 45px;
-        margin: 45px 0;
-    }
-
-    form .button input {
-        height: 100%;
-        width: 100%;
+        flex-direction: column;
+        align-items: center;
         color: #fff;
-        outline: none;
-        border: none;
-        font-size: 18px;
-        font-weight: 500;
-        cursor: pointer;
+    }
+
+    h2 {
+        font-size: 1.222rem;
+        font-weight: 800;
+    }
+
+    span.friend-status {
+        font-size: 0.666rem;
+    }
+
+
+    .app-message-body {
+        background-color: rgba(233, 233, 233, 0.6);
+        padding: 24px 16px 0;
+
+
+
+    }
+
+    .message-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .message-wrapper:nth-child(2n+1) {
+        align-items: flex-start;
+    }
+
+    .message-meta {
+        justify-content: flex-start;
+    }
+
+
+    .message-wrapper:nth-child(2n) {
+        align-items: flex-end;
+    }
+
+    .message-meta {
+        flex-direction: row-reverse;
+    }
+
+
+
+    .message {
+        max-width: 66.6%;
+        background-color: #fff;
+        padding: 8px;
         border-radius: 5px;
-        letter-spacing: 1px;
-        background: #434341;
+        box-shadow: 4px 4px rgba(200, 200, 200, 0.25);
+        font-size: 0.9rem;
+        display: flex;
+        flex: 1 auto;
     }
 
-    form .button input:hover {
-        background: linear-gradient(-135deg, #C0C0C0, #9B59B6);
+    .message-meta {
+        display: flex;
+        flex: 1 auto;
+        margin: 10px 5px 15px;
     }
 
-    /* Media Query */
-    @media (max-width: 584px) {
-        .wrapper {
-            max-width: 100%;
-        }
-
-        form .user-details .input-box {
-            margin-bottom: 15px;
-            width: 100%;
-        }
-
-        .gender-details .category {
-            width: 100%;
-        }
-
-        .wrapper form .user-details {
-            max-height: 300px;
-            overflow-y: scroll;
-        }
-
-        .user-details::-webkit-scrollbar {
-            width: 0;
-        }
+    .sender-avatar {
+        width: 24px;
+        height: 24px;
+        border-radius: 9999px;
+        background: linear-gradient(#ff0000, #981515);
+        color: #fff;
+        line-height: 24px;
+        text-align: center;
+        font-size: 0.666rem;
+        font-weight: 600;
     }
 
-    form .button1 input {
-        height: 100%;
+    .timestamp {
+        color: #999;
+        font-size: 0.666rem;
+        line-height: 24px;
+        display: inline-block;
+        margin: 0 5px;
+    }
+
+
+    .app-input-area {
+
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #f9f9f9;
+        padding: 10px;
+        box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+    }
+
+    .app-input-area form {
+        flex: 1;
+        display: flex;
+    }
+
+    .app-input-area input[type="text"] {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-right: 10px;
+    }
+
+    .app-input-area button[type="submit"] {
 
         color: #fff;
-        outline: none;
         border: none;
-        font-size: 18px;
-        font-weight: 500;
+        padding: 10px 15px;
+        border-radius: 4px;
         cursor: pointer;
-        border-radius: 5px;
-        letter-spacing: 1px;
-        background: #434341;
+    }
+
+    /* Adjust the SVG icon size */
+    .app-input-area svg {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
     }
 </style>
 
@@ -244,7 +256,7 @@
                             </div>
                         </div>
                         <a>
-                            <img class="img-fluid" src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="Theme-Logo" style=" width: 160px;">
+                            <img class="img-fluid" src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -263,13 +275,13 @@
                         </ul>
                         <ul class="nav-right">
                             <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
+                                <a href="<?php echo base_url(); ?>Chat" class="waves-effect waves-light">
                                     <i class="ti-bell"></i>
                                     <span class="badge bg-c-red"></span>
                                 </a>
                                 <ul class="show-notification">
                                     <li>
-                                        <h6>Notifications</h6>
+                                        <h6>New chat</h6>
                                         <label class="label label-danger">New</label>
                                     </li>
                                     <!-- <li class="waves-effect waves-light">
@@ -303,14 +315,14 @@
 
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
-                                        
+
                                     </div>
                                 </div>
                             </div>
 
                             <div class="pcoded-navigation-label">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="active">
+                                <li class="">
                                     <a href="<?php
                                                 $role = $this->session->userdata('role'); ?>
                                     <?php if ($role == "admin") { ?>
@@ -350,7 +362,7 @@
                             <?php } ?>
                             <?php
                             $mail = $this->session->userdata('user_email'); ?>
-                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com"  ) { ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com") { ?>
                                 <div class="pcoded-navigation-label">Invoice</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li class="">
@@ -373,7 +385,7 @@
                                             <span class="pcoded-mtext">Job Openings</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
-                                        <ul class="pcoded-submenu">
+                                        <ul class="pcoded-submenu ">
                                             <li class="">
                                                 <a href="<?php echo base_url(); ?>Jobopening" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
@@ -411,7 +423,7 @@
                             </ul>
                             <div class="pcoded-navigation-label">Profile</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
+                                <li class="active">
                                     <a href="<?php echo base_url(); ?>profile" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="fa fa-cog"></i><b>L</b></span>
                                         <span class="pcoded-mtext">Profile</span>
@@ -439,7 +451,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Candidate Information</h5>
+                                            <h5 class="m-b-10">Chat</h5>
                                             <p class="m-b-0">Maclareen Talent Acquisition System </p>
                                         </div>
                                     </div>
@@ -448,7 +460,7 @@
                                             <li class="breadcrumb-item">
                                                 <a> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a> Candidate Information</a>
+                                            <li class="breadcrumb-item"><a>Chat</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -465,319 +477,228 @@
 
                         <div class="pcoded-inner-content">
                             <!-- Main-body start -->
+
+
                             <div class="main-body">
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
 
 
+                                    <?php
+                                    $this->load->helper('form');
+                                    $error = $this->session->flashdata('error');
+                                    if ($error) {
+                                    ?>
+                                        <div class="alert alert-danger alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <?php echo $error; ?>
+                                        </div>
+                                    <?php }
+                                    $success = $this->session->flashdata('success');
+                                    if ($success) {
+                                    ?>
+                                        <div class="alert alert-success alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <?php echo $success; ?>
+                                        </div>
+                                    <?php } ?>
 
-
-
-                                    <div class="wrapper">
-                                        <div class="title">
-
-                                            <a class="pull-right btn btn-warning btn-large" style="margin-right:40px;  margin-top: 20px;  background-color: #007bff; border-color: #007bff;" href="<?php echo base_url('Sendmail/' . $candidate[0]->candidate_id); ?>"><i class="fa fa-envelope"></i></a>
-                                            <a class="pull-right btn btn-warning btn-large" style="margin-right:40px;  margin-top: 20px;  background-color: #ffc107; border-color: ##ffc107;" href="<?php echo base_url('ExportData/' .  $candidate[0]->candidate_id); ?>"><i class="fa fa-file-pdf-o"></i></a>
+                                    <div class="app-wrapper">
+                                        <div class="app-header">
+                                            <h2>MTAS</h2>
 
                                         </div>
-                                        <div class="title">Candidate Information
+                                        <div class="app-message-body">
+                                            <div id="chat-box">
+                                                <?php if (!empty($chatdata)) : ?>
+                                                    <?php foreach ($chatdata as $row) : ?>
+                                                        <?php
+                                                        $Admin_id = $this->session->userdata('userId');
+                                                        $isSentByAdmin = ($row->sender_id == $Admin_id);
+                                                        ?>
+                                                        <?php if ($isSentByAdmin) { ?>
+                                                            <div class="message-wrapper" style="display: flex; flex-direction: column;  align-items: end;;  margin-bottom: 15px;">
+                                                                <div class="message" style="max-width: 66.6%; background-color: #fff; padding: 8px; border-radius: 5px; box-shadow: 4px 4px rgba(200, 200, 200, 0.25); font-size: 0.9rem; display: flex; flex: 1 auto;">
+                                                                    <span><?php echo $row->chat_message; ?></span>
+                                                                </div>
+                                                                <div class="message-meta" style="display: flex; flex: 1 auto; margin: 10px 5px 15px; justify-content: flex-end;">
+                                                                    <div class="sender-avatar" style="width: 82px; height: 24px; border-radius: 9999px; background: linear-gradient(180deg, #fb551c, #f7b633); color: #fff; line-height: 24px; text-align: center; font-size: 0.666rem; font-weight: 600;">
+                                                                        <?php
+                                                                        $first_name = strtok($row->user_name, ' '); // Get the first part before the space
 
-                                        </div>
+                                                                        echo $first_name; ?>
+                                                                    </div>
+                                                                    <span class="timestamp" style="color: #999; font-size: 0.666rem; line-height: 24px; display: inline-block; margin: 0 5px;">
+                                                                        <?php
+                                                                        $formattedDate = date('j M g:i A', strtotime($row->chat_time));
+                                                                        echo $formattedDate;
+                                                                        ?>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        <?php } else { ?>
+                                                            <div class="message-wrapper" style="display: flex; flex-direction: column; align-items: start;; margin-bottom: 15px;">
+                                                                <div class="message" style="max-width: 66.6%; background-color: #fff; padding: 8px; border-radius: 5px; box-shadow: 4px 4px rgba(200, 200, 200, 0.25); font-size: 0.9rem; display: flex; flex: 1 auto;">
+                                                                    <span><?php echo $row->chat_message; ?></span>
+                                                                </div>
+                                                                <div class="message-meta" style="display: flex; flex: 1 auto; margin: 10px 5px 15px; justify-content:flex-start;">
+                                                                    <div class="sender-avatar" style="width: 82px; height: 24px; border-radius: 9999px; background: linear-gradient(180deg, #fb551c, #f7b633); color: #fff; line-height: 24px; text-align: center; font-size: 0.666rem; font-weight: 600;">
+                                                                        <?php
+                                                                        $first_name = strtok($row->user_name, ' '); // Get the first part before the space
 
-
-                                        <form action="#">
-                                            <div class="user-details">
-                                                <div class="input-box">
-                                                    <span class="details">Full Name</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->candidate_name ?>" disabled>
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">Job title</span>
-                                                    <input type="text" value="<?php $combined_value = $candidate[0]->job_country . ' - ' . $candidate[0]->job_position;
-                                                                                echo $combined_value; ?>" disabled>
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">E-Mail</span>
-                                                    <input type="email" value="<?php echo $candidate[0]->candidate_email ?>" disabled>
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">Phone Number</span>
-                                                    <input type="number" value="<?php echo $candidate[0]->candidate_mobile_no ?>" disabled>
-                                                </div>
-                                                <div class="input-box">
-                                                    <span class="details">Candidate Source</span>
-
-                                                    <input type="email" value="<?php echo $candidate[0]->source_name ?>" name="source_name" disabled>
-                                                </div>
-                                                <div class="button">
-                                                    <?php if ($candidate[0]->candidate_job_status == "0") { ?>
-                                                        <button style="background-color: #ff3333; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Screening
-                                                        </button>
-                                                    <?php } else if ($candidate[0]->candidate_job_status == "1") { ?>
-                                                        <button style="background-color: #e60000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Waiting for document
-                                                        </button>
-                                                    <?php } else if ($candidate[0]->candidate_job_status == "2") { ?>
-                                                        <button style="background-color: #00e600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Sent to recruitment review
-                                                        </button>
-                                                    <?php } else if ($candidate[0]->candidate_job_status == "3") { ?>
-                                                        <button style="background-color: #00b300; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Shortlisted
-                                                        </button>
-                                                    <?php } else if ($candidate[0]->candidate_job_status == "4") { ?>
-                                                        <button style="background-color: #b30000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Not selected
-                                                        </button>
-                                                    <?php } else if ($candidate[0]->candidate_job_status == "5") { ?>
-                                                        <button style="background-color: #C0C0C0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Job Orientation 1
-                                                        </button>
-                                                    <?php } else if ($candidate[0]->candidate_job_status == "6") { ?>
-                                                        <button style="background-color: #A9A9A9; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Job Orientation 2
-                                                        </button>
-                                                    <?php } else if ($candidate[0]->candidate_job_status == "7") { ?>
-                                                        <button style="background-color: #808080; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Job Orientation 3
-                                                        </button>
-                                                    <?php } else if ($candidate[0]->candidate_job_status == "8") { ?>
-                                                        <button style="background-color: #009900; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Work permit
-                                                        </button>
-                                                    <?php } else if ($candidate[0]->candidate_job_status == "9") { ?>
-                                                        <button style="background-color: #008000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Visa filing
-                                                        </button>
-                                                    <?php } else if ($candidate[0]->candidate_job_status == "10") { ?>
-                                                        <button style="background-color: #696969; color: white;border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Training for visa
-                                                        </button>
-                                                    <?php } else if ($candidate[0]->candidate_job_status == "11") { ?>
-                                                        <button style="background-color: #006600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                                                            <span style="font-weight: bold;">Job Status:</span> Completed
-                                                        </button>
-                                                    <?php } ?>
-                                                </div>
-
-                                            </div>
-
-
-                                            <div class="title" style="margin-bottom:20px;">Documents</div>
-
-                                            <?php if ($candidate[0]->candidate_aadhar_card != "") { ?>
-
-                                                <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/0'); ?>" style="background: #434341;border: none;color: white;padding: 8px 16px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px; margin: 4px 2px; transition-duration: 0.4s;cursor: pointer;border-radius: 4px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);transform-style: preserve-3d;perspective: 1000px;transform: translateZ(10px);">
-                                                    View Aadhar Card
-                                                </a>
-
-                                            <?php } ?>
-
-
-                                            <?php if ($candidate[0]->candidate_pan_card != "") { ?>
-
-                                                <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/1'); ?>" style="background: #434341; border: none;color: white;padding: 8px 16px; text-align: center;text-decoration: none;display: inline-block;font-size: 14px;  margin: 4px 2px;transition-duration: 0.4s;cursor: pointer;border-radius: 4px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);transform-style: preserve-3d; perspective: 1000px;transform: translateZ(10px); ">
-                                                    View Pan Card
-                                                </a>
-
-                                            <?php } ?>
-
-                                            <?php if ($candidate[0]->candidate_passport != "") { ?>
-                                                <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/3'); ?>" style="background: #434341; border: none;color: white;padding: 8px 16px; text-align: center;text-decoration: none;display: inline-block;font-size: 14px; margin: 4px 2px;transition-duration: 0.4s;cursor: pointer;border-radius: 4px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); transform-style: preserve-3d; perspective: 1000px; transform: translateZ(10px); ">
-                                                    View Passport
-                                                </a>
-
-                                            <?php } ?>
-
-
-                                            <?php if ($candidate[0]->candidate_resume != "") { ?>
-
-                                                <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/2'); ?>" style="background: #434341;border: none;color: white;padding: 8px 16px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px; margin: 4px 2px;transition-duration: 0.4s; cursor: pointer; border-radius: 4px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); transform-style: preserve-3d;  perspective: 1000px;  transform: translateZ(10px);">
-                                                    View Resume
-                                                </a>
-
-                                            <?php } ?>
-                                            <?php if ($candidate[0]->candidate_resume != "") { ?>
-
-                                                <a href="<?php echo base_url('ViewCandiateDocument/' . $candidateId . '/4'); ?>" style="background: #434341;border: none;color: white;padding: 8px 16px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px; margin: 4px 2px;transition-duration: 0.4s; cursor: pointer; border-radius: 4px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); transform-style: preserve-3d;  perspective: 1000px;  transform: translateZ(10px);">
-                                                    View Photo
-                                                </a>
-
-                                            <?php } ?>
-
-                                            <div class="title" style="margin-top: 20px;">Job Orientation </div>
-
-                                            <?php if ($candidate[0]->job_training_one != "") { ?>
-                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 1</div>
-                                                <div class="user-details">
-
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Url</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one ?>" disabled>
-                                                    </div>
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Time</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one_date_time ?>" disabled>
-                                                    </div>
-                                                    <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting ID</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_id ?>" disabled>
-                                                    </div>
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Password</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_password ?>" disabled>
-                                                    </div>
-                                                </div>
-                                            <?php } ?>
-
-                                            <?php if ($candidate[0]->job_training_two != "") { ?>
-                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 2</div>
-                                                <div class="user-details">
-
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Url</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two ?>" disabled>
-                                                    </div>
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Time</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two_date_time ?>" disabled>
-                                                    </div>
-                                                    <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting ID</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_id ?>" disabled>
-                                                    </div>
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Password</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_password ?>" disabled>
-                                                    </div>
-                                                </div>
-                                            <?php } ?>
-                                            <?php if ($candidate[0]->job_training_three != "") { ?>
-                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 3</div>
-                                                <div class="user-details">
-
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Url</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_three ?>" disabled>
-                                                    </div>
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Time</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_three_date_time ?>" disabled>
-                                                    </div>
-                                                    <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting ID</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_three_meet_id ?>" disabled>
-                                                    </div>
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Password</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_three_password ?>" disabled>
-                                                    </div>
-                                                </div>
-                                            <?php } ?>
-
-                                            <br>
-                                            <div class="title">Visa Training</div>
-
-                                            <?php if ($candidate[0]->visa_training != "") { ?>
-                                                <div class="user-details">
-
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Url</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->visa_training ?>" disabled>
-                                                    </div>
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Time</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->visa_training_datetime ?>" disabled>
-                                                    </div>
-                                                    <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting ID</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->visa_training_meet_id ?>" disabled>
-                                                    </div>
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Password</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->visa_training_meet_password ?>" disabled>
-                                                    </div>
-                                                </div>
-                                            <?php } ?>
-
-                                        </form>
-                                    </div>
-                                    <br>
-                                    <h5>Status Log</h5>
-
-                                    <table id="my-table" class="table datatable">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Status</th>
-                                                <th>Admin Name</th>
-                                                <th>Admin Emp Id</th>
-                                                <th>date</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody id="myTable">
-                                            <?php $counter = 0; ?>
-                                            <?php foreach ($log as $row) : ?>
-                                                <tr>
-                                                    <?php $counter++; ?>
-                                                    <td><?php echo $counter; ?></td>
-                                                    <td> <?php if ($row->status == "0") { ?>
-                                                            <button style="background-color: #ff3333; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Screening</button>
-                                                        <?php } else if ($row->status == "1") { ?>
-                                                            <button style="background-color: #e60000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Waiting for document </button>
-                                                        <?php } else if ($row->status == "2") { ?>
-                                                            <button style="background-color: #00e600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Sent to recruitment review</button>
-                                                        <?php } else if ($row->status == "3") { ?>
-                                                            <button style="background-color: #00b300; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Shortlisted</button>
-                                                        <?php } else if ($row->status == "4") { ?>
-                                                            <button style="background-color: #b30000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Not selected</button>
-                                                        <?php } else if ($row->status == "5") { ?>
-                                                            <button style="background-color: #C0C0C0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 1</button>
-                                                        <?php } else if ($row->status == "6") { ?>
-                                                            <button style="background-color: #A9A9A9; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 2</button>
-                                                        <?php } else if ($row->status == "7") { ?>
-                                                            <button style="background-color: #808080; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 3</button>
-                                                        <?php } else if ($row->status == "8") { ?>
-                                                            <button style="background-color: #009900; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Work permit</button>
-                                                        <?php } else if ($row->status == "9") { ?>
-                                                            <button style="background-color: #008000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Visa filing</button>
-                                                        <?php } else if ($row->status == "10") { ?>
-                                                            <button style="background-color: #696969; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Training for visa</button>
-                                                        <?php } else if ($row->status == "11") { ?>
-                                                            <button style="background-color: #006600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Completed</button>
-
+                                                                        echo $first_name; ?>
+                                                                    </div>
+                                                                    <span class="timestamp" style="color: #999; font-size: 0.666rem; line-height: 24px; display: inline-block; margin: 0 5px;">
+                                                                        <?php
+                                                                        $formattedDate = date('j M g:i A', strtotime($row->chat_time));
+                                                                        echo $formattedDate;
+                                                                        ?>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
                                                         <?php } ?>
 
+                                                    <?php endforeach; ?>
+                                                <?php else : ?>
+                                                    <p>No chat available.</p>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
 
-                                                    </td>
-                                                    <td><?php echo $row->user_name ?></td>
-                                                    <td><?php echo $row->emp_id ?></td>
-                                                    <td><?php
-                                                        $timestamp = strtotime($row->date);
-                                                        $humanReadableDate = date("d F Y", $timestamp);
-
-                                                        echo $humanReadableDate; ?></td>
-
-
-
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-                                    <div id="pagination-container">
-                                        <ul id="pagination" class="pagination"></ul>
+                                        <div class="app-input-area">
+                                            <form class="form-material" action="<?php echo base_url(); ?>AddChat" method="post">
+                                                <input type="text" placeholder="Your message here..." name="message" required />
+                                                <button type="submit">
+                                                    <svg viewBox="0 0 512 512" x="0px" y="0px" style="enable-background: new 0 0 512 512" title="paper-plane">
+                                                        <path fill="" d="M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z" />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
+
+
+
+
                                 </div>
-                                <!-- Page-body end -->
+
+
+
+
+
+
+
+
+
                             </div>
-                            <div id="styleSelector"> </div>
+                            <!-- Page-body end -->
                         </div>
+                        <!-- chat update script start -->
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+                            // Function to update the chat messages
+                            function updateChatMessages() {
+                                // Use AJAX to fetch updated chat data from the server
+                                // Replace 'your_controller_path' with the actual path to your controller's 'UpdateChat_get' method
+                                $.ajax({
+                                    url: '<?php echo base_url("chat/ChatControllers/UpdateChat_get"); ?>',
+                                    type: 'GET',
+                                    dataType: 'json',
+                                    success: function(data) {
+                                        // Check if there is any new chat data
+                                        var chatBox = document.getElementById('chat-box');
+
+                                                            if (data.length > 0) {
+                                                                data.forEach(function(row) {
+                                                                    var Admin_id = <?php echo $this->session->userdata('userId'); ?>;
+                                                                    var isSentByAdmin = row.sender_id == Admin_id;
+
+                                                                    var messageWrapper = document.createElement('div');
+                                                                    messageWrapper.className = 'message-wrapper';
+
+                                                                    var message = document.createElement('div');
+                                                                    message.className = 'message';
+                                                                    message.style.maxWidth = '66.6%';
+                                                                    message.style.backgroundColor = '#fff';
+                                                                    message.style.padding = '8px';
+                                                                    message.style.borderRadius = '5px';
+                                                                    message.style.boxShadow = '4px 4px rgba(200, 200, 200, 0.25)';
+                                                                    message.style.fontSize = '0.9rem';
+                                                                    message.style.display = 'flex';
+                                                                    message.style.flex = '1 auto';
+                                                                    message.textContent = row.chat_message;
+                                                                    messageWrapper.appendChild(message);
+
+                                                                    var messageMeta = document.createElement('div');
+                                                                    messageMeta.className = 'message-meta';
+                                                                    messageMeta.style.display = 'flex';
+                                                                    messageMeta.style.flex = '1 auto';
+                                                                    messageMeta.style.margin = '10px 5px 15px';
+
+                                                                    var senderAvatar = document.createElement('div');
+                                                                    senderAvatar.className = 'sender-avatar';
+                                                                    senderAvatar.style.width = '82px';
+                                                                    senderAvatar.style.height = '24px';
+                                                                    senderAvatar.style.borderRadius = '9999px';
+                                                                    senderAvatar.style.background = 'linear-gradient(180deg, #fb551c, #f7b633)';
+                                                                    senderAvatar.style.color = '#fff';
+                                                                    senderAvatar.style.lineHeight = '24px';
+                                                                    senderAvatar.style.textAlign = 'center';
+                                                                    senderAvatar.style.fontSize = '0.666rem';
+                                                                    senderAvatar.style.fontWeight = '600';
+                                                                    var first_name = row.user_name.split(' ')[0];
+                                                                    senderAvatar.textContent = first_name;
+                                                                    messageMeta.appendChild(senderAvatar);
+
+                                                                    var timestamp = document.createElement('span');
+                                                                    timestamp.className = 'timestamp';
+                                                                    timestamp.style.color = '#999';
+                                                                    timestamp.style.fontSize = '0.666rem';
+                                                                    timestamp.style.lineHeight = '24px';
+                                                                    timestamp.style.display = 'inline-block';
+                                                                    timestamp.style.margin = '0 5px';
+                                                                    var formattedDate = new Date(row.chat_time);
+                                                                    timestamp.textContent = formattedDate.toLocaleString('en-US', {
+                                                                        day: 'numeric',
+                                                                        month: 'short',
+                                                                        hour: 'numeric',
+                                                                        minute: 'numeric',
+                                                                        hour12: true,
+                                                                    });
+                                                                    messageMeta.appendChild(timestamp);
+
+                                                                    messageWrapper.appendChild(messageMeta);
+
+                                                                    if (isSentByAdmin) {
+                                                                        messageWrapper.style.alignItems = 'end';
+                                                                        messageMeta.style.justifyContent = 'flex-end';
+                                                                    } else {
+                                                                        messageWrapper.style.alignItems = 'start';
+                                                                        messageMeta.style.justifyContent = 'flex-start';
+                                                                    }
+
+                                                                    chatBox.appendChild(messageWrapper);
+                                                                });
+                                                                chatBox.scrollTop = chatBox.scrollHeight;
+                                                            }
+                                    },
+                                    error: function(xhr, status, error) {
+                                        console.error(error);
+                                    }
+                                });
+                            }
+
+                            // Call updateChatMessages function every 10 seconds
+                            setInterval(updateChatMessages, 10000); // 10000 milliseconds = 10 seconds
+                        </script>
+
+                        <!-- chat update script end -->
+                        <div id="styleSelector"> </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     </div>
 
@@ -802,44 +723,9 @@
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/script.js "></script>
 
 
-    <script>
-        const tableBody = document.getElementById('myTable');
-        const paginationContainer = document.getElementById('pagination');
-        const itemsPerPage = 7;
-        let currentPage = 1;
 
-        function displayDataPage(page) {
-            const start = (page - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            const rows = Array.from(tableBody.getElementsByTagName('tr'));
 
-            rows.forEach((row, index) => {
-                if (index >= start && index < end) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
 
-            updatePagination(page);
-        }
-
-        function updatePagination(currentPage) {
-            const rowsCount = tableBody.getElementsByTagName('tr').length;
-            const totalPages = Math.ceil(rowsCount / itemsPerPage);
-            let paginationHTML = '';
-
-            for (let i = 1; i <= totalPages; i++) {
-                paginationHTML += `<li class="page-item${i === currentPage ? ' active' : ''}">
-        <a class="page-link" href="#" onclick="displayDataPage(${i})">${i}</a>
-      </li>`;
-            }
-
-            paginationContainer.innerHTML = paginationHTML;
-        }
-
-        displayDataPage(currentPage);
-    </script>
 
 
 

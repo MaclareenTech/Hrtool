@@ -186,7 +186,7 @@ class LoginControllers extends BaseController
                 $logout = '0000-00-00 00:00:00';
                 $data = [
                     'login_time'    => $currentDateTime,
-                    'logout_time'    => "",
+                    'logout_time'    => $logout,
                 ];
 
                 if ($details = $this->Admin_model->UpdateUsingEmailId($email, $data)) {
@@ -311,35 +311,35 @@ class LoginControllers extends BaseController
 
         // Check if the user's location is within the specified range (200 meters)
         $distance = $this->distanceBetweenPoints($submitted_latitude, $submitted_longitude, $targetLatitude, $targetLongitude);
-       
-            if ($this->form_validation->run() == FALSE) {
-                $this->index();
-            } else {
-                $email = $this->input->post('email');
-                $password = $this->input->post('password');
-                $hashedPassword = md5($password);
-                $result = $this->Admin_model->Login($email, $hashedPassword);
 
-                if (!empty($result)) {
-                    $res = $result[0];
-                    $sessionArray = array(
-                        'userId' => $res->user_id,
-                        'user_profile' => $res->user_profile,
-                        'user_email' => $res->user_email,
-                        'name' => $res->user_name
-                    );
+        if ($this->form_validation->run() == FALSE) {
+            $this->index();
+        } else {
+            $email = $this->input->post('email');
+            $password = $this->input->post('password');
+            $hashedPassword = md5($password);
+            $result = $this->Admin_model->Login($email, $hashedPassword);
 
-
-                    if ($res->user_role == "0") {
-
-                        $sessionArray['role'] = 'candidate';
-                        $sessionArray['isLoggedIn'] = TRUE;
-                        $sessionArray['userId'] = $res->table_id;
-                        $this->session->set_userdata($sessionArray);
-                        redirect('candidateDashboard');
-                    } else if ($res->user_role == "1") {
+            if (!empty($result)) {
+                $res = $result[0];
+                $sessionArray = array(
+                    'userId' => $res->user_id,
+                    'user_profile' => $res->user_profile,
+                    'user_email' => $res->user_email,
+                    'name' => $res->user_name
+                );
 
 
+                if ($res->user_role == "0") {
+
+                    $sessionArray['role'] = 'candidate';
+                    $sessionArray['isLoggedIn'] = TRUE;
+                    $sessionArray['userId'] = $res->table_id;
+                    $this->session->set_userdata($sessionArray);
+                    redirect('candidateDashboard');
+                } else if ($res->user_role == "1") {
+
+                    // if ($distance <= 1.0) {
                         // Define the allowed distance (500 meters in this example)
                         $allowed_distance_meters = 500;
                         // if ($distance <= $allowed_distance_meters) {
@@ -471,36 +471,34 @@ class LoginControllers extends BaseController
                         //     $this->session->set_flashdata('error', 'You Are not in office');
                         //     redirect('LoginControllers');
                         // }
-                    } else {
-                        if ($distance <= 1.0) {
-                        date_default_timezone_set('Asia/Kolkata');
-                        $currentDateTime = date('Y-m-d H:i:s');
-                       
-                        $data = [
-                            'login_time'    => $currentDateTime,
-                            'logout_time'    => "",
-                        ];
-
-                        if ($details = $this->Admin_model->UpdateUsingEmailId($email, $data)) {
-                            $sessionArray['isLoggedIn'] = TRUE;
-                            $sessionArray['role'] = 'superadmin';
-                            $sessionArray['userId'] = $res->user_id;
-                            $this->session->set_userdata($sessionArray);
-                            redirect('superadminDashboard');
-                        }
-                    }
-                 else {
-                    $this->session->set_flashdata('error', 'You Are not in office');
-                    redirect('LoginControllers');}}
-                
+                    // } else {
+                    //     $this->session->set_flashdata('error', 'You Are not in office');
+                    //     redirect('LoginControllers');
+                    // }
                 } else {
-                    $this->session->set_flashdata('error', 'Email or password mismatch');
-                    redirect('LoginControllers');
+
+                    date_default_timezone_set('Asia/Kolkata');
+                    $currentDateTime = date('Y-m-d H:i:s');
+                    $logout = '0000-00-00 00:00:00';
+                    $data = [
+                        'login_time'    => $currentDateTime,
+                        'logout_time'    => $logout,
+                    ];
+
+                    if ($details = $this->Admin_model->UpdateUsingEmailId($email, $data)) {
+                        $sessionArray['isLoggedIn'] = TRUE;
+                        $sessionArray['role'] = 'superadmin';
+                        $sessionArray['userId'] = $res->user_id;
+                        $this->session->set_userdata($sessionArray);
+                        redirect('superadminDashboard');
+                    }
                 }
+            } else {
+                $this->session->set_flashdata('error', 'Email or password mismatch');
+                redirect('LoginControllers');
             }
-        
-    
-}
+        }
+    }
 
 
     // Function to calculate the Haversine distance between two geographical coordinates

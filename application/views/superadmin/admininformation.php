@@ -137,13 +137,13 @@
                         </ul>
                         <ul class="nav-right">
                             <li class="header-notification">
-                                <a href="#!" class="waves-effect waves-light">
+                                <a href="<?php echo base_url(); ?>Chat" class="waves-effect waves-light">
                                     <i class="ti-bell"></i>
                                     <span class="badge bg-c-red"></span>
                                 </a>
                                 <ul class="show-notification">
                                     <li>
-                                        <h6>Notifications</h6>
+                                        <h6>New chat</h6>
                                         <label class="label label-danger">New</label>
                                     </li>
                                     <!-- <li class="waves-effect waves-light">
@@ -408,7 +408,7 @@
 
 
                                                                     <td>
-                                                                        <?php if ($row->logout_time != "") { ?>
+                                                                        <?php if ($row->logout_time != "0000-00-00 00:00:00") { ?>
                                                                         <?php $LogOutTIme =  $row->logout_time;
                                                                             $dateLogOut = new DateTime($LogOutTIme);
                                                                             $LogOut = $dateLogOut->format('F j, Y, g:i A');

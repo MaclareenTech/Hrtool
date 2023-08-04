@@ -71,7 +71,7 @@ class SuperAdminDashboardControllers extends BaseController
         ]);
 
         // Add watermark to each page
-        $mpdf->SetWatermarkImage(base_url('assets/images/bg/438-x-292-watermark.png'));
+        $mpdf->SetWatermarkImage(base_url('assets/images/bg/watermark.png'));
         $mpdf->showWatermarkImage = true;
 
         // Write content to PDF
