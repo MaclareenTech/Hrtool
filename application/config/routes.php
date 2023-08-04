@@ -135,6 +135,7 @@ $route['changePassword'] = 'profile/ProfileControllers/ChangePassword';
 // chat
 $route['Chat'] = 'chat/ChatControllers';
 $route['AddChat'] = 'chat/ChatControllers/AddNewChat';
+$route['updatechat'] = 'chat/ChatControllers/UpdateChat';
 
 
 

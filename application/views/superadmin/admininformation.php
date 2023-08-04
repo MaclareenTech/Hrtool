@@ -135,6 +135,33 @@
                                 </a>
                             </li>
                         </ul>
+                        <ul class="nav-right">
+                            <li class="header-notification">
+                                <a href="#!" class="waves-effect waves-light">
+                                    <i class="ti-bell"></i>
+                                    <span class="badge bg-c-red"></span>
+                                </a>
+                                <ul class="show-notification">
+                                    <li>
+                                        <h6>Notifications</h6>
+                                        <label class="label label-danger">New</label>
+                                    </li>
+                                    <!-- <li class="waves-effect waves-light">
+                                            <div class="media">
+                                                <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                    <h5 class="notification-user">John Doe</h5>
+                                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                    <span class="notification-time">30 minutes ago</span>
+                                                </div>
+                                            </div>
+                                        </li> -->
+
+
+                                </ul>
+                            </li>
+
+                        </ul>
 
                     </div>
                 </div>
@@ -150,7 +177,7 @@
 
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -347,6 +374,8 @@
                                                                 <th>Emp Id</th>
                                                                 <th>Role</th>
                                                                 <th>Login Time</th>
+                                                                <th>Logout Time</th>
+                                                                <!-- <th>Activity TIme</th> -->
                                                                 <th>Status </th>
                                                                 <th></th>
                                                             </tr>
@@ -371,14 +400,43 @@
                                                                                 Super Admin
                                                                             </div>
                                                                         <?php } ?>
-                                                                    <td><?php $inputDateTime =  $row->login_time; // Create a DateTime object from the input string
-                                                                        $dateObj = new DateTime($inputDateTime);
+                                                                    <td><?php $LoginTime =  $row->login_time;
+                                                                        $dateLogIn = new DateTime($LoginTime);
+                                                                        $LogIN = $dateLogIn->format('F j, Y, g:i A');
+                                                                        echo $LogIN; ?></td>
 
-                                                                        // Format the DateTime object into a human-readable format
-                                                                        $humanReadableFormat = $dateObj->format('F j, Y, g:i A');
 
-                                                                        // Output the human-readable format
-                                                                        echo $humanReadableFormat; ?></td>
+
+                                                                    <td>
+                                                                        <?php if ($row->logout_time != "") { ?>
+                                                                        <?php $LogOutTIme =  $row->logout_time;
+                                                                            $dateLogOut = new DateTime($LogOutTIme);
+                                                                            $LogOut = $dateLogOut->format('F j, Y, g:i A');
+                                                                            echo $LogOut;
+                                                                        } else {
+                                                                            // If $row->logout_time is empty, display "-------"
+                                                                            echo "Working";
+                                                                        }
+                                                                        ?>
+
+                                                                    </td>
+
+<!-- 
+                                                                    <td>
+                                                                        <?php if ($row->logout_time != "") { ?>
+                                                                        <?php $currentDateTime = new DateTime();
+                                                                            $timeDifference = $dateLogIn->diff($currentDateTime);
+                                                                            $intervalFormatted = $timeDifference->format('%d days, %h hours, %i minutes');
+                                                                            echo $intervalFormatted;
+                                                                        } else { $timeDifference = $dateLogIn->diff($dateLogOut);
+
+                                                                            // Format the time difference into a human-readable format
+                                                                            $intervalFormatted = $timeDifference->format('%d days, %h hours, %i minutes');
+                                                                            echo $intervalFormatted; } ?>
+                                                                    </td> -->
+
+
+
                                                                     <td> <?php if ($row->id_deleted == "0") { ?>
                                                                             <a href="<?php echo base_url('UpdateStatus/' . $row->id_deleted . '/' . $row->user_id); ?>" style="text-decoration: none;">
                                                                                 <button style="background-color: #2ECC71; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">

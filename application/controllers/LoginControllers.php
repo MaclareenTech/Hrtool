@@ -183,17 +183,108 @@ class LoginControllers extends BaseController
             } else {
                 date_default_timezone_set('Asia/Kolkata');
                 $currentDateTime = date('Y-m-d H:i:s');
+                $logout = '0000-00-00 00:00:00';
                 $data = [
                     'login_time'    => $currentDateTime,
+                    'logout_time'    => "",
                 ];
 
-                if ($this->Admin_model->UpdateUsingEmailId($email, $data)) {
-                    $sessionArray['isLoggedIn'] = TRUE;
-                    $this->session->set_userdata($sessionArray);
-                    redirect('adminDashboard');
-                } else {
-                    $this->session->set_flashdata('error', 'Please Try Again ');
-                    redirect('optscreen');
+                if ($details = $this->Admin_model->UpdateUsingEmailId($email, $data)) {
+                    $user_email = $details[0]['user_name'];
+                    $latitude = $details[0]['latitude'];
+                    $longitude = $details[0]['longitude'];
+                    $dateObj = new DateTime($currentDateTime);
+
+                    // Format the DateTime object into a human-readable format
+                    $humanReadableFormat = $dateObj->format('F j, Y, g:i A');
+
+                    // Output the human-readable format
+
+                    $url = "https://www.google.com/maps?q={$latitude},{$longitude}";
+                    $subject = "Login Notification - MTAS(Maclareen Talent Acquisition System)";
+                    $OtpMail = '<!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Password Changed Notification</title>
+                        <style>
+                            body {
+                                font-family: Arial, sans-serif;
+                                line-height: 1.6;
+                                background-color: #f7f7f7;
+                                margin: 0;
+                                padding: 0;
+                            }
+                            .container {
+                                max-width: 600px;
+                                margin: 20px auto;
+                                background-color: #ffffff;
+                                padding: 20px;
+                                border-radius: 5px;
+                                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                            }
+                            h1 {
+                                color: #444;
+                                text-align: center;
+                            }
+                            p {
+                                margin-bottom: 20px;
+                            }
+                            .notification {
+                                background-color: #868181;
+                                color: #ffffff;
+                                text-align: center;
+                                padding: 10px;
+                                border-radius: 5px;
+                            }
+                            .footer {
+                                margin-top: 30px;
+                                text-align: center;
+                                color: #888;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="container">
+                            <h1>Log In Notification </h1>
+                            <p>Hello Super Admin,</p>
+                            <p>This is to inform you that the employee <strong>' . $user_email . '</strong> has recently loged in.Following are loginin details  </p>
+                            <div class="notification"><p>Log In Time : ' . $humanReadableFormat . '</p> 
+                                <p>Log In Location : ' . $url . '</p> 
+                            </div>
+                            <p>This is an automated email. Please do not reply</p>
+                            <p>Thank you,</p>
+                    
+                        </div>
+                        <div class="footer">
+                            This email was sent by MTAS(Maclareen Talent Acquisition System ).
+                        </div>
+                    </body>
+                    </html>
+                    
+                    ';
+                    $this->load->config('email');
+                    $this->load->library('email');
+
+                    //	$token = $email_exist->emp_id;
+
+                    $this->email->from('MTAS(Maclareen Talent Acquisition System)', 'Maclareen Talent Acquisition System ');
+                    $this->email->to($email);
+                    $this->email->subject($subject);
+                    $this->email->message($OtpMail);
+                    $this->email->set_header('Reply-To', 'immigration@maclareen.com');
+                    $this->email->set_mailtype("html");
+                    $sendemail = $this->email->send();
+                    if ($sendemail) {
+                        $sessionArray['isLoggedIn'] = TRUE;
+                        $this->session->set_userdata($sessionArray);
+                        redirect('adminDashboard');
+                    } else {
+                        $this->session->set_flashdata('error', 'Please Try Again ');
+                        redirect('optscreen');
+                    }
                 }
             }
             // redirect('optscreen');
@@ -215,47 +306,43 @@ class LoginControllers extends BaseController
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]');
 
-        $allowed_latitude = 19.198353764439567; // office latitude   19.198353764439567, 72.94832591579724
-        $allowed_longitude = 72.94851828726368; // office longitude
+        $targetLatitude = 19.19955836536099;
+        $targetLongitude = 72.94976072877951;
 
-        // $allowed_latitude = 19.1025427; // office latitude
-        // $allowed_longitude = 72.9254307; // office longitude
+        // Check if the user's location is within the specified range (200 meters)
+        $distance = $this->distanceBetweenPoints($submitted_latitude, $submitted_longitude, $targetLatitude, $targetLongitude);
+       
+            if ($this->form_validation->run() == FALSE) {
+                $this->index();
+            } else {
+                $email = $this->input->post('email');
+                $password = $this->input->post('password');
+                $hashedPassword = md5($password);
+                $result = $this->Admin_model->Login($email, $hashedPassword);
 
-        // $allowed_latitude = 19.210872627836014; // dombivali latitude
-        // $allowed_longitude = 73.0940885985540; // dombivali longitude
-        $distance = $this->calculateHaversineDistance($submitted_latitude, $submitted_longitude, $allowed_latitude, $allowed_longitude);
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->index();
-        } else {
-            $email = $this->input->post('email');
-            $password = $this->input->post('password');
-            $hashedPassword = md5($password);
-            $result = $this->Admin_model->Login($email, $hashedPassword);
-
-            if (!empty($result)) {
-                $res = $result[0];
-                $sessionArray = array(
-                    'userId' => $res->user_id,
-                    'user_profile' => $res->user_profile,
-                    'user_email' => $res->user_email,
-                    'name' => $res->user_name
-                );
+                if (!empty($result)) {
+                    $res = $result[0];
+                    $sessionArray = array(
+                        'userId' => $res->user_id,
+                        'user_profile' => $res->user_profile,
+                        'user_email' => $res->user_email,
+                        'name' => $res->user_name
+                    );
 
 
-                if ($res->user_role == "0") {
+                    if ($res->user_role == "0") {
 
-                    $sessionArray['role'] = 'candidate';
-                    $sessionArray['isLoggedIn'] = TRUE;
-                    $sessionArray['userId'] = $res->table_id;
-                    $this->session->set_userdata($sessionArray);
-                    redirect('candidateDashboard');
-                } else if ($res->user_role == "1") {
+                        $sessionArray['role'] = 'candidate';
+                        $sessionArray['isLoggedIn'] = TRUE;
+                        $sessionArray['userId'] = $res->table_id;
+                        $this->session->set_userdata($sessionArray);
+                        redirect('candidateDashboard');
+                    } else if ($res->user_role == "1") {
 
 
-                    // Define the allowed distance (500 meters in this example)
-                    $allowed_distance_meters = 500;
-                    // if ($distance <= $allowed_distance_meters) {
+                        // Define the allowed distance (500 meters in this example)
+                        $allowed_distance_meters = 500;
+                        // if ($distance <= $allowed_distance_meters) {
                         $sessionArray['role'] = 'admin';
                         $sessionArray['userId'] = $res->user_id;
                         $this->session->set_userdata($sessionArray);
@@ -368,6 +455,8 @@ class LoginControllers extends BaseController
 
                         $data = [
                             'login_otp'    => $otp,
+                            'latitude'    => $submitted_latitude,
+                            'longitude'    => $submitted_longitude
                         ];
                         $OtpSend = $this->Admin_model->UpdateUsingEmailId($email, $data);
 
@@ -378,23 +467,41 @@ class LoginControllers extends BaseController
                             redirect('LoginControllers');
                         }
                         //  redirect('adminDashboard');
-                    // } else {
-                    //     $this->session->set_flashdata('error', 'You Are not in office');
-                    //     redirect('LoginControllers');
-                    // }
+                        // } else {
+                        //     $this->session->set_flashdata('error', 'You Are not in office');
+                        //     redirect('LoginControllers');
+                        // }
+                    } else {
+                        if ($distance <= 1.0) {
+                        date_default_timezone_set('Asia/Kolkata');
+                        $currentDateTime = date('Y-m-d H:i:s');
+                       
+                        $data = [
+                            'login_time'    => $currentDateTime,
+                            'logout_time'    => "",
+                        ];
+
+                        if ($details = $this->Admin_model->UpdateUsingEmailId($email, $data)) {
+                            $sessionArray['isLoggedIn'] = TRUE;
+                            $sessionArray['role'] = 'superadmin';
+                            $sessionArray['userId'] = $res->user_id;
+                            $this->session->set_userdata($sessionArray);
+                            redirect('superadminDashboard');
+                        }
+                    }
+                 else {
+                    $this->session->set_flashdata('error', 'You Are not in office');
+                    redirect('LoginControllers');}}
+                
                 } else {
-                    $sessionArray['isLoggedIn'] = TRUE;
-                    $sessionArray['role'] = 'superadmin';
-                    $sessionArray['userId'] = $res->user_id;
-                    $this->session->set_userdata($sessionArray);
-                    redirect('superadminDashboard');
+                    $this->session->set_flashdata('error', 'Email or password mismatch');
+                    redirect('LoginControllers');
                 }
-            } else {
-                $this->session->set_flashdata('error', 'Email or password mismatch');
-                redirect('LoginControllers');
             }
-        }
-    }
+        
+    
+}
+
 
     // Function to calculate the Haversine distance between two geographical coordinates
     private function calculateHaversineDistance($lat1, $lon1, $lat2, $lon2)
@@ -420,5 +527,18 @@ class LoginControllers extends BaseController
         $OTP     .=    rand(0, 9);
         $OTP     .=    rand(0, 9);
         return $OTP;
+    }
+    // Helper function to calculate the distance between two coordinates using the Haversine formula.
+    private function distanceBetweenPoints($lat1, $lon1, $lat2, $lon2)
+    {
+        $earthRadius = 6371; // Radius of the earth in km
+        $dLat = deg2rad($lat2 - $lat1);
+        $dLon = deg2rad($lon2 - $lon1);
+
+        $a = sin($dLat / 2) * sin($dLat / 2) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * sin($dLon / 2) * sin($dLon / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        $distance = $earthRadius * $c;
+
+        return $distance; // in km
     }
 }

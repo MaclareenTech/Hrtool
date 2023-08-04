@@ -56,8 +56,14 @@ class ChatControllers extends BaseController
            
         }
     
-        public function get_messages() {
-            $messages = $this->chat_model->get_messages();
-            echo json_encode($messages);
+        public function UpdateChat_get() {
+            $this->load->model('chat_model');
+            $chatdata = $this->chat_model->get_messages();
+    
+            // Convert the chat data to JSON format and send it as the response
+            echo json_encode($chatdata);
+        }
+        public function test() {
+            echo "Test method is working.";
         }
    }

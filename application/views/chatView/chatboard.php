@@ -120,7 +120,7 @@
         width: 24px;
         height: 24px;
         border-radius: 9999px;
-        background: linear-gradient(#e71b1b, #bb1c1c);
+        background: linear-gradient(#ff0000, #981515);
         color: #fff;
         line-height: 24px;
         text-align: center;
@@ -272,6 +272,33 @@
                                     <i class="ti-fullscreen"></i>
                                 </a>
                             </li>
+                        </ul>
+                        <ul class="nav-right">
+                            <li class="header-notification">
+                                <a href="#!" class="waves-effect waves-light">
+                                    <i class="ti-bell"></i>
+                                    <span class="badge bg-c-red"></span>
+                                </a>
+                                <ul class="show-notification">
+                                    <li>
+                                        <h6>Notifications</h6>
+                                        <label class="label label-danger">New</label>
+                                    </li>
+                                    <!-- <li class="waves-effect waves-light">
+                                            <div class="media">
+                                                <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                    <h5 class="notification-user">John Doe</h5>
+                                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                                    <span class="notification-time">30 minutes ago</span>
+                                                </div>
+                                            </div>
+                                        </li> -->
+
+
+                                </ul>
+                            </li>
+
                         </ul>
 
                     </div>
@@ -482,58 +509,60 @@
 
                                         </div>
                                         <div class="app-message-body">
-                                            <?php if (!empty($chatdata)) : ?>
-                                                <?php foreach ($chatdata as $row) : ?>
-                                                    <?php
-                                                    $Admin_id = $this->session->userdata('userId');
-                                                    $isSentByAdmin = ($row->sender_id == $Admin_id);
-                                                    ?>
-                                                    <?php if ($isSentByAdmin) { ?>
-                                                        <div class="message-wrapper" style="display: flex; flex-direction: column;  align-items: end;;  margin-bottom: 15px;">
-                                                            <div class="message" style="max-width: 66.6%; background-color: #fff; padding: 8px; border-radius: 5px; box-shadow: 4px 4px rgba(200, 200, 200, 0.25); font-size: 0.9rem; display: flex; flex: 1 auto;">
-                                                                <span><?php echo $row->chat_message; ?></span>
-                                                            </div>
-                                                            <div class="message-meta" style="display: flex; flex: 1 auto; margin: 10px 5px 15px; justify-content: flex-end;">
-                                                                <div class="sender-avatar" style="width: 82px; height: 24px; border-radius: 9999px; background: linear-gradient(180deg, #fb551c, #f7b633); color: #fff; line-height: 24px; text-align: center; font-size: 0.666rem; font-weight: 600;">
-                                                                    <?php
-                                                                    $first_name = strtok($row->user_name, ' '); // Get the first part before the space
-
-                                                                    echo $first_name; ?>
+                                            <div id="chat-box">
+                                                <?php if (!empty($chatdata)) : ?>
+                                                    <?php foreach ($chatdata as $row) : ?>
+                                                        <?php
+                                                        $Admin_id = $this->session->userdata('userId');
+                                                        $isSentByAdmin = ($row->sender_id == $Admin_id);
+                                                        ?>
+                                                        <?php if ($isSentByAdmin) { ?>
+                                                            <div class="message-wrapper" style="display: flex; flex-direction: column;  align-items: end;;  margin-bottom: 15px;">
+                                                                <div class="message" style="max-width: 66.6%; background-color: #fff; padding: 8px; border-radius: 5px; box-shadow: 4px 4px rgba(200, 200, 200, 0.25); font-size: 0.9rem; display: flex; flex: 1 auto;">
+                                                                    <span><?php echo $row->chat_message; ?></span>
                                                                 </div>
-                                                                <span class="timestamp" style="color: #999; font-size: 0.666rem; line-height: 24px; display: inline-block; margin: 0 5px;">
-                                                                    <?php
-                                                                    $formattedDate = date('j M g:i A', strtotime($row->chat_time));
-                                                                    echo $formattedDate;
-                                                                    ?>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    <?php } else { ?>
-                                                        <div class="message-wrapper" style="display: flex; flex-direction: column; align-items: start;; margin-bottom: 15px;">
-                                                            <div class="message" style="max-width: 66.6%; background-color: #fff; padding: 8px; border-radius: 5px; box-shadow: 4px 4px rgba(200, 200, 200, 0.25); font-size: 0.9rem; display: flex; flex: 1 auto;">
-                                                                <span><?php echo $row->chat_message; ?></span>
-                                                            </div>
-                                                            <div class="message-meta" style="display: flex; flex: 1 auto; margin: 10px 5px 15px; justify-content:flex-start;">
-                                                            <div class="sender-avatar" style="width: 82px; height: 24px; border-radius: 9999px; background: linear-gradient(180deg, #fb551c, #f7b633); color: #fff; line-height: 24px; text-align: center; font-size: 0.666rem; font-weight: 600;">
-                                                                    <?php
-                                                                    $first_name = strtok($row->user_name, ' '); // Get the first part before the space
+                                                                <div class="message-meta" style="display: flex; flex: 1 auto; margin: 10px 5px 15px; justify-content: flex-end;">
+                                                                    <div class="sender-avatar" style="width: 82px; height: 24px; border-radius: 9999px; background: linear-gradient(180deg, #fb551c, #f7b633); color: #fff; line-height: 24px; text-align: center; font-size: 0.666rem; font-weight: 600;">
+                                                                        <?php
+                                                                        $first_name = strtok($row->user_name, ' '); // Get the first part before the space
 
-                                                                    echo $first_name; ?>
+                                                                        echo $first_name; ?>
+                                                                    </div>
+                                                                    <span class="timestamp" style="color: #999; font-size: 0.666rem; line-height: 24px; display: inline-block; margin: 0 5px;">
+                                                                        <?php
+                                                                        $formattedDate = date('j M g:i A', strtotime($row->chat_time));
+                                                                        echo $formattedDate;
+                                                                        ?>
+                                                                    </span>
                                                                 </div>
-                                                                <span class="timestamp" style="color: #999; font-size: 0.666rem; line-height: 24px; display: inline-block; margin: 0 5px;">
-                                                                    <?php
-                                                                    $formattedDate = date('j M g:i A', strtotime($row->chat_time));
-                                                                    echo $formattedDate;
-                                                                    ?>
-                                                                </span>
                                                             </div>
-                                                        </div>
-                                                    <?php } ?>
+                                                        <?php } else { ?>
+                                                            <div class="message-wrapper" style="display: flex; flex-direction: column; align-items: start;; margin-bottom: 15px;">
+                                                                <div class="message" style="max-width: 66.6%; background-color: #fff; padding: 8px; border-radius: 5px; box-shadow: 4px 4px rgba(200, 200, 200, 0.25); font-size: 0.9rem; display: flex; flex: 1 auto;">
+                                                                    <span><?php echo $row->chat_message; ?></span>
+                                                                </div>
+                                                                <div class="message-meta" style="display: flex; flex: 1 auto; margin: 10px 5px 15px; justify-content:flex-start;">
+                                                                    <div class="sender-avatar" style="width: 82px; height: 24px; border-radius: 9999px; background: linear-gradient(180deg, #fb551c, #f7b633); color: #fff; line-height: 24px; text-align: center; font-size: 0.666rem; font-weight: 600;">
+                                                                        <?php
+                                                                        $first_name = strtok($row->user_name, ' '); // Get the first part before the space
 
-                                                <?php endforeach; ?>
-                                            <?php else : ?>
-                                                <p>No chat available.</p>
-                                            <?php endif; ?>
+                                                                        echo $first_name; ?>
+                                                                    </div>
+                                                                    <span class="timestamp" style="color: #999; font-size: 0.666rem; line-height: 24px; display: inline-block; margin: 0 5px;">
+                                                                        <?php
+                                                                        $formattedDate = date('j M g:i A', strtotime($row->chat_time));
+                                                                        echo $formattedDate;
+                                                                        ?>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        <?php } ?>
+
+                                                    <?php endforeach; ?>
+                                                <?php else : ?>
+                                                    <p>No chat available.</p>
+                                                <?php endif; ?>
+                                            </div>
                                         </div>
 
                                         <div class="app-input-area">
@@ -564,6 +593,106 @@
                             </div>
                             <!-- Page-body end -->
                         </div>
+                        <!-- chat update script start -->
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+                            // Function to update the chat messages
+                            function updateChatMessages() {
+                                // Use AJAX to fetch updated chat data from the server
+                                // Replace 'your_controller_path' with the actual path to your controller's 'UpdateChat_get' method
+                                $.ajax({
+                                    url: '<?php echo base_url("chat/ChatControllers/UpdateChat_get"); ?>',
+                                    type: 'GET',
+                                    dataType: 'json',
+                                    success: function(data) {
+                                        // Check if there is any new chat data
+                                        var chatBox = document.getElementById('chat-box');
+
+                                                            if (data.length > 0) {
+                                                                data.forEach(function(row) {
+                                                                    var Admin_id = <?php echo $this->session->userdata('userId'); ?>;
+                                                                    var isSentByAdmin = row.sender_id == Admin_id;
+
+                                                                    var messageWrapper = document.createElement('div');
+                                                                    messageWrapper.className = 'message-wrapper';
+
+                                                                    var message = document.createElement('div');
+                                                                    message.className = 'message';
+                                                                    message.style.maxWidth = '66.6%';
+                                                                    message.style.backgroundColor = '#fff';
+                                                                    message.style.padding = '8px';
+                                                                    message.style.borderRadius = '5px';
+                                                                    message.style.boxShadow = '4px 4px rgba(200, 200, 200, 0.25)';
+                                                                    message.style.fontSize = '0.9rem';
+                                                                    message.style.display = 'flex';
+                                                                    message.style.flex = '1 auto';
+                                                                    message.textContent = row.chat_message;
+                                                                    messageWrapper.appendChild(message);
+
+                                                                    var messageMeta = document.createElement('div');
+                                                                    messageMeta.className = 'message-meta';
+                                                                    messageMeta.style.display = 'flex';
+                                                                    messageMeta.style.flex = '1 auto';
+                                                                    messageMeta.style.margin = '10px 5px 15px';
+
+                                                                    var senderAvatar = document.createElement('div');
+                                                                    senderAvatar.className = 'sender-avatar';
+                                                                    senderAvatar.style.width = '82px';
+                                                                    senderAvatar.style.height = '24px';
+                                                                    senderAvatar.style.borderRadius = '9999px';
+                                                                    senderAvatar.style.background = 'linear-gradient(180deg, #fb551c, #f7b633)';
+                                                                    senderAvatar.style.color = '#fff';
+                                                                    senderAvatar.style.lineHeight = '24px';
+                                                                    senderAvatar.style.textAlign = 'center';
+                                                                    senderAvatar.style.fontSize = '0.666rem';
+                                                                    senderAvatar.style.fontWeight = '600';
+                                                                    var first_name = row.user_name.split(' ')[0];
+                                                                    senderAvatar.textContent = first_name;
+                                                                    messageMeta.appendChild(senderAvatar);
+
+                                                                    var timestamp = document.createElement('span');
+                                                                    timestamp.className = 'timestamp';
+                                                                    timestamp.style.color = '#999';
+                                                                    timestamp.style.fontSize = '0.666rem';
+                                                                    timestamp.style.lineHeight = '24px';
+                                                                    timestamp.style.display = 'inline-block';
+                                                                    timestamp.style.margin = '0 5px';
+                                                                    var formattedDate = new Date(row.chat_time);
+                                                                    timestamp.textContent = formattedDate.toLocaleString('en-US', {
+                                                                        day: 'numeric',
+                                                                        month: 'short',
+                                                                        hour: 'numeric',
+                                                                        minute: 'numeric',
+                                                                        hour12: true,
+                                                                    });
+                                                                    messageMeta.appendChild(timestamp);
+
+                                                                    messageWrapper.appendChild(messageMeta);
+
+                                                                    if (isSentByAdmin) {
+                                                                        messageWrapper.style.alignItems = 'end';
+                                                                        messageMeta.style.justifyContent = 'flex-end';
+                                                                    } else {
+                                                                        messageWrapper.style.alignItems = 'start';
+                                                                        messageMeta.style.justifyContent = 'flex-start';
+                                                                    }
+
+                                                                    chatBox.appendChild(messageWrapper);
+                                                                });
+                                                                chatBox.scrollTop = chatBox.scrollHeight;
+                                                            }
+                                    },
+                                    error: function(xhr, status, error) {
+                                        console.error(error);
+                                    }
+                                });
+                            }
+
+                            // Call updateChatMessages function every 10 seconds
+                            setInterval(updateChatMessages, 5000); // 5000 milliseconds = 5 seconds
+                        </script>
+
+                        <!-- chat update script end -->
                         <div id="styleSelector"> </div>
                     </div>
                 </div>
