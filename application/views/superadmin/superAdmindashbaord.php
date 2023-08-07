@@ -82,28 +82,27 @@
         animation: fadeIn 1s ease-in-out;
     }
 
+
+
     /* 3d box start */
     .box-container {
-        /* align-items: center;
-            display: flex; */
-        /* flex-direction: column; /* Updated to vertical column */
-        /* justify-content: space-around;
-            width: 100%; */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        /* Updated to show two boxes horizontally */
+        gap: 20px;
     }
 
     @media screen and (min-width: 1380px) {
         .box-container {
-            flex-direction: row;
-            /* Horizontal row for larger screens */
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 
     .box-item {
         position: relative;
         -webkit-backface-visibility: hidden;
-        width: 550px;
         margin-bottom: 35px;
-        max-width: 100%;
+        max-width: 550px;
     }
 
     .flip-box {
@@ -120,7 +119,7 @@
         background-position: center;
         border-radius: 8px;
         min-height: 205px;
-        /* width: 150%; */
+        width: 100%;
         -ms-transition: transform 0.7s cubic-bezier(.4, .2, .2, 1);
         transition: transform 0.7s cubic-bezier(.4, .2, .2, 1);
         -webkit-transition: transform 0.7s cubic-bezier(.4, .2, .2, 1);
@@ -173,7 +172,7 @@
         position: absolute;
         left: 0;
         width: 100%;
-        padding: 60px;
+
         outline: 1px solid transparent;
         -webkit-perspective: inherit;
         perspective: inherit;
@@ -186,12 +185,11 @@
     }
 
     .flip-box-header {
-        font-size: 24px;
-     
+        font-size: 20px;
     }
 
     .flip-box p {
-        font-size: 20px;
+        font-size: 15px;
         line-height: 1.5em;
     }
 
@@ -563,27 +561,63 @@
                                                                 </div>
                                                             </div>
                                                         </div> -->
-
                                                         <div class="box-container">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
+                                                            <div class="box-item">
+                                                                <div class="flip-box">
+                                                                    <div class="flip-box-front text-center" style="background: linear-gradient(45deg, #ff0000, #ff0000);">
+                                                                        <div class="inner color-white">
+                                                                            <h3 class="flip-box-header" style="color: white;">Pending Candidate</h3>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="flip-box-back text-center" style="background: linear-gradient(45deg, #ff0000, #ff0000);">
+                                                                        <div class="inner color-white">
+                                                                            <h3 class="flip-box-header" style="color: white;">Pending Candidate</h3>
+                                                                            <button class="flip-box-button"><?php echo $pendingCandidate; ?></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="box-item">
+                                                                <div class="flip-box">
+                                                                    <div class="flip-box-front text-center" style="background: linear-gradient(45deg, #45a049, #45a049);">
+                                                                        <div class="inner color-white">
+                                                                            <h3 class="flip-box-header" style="color: white;">Completed Candidate</h3>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="flip-box-back text-center" style="background: linear-gradient(45deg, #45a049, #45a049);">
+                                                                        <div class="inner color-white">
+                                                                            <h3 class="flip-box-header" style="color: white;">Completed Candidate</h3>
+                                                                            <button class="flip-box-button"><?php echo $CompletedCandidate; ?></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="box-container">
                                                                     <div class="box-item">
                                                                         <div class="flip-box">
                                                                             <div class="flip-box-front text-center" style="background: linear-gradient(45deg, #ff0000, #ff0000);">
                                                                                 <div class="inner color-white">
-                                                                                    <h3 class="flip-box-header"  style="color: white;">Pending Candidate</h3>
+                                                                                    <h3 class="flip-box-header" style="color: white;">Pending Candidate</h3>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="flip-box-back text-center" style="background: linear-gradient(45deg, #ff0000, #ff0000);">
                                                                                 <div class="inner color-white">
-                                                                                    <h3 class="flip-box-header" style="color: white;" >Pending Candidate</h3>
+                                                                                    <h3 class="flip-box-header" style="color: white;">Pending Candidate</h3>
                                                                                     <button class="flip-box-button"><?php echo $pendingCandidate; ?></button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
+
                                                                 </div>
-                                                                <div class="col-md-6">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="box-container">
+
                                                                     <div class="box-item">
                                                                         <div class="flip-box">
                                                                             <div class="flip-box-front text-center" style="background: linear-gradient(45deg, #45a049, #45a049);">
@@ -601,9 +635,10 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-
+                                                        </div> -->
                                                     </div>
+
+
                                                     <div class="col-xl-6 col-md-6 d-flex align-items-center justify-content-center">
                                                         <div>
                                                             <canvas id="myPieChart"></canvas>
