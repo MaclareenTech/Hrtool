@@ -480,7 +480,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="accountNo">Client's Contact No: </label>
-                                                                                    <input type="tel" class="form-control" name="candidate_number" placeholder="Your client contact's name" id="clientsmobileNo" required>
+                                                                                    <input type="tel" class="form-control" name="candidate_number" placeholder="Your client contact's name" id="clientsmobileNo" required pattern="[0-9]+" title="Please enter numbers only">
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="accountNo">Client's Email ID: </label>
@@ -625,8 +625,10 @@
                                                                         <button type="button" class="btn btn-info waves-effect waves-light" onclick="addRow()">Add Row</button>
                                                                         <hr>
 
-
-                                                                        <center> <button type="submit" class="btn btn-success waves-effect waves-light">Create Invoice</button></center>
+                                                                        <center> <button type="submit" class="btn btn-success waves-effect waves-light" style="background: linear-gradient(to bottom, #2ecc71, #2ecc71); padding: 12px 20px; box-shadow: 0 4px 0 #0b872c; color: white; font-size: 16px; border-radius: 6px; border: none; margin-left: 10px; transition: all 0.3s ease;">
+                                                                        Create Invoice
+                                                    </button></center>
+                                                                        
                                                                     </div>
                                                                 </form>
                                                             </div>

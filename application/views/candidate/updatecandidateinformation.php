@@ -208,6 +208,111 @@
             transform: rotate(360deg);
         }
     }
+
+    /* loader start */
+    .loader {
+        /* width: 100%;
+        margin-top: 50px;*/
+        display: none;
+        width: 100%;
+        align-items: center;
+        height: 15px;
+        text-align: center;
+
+    }
+
+    .dot {
+        position: relative;
+        width: 15px;
+        height: 15px;
+        margin: 0 2px;
+        display: inline-block;
+    }
+
+    .dot:first-child:before {
+        animation-delay: 0ms;
+    }
+
+    .dot:first-child:after {
+        animation-delay: 0ms;
+    }
+
+    .dot:last-child:before {
+        animation-delay: 200ms;
+    }
+
+    .dot:last-child:after {
+        animation-delay: 200ms;
+    }
+
+    .dot:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 15px;
+        height: 15px;
+        background-color: blue;
+        animation-name: dotHover;
+        animation-duration: 900ms;
+        animation-timing-function: cubic-bezier(.82, 0, .26, 1);
+        animation-iteration-count: infinite;
+        animation-delay: 100ms;
+        background: linear-gradient(45deg, rgba(208, 8, 8, 1) 0%, rgba(255, 0, 0, 1) 100%);
+        box-shadow: 0px 0px 8px rgba(208, 8, 8, 0.8);
+
+        border-radius: 100%;
+    }
+
+    .dot:after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background: black;
+        box-shadow: 0px 0px 1px black;
+        opacity: .20;
+        width: 100%;
+        height: 3px;
+        left: 0;
+        bottom: -2px;
+        border-radius: 100%;
+        animation-name: dotShadow;
+        animation-duration: 900ms;
+        animation-timing-function: cubic-bezier(.82, 0, .26, 1);
+        animation-iteration-count: infinite;
+        animation-delay: 100ms;
+    }
+
+    @keyframes dotShadow {
+        0% {
+            transform: scaleX(1);
+        }
+
+        50% {
+            opacity: 0;
+            transform: scaleX(.6);
+        }
+
+        100% {
+            transform: scaleX(1);
+        }
+    }
+
+    @keyframes dotHover {
+        0% {
+            top: 0px;
+        }
+
+        50% {
+            top: -50px;
+            transform: scale(1.1);
+        }
+
+        100% {
+            top: 0;
+        }
+    }
+
+    /* loader end  */
 </style>
 
 <body>
@@ -286,7 +391,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a >
+                        <a>
                             <img class="img-fluid" src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="Theme-Logo" style="  width: 160px;">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -338,7 +443,7 @@
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-                <nav class="pcoded-navbar">
+                    <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
@@ -346,7 +451,7 @@
 
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -393,7 +498,7 @@
                             <?php } ?>
                             <?php
                             $mail = $this->session->userdata('user_email'); ?>
-                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com"  ) { ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com") { ?>
                                 <div class="pcoded-navigation-label">Invoice</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li class="">
@@ -489,7 +594,7 @@
                                     <div class="col-md-4">
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a > <i class="fa fa-home"></i> </a>
+                                                <a> <i class="fa fa-home"></i> </a>
                                             </li>
                                             <li class="breadcrumb-item"><a href="#!">Update Candidate Information</a>
                                             </li>
@@ -509,7 +614,7 @@
                         <div class="pcoded-inner-content">
                             <!-- Main-body start -->
                             <div class="main-body">
-                                <div class="page-wrapper" >
+                                <div class="page-wrapper">
                                     <!-- Page-body start -->
 
 
@@ -544,7 +649,8 @@
                                             </div>
                                             <div class="input-box">
                                                 <span class="details">Job title</span>
-                                                <input type="text" value="<?php $combined_value = $candidate[0]->job_country . ' - ' . $candidate[0]->job_position; echo $combined_value ; ?>" name="candidate_job_profile" disabled>
+                                                <input type="text" value="<?php $combined_value = $candidate[0]->job_country . ' - ' . $candidate[0]->job_position;
+                                                                            echo $combined_value; ?>" name="candidate_job_profile" disabled>
                                             </div>
                                             <div class="input-box">
                                                 <span class="details">E-Mail</span>
@@ -563,9 +669,9 @@
 
                                             </div>
                                             <div class="input-box">
-                                               
+
                                             </div>
-                                           
+
                                             <div class="button">
                                                 <div class="form-group row">
                                                     <label class="col-sm-4 col-form-label">Job Status</label>
@@ -636,7 +742,7 @@
                                                 </div>
                                             </div>
                                         <?php }  ?>
-                                       
+
 
 
                                         <div class="title" style="margin-top: 20px;">Job Orientation </div>
@@ -818,7 +924,10 @@
                                         <?php } ?>
                                         <div class="form-group row">
                                             <div class="col-sm-12">
-                                                <center> <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: #2ecc71; ">Update Candidate</button></center>
+                                                <center> <button type="submit" class="btn btn-success waves-effect waves-light" id="loaderButton" style="background: linear-gradient(to bottom, #2ecc71, #2ecc71); padding: 12px 20px; box-shadow: 0 4px 0 #0b872c; color: white; font-size: 16px; border-radius: 6px; border: none; margin-left: 10px; transition: all 0.3s ease;">
+                                                        Update Candidate
+                                                    </button></center>
+
                                             </div>
 
                                         </div>
@@ -852,7 +961,12 @@
                                 <!-- Page-body end -->
                             </div>
                             <div id="styleSelector"> </div>
+                            <div class="loader">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -883,7 +997,20 @@
 
 
 
+    <!-- password view option  end -->
 
+
+
+    <!-- Your JavaScript code to handle the button click and show the loader  start-->
+    <script>
+        document.getElementById("loaderButton").addEventListener("click", function() {
+            // Show the loader on button click
+            var loader = document.querySelector(".loader");
+            loader.style.display = "block";
+
+        });
+    </script>
+    <!-- Your JavaScript code to handle the button click and show the loader  end-->
 
 
 </body>

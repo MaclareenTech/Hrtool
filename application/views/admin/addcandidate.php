@@ -61,6 +61,111 @@
             transform: rotate(360deg);
         }
     }
+
+    /* loader start */
+    .loader {
+        /* width: 100%;
+        margin-top: 50px;*/
+        display: none;
+        width: 100%;
+        align-items: center;
+        height: 15px;
+        text-align: center;
+
+    }
+
+    .dot {
+        position: relative;
+        width: 15px;
+        height: 15px;
+        margin: 0 2px;
+        display: inline-block;
+    }
+
+    .dot:first-child:before {
+        animation-delay: 0ms;
+    }
+
+    .dot:first-child:after {
+        animation-delay: 0ms;
+    }
+
+    .dot:last-child:before {
+        animation-delay: 200ms;
+    }
+
+    .dot:last-child:after {
+        animation-delay: 200ms;
+    }
+
+    .dot:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 15px;
+        height: 15px;
+        background-color: blue;
+        animation-name: dotHover;
+        animation-duration: 900ms;
+        animation-timing-function: cubic-bezier(.82, 0, .26, 1);
+        animation-iteration-count: infinite;
+        animation-delay: 100ms;
+        background: linear-gradient(45deg, rgba(208, 8, 8, 1) 0%, rgba(255, 0, 0, 1) 100%);
+        box-shadow: 0px 0px 8px rgba(208, 8, 8, 0.8);
+
+        border-radius: 100%;
+    }
+
+    .dot:after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background: black;
+        box-shadow: 0px 0px 1px black;
+        opacity: .20;
+        width: 100%;
+        height: 3px;
+        left: 0;
+        bottom: -2px;
+        border-radius: 100%;
+        animation-name: dotShadow;
+        animation-duration: 900ms;
+        animation-timing-function: cubic-bezier(.82, 0, .26, 1);
+        animation-iteration-count: infinite;
+        animation-delay: 100ms;
+    }
+
+    @keyframes dotShadow {
+        0% {
+            transform: scaleX(1);
+        }
+
+        50% {
+            opacity: 0;
+            transform: scaleX(.6);
+        }
+
+        100% {
+            transform: scaleX(1);
+        }
+    }
+
+    @keyframes dotHover {
+        0% {
+            top: 0px;
+        }
+
+        50% {
+            top: -50px;
+            transform: scale(1.1);
+        }
+
+        100% {
+            top: 0;
+        }
+    }
+
+    /* loader end  */
 </style>
 
 <body>
@@ -398,26 +503,26 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Candidate Name *</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_name" placeholder="Candidate Name" required>
+                                                            <input type="text" class="form-control" name="candidate_name" placeholder="Candidate Name">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Candidate Email Id *</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_email" placeholder="Email id" required>
+                                                            <input type="text" class="form-control" name="candidate_email" placeholder="Email id">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Candidate Mobile Number *</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_mobile_no" placeholder="Mobile number" pattern="[0-9]{10}" required>
+                                                            <input type="text" class="form-control" name="candidate_mobile_no" placeholder="Mobile number" pattern="[0-9]{10}">
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Job Profile *</label>
                                                         <div class="col-sm-9">
-                                                            <select name="candidate_job_profile" class="form-control" required>
+                                                            <select name="candidate_job_profile" class="form-control">
 
                                                                 <?php foreach ($jobdetails as $row) : ?>
                                                                     <option value="<?php echo $row->job_code ?>"><?php $combined_value = $row->job_country . ' - ' . $row->job_position;
@@ -430,7 +535,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Candidate Source *</label>
                                                         <div class="col-sm-9">
-                                                            <select name="candidate_source_id" class="form-control" required>
+                                                            <select name="candidate_source_id" class="form-control">
 
                                                                 <?php foreach ($sourcedetails as $row) : ?>
                                                                     <option value="<?php echo $row->source_id ?>"><?php echo $row->source_name; ?></option>
@@ -442,11 +547,9 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Candidate Password *</label>
                                                         <div class="col-sm-7">
-                                                            <input type="password" class="form-control" name="candidate_password" id="passwordInput" placeholder="Enter your password" required>
+                                                            <input type="password" class="form-control" name="candidate_password" id="passwordInput" placeholder="Enter your password">
                                                         </div>
-                                                        <div class="col-sm-1" style="
-    margin-top: 4px;
-">
+                                                        <div class="col-sm-1" style=" margin-top: 4px;">
                                                             <span id="togglePassword" onclick="togglePasswordVisibility()">👁️</span>
                                                         </div>
                                                     </div>
@@ -502,7 +605,10 @@
                                                     </div> -->
                                                     <div class="form-group row">
                                                         <div class="col-sm-12">
-                                                            <center> <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: #2ecc71; ">Add Candiddate</button></center>
+                                                            <center> <button type="submit" id="loaderButton" class="btn btn-success waves-effect waves-light" style="background: linear-gradient(to bottom, #2ecc71, #2ecc71); padding: 12px 20px; box-shadow: 0 4px 0 #0b872c; color: white; font-size: 16px; border-radius: 6px; border: none; margin-left: 10px; transition: all 0.3s ease;">
+                                                                    Add Candiddate
+                                                                </button></center>
+
                                                         </div>
 
                                                     </div>
@@ -513,27 +619,7 @@
 
                                                     </form>
 
-                                                    <div class="progress-container" id="progressContainer" style="margin-top: -100px;margin-left: 500px;">
-                                                        <div class="progress-bar"></div>
-                                                    </div>
 
-                                                    <script>
-                                                        function startProgressBar() {
-                                                            const progressBar = document.querySelector(".progress-bar");
-                                                            progressBar.style.animationPlayState = "running";
-
-                                                            // Show the progress bar when the button is clicked
-                                                            const progressContainer = document.getElementById("progressContainer");
-                                                            progressContainer.style.display = "block";
-
-                                                            // Reset the progress bar after the animation delay (5 seconds in this example)
-                                                            setTimeout(() => {
-                                                                progressBar.style.animationPlayState = "paused";
-                                                                // Hide the progress bar after the animation is completed
-                                                                progressContainer.style.display = "none";
-                                                            }, 50000);
-                                                        }
-                                                    </script>
                                                 </div>
                                             </div>
                                             <!-- Basic Form Inputs card end -->
@@ -545,6 +631,12 @@
 
                                 </div>
                                 <!-- Page-body end -->
+                                <div class="loader">
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+
+                                </div>
                             </div>
                             <div id="styleSelector"> </div>
                         </div>
@@ -594,6 +686,16 @@
 
 
 
+    <!-- Your JavaScript code to handle the button click and show the loader  start-->
+    <script>
+        document.getElementById("loaderButton").addEventListener("click", function() {
+            // Show the loader on button click
+            var loader = document.querySelector(".loader");
+            loader.style.display = "block";
+
+        });
+    </script>
+    <!-- Your JavaScript code to handle the button click and show the loader  end-->
 
 </body>
 

@@ -527,7 +527,10 @@
                                                         </div>
 
                                                         <div class="col-sm-12">
-                                                            <center> <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: #2ecc71; ">Submit</button></center>
+                                                        <center> <button type="submit" class="btn btn-success waves-effect waves-light" style="background: linear-gradient(to bottom, #2ecc71, #2ecc71); padding: 12px 20px; box-shadow: 0 4px 0 #0b872c; color: white; font-size: 16px; border-radius: 6px; border: none; margin-left: 10px; transition: all 0.3s ease;">
+                                                Update Information
+                                                    </button></center>
+                                                           
                                                         </div>
 
                                                     </div>

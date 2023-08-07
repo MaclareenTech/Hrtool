@@ -212,6 +212,111 @@
             transform: rotate(360deg);
         }
     }
+        /* loader start */
+        .loader {
+        /* width: 100%;
+        margin-top: 50px;*/
+        display: none;
+        width: 100%;
+        align-items: center;
+        height: 15px;
+        text-align: center;
+
+    }
+
+    .dot {
+        position: relative;
+        width: 15px;
+        height: 15px;
+        margin: 0 2px;
+        display: inline-block;
+    }
+
+    .dot:first-child:before {
+        animation-delay: 0ms;
+    }
+
+    .dot:first-child:after {
+        animation-delay: 0ms;
+    }
+
+    .dot:last-child:before {
+        animation-delay: 200ms;
+    }
+
+    .dot:last-child:after {
+        animation-delay: 200ms;
+    }
+
+    .dot:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 15px;
+        height: 15px;
+        background-color: blue;
+        animation-name: dotHover;
+        animation-duration: 900ms;
+        animation-timing-function: cubic-bezier(.82, 0, .26, 1);
+        animation-iteration-count: infinite;
+        animation-delay: 100ms;
+        background: linear-gradient(45deg, rgba(208, 8, 8, 1) 0%, rgba(255, 0, 0, 1) 100%);
+        box-shadow: 0px 0px 8px rgba(208, 8, 8, 0.8);
+
+        border-radius: 100%;
+    }
+
+    .dot:after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background: black;
+        box-shadow: 0px 0px 1px black;
+        opacity: .20;
+        width: 100%;
+        height: 3px;
+        left: 0;
+        bottom: -2px;
+        border-radius: 100%;
+        animation-name: dotShadow;
+        animation-duration: 900ms;
+        animation-timing-function: cubic-bezier(.82, 0, .26, 1);
+        animation-iteration-count: infinite;
+        animation-delay: 100ms;
+    }
+
+    @keyframes dotShadow {
+        0% {
+            transform: scaleX(1);
+        }
+
+        50% {
+            opacity: 0;
+            transform: scaleX(.6);
+        }
+
+        100% {
+            transform: scaleX(1);
+        }
+    }
+
+    @keyframes dotHover {
+        0% {
+            top: 0px;
+        }
+
+        50% {
+            top: -50px;
+            transform: scale(1.1);
+        }
+
+        100% {
+            top: 0;
+        }
+    }
+
+    /* loader end  */
+
 </style>
 
 <body>
@@ -512,46 +617,49 @@
                         <div class="pcoded-inner-content" >
                             <!-- Main-body start -->
                             <div class="main-body">
-                                
+                            <?php
+                                        $this->load->helper('form');
+                                        $error = $this->session->flashdata('error');
+                                        if ($error) {
+                                        ?>
+                                            <div class="alert alert-danger alert-dismissable">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                <?php echo $error; ?>
+                                            </div>
+                                        <?php }
+                                        $success = $this->session->flashdata('success');
+                                        if ($success) {
+                                        ?>
+                                            <div class="alert alert-success alert-dismissable">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                <?php echo $success; ?>
+                                            </div>
+                                        <?php } ?>
                                 <form action="<?php echo base_url(); ?>send" method="post" style="padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);">
                                     <h1 class="title" style="text-align: center;">Start Email to <?php echo $candidate[0]->candidate_name ?></h1>
                                     <div class="field" style="margin-bottom: 10px;">
                                         <p for="subject" style="display: block; font-weight: bold; color: black;">Email Subject</p>
-                                        <input id="subject" type="text" class="input" name="subject" placeholder="Email Subject" style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" required>
+                                        <input id="subject" type="text" class="input" name="subject" placeholder="Email Subject" style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" >
                                     </div>
                                     <div class="field" style="margin-bottom: 10px;">
                                         <p for="body" style="display: block; font-weight: bold; color: black;">Email Body</p>
-                                        <textarea class="textarea" name="body" id="body" style="width: 100%; height: 150px; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" required>    </textarea>
+                                        <textarea class="textarea" name="body" id="body" style="width: 100%; height: 150px; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" >    </textarea>
                                     </div>
                                     <div style="text-align: center;">
                                         <input type="text" value="<?php echo $candidate[0]->candidate_email ?>" style="opacity: 0;" name="candidate_email">
                                         <input type="text" value="<?php echo $candidate[0]->candidate_name ?>" style="opacity: 0;" name="candidate_name">
-                                        <button type="submit" class="button is-primary" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="startProgressBar()">Send Mail</button>
+                                        <input type="text" value="<?php echo $candidate[0]->candidate_id ?>" style="opacity: 0;" name="candidate_id">
+                                        <button type="submit" class="button is-primary" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;"  id = "loaderButton">Send Mail</button>
                                     </div>
-                                </form>
-                                <div class="progress-container" id="progressContainer" style="margin-top: -100px;margin-left: 500px;">
-                                    <div class="progress-bar"></div>
-                                </div>
+                            </form>
+                               
 
-                                <script>
-                                    function startProgressBar() {
-                                        const progressBar = document.querySelector(".progress-bar");
-                                        progressBar.style.animationPlayState = "running";
+                            <div class="loader">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
 
-                                        // Show the progress bar when the button is clicked
-                                        const progressContainer = document.getElementById("progressContainer");
-                                        progressContainer.style.display = "block";
-
-                                        // Reset the progress bar after the animation delay (5 seconds in this example)
-                                        setTimeout(() => {
-                                            progressBar.style.animationPlayState = "paused";
-                                            // Hide the progress bar after the animation is completed
-                                            progressContainer.style.display = "none";
-                                        }, 50000);
-                                    }
-                                </script>
-
-
+                            </div>
 
                                 <!-- Page-body end -->
                             </div>
@@ -586,6 +694,17 @@
 
 
 
+
+        <!-- Your JavaScript code to handle the button click and show the loader  start-->
+        <script>
+        document.getElementById("loaderButton").addEventListener("click", function() {
+            // Show the loader on button click
+            var loader = document.querySelector(".loader");
+            loader.style.display = "block";
+            
+        });
+    </script>
+      <!-- Your JavaScript code to handle the button click and show the loader  end-->
 
 
 

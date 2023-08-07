@@ -99,150 +99,150 @@ class AddCandidateControllers extends BaseController
     $this->form_validation->set_rules('candidate_password', 'Job Profile', 'required');
 
     // Check if form validation passes
-    // if ($this->form_validation->run() == FALSE) {
-    //     // If validation fails, reload the form view with error messages
-    //     $this->load->view('registration_form');
-    // } else {
-    // Get the form input values
-    $candidate_name = $this->input->post('candidate_name');
-    $candidate_email = $this->input->post('candidate_email');
-    $candidate_mobile_no = $this->input->post('candidate_mobile_no');
-    $candidate_job_profile = $this->input->post('candidate_job_profile');
-    $candidate_password = $this->input->post('candidate_password');
-    $candidate_source_id = $this->input->post('candidate_source_id');
-    $hashedPassword = md5($candidate_password);
+    if ($this->form_validation->run() == FALSE) {
+      $this->session->set_flashdata('error', 'Enter All  right details');
+      redirect('addCandidate');
+    } else {
+      // Get the form input values
+      $candidate_name = $this->input->post('candidate_name');
+      $candidate_email = $this->input->post('candidate_email');
+      $candidate_mobile_no = $this->input->post('candidate_mobile_no');
+      $candidate_job_profile = $this->input->post('candidate_job_profile');
+      $candidate_password = $this->input->post('candidate_password');
+      $candidate_source_id = $this->input->post('candidate_source_id');
+      $hashedPassword = md5($candidate_password);
 
-    // Upload files
-    $config['upload_path'] = './upload/';
-    $config['allowed_types'] = 'pdf|gif|jpg|jpeg|png';
-    $this->load->library('upload', $config);
+      // Upload files
+      $config['upload_path'] = './upload/';
+      $config['allowed_types'] = 'pdf|gif|jpg|jpeg|png';
+      $this->load->library('upload', $config);
 
-    $uploaded_files = array();
-    $upload_errors = false;
-
-
-    $this->load->model('Candidate_model');
-    $this->load->model('Job_Opening_model');
-    $this->load->model('Admin_model');
-    $Admin_id = $this->session->userdata('userId');
-    date_default_timezone_set("Asia/Kolkata");
-    $today = date("Y-m-d H:i:s");
-
-    $data = array(
-      'candidate_name' => $candidate_name,
-      'candidate_email' => $candidate_email,
-      'candidate_mobile_no' => $candidate_mobile_no,
-      'candidate_job_profile' => $candidate_job_profile,
-      'updated_by' => $Admin_id,
-      'candidate_source_id' => $candidate_source_id,
-      'candidate_satus_days' => $today,
-      'candidate_password' => $hashedPassword
-    );
+      $uploaded_files = array();
+      $upload_errors = false;
 
 
+      $this->load->model('Candidate_model');
+      $this->load->model('Job_Opening_model');
+      $this->load->model('Admin_model');
+      $Admin_id = $this->session->userdata('userId');
+      date_default_timezone_set("Asia/Kolkata");
+      $today = date("Y-m-d H:i:s");
 
-    // // If any file upload encountered errors, display an error message
-    // if ($upload_errors) {
-    //     $data['error_message'] = $this->upload->display_errors();
-    //     // $this->load->view('registration_form', $data);
-    //     echo $this->upload->display_errors();
-    //     return;
-    // }
-
-    // Save the form data and uploaded file paths to the database
+      $data = array(
+        'candidate_name' => $candidate_name,
+        'candidate_email' => $candidate_email,
+        'candidate_mobile_no' => $candidate_mobile_no,
+        'candidate_job_profile' => $candidate_job_profile,
+        'updated_by' => $Admin_id,
+        'candidate_source_id' => $candidate_source_id,
+        'candidate_satus_days' => $today,
+        'candidate_password' => $hashedPassword
+      );
 
 
 
-    $is_new = $this->Admin_model->CheckAvailable($candidate_email);
-    if (!$is_new) {
-      // Upload Aadhar Card
-      if ($this->upload->do_upload('candidate_aadhar_card')) {
-        $file_name = $candidate_email . '_aadhar.pdf';
-        $uploaded_files['aadhar_card'] = $file_name;
-        rename($this->upload->data('full_path'), './upload/aadhar/' . $file_name);
-        $data['candidate_aadhar_card'] = $uploaded_files['aadhar_card'];
-      } else {
-        // $upload_errors = true;
-      }
+      // // If any file upload encountered errors, display an error message
+      // if ($upload_errors) {
+      //     $data['error_message'] = $this->upload->display_errors();
+      //     // $this->load->view('registration_form', $data);
+      //     echo $this->upload->display_errors();
+      //     return;
+      // }
 
-      // Upload Pan Card
-      if ($this->upload->do_upload('candidate_pan_card')) {
-        $file_name = $candidate_name.$candidate_mobile_no . '_pan.pdf';
-        $uploaded_files['pan_card'] = $file_name;
-        rename($this->upload->data('full_path'), './upload/pan/' . $file_name);
-        $data['candidate_pan_card'] = $uploaded_files['pan_card'];
-      } else {
-        //  $upload_errors = true;
-      }
-
-      // Upload Passport
-      if ($this->upload->do_upload('candidate_passport')) {
-        $file_name = $candidate_name.$candidate_mobile_no . '_passport.pdf';
-        $uploaded_files['passport'] = $file_name;
-        rename($this->upload->data('full_path'), './upload/passport/' . $file_name);
-        $data['candidate_passport'] = $uploaded_files['passport'];
-      } else {
-        // $upload_errors = true;
-      }
-
-      // Upload Candidate Resume
-      if ($this->upload->do_upload('candidate_resume')) {
-        $file_name = $candidate_name.$candidate_mobile_no . '_resume.pdf';
-        $uploaded_files['resume'] = $file_name;
-        rename($this->upload->data('full_path'), './upload/resume/' . $file_name);
-        $data['candidate_resume'] = $uploaded_files['resume'];
-      } else {
-        //   $upload_errors = true;
-      }
-
-      // Upload Candidate image
-      if ($this->upload->do_upload('candidate_photo')) {
-        $file_name = $candidate_name.$candidate_mobile_no . '_img.png';
-        $uploaded_files['image'] = $file_name;
-        rename($this->upload->data('full_path'), './upload/image/' . $file_name);
-        $data['candidate_photo'] = $uploaded_files['image'];
-        $candidate_photo = $uploaded_files['image'];
-      } else {
-        //   $upload_errors = true;
-      }
-      $candidate_id = $this->Candidate_model->InsertNew_Candidate($data);
+      // Save the form data and uploaded file paths to the database
 
 
-      if ($candidate_id) {
-        $JobDetails = $this->Job_Opening_model->ViewArray('', '', $candidate_job_profile, '');
 
-        $job_open_position = $JobDetails[0]['job_open_position'];
-        $job_id = $JobDetails[0]['job_id'];
-        $job_fill_position = $JobDetails[0]['job_fill_position'];
+      $is_new = $this->Admin_model->CheckAvailable($candidate_email);
+      if (!$is_new) {
+        // Upload Aadhar Card
+        if ($this->upload->do_upload('candidate_aadhar_card')) {
+          $file_name = $candidate_email . '_aadhar.pdf';
+          $uploaded_files['aadhar_card'] = $file_name;
+          rename($this->upload->data('full_path'), './upload/aadhar/' . $file_name);
+          $data['candidate_aadhar_card'] = $uploaded_files['aadhar_card'];
+        } else {
+          // $upload_errors = true;
+        }
 
-        $JobAddedposition = $job_fill_position + 1;
-        $JobRemainingposition = $job_open_position - $JobAddedposition;
+        // Upload Pan Card
+        if ($this->upload->do_upload('candidate_pan_card')) {
+          $file_name = $candidate_name . $candidate_mobile_no . '_pan.pdf';
+          $uploaded_files['pan_card'] = $file_name;
+          rename($this->upload->data('full_path'), './upload/pan/' . $file_name);
+          $data['candidate_pan_card'] = $uploaded_files['pan_card'];
+        } else {
+          //  $upload_errors = true;
+        }
 
-        $JobDetailsUpdate = array(
-          'job_fill_position' => $JobAddedposition,
-          'job_remaining_position' => $JobRemainingposition
-        );
-        $this->Job_Opening_model->Update($job_id, $JobDetailsUpdate);
+        // Upload Passport
+        if ($this->upload->do_upload('candidate_passport')) {
+          $file_name = $candidate_name . $candidate_mobile_no . '_passport.pdf';
+          $uploaded_files['passport'] = $file_name;
+          rename($this->upload->data('full_path'), './upload/passport/' . $file_name);
+          $data['candidate_passport'] = $uploaded_files['passport'];
+        } else {
+          // $upload_errors = true;
+        }
 
-        $loginCreate = array(
-          'user_name' => $candidate_name,
-          'user_email' => $candidate_email,
-          'user_mobile' => $candidate_mobile_no,
-          'user_role' => '0',
-          'table_id' => $candidate_id,
-          'user_password' => $hashedPassword
-        );
-        $Logdata = array(
-          'candidate_id' => $candidate_id,
-          'admin_id' => $Admin_id,
-          'status' => '0'
-        );
-        $adminName = $this->session->userdata('name');
-        $adminMail = $this->session->userdata('user_email');
-        $test = $this->Admin_model->InsertLog($Logdata);
-        $user_id = $this->Admin_model->InsertNew_User($loginCreate);
+        // Upload Candidate Resume
+        if ($this->upload->do_upload('candidate_resume')) {
+          $file_name = $candidate_name . $candidate_mobile_no . '_resume.pdf';
+          $uploaded_files['resume'] = $file_name;
+          rename($this->upload->data('full_path'), './upload/resume/' . $file_name);
+          $data['candidate_resume'] = $uploaded_files['resume'];
+        } else {
+          //   $upload_errors = true;
+        }
 
-        $registerMessage = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        // Upload Candidate image
+        if ($this->upload->do_upload('candidate_photo')) {
+          $file_name = $candidate_name . $candidate_mobile_no . '_img.png';
+          $uploaded_files['image'] = $file_name;
+          rename($this->upload->data('full_path'), './upload/image/' . $file_name);
+          $data['candidate_photo'] = $uploaded_files['image'];
+          $candidate_photo = $uploaded_files['image'];
+        } else {
+          //   $upload_errors = true;
+        }
+        $candidate_id = $this->Candidate_model->InsertNew_Candidate($data);
+
+
+        if ($candidate_id) {
+          $JobDetails = $this->Job_Opening_model->ViewArray('', '', $candidate_job_profile, '');
+
+          $job_open_position = $JobDetails[0]['job_open_position'];
+          $job_id = $JobDetails[0]['job_id'];
+          $job_fill_position = $JobDetails[0]['job_fill_position'];
+
+          $JobAddedposition = $job_fill_position + 1;
+          $JobRemainingposition = $job_open_position - $JobAddedposition;
+
+          $JobDetailsUpdate = array(
+            'job_fill_position' => $JobAddedposition,
+            'job_remaining_position' => $JobRemainingposition
+          );
+          $this->Job_Opening_model->Update($job_id, $JobDetailsUpdate);
+
+          $loginCreate = array(
+            'user_name' => $candidate_name,
+            'user_email' => $candidate_email,
+            'user_mobile' => $candidate_mobile_no,
+            'user_role' => '0',
+            'table_id' => $candidate_id,
+            'user_password' => $hashedPassword
+          );
+          $Logdata = array(
+            'candidate_id' => $candidate_id,
+            'admin_id' => $Admin_id,
+            'status' => '0'
+          );
+          $adminName = $this->session->userdata('name');
+          $adminMail = $this->session->userdata('user_email');
+          $test = $this->Admin_model->InsertLog($Logdata);
+          $user_id = $this->Admin_model->InsertNew_User($loginCreate);
+
+          $registerMessage = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
         <html xmlns="http://www.w3.org/1999/xhtml">
             <head>
                 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -469,45 +469,43 @@ class AddCandidateControllers extends BaseController
         </html>
         ';
 
-        $this->load->config('email');
-        $this->load->library('email');
-        $subject = 'Maclareen Talent Acquisition System  -  Candidate Register';
-        //	$token = $email_exist->emp_id;
-        $this->email->from('maclareendata@gmail.com', 'Maclareen Talent Acquisition System  -  Candidate Registe');
-        $this->email->to($candidate_email);
-        $this->email->subject($subject);
-        $this->email->message($registerMessage);
-        $this->email->set_header('Reply-To', 'immigration@maclareen.com');
-        $this->email->set_mailtype("html");
-        $sendemail = $this->email->send();
+          $this->load->config('email');
+          $this->load->library('email');
+          $subject = 'Maclareen Talent Acquisition System  -  Candidate Register';
+          //	$token = $email_exist->emp_id;
+          $this->email->from('maclareendata@gmail.com', 'Maclareen Talent Acquisition System  -  Candidate Registe');
+          $this->email->to($candidate_email);
+          $this->email->subject($subject);
+          $this->email->message($registerMessage);
+          $this->email->set_header('Reply-To', 'immigration@maclareen.com');
+          $this->email->set_mailtype("html");
+          $sendemail = $this->email->send();
 
-        // echo $candidate_email;
-        // echo $sendemail;
+          // echo $candidate_email;
+          // echo $sendemail;
 
-        // Candidate registration successful
-        $role = $this->session->userdata('role');
-        if ($role == "candidate") {
-          redirect('candidateDashboard');
-        } else   if ($role == "admin") {
-          redirect('adminDashboard');;
+          // Candidate registration successful
+          $role = $this->session->userdata('role');
+          if ($role == "candidate") {
+            redirect('candidateDashboard');
+          } else   if ($role == "admin") {
+            redirect('adminDashboard');;
+          } else {
+            redirect('superadminDashboard');
+          }
+
+          //  redirect('registermail');
         } else {
-          redirect('superadminDashboard');
+          // Failed to save candidate data
+
+          $this->session->set_flashdata('error', 'Failed to register candidate. Please try again.');
+          redirect('addCandidate');
         }
-
-        //  redirect('registermail');
       } else {
-        // Failed to save candidate data
-
-        $this->session->set_flashdata('error', 'Failed to register candidate. Please try again.');
+        $this->session->set_flashdata('error', 'Failed to register candidate. Email ID alredy exist');
         redirect('addCandidate');
       }
-    } else {
-      $this->session->set_flashdata('error', 'Failed to register candidate. Email ID alredy exist');
-      redirect('addCandidate');
     }
-
-
-    //  }
   }
 
 
@@ -572,208 +570,211 @@ class AddCandidateControllers extends BaseController
     $this->form_validation->set_rules('candidate_name', 'Candidate Name', 'required');
     $this->form_validation->set_rules('candidate_mobile_no', 'Candidate Mobile Number', 'required|regex_match[/^[0-9]{10}$/]');
     $this->form_validation->set_rules('candidate_job_status', 'Job status', 'required');
+    if ($this->form_validation->run() == FALSE) {
+      $this->session->set_flashdata('error', 'Enter All  right details');
+      redirect('addCandidate');
+    } else {
+
+      $candidate_name = $this->input->post('candidate_name');
+
+      $candidate_mobile_no = $this->input->post('candidate_mobile_no');
+      $candidate_id = $this->input->post('candidate_id');
+      $candidate_job_status = $this->input->post('candidate_job_status');
+
+      $job_training_one = $this->input->post('job_training_one');
+      $job_training_one_date_time = $this->input->post('job_training_one_date_time');
+      $job_training_one_meet_id = $this->input->post('candidate_id');
+      $job_training_one_meet_password = $this->input->post('job_training_one_meet_password');
 
 
-    $candidate_name = $this->input->post('candidate_name');
-
-    $candidate_mobile_no = $this->input->post('candidate_mobile_no');
-    $candidate_id = $this->input->post('candidate_id');
-    $candidate_job_status = $this->input->post('candidate_job_status');
-
-    $job_training_one = $this->input->post('job_training_one');
-    $job_training_one_date_time = $this->input->post('job_training_one_date_time');
-    $job_training_one_meet_id = $this->input->post('candidate_id');
-    $job_training_one_meet_password = $this->input->post('job_training_one_meet_password');
-
-
-    $job_training_two = $this->input->post('job_training_two');
-    $job_training_two_date_time = $this->input->post('job_training_two_date_time');
-    $job_training_two_meet_id = $this->input->post('job_training_two_meet_id');
-    $job_training_two_meet_password = $this->input->post('job_training_two_meet_password');
+      $job_training_two = $this->input->post('job_training_two');
+      $job_training_two_date_time = $this->input->post('job_training_two_date_time');
+      $job_training_two_meet_id = $this->input->post('job_training_two_meet_id');
+      $job_training_two_meet_password = $this->input->post('job_training_two_meet_password');
 
 
 
-    $job_training_three = $this->input->post('job_training_three');
-    $job_training_three_date_time = $this->input->post('job_training_three_date_time');
-    $job_training_three_meet_id = $this->input->post('job_training_three_meet_id');
-    $job_training_three_password = $this->input->post('job_training_three_password');
+      $job_training_three = $this->input->post('job_training_three');
+      $job_training_three_date_time = $this->input->post('job_training_three_date_time');
+      $job_training_three_meet_id = $this->input->post('job_training_three_meet_id');
+      $job_training_three_password = $this->input->post('job_training_three_password');
 
 
-    $visa_training = $this->input->post('visa_training');
-    $visa_training_datetime = $this->input->post('visa_training_datetime');
-    $visa_training_meet_id = $this->input->post('visa_training_meet_id');
-    $visa_training_meet_password = $this->input->post('visa_training_meet_password');
-    $Admin_id = $this->session->userdata('userId');
-    $candidate = $this->Candidate_model->ViewCandidateInfoForMail($candidate_id);
-    $candidate_email = $candidate[0]['candidate_email'];
-    $candidate_job_profile = $candidate[0]['candidate_job_profile'];
+      $visa_training = $this->input->post('visa_training');
+      $visa_training_datetime = $this->input->post('visa_training_datetime');
+      $visa_training_meet_id = $this->input->post('visa_training_meet_id');
+      $visa_training_meet_password = $this->input->post('visa_training_meet_password');
+      $Admin_id = $this->session->userdata('userId');
+      $candidate = $this->Candidate_model->ViewCandidateInfoForMail($candidate_id);
+      $candidate_email = $candidate[0]['candidate_email'];
+      $candidate_job_profile = $candidate[0]['candidate_job_profile'];
 
-    $job_training_onedatetime = new DateTime($job_training_one_date_time);
-    $job_training_one_humanReadable = $job_training_onedatetime->format('F j, Y \a\t h:i A');
-
-
-    $job_training_twodatetime = new DateTime($job_training_two_date_time);
-    $job_training_two_humanReadable = $job_training_twodatetime->format('F j, Y \a\t h:i A');
-
-    $job_training_threedatetime = new DateTime($job_training_three_date_time);
-    $job_training_three_humanReadable = $job_training_threedatetime->format('F j, Y \a\t h:i A');
+      $job_training_onedatetime = new DateTime($job_training_one_date_time);
+      $job_training_one_humanReadable = $job_training_onedatetime->format('F j, Y \a\t h:i A');
 
 
-    $job_training_visadatetime = new DateTime($visa_training_datetime);
-    $job_training_visa_humanReadable = $job_training_visadatetime->format('F j, Y \a\t h:i A');
-    $adminName = $this->session->userdata('name');
-    $adminMail = $this->session->userdata('user_email');
-    date_default_timezone_set("Asia/Kolkata");
-    $today = date("Y-m-d H:i:s");
-    $data = array(
-      'candidate_name' => $candidate_name,
-      'candidate_mobile_no' => $candidate_mobile_no,
-      'updated_by' => $Admin_id,
-      'candidate_satus_days' => $today,
-      'candidate_job_status' => $candidate_job_status
-    );
-    if ($candidate_job_status == "opt1" || $candidate_job_status == "") {
-      $this->session->set_flashdata('error', 'Failed to update candidate. Please select valid Status.');
-      redirect('editCandidateInfo/' . $candidate_id);
-    }
-    if ($candidate_job_status == 5) {
-      if ($job_training_one == '' ||  $job_training_one_date_time == '' || $job_training_one_meet_id == '' || $job_training_one_meet_password == '') {
-        $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
+      $job_training_twodatetime = new DateTime($job_training_two_date_time);
+      $job_training_two_humanReadable = $job_training_twodatetime->format('F j, Y \a\t h:i A');
+
+      $job_training_threedatetime = new DateTime($job_training_three_date_time);
+      $job_training_three_humanReadable = $job_training_threedatetime->format('F j, Y \a\t h:i A');
+
+
+      $job_training_visadatetime = new DateTime($visa_training_datetime);
+      $job_training_visa_humanReadable = $job_training_visadatetime->format('F j, Y \a\t h:i A');
+      $adminName = $this->session->userdata('name');
+      $adminMail = $this->session->userdata('user_email');
+      date_default_timezone_set("Asia/Kolkata");
+      $today = date("Y-m-d H:i:s");
+      $data = array(
+        'candidate_name' => $candidate_name,
+        'candidate_mobile_no' => $candidate_mobile_no,
+        'updated_by' => $Admin_id,
+        'candidate_satus_days' => $today,
+        'candidate_job_status' => $candidate_job_status
+      );
+      if ($candidate_job_status == "opt1" || $candidate_job_status == "") {
+        $this->session->set_flashdata('error', 'Failed to update candidate. Please select valid Status.');
         redirect('editCandidateInfo/' . $candidate_id);
-      } else {
-        $data['job_training_one'] = $job_training_one;
-        $data['job_training_one_date_time'] = $job_training_one_humanReadable;
-        $data['job_training_one_meet_password'] = $job_training_one_meet_password;
-        $data['job_training_one_meet_id'] = $job_training_one_meet_id;
       }
-    }
-    if ($candidate_job_status == 6) {
-      if ($job_training_two == '' ||  $job_training_two_date_time == '' || $job_training_two_meet_id == '' || $job_training_two_meet_password == '') {
-        $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
-        redirect('editCandidateInfo/' . $candidate_id);
-      } else {
-        $data['job_training_two'] = $job_training_two;
-        $data['job_training_two_date_time'] = $job_training_two_humanReadable;
-        $data['job_training_two_meet_id'] = $job_training_two_meet_id;
-        $data['job_training_two_meet_password'] = $job_training_two_meet_password;
+      if ($candidate_job_status == 5) {
+        if ($job_training_one == '' ||  $job_training_one_date_time == '' || $job_training_one_meet_id == '' || $job_training_one_meet_password == '') {
+          $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
+          redirect('editCandidateInfo/' . $candidate_id);
+        } else {
+          $data['job_training_one'] = $job_training_one;
+          $data['job_training_one_date_time'] = $job_training_one_humanReadable;
+          $data['job_training_one_meet_password'] = $job_training_one_meet_password;
+          $data['job_training_one_meet_id'] = $job_training_one_meet_id;
+        }
       }
-    }
-    if ($candidate_job_status == 7) {
-      if ($job_training_three == '' ||  $job_training_three_date_time == '' || $job_training_three_meet_id == '' || $job_training_three_password == '') {
-        $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
-        redirect('editCandidateInfo/' . $candidate_id);
-      } else {
-        $data['job_training_three'] = $job_training_three;
-        $data['job_training_three_date_time'] = $job_training_three_humanReadable;
-        $data['job_training_three_meet_id'] = $job_training_three_meet_id;
-        $data['job_training_three_password'] = $job_training_three_password;
+      if ($candidate_job_status == 6) {
+        if ($job_training_two == '' ||  $job_training_two_date_time == '' || $job_training_two_meet_id == '' || $job_training_two_meet_password == '') {
+          $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
+          redirect('editCandidateInfo/' . $candidate_id);
+        } else {
+          $data['job_training_two'] = $job_training_two;
+          $data['job_training_two_date_time'] = $job_training_two_humanReadable;
+          $data['job_training_two_meet_id'] = $job_training_two_meet_id;
+          $data['job_training_two_meet_password'] = $job_training_two_meet_password;
+        }
       }
-    }
-    if ($candidate_job_status == 10) {
-      if ($visa_training == '' ||  $visa_training_datetime == '' || $visa_training_meet_id == '' || $visa_training_meet_password == '') {
-        $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
-        redirect('editCandidateInfo/' . $candidate_id);
-      } else {
-        $data['visa_training'] = $visa_training;
-        $data['visa_training_datetime'] = $job_training_visa_humanReadable;
-        $data['visa_training_meet_id'] = $visa_training_meet_id;
-        $data['visa_training_meet_password'] = $visa_training_meet_password;
+      if ($candidate_job_status == 7) {
+        if ($job_training_three == '' ||  $job_training_three_date_time == '' || $job_training_three_meet_id == '' || $job_training_three_password == '') {
+          $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
+          redirect('editCandidateInfo/' . $candidate_id);
+        } else {
+          $data['job_training_three'] = $job_training_three;
+          $data['job_training_three_date_time'] = $job_training_three_humanReadable;
+          $data['job_training_three_meet_id'] = $job_training_three_meet_id;
+          $data['job_training_three_password'] = $job_training_three_password;
+        }
       }
-    }
-    // if ($candidate_job_status == 1 || $candidate_job_status == 2 || $candidate_job_status == 3 || $candidate_job_status == 4) {
-    //     if ($job_training_one != '' ||  $job_training_one_date_time != '' || $job_training_one_meet_id != '' || $job_training_one_meet_password != '' || $job_training_two != '' ||  $job_training_two_date_time != '' || $job_training_two_meet_id != '' || $job_training_two_meet_password != '' || $job_training_three != '' ||  $job_training_three_date_time != '' || $job_training_three_meet_id != '' || $job_training_three_password != ''  || $visa_training != '' ||  $visa_training_datetime != '' || $visa_training_meet_id != '' || $visa_training_meet_password != '') {
-    //         $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
-    //         redirect('editCandidateInfo/' . $candidate_id);
-    //     }
-    // }
+      if ($candidate_job_status == 10) {
+        if ($visa_training == '' ||  $visa_training_datetime == '' || $visa_training_meet_id == '' || $visa_training_meet_password == '') {
+          $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
+          redirect('editCandidateInfo/' . $candidate_id);
+        } else {
+          $data['visa_training'] = $visa_training;
+          $data['visa_training_datetime'] = $job_training_visa_humanReadable;
+          $data['visa_training_meet_id'] = $visa_training_meet_id;
+          $data['visa_training_meet_password'] = $visa_training_meet_password;
+        }
+      }
+      // if ($candidate_job_status == 1 || $candidate_job_status == 2 || $candidate_job_status == 3 || $candidate_job_status == 4) {
+      //     if ($job_training_one != '' ||  $job_training_one_date_time != '' || $job_training_one_meet_id != '' || $job_training_one_meet_password != '' || $job_training_two != '' ||  $job_training_two_date_time != '' || $job_training_two_meet_id != '' || $job_training_two_meet_password != '' || $job_training_three != '' ||  $job_training_three_date_time != '' || $job_training_three_meet_id != '' || $job_training_three_password != ''  || $visa_training != '' ||  $visa_training_datetime != '' || $visa_training_meet_id != '' || $visa_training_meet_password != '') {
+      //         $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
+      //         redirect('editCandidateInfo/' . $candidate_id);
+      //     }
+      // }
 
 
 
 
 
-    //Upload files
-    $config['upload_path'] = './upload/';
-    $config['allowed_types'] = 'pdf|gif|jpg|jpeg|png';
-    $this->load->library('upload', $config);
+      //Upload files
+      $config['upload_path'] = './upload/';
+      $config['allowed_types'] = 'pdf|gif|jpg|jpeg|png';
+      $this->load->library('upload', $config);
 
-    $uploaded_files = array();
-    $upload_errors = false;;
+      $uploaded_files = array();
+      $upload_errors = false;;
 
-    $Logdata = array(
-      'candidate_id' => $candidate_id,
-      'admin_id' => $Admin_id,
-      'status' => $candidate_job_status
-    );
+      $Logdata = array(
+        'candidate_id' => $candidate_id,
+        'admin_id' => $Admin_id,
+        'status' => $candidate_job_status
+      );
 
 
-    $candidate_aadhar_card = '';
-    $candidate_pan_card = '';
-    $candidate_passport =  '';
-    $candidate_resume =  '';
-    $candidate_photo =  '';
+      $candidate_aadhar_card = '';
+      $candidate_pan_card = '';
+      $candidate_passport =  '';
+      $candidate_resume =  '';
+      $candidate_photo =  '';
 
-    // Upload Aadhar Card
-    if ($this->upload->do_upload('candidate_aadhar_card')) {
-      $file_name = $candidate_name.$candidate_mobile_no . '_aadhar.pdf';
-      $uploaded_files['aadhar_card'] = $file_name;
-      rename($this->upload->data('full_path'), './upload/aadhar/' . $file_name);
-      $data['candidate_aadhar_card'] = $uploaded_files['aadhar_card'];
-      $candidate_aadhar_card = $uploaded_files['aadhar_card'];
-    } else {
-      // $upload_errors = true;
-    }
+      // Upload Aadhar Card
+      if ($this->upload->do_upload('candidate_aadhar_card')) {
+        $file_name = $candidate_name . $candidate_mobile_no . '_aadhar.pdf';
+        $uploaded_files['aadhar_card'] = $file_name;
+        rename($this->upload->data('full_path'), './upload/aadhar/' . $file_name);
+        $data['candidate_aadhar_card'] = $uploaded_files['aadhar_card'];
+        $candidate_aadhar_card = $uploaded_files['aadhar_card'];
+      } else {
+        // $upload_errors = true;
+      }
 
-    // Upload Pan Card
-    if ($this->upload->do_upload('candidate_pan_card')) {
-      $file_name = $candidate_name.$candidate_mobile_no . '_pan.pdf';
-      $uploaded_files['pan_card'] = $file_name;
-      rename($this->upload->data('full_path'), './upload/pan/' . $file_name);
-      $data['candidate_pan_card'] = $uploaded_files['pan_card'];
-      $candidate_pan_card =  $uploaded_files['pan_card'];
-    } else {
-      //  $upload_errors = true;
-    }
+      // Upload Pan Card
+      if ($this->upload->do_upload('candidate_pan_card')) {
+        $file_name = $candidate_name . $candidate_mobile_no . '_pan.pdf';
+        $uploaded_files['pan_card'] = $file_name;
+        rename($this->upload->data('full_path'), './upload/pan/' . $file_name);
+        $data['candidate_pan_card'] = $uploaded_files['pan_card'];
+        $candidate_pan_card =  $uploaded_files['pan_card'];
+      } else {
+        //  $upload_errors = true;
+      }
 
-    // Upload Passport
-    if ($this->upload->do_upload('candidate_passport')) {
-      $file_name = $candidate_name.$candidate_mobile_no . '_passport.pdf';
-      $uploaded_files['passport'] = $file_name;
-      rename($this->upload->data('full_path'), './upload/passport/' . $file_name);
-      $data['candidate_passport'] = $uploaded_files['passport'];
-      $candidate_passport = $uploaded_files['passport'];
-    } else {
-      // $upload_errors = true;
-    }
+      // Upload Passport
+      if ($this->upload->do_upload('candidate_passport')) {
+        $file_name = $candidate_name . $candidate_mobile_no . '_passport.pdf';
+        $uploaded_files['passport'] = $file_name;
+        rename($this->upload->data('full_path'), './upload/passport/' . $file_name);
+        $data['candidate_passport'] = $uploaded_files['passport'];
+        $candidate_passport = $uploaded_files['passport'];
+      } else {
+        // $upload_errors = true;
+      }
 
-    // Upload Candidate Resume
-    if ($this->upload->do_upload('candidate_resume')) {
-      $file_name = $candidate_name.$candidate_mobile_no . '_resume.pdf';
-      $uploaded_files['resume'] = $file_name;
-      rename($this->upload->data('full_path'), './upload/resume/' . $file_name);
-      $data['candidate_resume'] = $uploaded_files['resume'];
-      $candidate_resume = $uploaded_files['resume'];
-    } else {
-      //   $upload_errors = true;
-    }
+      // Upload Candidate Resume
+      if ($this->upload->do_upload('candidate_resume')) {
+        $file_name = $candidate_name . $candidate_mobile_no . '_resume.pdf';
+        $uploaded_files['resume'] = $file_name;
+        rename($this->upload->data('full_path'), './upload/resume/' . $file_name);
+        $data['candidate_resume'] = $uploaded_files['resume'];
+        $candidate_resume = $uploaded_files['resume'];
+      } else {
+        //   $upload_errors = true;
+      }
 
-    // Upload Candidate image
-    if ($this->upload->do_upload('candidate_photo')) {
-      $file_name = $candidate_name.$candidate_mobile_no . '_img.png';
-      $uploaded_files['image'] = $file_name;
-      rename($this->upload->data('full_path'), './upload/image/' . $file_name);
-      $data['candidate_photo'] = $uploaded_files['image'];
-      $candidate_photo = $uploaded_files['image'];
-    } else {
-      //   $upload_errors = true;
-    }
-    $candidate_id = $this->Candidate_model->UpdateCandidate($candidate_id, $data);
-    $candidateMail = "";
-    if ($candidate_id) {
+      // Upload Candidate image
+      if ($this->upload->do_upload('candidate_photo')) {
+        $file_name = $candidate_name . $candidate_mobile_no . '_img.png';
+        $uploaded_files['image'] = $file_name;
+        rename($this->upload->data('full_path'), './upload/image/' . $file_name);
+        $data['candidate_photo'] = $uploaded_files['image'];
+        $candidate_photo = $uploaded_files['image'];
+      } else {
+        //   $upload_errors = true;
+      }
+      $candidate_id = $this->Candidate_model->UpdateCandidate($candidate_id, $data);
+      $candidateMail = "";
+      if ($candidate_id) {
 
-      if ($candidate_job_status == 1) {
-        $subject = 'Maclareen Talent Acquisition System  -  Waiting for document ';
+        if ($candidate_job_status == 1) {
+          $subject = 'Maclareen Talent Acquisition System  -  Waiting for document ';
 
-        $candidateMail = '
+          $candidateMail = '
                     <!DOCTYPE html>
                     <html>
                     <head>
@@ -843,22 +844,22 @@ class AddCandidateControllers extends BaseController
                           <p>I recently registered you for the ' . $candidate_job_profile . ' job profile. Kindly share the documents within 3-4 working days . If sent already you may ignore.</p>
                           <p>Following is the document list:</p>
                           <ol class="document-list">';
-        if ($candidate_aadhar_card == "") {
-          $candidateMail .= '<li>Aadhar Card</li>';
-        }
-        if ($candidate_pan_card == "") {
-          $candidateMail .= '<li>PAN Card</li>';
-        }
-        if ($candidate_passport == "") {
-          $candidateMail .= '<li>Passport</li>';
-        }
-        if ($candidate_resume == "") {
-          $candidateMail .= '<li>Resume</li>';
-        }
-        if ($candidate_photo == "") {
-          $candidateMail .= '<li>Passport size photo</li>';
-        }
-        $candidateMail .= '</ol>
+          if ($candidate_aadhar_card == "") {
+            $candidateMail .= '<li>Aadhar Card</li>';
+          }
+          if ($candidate_pan_card == "") {
+            $candidateMail .= '<li>PAN Card</li>';
+          }
+          if ($candidate_passport == "") {
+            $candidateMail .= '<li>Passport</li>';
+          }
+          if ($candidate_resume == "") {
+            $candidateMail .= '<li>Resume</li>';
+          }
+          if ($candidate_photo == "") {
+            $candidateMail .= '<li>Passport size photo</li>';
+          }
+          $candidateMail .= '</ol>
                           <p>Once you send all the documents, I will start the further process for your job profile.</p>
                         </div>
                         <div class="footer">
@@ -890,11 +891,11 @@ class AddCandidateControllers extends BaseController
                       </div>
                     </body>
                     </html>';
-      }
-      if ($candidate_job_status == 2) {
-        $subject = 'Maclareen Talent Acquisition System  -  Sent to recruitment review ';
+        }
+        if ($candidate_job_status == 2) {
+          $subject = 'Maclareen Talent Acquisition System  -  Sent to recruitment review ';
 
-        $candidateMail = '
+          $candidateMail = '
                     <!DOCTYPE html>
                     <html>
                     <head>
@@ -985,10 +986,10 @@ class AddCandidateControllers extends BaseController
                     </body>
                     </html>
                     ';
-      }
-      if ($candidate_job_status == 3) {
-        $subject = 'Maclareen Talent Acquisition System  -  Shortlisted ';
-        $candidateMail = '
+        }
+        if ($candidate_job_status == 3) {
+          $subject = 'Maclareen Talent Acquisition System  -  Shortlisted ';
+          $candidateMail = '
                     <!DOCTYPE html>
                     <html>
                     <head>
@@ -1081,10 +1082,10 @@ class AddCandidateControllers extends BaseController
                     </html>
                     
                     ';
-      }
-      if ($candidate_job_status == 4) {
-        $subject = 'Maclareen Talent Acquisition System  -  Not selected ';
-        $candidateMail = '
+        }
+        if ($candidate_job_status == 4) {
+          $subject = 'Maclareen Talent Acquisition System  -  Not selected ';
+          $candidateMail = '
                     <!DOCTYPE html>
                             <html>
                             <head>
@@ -1173,10 +1174,10 @@ class AddCandidateControllers extends BaseController
 
                     
                     ';
-      }
-      if ($candidate_job_status == 5) {
-        $subject = 'Maclareen Talent Acquisition System  -  Job Orientation  1 ';
-        $candidateMail = '
+        }
+        if ($candidate_job_status == 5) {
+          $subject = 'Maclareen Talent Acquisition System  -  Job Orientation  1 ';
+          $candidateMail = '
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -1315,10 +1316,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-      }
-      if ($candidate_job_status == 6) {
-        $subject = 'Maclareen Talent Acquisition System  -  Job Orientation  2 ';
-        $candidateMail = '
+        }
+        if ($candidate_job_status == 6) {
+          $subject = 'Maclareen Talent Acquisition System  -  Job Orientation  2 ';
+          $candidateMail = '
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -1457,10 +1458,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-      }
-      if ($candidate_job_status == 7) {
-        $subject = 'Maclareen Talent Acquisition System  -  Job Orientation  3 ';
-        $candidateMail = '
+        }
+        if ($candidate_job_status == 7) {
+          $subject = 'Maclareen Talent Acquisition System  -  Job Orientation  3 ';
+          $candidateMail = '
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -1599,10 +1600,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-      }
-      if ($candidate_job_status == 8) {
-        $subject = 'Maclareen Talent Acquisition System  -  Work permit ';
-        $candidateMail = '
+        }
+        if ($candidate_job_status == 8) {
+          $subject = 'Maclareen Talent Acquisition System  -  Work permit ';
+          $candidateMail = '
                 <!DOCTYPE html>
                         <html>
                         <head>
@@ -1705,10 +1706,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-      }
-      if ($candidate_job_status == 9) {
-        $subject = 'Maclareen Talent Acquisition System  -  Visa filing ';
-        $candidateMail = '
+        }
+        if ($candidate_job_status == 9) {
+          $subject = 'Maclareen Talent Acquisition System  -  Visa filing ';
+          $candidateMail = '
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -1799,10 +1800,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-      }
-      if ($candidate_job_status == 10) {
-        $subject = 'Maclareen Talent Acquisition System  -  Training for visa ';
-        $candidateMail = '
+        }
+        if ($candidate_job_status == 10) {
+          $subject = 'Maclareen Talent Acquisition System  -  Training for visa ';
+          $candidateMail = '
                 <!DOCTYPE html>
                     <html>
                     <head>
@@ -1944,10 +1945,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-      }
-      if ($candidate_job_status == 11) {
-        $subject = 'Maclareen Talent Acquisition System  - Completed ';
-        $candidateMail = '
+        }
+        if ($candidate_job_status == 11) {
+          $subject = 'Maclareen Talent Acquisition System  - Completed ';
+          $candidateMail = '
                 <html>
                     <head>
                         <title>
@@ -2094,38 +2095,40 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-      }
-      $this->load->config('email');
-      $this->load->library('email');
+        }
+        $this->load->config('email');
+        $this->load->library('email');
 
-      //	$token = $email_exist->emp_id;
+        //	$token = $email_exist->emp_id;
 
-      $this->email->from('MTAS(Maclareen Talent Acquisition System)', 'Maclareen Talent Acquisition System ');
-      $this->email->to($candidate_email);
-      $this->email->subject($subject);
-      $this->email->message($candidateMail);
-      $this->email->set_header('Reply-To', 'immigration@maclareen.com');
-      $this->email->set_mailtype("html");
-      $sendemail = $this->email->send();
-      $test = $this->Admin_model->InsertLog($Logdata);
-      // Candidate registration successful
-      $role = $this->session->userdata('role');
-      if ($role == "candidate") {
-        redirect('candidateDashboard');
-      } else   if ($role == "admin") {
-        redirect('adminDashboard');;
+        $this->email->from('MTAS(Maclareen Talent Acquisition System)', 'Maclareen Talent Acquisition System ');
+        $this->email->to($candidate_email);
+        $this->email->subject($subject);
+        $this->email->message($candidateMail);
+        $this->email->set_header('Reply-To', 'immigration@maclareen.com');
+        $this->email->set_mailtype("html");
+        $sendemail = $this->email->send();
+        $test = $this->Admin_model->InsertLog($Logdata);
+        // Candidate registration successful
+        $role = $this->session->userdata('role');
+        if ($role == "candidate") {
+          redirect('candidateDashboard');
+        } else   if ($role == "admin") {
+          redirect('adminDashboard');;
+        } else {
+          redirect('superadminDashboard');
+        }
+
+        //  redirect('registermail');
       } else {
-        redirect('superadminDashboard');
+        // Failed to save candidate data
+
+        $this->session->set_flashdata('error', 'Failed to register candidate. Please try again.');
+        redirect('addCandidate');
       }
-
-      //  redirect('registermail');
-    } else {
-      // Failed to save candidate data
-
-      $this->session->set_flashdata('error', 'Failed to register candidate. Please try again.');
-      redirect('addCandidate');
     }
   }
+
 
 
 
@@ -2211,6 +2214,20 @@ class AddCandidateControllers extends BaseController
 
   public function Sendmail()
   {
+     // Load necessary helpers and libraries
+    $this->load->helper('form');
+    $this->load->library('form_validation');
+    $candidate_id = $this->input->post('candidate_id');
+    // Validate form fields
+    $this->form_validation->set_rules('subject', 'subject', 'required');
+    $this->form_validation->set_rules('body', 'body', 'required');
+ 
+
+
+    if ($this->form_validation->run() == FALSE) {
+      $this->session->set_flashdata('error', 'Enter mail body and subject');
+      redirect('Sendmail/'.$candidate_id);     //candidate_id
+    } else {
     $subject = $this->input->post('subject');
     $body = $this->input->post('body');
     $candidate_email = $this->input->post('candidate_email');
@@ -2281,4 +2298,5 @@ class AddCandidateControllers extends BaseController
       }
     }
   }
+}
 }

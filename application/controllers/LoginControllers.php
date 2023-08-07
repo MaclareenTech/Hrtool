@@ -165,44 +165,56 @@ class LoginControllers extends BaseController
 
     public function VerifyOtp()
     {
-        $email = $this->session->userdata('user_email');
-        $otp1 = $this->input->post('otp1');
-        $otp2 = $this->input->post('otp2');
-        $otp3 = $this->input->post('otp3');
-        $otp4 = $this->input->post('otp4');
-        $otpexpire = $this->input->post('otpexpire');
+        $this->load->library('form_validation');
         $this->load->model('Admin_model');
-        $otp = $otp1 . $otp2 . $otp3 . $otp4;
-        //echo $otpexpire;
+        $this->form_validation->set_rules('otp1', 'otp1', 'required');
+        $this->form_validation->set_rules('otp2', 'otp2', 'required');
+        $this->form_validation->set_rules('otp3', 'otp3', 'required');
+        $this->form_validation->set_rules('otp4', 'otp4', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', 'Enter All  right details');
+            redirect('optscreen');
+        } else {
 
 
-        if ($this->Admin_model->VerifyOTP($email, $otp)) {
-            if ($otpexpire == "yes") {
-                $this->session->set_flashdata('error', 'Otp expire kidnly request for new otp');
-                redirect('optscreen');
-            } else {
-                date_default_timezone_set('Asia/Kolkata');
-                $currentDateTime = date('Y-m-d H:i:s');
-                $logout = '0000-00-00 00:00:00';
-                $data = [
-                    'login_time'    => $currentDateTime,
-                    'logout_time'    => $logout,
-                ];
+            $email = $this->session->userdata('user_email');
+            $otp1 = $this->input->post('otp1');
+            $otp2 = $this->input->post('otp2');
+            $otp3 = $this->input->post('otp3');
+            $otp4 = $this->input->post('otp4');
+            $otpexpire = $this->input->post('otpexpire');
+            $this->load->model('Admin_model');
+            $otp = $otp1 . $otp2 . $otp3 . $otp4;
+            //echo $otpexpire;
 
-                if ($details = $this->Admin_model->UpdateUsingEmailId($email, $data)) {
-                    $user_email = $details[0]['user_name'];
-                    $latitude = $details[0]['latitude'];
-                    $longitude = $details[0]['longitude'];
-                    $dateObj = new DateTime($currentDateTime);
 
-                    // Format the DateTime object into a human-readable format
-                    $humanReadableFormat = $dateObj->format('F j, Y, g:i A');
+            if ($this->Admin_model->VerifyOTP($email, $otp)) {
+                if ($otpexpire == "yes") {
+                    $this->session->set_flashdata('error', 'Otp expire kidnly request for new otp');
+                    redirect('optscreen');
+                } else {
+                    date_default_timezone_set('Asia/Kolkata');
+                    $currentDateTime = date('Y-m-d H:i:s');
+                    $logout = '0000-00-00 00:00:00';
+                    $data = [
+                        'login_time'    => $currentDateTime,
+                        'logout_time'    => $logout,
+                    ];
 
-                    // Output the human-readable format
+                    if ($details = $this->Admin_model->UpdateUsingEmailId($email, $data)) {
+                        $user_email = $details[0]['user_name'];
+                        $latitude = $details[0]['latitude'];
+                        $longitude = $details[0]['longitude'];
+                        $dateObj = new DateTime($currentDateTime);
 
-                    $url = "https://www.google.com/maps?q={$latitude},{$longitude}";
-                    $subject = "Login Notification - MTAS(Maclareen Talent Acquisition System)";
-                    $OtpMail = '<!DOCTYPE html>
+                        // Format the DateTime object into a human-readable format
+                        $humanReadableFormat = $dateObj->format('F j, Y, g:i A');
+
+                        // Output the human-readable format
+
+                        $url = "https://www.google.com/maps?q={$latitude},{$longitude}";
+                        $subject = "Login Notification - MTAS(Maclareen Talent Acquisition System)";
+                        $OtpMail = '<!DOCTYPE html>
                     <html lang="en">
                     <head>
                         <meta charset="UTF-8">
@@ -265,32 +277,33 @@ class LoginControllers extends BaseController
                     </html>
                     
                     ';
-                    $this->load->config('email');
-                    $this->load->library('email');
+                        $this->load->config('email');
+                        $this->load->library('email');
 
-                    //	$token = $email_exist->emp_id;
+                        //	$token = $email_exist->emp_id;
 
-                    $this->email->from('MTAS(Maclareen Talent Acquisition System)', 'Maclareen Talent Acquisition System ');
-                    $this->email->to($email);
-                    $this->email->subject($subject);
-                    $this->email->message($OtpMail);
-                    $this->email->set_header('Reply-To', 'immigration@maclareen.com');
-                    $this->email->set_mailtype("html");
-                    $sendemail = $this->email->send();
-                    if ($sendemail) {
-                        $sessionArray['isLoggedIn'] = TRUE;
-                        $this->session->set_userdata($sessionArray);
-                        redirect('adminDashboard');
-                    } else {
-                        $this->session->set_flashdata('error', 'Please Try Again ');
-                        redirect('optscreen');
+                        $this->email->from('MTAS(Maclareen Talent Acquisition System)', 'Maclareen Talent Acquisition System ');
+                        $this->email->to($email);
+                        $this->email->subject($subject);
+                        $this->email->message($OtpMail);
+                        $this->email->set_header('Reply-To', 'immigration@maclareen.com');
+                        $this->email->set_mailtype("html");
+                        $sendemail = $this->email->send();
+                        if ($sendemail) {
+                            $sessionArray['isLoggedIn'] = TRUE;
+                            $this->session->set_userdata($sessionArray);
+                            redirect('adminDashboard');
+                        } else {
+                            $this->session->set_flashdata('error', 'Please Try Again ');
+                            redirect('optscreen');
+                        }
                     }
                 }
+                // redirect('optscreen');
+            } else {
+                $this->session->set_flashdata('error', 'Please Try Again ');
+                redirect('optscreen');
             }
-            // redirect('optscreen');
-        } else {
-            $this->session->set_flashdata('error', 'Please Try Again ');
-            redirect('optscreen');
         }
     }
 
@@ -313,6 +326,7 @@ class LoginControllers extends BaseController
         $distance = $this->distanceBetweenPoints($submitted_latitude, $submitted_longitude, $targetLatitude, $targetLongitude);
 
         if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', 'Enter All  right details');
             $this->index();
         } else {
             $email = $this->input->post('email');
@@ -340,16 +354,16 @@ class LoginControllers extends BaseController
                 } else if ($res->user_role == "1") {
 
                     // if ($distance <= 1.0) {
-                        // Define the allowed distance (500 meters in this example)
-                        $allowed_distance_meters = 500;
-                        // if ($distance <= $allowed_distance_meters) {
-                        $sessionArray['role'] = 'admin';
-                        $sessionArray['userId'] = $res->user_id;
-                        $this->session->set_userdata($sessionArray);
-                        // Generate OTP
-                        $otp = $this->generate_otp();
-                        $subject = "Login Verification - MTAS(Maclareen Talent Acquisition System)";
-                        $OtpMail = '<!DOCTYPE html>
+                    // Define the allowed distance (500 meters in this example)
+                    $allowed_distance_meters = 500;
+                    // if ($distance <= $allowed_distance_meters) {
+                    $sessionArray['role'] = 'admin';
+                    $sessionArray['userId'] = $res->user_id;
+                    $this->session->set_userdata($sessionArray);
+                    // Generate OTP
+                    $otp = $this->generate_otp();
+                    $subject = "Login Verification - MTAS(Maclareen Talent Acquisition System)";
+                    $OtpMail = '<!DOCTYPE html>
                         <html lang="en">
                         <head>
                         
@@ -440,37 +454,37 @@ class LoginControllers extends BaseController
                         </body>
                         </html>
                         ';
-                        $this->load->config('email');
-                        $this->load->library('email');
+                    $this->load->config('email');
+                    $this->load->library('email');
 
-                        //	$token = $email_exist->emp_id;
+                    //	$token = $email_exist->emp_id;
 
-                        $this->email->from('MTAS(Maclareen Talent Acquisition System)', 'Maclareen Talent Acquisition System ');
-                        $this->email->to($email);
-                        $this->email->subject($subject);
-                        $this->email->message($OtpMail);
-                        $this->email->set_header('Reply-To', 'immigration@maclareen.com');
-                        $this->email->set_mailtype("html");
-                        $sendemail = $this->email->send();
+                    $this->email->from('MTAS(Maclareen Talent Acquisition System)', 'Maclareen Talent Acquisition System ');
+                    $this->email->to($email);
+                    $this->email->subject($subject);
+                    $this->email->message($OtpMail);
+                    $this->email->set_header('Reply-To', 'immigration@maclareen.com');
+                    $this->email->set_mailtype("html");
+                    $sendemail = $this->email->send();
 
-                        $data = [
-                            'login_otp'    => $otp,
-                            'latitude'    => $submitted_latitude,
-                            'longitude'    => $submitted_longitude
-                        ];
-                        $OtpSend = $this->Admin_model->UpdateUsingEmailId($email, $data);
+                    $data = [
+                        'login_otp'    => $otp,
+                        'latitude'    => $submitted_latitude,
+                        'longitude'    => $submitted_longitude
+                    ];
+                    $OtpSend = $this->Admin_model->UpdateUsingEmailId($email, $data);
 
-                        if ($sendemail && $OtpSend) {
-                            redirect('optscreen');
-                        } else {
-                            $this->session->set_flashdata('error', 'Please Try Again ');
-                            redirect('LoginControllers');
-                        }
-                        //  redirect('adminDashboard');
-                        // } else {
-                        //     $this->session->set_flashdata('error', 'You Are not in office');
-                        //     redirect('LoginControllers');
-                        // }
+                    if ($sendemail && $OtpSend) {
+                        redirect('optscreen');
+                    } else {
+                        $this->session->set_flashdata('error', 'Please Try Again ');
+                        redirect('LoginControllers');
+                    }
+                    //  redirect('adminDashboard');
+                    // } else {
+                    //     $this->session->set_flashdata('error', 'You Are not in office');
+                    //     redirect('LoginControllers');
+                    // }
                     // } else {
                     //     $this->session->set_flashdata('error', 'You Are not in office');
                     //     redirect('LoginControllers');

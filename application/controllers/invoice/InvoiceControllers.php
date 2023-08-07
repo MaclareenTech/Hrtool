@@ -161,6 +161,7 @@ class InvoiceControllers extends BaseController
             'invoice_date' => $date,
             'candidate_state' => $candidate_state,
             'admin_id' => $Admin_id,
+            'candidate_number' => $candidate_number,
             'invoice_path' => $fileName,
             'invoice_paeticulars' => $serializedDataArray,
             'invoice_amount' => $total_amount,

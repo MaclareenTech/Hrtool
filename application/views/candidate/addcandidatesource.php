@@ -117,7 +117,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a >
+                        <a>
                             <img class="img-fluid" src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -177,7 +177,7 @@
 
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -224,7 +224,7 @@
                             <?php } ?>
                             <?php
                             $mail = $this->session->userdata('user_email'); ?>
-                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com"  ) { ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com") { ?>
                                 <div class="pcoded-navigation-label">Invoice</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li class="">
@@ -320,7 +320,7 @@
                                     <div class="col-md-4">
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a > <i class="fa fa-home"></i> </a>
+                                                <a> <i class="fa fa-home"></i> </a>
                                             </li>
                                             <li class="breadcrumb-item"><a>Add Candidate Source</a>
                                             </li>
@@ -374,17 +374,17 @@
                                                 <div class="form-group form-default form-static-label">
                                                     <input type="text" name="source_name" class="form-control" required>
                                                     <span class="form-bar"></span>
-                                                    <label class="float-label">Source Name</label>
+                                                    <label class="float-label" style="color: black;">Source Name</label>
                                                 </div>
                                                 <div class="form-group form-default form-static-label">
                                                     <input type="email" name="source_email" class="form-control">
                                                     <span class="form-bar"></span>
-                                                    <label class="float-label">Source Email</label>
+                                                    <label class="float-label" style="color: black;">Source Email</label>
                                                 </div>
                                                 <div class="form-group form-default form-static-label">
-                                                    <input type="tel" name="source_mobile_number" class="form-control"  pattern="[0-9]{10}" maxlength="10">
+                                                    <input type="tel" name="source_mobile_number" class="form-control" pattern="[0-9]{10}" maxlength="10">
                                                     <span class="form-bar"></span>
-                                                    <label class="float-label">Source Mobile Number (10 digits)</label>
+                                                    <label class="float-label" style="color: black;">Source Mobile Number (10 digits)</label>
                                                 </div>
 
                                                 <div class="form-group">
@@ -395,8 +395,10 @@
                                                         <input type="radio" name="source_type" value="0" required> Person
                                                     </label>
                                                 </div>
+                                                <center> <button type="submit" class="btn btn-success waves-effect waves-light" style="background: linear-gradient(to bottom, #2ecc71, #2ecc71); padding: 12px 20px; box-shadow: 0 4px 0 #0b872c; color: white; font-size: 16px; border-radius: 6px; border: none; margin-left: 10px; transition: all 0.3s ease;">
+                                                        Add Candidate Source
+                                                    </button></center>
 
-                                                <button class="btn btn-success waves-effect waves-light">Add Opening</button>
                                             </form>
 
 

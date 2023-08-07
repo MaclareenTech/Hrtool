@@ -152,6 +152,7 @@
 
     .flip-box-header {
         font-size: 24px;
+        width: 100px;
     }
 
     .flip-box p {

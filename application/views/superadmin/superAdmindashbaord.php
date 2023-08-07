@@ -187,6 +187,7 @@
 
     .flip-box-header {
         font-size: 24px;
+     
     }
 
     .flip-box p {
