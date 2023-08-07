@@ -485,32 +485,60 @@
                                                             <!-- Basic Form Inputs card start -->
 
                                                             <div class="form-group form-primary">
-                                                                <input type="password" name="old_password" class="form-control">
+
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-9">
+                                                                        <input type="password" name="old_password" id="oldPassword" class="form-control" required>
+                                                                    </div>
+                                                                    <div class="col-sm-3" style="
+    margin-top: 15px;
+">
+                                                                        <span id="oldPasswordToggele" onclick="togglePasswordVisibilityOld()">👁️</span>
+                                                                    </div>
+                                                                </div>
                                                                 <span class="form-bar"></span>
                                                                 <label class="float-label">Old Password</label>
                                                             </div>
                                                             <div class="form-group form-primary">
-                                                                <input type="password" name="new_password" class="form-control">
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-9">
+                                                                        <input type="password" name="new_password" id="newPassword" class="form-control " required>
+                                                                    </div>
+                                                                    <div class="col-sm-3" style="
+    margin-top: 15px;
+">
+                                                                        <span id="newPasswordToggele" onclick="togglePasswordVisibilityNew()">👁️</span>
+                                                                    </div>
+                                                                </div>
                                                                 <span class="form-bar"></span>
                                                                 <label class="float-label">New Password</label>
                                                             </div>
                                                             <div class="form-group form-primary">
-                                                                <input type="password" name="confirm_password" class="form-control">
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-9">
+                                                                        <input type="password" name="confirm_password" id="conPassword" class="form-control" required>
+                                                                    </div>
+                                                                    <div class="col-sm-3" style="
+    margin-top: 15px;
+">
+                                                                        <span id="conPasswordToggele" onclick="togglePasswordVisibilityCon()">👁️</span>
+                                                                    </div>
+                                                                </div>
                                                                 <span class="form-bar"></span>
                                                                 <label class="float-label">Confirm Password</label>
                                                             </div>
 
                                                             <!-- Basic Form Inputs card end -->
                                                         </div>
-                                 
 
-                                            
-                                                <div class="col-sm-12">
-                                                    <center>
-                                                        <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: linear-gradient(to bottom, #2ecc71, #27ae60); padding: 12px 20px; box-shadow: 0 4px 0 #1f8c4d; color: white; font-size: 16px; border-radius: 6px; border: none; transition: all 0.3s ease;">Change Password</button>
-                                                    </center>
 
-                                                </div>
+
+                                                        <div class="col-sm-12">
+                                                            <center>
+                                                                <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: linear-gradient(to bottom, #2ecc71, #27ae60); padding: 12px 20px; box-shadow: 0 4px 0 #1f8c4d; color: white; font-size: 16px; border-radius: 6px; border: none; transition: all 0.3s ease;">Change Password</button>
+                                                            </center>
+
+                                                        </div>
                                                 </form>
 
                                             </div>
@@ -574,6 +602,53 @@
 
 
 
+
+    <!-- password view option  start -->
+    <script>
+        function togglePasswordVisibilityOld() {
+            const passwordInput = document.getElementById("oldPassword");
+            const togglePasswordIcon = document.getElementById("oldPasswordToggele");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                togglePasswordIcon.innerText = "👁️"; // Change the icon to an open eye
+            } else {
+                passwordInput.type = "password";
+                togglePasswordIcon.innerText = "👁️"; // Change the icon to a closed eye
+            }
+        }
+    </script>
+
+
+    <script>
+        function togglePasswordVisibilityNew() {
+            const passwordInput = document.getElementById("newPassword");
+            const togglePasswordIcon = document.getElementById("newPasswordToggele");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                togglePasswordIcon.innerText = "👁️"; // Change the icon to an open eye
+            } else {
+                passwordInput.type = "password";
+                togglePasswordIcon.innerText = "👁️"; // Change the icon to a closed eye
+            }
+        }
+    </script>
+    <script>
+        function togglePasswordVisibilityCon() {
+            const passwordInput = document.getElementById("conPassword");
+            const togglePasswordIcon = document.getElementById("conPasswordToggele");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                togglePasswordIcon.innerText = "👁️"; // Change the icon to an open eye
+            } else {
+                passwordInput.type = "password";
+                togglePasswordIcon.innerText = "👁️"; // Change the icon to a closed eye
+            }
+        }
+    </script>
+    <!-- password view option  end -->
 
 
 

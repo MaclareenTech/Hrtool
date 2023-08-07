@@ -381,7 +381,7 @@
                                                     <table class="table datatable" id="my-table">
                                                         <thead>
                                                             <tr>
-                                                                <th>#</th>
+                                                                <th>Sr.No</th>
                                                                 <th>Candidate Name</th>
                                                                 <th>Candidate Mobile Number</th>
                                                                 <th>Candidate Mail Id</th>
@@ -390,7 +390,7 @@
                                                                 <th>Invoice Date</th>
                                                                 <th>Created Date</th>
                                                                 <th>Admin Name</th>
-                                                                <th></th>
+                                                                <th>Action</th>
                                                             </tr>
                                                         </thead>
 

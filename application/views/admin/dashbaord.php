@@ -47,6 +47,136 @@
 .fade-in {
   animation: fadeIn 1s ease-in-out;
 }
+  /* 3d box start */
+.box-container {
+        /* align-items: center;
+            display: flex; */
+        /* flex-direction: column; /* Updated to vertical column */
+        /* justify-content: space-around;
+            width: 100%; */
+    }
+
+    @media screen and (min-width: 1380px) {
+        .box-container {
+            flex-direction: row;
+            /* Horizontal row for larger screens */
+        }
+    }
+
+    .box-item {
+        position: relative;
+        -webkit-backface-visibility: hidden;
+        width: 550px;
+        margin-bottom: 35px;
+        max-width: 100%;
+    }
+
+    .flip-box {
+        -ms-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
+        perspective: 1000px;
+        -webkit-perspective: 1000px;
+    }
+
+    .flip-box-front,
+    .flip-box-back {
+        background-size: cover;
+        background-position: center;
+        border-radius: 8px;
+        min-height: 205px;
+        /* width: 150%; */
+        -ms-transition: transform 0.7s cubic-bezier(.4, .2, .2, 1);
+        transition: transform 0.7s cubic-bezier(.4, .2, .2, 1);
+        -webkit-transition: transform 0.7s cubic-bezier(.4, .2, .2, 1);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .flip-box-front {
+        -ms-transform: rotateY(0deg);
+        -webkit-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+        -webkit-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+
+    .flip-box:hover .flip-box-front {
+        -ms-transform: rotateY(-180deg);
+        -webkit-transform: rotateY(-180deg);
+        transform: rotateY(-180deg);
+        -webkit-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+
+    .flip-box-back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+
+        -ms-transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+        -webkit-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+
+    .flip-box:hover .flip-box-back {
+        -ms-transform: rotateY(0deg);
+        -webkit-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+        -webkit-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+
+    .flip-box .inner {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        padding: 60px;
+        outline: 1px solid transparent;
+        -webkit-perspective: inherit;
+        perspective: inherit;
+        z-index: 2;
+
+        transform: translateY(-50%) translateZ(60px) scale(.94);
+        -webkit-transform: translateY(-50%) translateZ(60px) scale(.94);
+        -ms-transform: translateY(-50%) translateZ(60px) scale(.94);
+        top: 50%;
+    }
+
+    .flip-box-header {
+        font-size: 24px;
+    }
+
+    .flip-box p {
+        font-size: 20px;
+        line-height: 1.5em;
+    }
+
+    .flip-box-img {
+        margin-top: 25px;
+    }
+
+    .flip-box-button {
+        background-color: transparent;
+        border: 2px solid #fff;
+        border-radius: 2px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: bold;
+
+        padding: 15px 20px;
+        text-transform: uppercase;
+    }
+
+    /* 3d box end */
 </style>
 
 <body>
@@ -356,41 +486,45 @@
                                     <div class="col-xl-12">
                                         <div class="card proj-progress-card">
                                             <div class="card-block">
-                                                <div class="row">
-                                                    <div class="col-xl-6 col-md-6 fade-in">
-                                                        <div class="card mat-clr-stat-card text-white red">
-                                                            <div class="card-block">
-                                                                <div class="row">
-                                                                    <div class="col-3 text-center bg-c-red">
-                                                                        <i class="fa fa-list mat-icon f-24"></i>
+                                               
+                                            <div class="box-container">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="box-item">
+                                                                        <div class="flip-box">
+                                                                            <div class="flip-box-front text-center" style="background: linear-gradient(45deg, #ff0000, #ff0000);">
+                                                                                <div class="inner color-white">
+                                                                                    <h3 class="flip-box-header"  style="color: white;">Pending Candidate</h3>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="flip-box-back text-center" style="background: linear-gradient(45deg, #ff0000, #ff0000);">
+                                                                                <div class="inner color-white">
+                                                                                    <h3 class="flip-box-header" style="color: white;" >Pending Candidate</h3>
+                                                                                    <button class="flip-box-button"><?php echo $pendingCandidate; ?></button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="col-9 cst-cont">
-                                                                        <h5><?php echo $pendingCandidate; ?></h5>
-                                                                        <p class="m-b-0">Pending Candidate</p>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="box-item">
+                                                                        <div class="flip-box">
+                                                                            <div class="flip-box-front text-center" style="background: linear-gradient(45deg, #45a049, #45a049);">
+                                                                                <div class="inner color-white">
+                                                                                    <h3 class="flip-box-header" style="color: white;">Completed Candidate</h3>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="flip-box-back text-center" style="background: linear-gradient(45deg, #45a049, #45a049);">
+                                                                                <div class="inner color-white">
+                                                                                    <h3 class="flip-box-header" style="color: white;">Completed Candidate</h3>
+                                                                                    <button class="flip-box-button"><?php echo $CompletedCandidate; ?></button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-xl-6 col-md-6 fade-in" >
-                                                        <div class="card mat-clr-stat-card text-white green ">
-                                                            <div class="card-block">
-                                                                <div class="row">
-                                                                    <div class="col-3 text-center bg-c-green">
-                                                                        <i class="fas fa-trophy mat-icon f-24"></i>
-                                                                    </div>
-                                                                    <div class="col-9 cst-cont">
-                                                                        <h5><?php echo $CompletedCandidate; ?></h5>
-                                                                        <p class="m-b-0">Completed Candidate</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -424,7 +558,7 @@
                                                         <table id="my-table" class="table datatable">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>#</th>
+                                                                    <th>Sr.No</th>
                                                                     <th>Candidate Name</th>
                                                                     <th>Candidate Email</th>
                                                                     <th>Candidate Number</th>
@@ -435,7 +569,7 @@
                                                                     <th>Candidate Status updated days </th>
                                                                     <th>Status Updated by </th>
                                                                     <th>Candidate Source</th>
-                                                                    <th></th>
+                                                                    <th>Actions</th>
                                                                 </tr>
                                                             </thead>
 

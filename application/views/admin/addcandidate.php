@@ -396,26 +396,26 @@
                                                 <div class="card-block">
                                                     <?php echo form_open_multipart('admin/AddCandidateControllers/RegisterCandidate'); ?>
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Name </label>
+                                                        <label class="col-sm-3 col-form-label">Candidate Name *</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_name" placeholder="Ex. john dev" required>
+                                                            <input type="text" class="form-control" name="candidate_name" placeholder="Candidate Name" required>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Email Id</label>
+                                                        <label class="col-sm-3 col-form-label">Candidate Email Id *</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_email" placeholder="Ex.abc@example.com" required>
+                                                            <input type="text" class="form-control" name="candidate_email" placeholder="Email id" required>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Mobile Number</label>
+                                                        <label class="col-sm-3 col-form-label">Candidate Mobile Number *</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control" name="candidate_mobile_no" placeholder="Ex.1234567890" pattern="[0-9]{10}" required>
+                                                            <input type="text" class="form-control" name="candidate_mobile_no" placeholder="Mobile number" pattern="[0-9]{10}" required>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Job Profile</label>
+                                                        <label class="col-sm-3 col-form-label">Job Profile *</label>
                                                         <div class="col-sm-9">
                                                             <select name="candidate_job_profile" class="form-control" required>
 
@@ -428,7 +428,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Source</label>
+                                                        <label class="col-sm-3 col-form-label">Candidate Source *</label>
                                                         <div class="col-sm-9">
                                                             <select name="candidate_source_id" class="form-control" required>
 
@@ -440,9 +440,14 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Candidate Password</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="password" class="form-control" name="candidate_password" placeholder="Enter your password" required>
+                                                        <label class="col-sm-3 col-form-label">Candidate Password *</label>
+                                                        <div class="col-sm-7">
+                                                            <input type="password" class="form-control" name="candidate_password" id="passwordInput" placeholder="Enter your password" required>
+                                                        </div>
+                                                        <div class="col-sm-1" style="
+    margin-top: 4px;
+">
+                                                            <span id="togglePassword" onclick="togglePasswordVisibility()">👁️</span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -497,7 +502,7 @@
                                                     </div> -->
                                                     <div class="form-group row">
                                                         <div class="col-sm-12">
-                                                            <center> <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: #2ecc71; ">Submit</button></center>
+                                                            <center> <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: #2ecc71; ">Add Candiddate</button></center>
                                                         </div>
 
                                                     </div>
@@ -570,7 +575,22 @@
 
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/script.js "></script>
 
+    <!-- password view option  start -->
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById("passwordInput");
+            const togglePasswordIcon = document.getElementById("togglePassword");
 
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                togglePasswordIcon.innerText = "👁️"; // Change the icon to an open eye
+            } else {
+                passwordInput.type = "password";
+                togglePasswordIcon.innerText = "👁️"; // Change the icon to a closed eye
+            }
+        }
+    </script>
+    <!-- password view option  end -->
 
 
 

@@ -381,7 +381,7 @@
                                                     <table class="table datatable" id="my-table">
                                                         <thead>
                                                             <tr>
-                                                                <th>#</th>
+                                                                <th>Sr.No</th>
                                                                 <th>Job Country</th>
                                                                 <th>Job Position</th>
                                                                 <th>Job Code</th>
@@ -391,7 +391,7 @@
                                                                 <th>Valid From</th>
                                                                 <th>Valid Till</th>
                                                                 <th>Status</th>
-                                                                <th></th>
+                                                                <th>Action</th>
                                                             </tr>
                                                         </thead>
 

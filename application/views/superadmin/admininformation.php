@@ -367,7 +367,7 @@
                                                     <table class="table datatable">
                                                         <thead>
                                                             <tr>
-                                                                <th>#</th>
+                                                                <th>Sr.No</th>
                                                                 <th>Admin Name</th>
                                                                 <th>Admin Email</th>
                                                                 <th>Admin Number</th>
@@ -377,7 +377,7 @@
                                                                 <th>Logout Time</th>
                                                                 <!-- <th>Activity TIme</th> -->
                                                                 <th>Status </th>
-                                                                <th></th>
+                                                                <th>Action</th>
                                                             </tr>
                                                         </thead>
 

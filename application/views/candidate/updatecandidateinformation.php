@@ -636,16 +636,7 @@
                                                 </div>
                                             </div>
                                         <?php }  ?>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label"><i class="fa fa-inr" aria-hidden="true"></i></label>
-                                            <div class="col-sm-9">
-                                                <?php if ($candidate[0]->is_paid == "1") { ?>
-                                                    <input type="checkbox" id="toggle_switch" name="toggle_switch" checked>
-                                                <?php } else { ?>
-                                                    <input type="checkbox" id="toggle_switch" name="toggle_switch" >
-                                                <?php } ?>
-                                            </div>
-                                        </div>
+                                       
 
 
                                         <div class="title" style="margin-top: 20px;">Job Orientation </div>
@@ -827,7 +818,7 @@
                                         <?php } ?>
                                         <div class="form-group row">
                                             <div class="col-sm-12">
-                                                <center> <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: #2ecc71; ">Submit</button></center>
+                                                <center> <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: #2ecc71; ">Update Candidate</button></center>
                                             </div>
 
                                         </div>
