@@ -140,6 +140,15 @@ align-items: center;
 
     /* loader end  */
 </style>
+    <script>
+        // Function to disable form submission on Enter key press
+        function disableEnterKeySubmit(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                return false;
+            }
+        }
+    </script>
 
 <body themebg-pattern="theme1">
     <?php $this->load->helper('form'); ?>

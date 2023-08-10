@@ -127,30 +127,7 @@
         background: linear-gradient(-135deg, #C0C0C0, #9B59B6);
     }
 
-    /* Media Query */
-    @media (max-width: 584px) {
-        .wrapper {
-            max-width: 100%;
-        }
 
-        form .user-details .input-box {
-            margin-bottom: 15px;
-            width: 100%;
-        }
-
-        .gender-details .category {
-            width: 100%;
-        }
-
-        .wrapper form .user-details {
-            max-height: 300px;
-            overflow-y: scroll;
-        }
-
-        .user-details::-webkit-scrollbar {
-            width: 0;
-        }
-    }
 
     form .button1 input {
         height: 100%;
@@ -165,48 +142,124 @@
         letter-spacing: 1px;
         background: #434341;
     }
-
-    /* card animation  start*/
-
-    
-
-
-
-    /* card animation  end */
 </style>
+<!-- card animation  start -->
+
+
 <style>
-    .container1 {
-     width: 640px;
-    height: 480px;
-    margin: 0 auto;
-    overflow: hidden;
-    background: white;
-    position: relative;
-    box-sizing: border-box; 
-    /* background-color: #317a5c; */
+.plans {
+         width: 300px; /* Set the width of the cards */
+  
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+      
 }
+.plan img {
 
-.marquee {
-    width: 320px;
-    top: 480px;
-    position: relative;
-    box-sizing: border-box;
-    animation: marquee 100s linear infinite;
-    /* margin: 0 auto;
-    text-align: center; */
-    color: #ffffff;
+  height: 270px;
+   border: 5px solid #bfbfc2;
+ /* border-radius: 50%;
+  background-color: #878787;
+  margin: 10px auto;
+  filter: drop-shadow(1px 4px 2px #414142cc); */
 }
-
-@keyframes marquee {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-150%);
-  }
+.plan img.icon {
+  height: auto
 }
+.plan {
+  display: flex;
+  border: 2px solid #888;
+  flex-direction: column;
+  border-radius: 10px;
+  justify-content: center;
  
-</style>
+  background: #b8b9ba;  
+  background: -webkit-linear-gradient(to right, #75777a, #b8b9ba);
+  background: linear-gradient(to right, #75777a, #b8b9ba);
+  box-shadow: 3px 3px #4e4d4daf;
+  transition: opacity 1s, transform 1s;
+
+  margin: 30px;
+}
+.plan .title {
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  font-size: 17pt;
+  border-bottom: 2px solid #0050aa33;
+  display: block;
+  margin: 0;
+  padding: 10px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 10px;
+}
+.actions .btn-apply {
+  width: 150px;
+  background-color: #121212;
+  border: 2px solid #fefefe;
+  font-size: 15pt;
+  padding: 3px;
+  transform: rotate(-5deg);
+}
+
+
+.actions button {
+  color: white;
+  box-shadow: 3px 3px #3336;
+}
+
+.plan ul {
+  color: white;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  padding: 10px;
+  list-style: none;
+}
+.plan ul li {
+  text-align: center;
+  padding: 10px;
+  /* display: flex;
+  line-height: 50px; */
+}
+
+img.icon {
+  width: 25px;
+  background: none;
+  border: none;
+  background-color: white;
+}
+
+
+
+
+.additional-info {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.additional-info.hidden {
+  max-height: 0;
+  opacity: 0;
+}
+.additional-info:not(.hidden) {
+  max-height: 500px; /* Adjust the value as needed */
+  opacity: 1;
+}
+
+    </style>
+
+<!-- card animation  end  -->
+
 
 <body>
 
@@ -342,26 +395,87 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                            </ul> 
-                            
-                            
-                            <div class="container1">
-  <div class="marquee">
-    <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" id="image1" style="width:200px;">
-    <p>This is some text about image 1.</p>
-    
-    <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" id="image2" style="width:200px;">
-    <p>This is some text about image 2.</p>
-    
-    <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" id="image3" style="width:200px;">
-    <p>This is some text about image 3</p>
-    
-    <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" id="image4" style="width:200px;">
-    <p>This is some text about image 4.</p>
-    
-  </div>
-</div>
+                            </ul>
 
+
+                            <!-- card animation start -->
+                            <div class="containernew">
+            <div class="plans">
+                <div class="plan">
+                    <p class="title">
+                        Test Job Opening
+                    </p>
+                    <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg">
+                    <ul>
+                        <li>     Test Job Opening
+                        </li>
+                        <li>     Test Job Opening
+                        </li>
+                        <li>     Test Job Opening
+                        </li>
+                        
+                    </ul>
+                    <div class="actions">
+                        <a href="https://maclareen.in/" ><button class="btn-apply">View More</button></a>
+                    </div>
+                    <div class="additional-info hidden">
+                        <!-- Additional information here -->
+                        This is the additional information for the Premium Plan.
+                    </div>
+                </div>
+            </div>
+            <div class="plans">
+                <div class="plan">
+                    <p class="title">
+                        Test Job Opening
+                    </p>
+                    <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg">
+                    <ul>
+                        <li>     Test Job Opening
+                        </li>
+                        <li>     Test Job Opening
+                        </li>
+                        <li>     Test Job Opening
+                        </li>
+                        
+                    </ul>
+                    <div class="actions">
+                        <a href="https://maclareen.in/" ><button class="btn-apply">View More</button></a>
+                    </div>
+                    <div class="additional-info hidden">
+                        <!-- Additional information here -->
+                        This is the additional information for the Premium Plan.
+                    </div>
+                </div>
+            </div>
+            <div class="plans">
+                <div class="plan">
+                    <p class="title">
+                        Test Job Opening
+                    </p>
+                    <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg">
+                    <ul>
+                        <li>     Test Job Opening
+                        </li>
+                        <li>     Test Job Opening
+                        </li>
+                        <li>     Test Job Opening
+                        </li>
+                        
+                    </ul>
+                    <div class="actions">
+                        <a href="https://maclareen.in/" ><button class="btn-apply">View More</button></a>
+                    </div>
+                    <div class="additional-info hidden">
+                        <!-- Additional information here -->
+                        This is the additional information for the Premium Plan.
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+                            <!-- card animation end -->
 
                         </div>
                     </nav>
@@ -660,24 +774,44 @@
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/script.js "></script>
     <script>
         $(function() {
-  var image1_bg_color = '#317a5c';
-  var image2_bg_color = '#dedede';
-  var image3_bg_color = '#ff0000';
-  var image4_bg_color = '#000000';
+            var image1_bg_color = '#317a5c';
+            var image2_bg_color = '#dedede';
+            var image3_bg_color = '#ff0000';
+            var image4_bg_color = '#000000';
 
-// pseudo-code...
+            // pseudo-code...
 
-// When #image2 becomes visible fade .container bg color from image1_bg_color to image2_bg_color
+            // When #image2 becomes visible fade .container bg color from image1_bg_color to image2_bg_color
 
-// When #image3 becomes visible fade .container bg color from image2_bg_color to image3_bg_color
+            // When #image3 becomes visible fade .container bg color from image2_bg_color to image3_bg_color
 
-// When #image4 becomes visible fade .container bg color from image3_bg_color to image4_bg_color
+            // When #image4 becomes visible fade .container bg color from image3_bg_color to image4_bg_color
 
-// When #image1 re-enters view fade .container bg color from image4_bg_color to image1_bg_color
+            // When #image1 re-enters view fade .container bg color from image4_bg_color to image1_bg_color
 
-// etc.
-});
+            // etc.
+        });
     </script>
+
+
+    <!-- card animation start -->
+    <script>
+        // Get the container and the plans
+        const container = document.querySelector('.containernew');
+        const plans = document.querySelectorAll('.plan');
+
+        // Function to clone and append plans to the container
+        function appendClonedPlans() {
+            plans.forEach(plan => {
+                const clonedPlan = plan.cloneNode(true);
+                container.appendChild(clonedPlan);
+            });
+        }
+
+        // Set interval to append cloned plans every 10 seconds
+        setInterval(appendClonedPlans, 10000); // 10000 milliseconds = 10 seconds
+    </script>
+    <!-- card animation end -->
 </body>
 
 

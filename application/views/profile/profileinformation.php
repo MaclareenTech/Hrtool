@@ -143,7 +143,7 @@
 	height:60px;
 	bottom:40px;
 	right:40px;
-	background-color:#981515;
+	background-color:#262525;
 	color:#FFF;
 	border-radius:50px;
 	text-align:center;
@@ -466,14 +466,15 @@
 
 
                                     <div class="panel panel-mask profileheader border-default-light">
-                                        <div class="coverprofile bg-cover" style="background: linear-gradient(to right, #c8081f , #050505);"></div>
+                                        <div class="coverprofile bg-cover" style="background: linear-gradient(to right, #dadada , #716f6f);"></div>
                                         <div class="text-center">
-                                            <img alt="" src="assets/images/avatar-4.jpg" class="avatar avatar-150 photo" height="120" width="120">
+                                            
                                         </div>
                                         <div class="panel-body">
                                             <div class="text-center">
                                                 <div class="dropdown inblock">
-                                                    <h1 class="font-3x margtop-none inblock"><?php echo $this->session->userdata('name');; ?></h1>
+                                                    <h1 class="font-3x margtop-none inblock"  
+    style = "margin-top: -25px;    font-size: 30px;"><?php echo $this->session->userdata('name');; ?></h1>
                                                 </div>
 
                                             </div>
@@ -543,7 +544,7 @@
                                                     <center>
                                                         <!-- <button type="submit" class="btn btn-primary waves-effect waves-light" style="background: linear-gradient(to bottom, #2ecc71, #27ae60); padding: 12px 20px; box-shadow: 0 4px 0 #1f8c4d; color: white; font-size: 16px; border-radius: 6px; border: none; transition: all 0.3s ease;">Submit</button> -->
                                                         <a href="<?php echo base_url(); ?>changePasswordForm">
-                                                            <button type="button" class="btn btn-secondary waves-effect waves-light" style="background: linear-gradient(to bottom, #3498db, #2980b9); padding: 12px 20px; box-shadow: 0 4px 0 #1b698f; color: white; font-size: 16px; border-radius: 6px; border: none; margin-left: 10px; transition: all 0.3s ease;">
+                                                            <button type="button" class="btn btn-secondary waves-effect waves-light" style="background: linear-gradient(to bottom, #2f9607, #2f9607); padding: 12px 20px; box-shadow: 0 4px 0 #dbe1dc; color: white; font-size: 16px; border-radius: 6px; border: none; margin-left: 10px; transition: all 0.3s ease;">
                                                                 Change Password
                                                             </button>
                                                         </a>

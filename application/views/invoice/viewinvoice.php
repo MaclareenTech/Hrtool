@@ -121,7 +121,7 @@
 
         .centered-content h4{
             margin-bottom:-4px;
-            margin-top:17px;
+            margin-top:25px;
         }
         /* disclaimer the content horizontally */
         .disclaimer-content {

@@ -49,7 +49,7 @@
 
     .app-header {
         border-radius: 10px 10px 0 0;
-        background: linear-gradient(#ff0000, #981515);
+        background: linear-gradient(#b3b3b3, #606060);
         padding: 20px 0;
         display: flex;
         flex-direction: column;
@@ -120,7 +120,7 @@
         width: 24px;
         height: 24px;
         border-radius: 9999px;
-        background: linear-gradient(#ff0000, #981515);
+        background: linear-gradient(#b3b3b3, #606060);
         color: #fff;
         line-height: 24px;
         text-align: center;
@@ -522,7 +522,7 @@
                                                                     <span><?php echo $row->chat_message; ?></span>
                                                                 </div>
                                                                 <div class="message-meta" style="display: flex; flex: 1 auto; margin: 10px 5px 15px; justify-content: flex-end;">
-                                                                    <div class="sender-avatar" style="width: 82px; height: 24px; border-radius: 9999px; background: linear-gradient(180deg, #fb551c, #f7b633); color: #fff; line-height: 24px; text-align: center; font-size: 0.666rem; font-weight: 600;">
+                                                                    <div class="sender-avatar" style="width: 82px; height: 24px; border-radius: 9999px; background: linear-gradient(180deg, #d0d0cf, #8c8a8a); color: #fff; line-height: 24px; text-align: center; font-size: 0.666rem; font-weight: 600;">
                                                                         <?php
                                                                         $first_name = strtok($row->user_name, ' '); // Get the first part before the space
 
@@ -542,7 +542,7 @@
                                                                     <span><?php echo $row->chat_message; ?></span>
                                                                 </div>
                                                                 <div class="message-meta" style="display: flex; flex: 1 auto; margin: 10px 5px 15px; justify-content:flex-start;">
-                                                                    <div class="sender-avatar" style="width: 82px; height: 24px; border-radius: 9999px; background: linear-gradient(180deg, #fb551c, #f7b633); color: #fff; line-height: 24px; text-align: center; font-size: 0.666rem; font-weight: 600;">
+                                                                    <div class="sender-avatar" style="width: 82px; height: 24px; border-radius: 9999px; background: linear-gradient(180deg, #d0d0cf, #8c8a8a); color: #fff; line-height: 24px; text-align: center; font-size: 0.666rem; font-weight: 600;">
                                                                         <?php
                                                                         $first_name = strtok($row->user_name, ' '); // Get the first part before the space
 
@@ -642,7 +642,7 @@
                                                                     senderAvatar.style.width = '82px';
                                                                     senderAvatar.style.height = '24px';
                                                                     senderAvatar.style.borderRadius = '9999px';
-                                                                    senderAvatar.style.background = 'linear-gradient(180deg, #fb551c, #f7b633)';
+                                                                    senderAvatar.style.background = 'linear-gradient(180deg, #d0d0cf, #8c8a8a)';
                                                                     senderAvatar.style.color = '#fff';
                                                                     senderAvatar.style.lineHeight = '24px';
                                                                     senderAvatar.style.textAlign = 'center';
@@ -701,7 +701,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> <script>
+    window.onload = function() {
+      var chatBox = document.getElementById("chat-box");
+      chatBox.scrollTop = chatBox.scrollHeight;
+    };
+  </script>
     </div>
     </div>
 
