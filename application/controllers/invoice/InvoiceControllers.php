@@ -10,8 +10,10 @@ class InvoiceControllers extends BaseController
     public function index()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
@@ -33,8 +35,10 @@ class InvoiceControllers extends BaseController
     public function CreateInvoiceform()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
@@ -275,8 +279,10 @@ class InvoiceControllers extends BaseController
     public function AdminInformation()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
@@ -293,8 +299,10 @@ class InvoiceControllers extends BaseController
     public function UpdateAdminInformation($id)
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
@@ -311,7 +319,11 @@ class InvoiceControllers extends BaseController
     public function ChangeAdminInformation()
     {
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+        $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
+
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
@@ -383,7 +395,11 @@ class InvoiceControllers extends BaseController
     public function AddAdminInformation()
     {
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+        $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
+
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
@@ -469,7 +485,11 @@ class InvoiceControllers extends BaseController
     public function UpdateVendorInformation($delete, $id)
     {
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+        $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
+
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);

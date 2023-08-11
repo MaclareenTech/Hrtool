@@ -11,8 +11,10 @@ class AddCandidateControllers extends BaseController
     $this->load->model('Job_Opening_model');
     $this->load->model('Candidate_source_model');
     $isLoggedIn = $this->session->userdata('isLoggedIn');
+    $role = $this->session->userdata('role');
 
-    if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+
+    if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
       $this->global['pageTitle'] = 'MTAS : Login';
       $this->loadViews("login/login", $this->global);
@@ -35,18 +37,27 @@ class AddCandidateControllers extends BaseController
     //  // Decrypt the number
     //  $decrypted_id = $this->encryption->decrypt($id);
 
+    $isLoggedIn = $this->session->userdata('isLoggedIn');
+    $role = $this->session->userdata('role');
 
-    $decrypted_id = $id;
-    // echo $decrypted_id;
-    $this->load->model('Candidate_model');
-    $this->load->model('Admin_model');
-    $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($decrypted_id);
-    $this->global['log'] = $this->Admin_model->ViewCandidateInfoLog($decrypted_id);
-    $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('', '');
-    $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
-    $this->global['pageTitle'] = 'MTAS : Candidate Information';
-    $this->global['candidateId'] = $decrypted_id;
-    $this->loadViews("admin/candidateInofrmation", $this->global);
+
+    if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
+
+      $this->global['pageTitle'] = 'MTAS : Login';
+      $this->loadViews("login/login", $this->global);
+    } else {
+      $decrypted_id = $id;
+      // echo $decrypted_id;
+      $this->load->model('Candidate_model');
+      $this->load->model('Admin_model');
+      $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($decrypted_id);
+      $this->global['log'] = $this->Admin_model->ViewCandidateInfoLog($decrypted_id);
+      $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('', '');
+      $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
+      $this->global['pageTitle'] = 'MTAS : Candidate Information';
+      $this->global['candidateId'] = $decrypted_id;
+      $this->loadViews("admin/candidateInofrmation", $this->global);
+    }
   }
 
 
@@ -2192,54 +2203,74 @@ class AddCandidateControllers extends BaseController
   public function viewCandidateInformationforUpdate($id)
   {
     //echo $id;
-    $this->load->model('Candidate_model');
-    $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($id);
-    $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('', '');
-    $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
-    $this->global['pageTitle'] = 'MTAS : Update Candidate';
+    $isLoggedIn = $this->session->userdata('isLoggedIn');
+    $role = $this->session->userdata('role');
 
-    $this->global['candidateId'] = $id;
-    $this->loadViews("candidate/updatecandidateinformation", $this->global);
+
+    if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
+
+      $this->global['pageTitle'] = 'MTAS : Login';
+      $this->loadViews("login/login", $this->global);
+    } else {
+      $this->load->model('Candidate_model');
+      $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($id);
+      $this->global['pendingCandidate'] = $this->Candidate_model->viewCandidate_count('', '');
+      $this->global['CompletedCandidate'] = $this->Candidate_model->viewCandidate_count('', '11');
+      $this->global['pageTitle'] = 'MTAS : Update Candidate';
+
+      $this->global['candidateId'] = $id;
+      $this->loadViews("candidate/updatecandidateinformation", $this->global);
+    }
   }
 
 
   public function SendmailForm($id)
   {
-    $this->load->model('Candidate_model');
-    $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($id);
-    $this->global['pageTitle'] = 'MTAS : Send Mail To  Candidate';
-    $this->global['candidateId'] = $id;
-    $this->loadViews("candidate/sendmail", $this->global);
+    $isLoggedIn = $this->session->userdata('isLoggedIn');
+    $role = $this->session->userdata('role');
+
+
+    if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
+
+      $this->global['pageTitle'] = 'MTAS : Login';
+      $this->loadViews("login/login", $this->global);
+    } else {
+      $this->load->model('Candidate_model');
+      $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($id);
+      $this->global['pageTitle'] = 'MTAS : Send Mail To  Candidate';
+      $this->global['candidateId'] = $id;
+      $this->loadViews("candidate/sendmail", $this->global);
+    }
   }
 
   public function Sendmail()
   {
-     // Load necessary helpers and libraries
+    // Load necessary helpers and libraries
     $this->load->helper('form');
     $this->load->library('form_validation');
     $candidate_id = $this->input->post('candidate_id');
     // Validate form fields
     $this->form_validation->set_rules('subject', 'subject', 'required');
     $this->form_validation->set_rules('body', 'body', 'required');
- 
+
 
 
     if ($this->form_validation->run() == FALSE) {
       $this->session->set_flashdata('error', 'Enter mail body and subject');
-      redirect('Sendmail/'.$candidate_id);     //candidate_id
+      redirect('Sendmail/' . $candidate_id);     //candidate_id
     } else {
-    $subject = $this->input->post('subject');
-    $body = $this->input->post('body');
-    $candidate_email = $this->input->post('candidate_email');
-    $candidate_name = $this->input->post('candidate_name');
+      $subject = $this->input->post('subject');
+      $body = $this->input->post('body');
+      $candidate_email = $this->input->post('candidate_email');
+      $candidate_name = $this->input->post('candidate_name');
 
-    $this->load->config('email');
-    $this->load->library('email');
+      $this->load->config('email');
+      $this->load->library('email');
 
-    $adminName = $this->session->userdata('name');
-    $adminMail = $this->session->userdata('user_email');
+      $adminName = $this->session->userdata('name');
+      $adminMail = $this->session->userdata('user_email');
 
-    $mailbody = '<!DOCTYPE html>
+      $mailbody = '<!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8">
@@ -2279,24 +2310,24 @@ class AddCandidateControllers extends BaseController
     </body>
     </html>
     ';
-    //	$token = $email_exist->emp_id;
-    $this->email->from('maclareendata@gmail.com', 'Maclareen Talent Acquisition System  ');
-    $this->email->to($candidate_email);
-    $this->email->subject($subject);
-    $this->email->message($mailbody);
-    $this->email->set_header('Reply-To', 'immigration@maclareen.com');
-    $this->email->set_mailtype("html");
-    $sendemail = $this->email->send();
-    if ($sendemail) {
-      $role = $this->session->userdata('role');
-      if ($role == "candidate") {
-        redirect('candidateDashboard');
-      } else   if ($role == "admin") {
-        redirect('adminDashboard');;
-      } else {
-        redirect('superadminDashboard');
+      //	$token = $email_exist->emp_id;
+      $this->email->from('maclareendata@gmail.com', 'Maclareen Talent Acquisition System  ');
+      $this->email->to($candidate_email);
+      $this->email->subject($subject);
+      $this->email->message($mailbody);
+      $this->email->set_header('Reply-To', 'immigration@maclareen.com');
+      $this->email->set_mailtype("html");
+      $sendemail = $this->email->send();
+      if ($sendemail) {
+        $role = $this->session->userdata('role');
+        if ($role == "candidate") {
+          redirect('candidateDashboard');
+        } else   if ($role == "admin") {
+          redirect('adminDashboard');;
+        } else {
+          redirect('superadminDashboard');
+        }
       }
     }
   }
-}
 }

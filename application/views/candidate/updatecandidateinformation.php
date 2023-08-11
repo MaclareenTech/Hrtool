@@ -136,7 +136,7 @@
     }
 
     form .button input:hover {
-        background: linear-gradient(-135deg, #C0C0C0, #9B59B6);
+        background: linear-gradient(-135deg, #99dda2, #9B59B6);
     }
 
     /* Media Query */
@@ -753,41 +753,58 @@
                                             <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 1</div>
                                             <div class="user-details">
 
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Url</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_one ?>" disabled>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Url</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one ?>" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Time</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_one_date_time ?>" disabled>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Time</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one_date_time ?>" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting ID</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_id ?>" disabled>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting ID</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_id ?>" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Password</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_password ?>" disabled>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Password</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_password ?>" disabled>
+                                                    </div>
                                                 </div>
                                             </div>
                                         <?php } else { ?>
                                             <div class="user-details">
 
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Url</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_one ?>" name="job_training_one">
+
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Url</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one ?>" name="job_training_one">
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Time</span>
-                                                    <input type="datetime-local" value="<?php echo $candidate[0]->job_training_one_date_time ?>" name="job_training_one_date_time" min="<?= date('Y-m-d') ?>">
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Time</span>
+                                                        <input type="datetime-local" value="<?php echo $candidate[0]->job_training_one_date_time ?>" name="job_training_one_date_time" min="<?= date('Y-m-d') ?>">
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting ID</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_id ?>" name="job_training_one_meet_id">
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting ID</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_id ?>" name="job_training_one_meet_id">
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Password</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_password ?>" name="job_training_one_meet_password">
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Password</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_password ?>" name="job_training_one_meet_password">
+                                                    </div>
                                                 </div>
                                             </div>
                                         <?php  } ?>
@@ -796,42 +813,59 @@
                                             <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 2</div>
                                             <div class="user-details">
 
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Url</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_two ?>" disabled>
+
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Url</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two ?>" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Time</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_two_date_time ?>" disabled>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Time</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two_date_time ?>" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting ID</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_id ?>" disabled>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting ID</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_id ?>" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Password</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_password ?>" disabled>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Password</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_password ?>" disabled>
+                                                    </div>
                                                 </div>
                                             </div>
                                         <?php } else { ?>
                                             <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 2</div>
                                             <div class="user-details">
 
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Url</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_two ?>" name="job_training_two">
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Url</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two ?>" name="job_training_two">
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Time</span>
-                                                    <input type="datetime-local" value="<?php echo $candidate[0]->job_training_two_date_time ?>" name="job_training_two_date_time" min="<?= date('Y-m-d') ?>">
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Time</span>
+                                                        <input type="datetime-local" value="<?php echo $candidate[0]->job_training_two_date_time ?>" name="job_training_two_date_time" min="<?= date('Y-m-d') ?>">
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting ID</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_id ?>" name="job_training_two_meet_id">
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting ID</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_id ?>" name="job_training_two_meet_id">
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Password</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_password ?>" name="job_training_two_meet_password">
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Password</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_password ?>" name="job_training_two_meet_password">
+                                                    </div>
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -839,42 +873,60 @@
                                             <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 3</div>
                                             <div class="user-details">
 
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Url</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_three ?>" disabled>
+
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Url</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_three ?>" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Time</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_three_date_time ?>" disabled>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Time</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_three_date_time ?>" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting ID</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_three_meet_id ?>" disabled>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting ID</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_three_meet_id ?>" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Password</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_three_password ?>" disabled>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Password</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_three_password ?>" disabled>
+                                                    </div>
                                                 </div>
                                             </div>
                                         <?php } else { ?>
                                             <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 3</div>
                                             <div class="user-details">
 
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Url</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_three ?>" name="job_training_three">
+
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Url</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_three ?>" name="job_training_three">
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Time</span>
-                                                    <input type="datetime-local" value="<?php echo $candidate[0]->job_training_three_date_time ?>" name="job_training_three_date_time" min="<?= date('Y-m-d') ?>">
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Time</span>
+                                                        <input type="datetime-local" value="<?php echo $candidate[0]->job_training_three_date_time ?>" name="job_training_three_date_time" min="<?= date('Y-m-d') ?>">
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting ID</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_three_meet_id ?>" name="job_training_three_meet_id">
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting ID</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_three_meet_id ?>" name="job_training_three_meet_id">
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Password</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->job_training_three_password ?>" name="job_training_three_password">
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Password</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->job_training_three_password ?>" name="job_training_three_password">
+                                                    </div>
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -884,41 +936,59 @@
                                         <?php if ($candidate[0]->candidate_job_status == "11") { ?>
                                             <div class="user-details">
 
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Url</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->visa_training ?>" disabled>
+
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Url</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->visa_training ?>" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Time</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->visa_training_datetime ?>" disabled>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Time</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->visa_training_datetime ?>" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting ID</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->visa_training_meet_id ?>" disabled>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting ID</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->visa_training_meet_id ?>" disabled>
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Password</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->visa_training_meet_password ?>" disabled>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Password</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->visa_training_meet_password ?>" disabled>
+                                                    </div>
                                                 </div>
                                             </div>
                                         <?php } else { ?>
                                             <div class="user-details">
 
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Url</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->visa_training ?>" name="visa_training">
+
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Url</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->visa_training ?>" name="visa_training">
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Time</span>
-                                                    <input type="datetime-local" value="<?php echo $candidate[0]->visa_training_datetime ?>" name="visa_training_datetime" min="<?= date('d F Y') ?>" min="<?= date('d F Y') ?>">
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Time</span>
+                                                        <input type="datetime-local" value="<?php echo $candidate[0]->visa_training_datetime ?>" name="visa_training_datetime" min="<?= date('d F Y') ?>" min="<?= date('d F Y') ?>">
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting ID</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->visa_training_meet_id ?>" name="visa_training_meet_id">
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting ID</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->visa_training_meet_id ?>" name="visa_training_meet_id">
+                                                    </div>
                                                 </div>
-                                                <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                    <span class="details">Meeting Password</span>
-                                                    <input type="text" value="<?php echo $candidate[0]->visa_training_meet_password ?>" name="visa_training_meet_password">
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
+                                                        <span class="details">Meeting Password</span>
+                                                        <input type="text" value="<?php echo $candidate[0]->visa_training_meet_password ?>" name="visa_training_meet_password">
+                                                    </div>
                                                 </div>
                                             </div>
                                         <?php } ?>

@@ -261,10 +261,10 @@ if (!window.CanvasRenderingContext2D) {
 
   // Silverlight does not support spelling gray as grey.
   var colorData = {
-    darkgrey: '#A9A9A9',
+    darkgrey: '#6ecf7b',
     darkslategrey: '#2F4F4F',
-    dimgrey: '#696969',
-    grey: '#808080',
+    dimgrey: '#349f42',
+    grey: '#49c359',
     lightgrey: '#D3D3D3',
     lightslategrey: '#778899',
     slategrey: '#708090'

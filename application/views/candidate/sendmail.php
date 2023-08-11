@@ -140,7 +140,7 @@
     }
 
     form .button input:hover {
-        background: linear-gradient(-135deg, #C0C0C0, #9B59B6);
+        background: linear-gradient(-135deg, #99dda2, #9B59B6);
     }
 
     /* Media Query */

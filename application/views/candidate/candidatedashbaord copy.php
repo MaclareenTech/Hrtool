@@ -124,7 +124,7 @@
     }
 
     form .button input:hover {
-        background: linear-gradient(-135deg, #C0C0C0, #9B59B6);
+        background: linear-gradient(-135deg, #99dda2, #9B59B6);
     }
 
     /* Media Query */
@@ -375,47 +375,47 @@
                                                             <span style="font-weight: bold;">Job Status:</span> Screening
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "1") { ?>
-                                                        <button style="background-color: #e60000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #fe6367; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Waiting for document
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "2") { ?>
-                                                        <button style="background-color: #00e600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #64d886; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Sent to recruitment review
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "3") { ?>
-                                                        <button style="background-color: #00b300; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #0abc38; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Shortlisted
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "4") { ?>
-                                                        <button style="background-color: #b30000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #940005; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Not selected
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "5") { ?>
-                                                        <button style="background-color: #C0C0C0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #99dda2; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Job Orientation 1
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "6") { ?>
-                                                        <button style="background-color: #A9A9A9; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #6ecf7b; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Job Orientation 2
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "7") { ?>
-                                                        <button style="background-color: #808080; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #49c359; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Job Orientation 3
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "8") { ?>
-                                                        <button style="background-color: #009900; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #00892c; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Work permit
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "9") { ?>
-                                                        <button style="background-color: #008000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #206228; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Visa filing
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "10") { ?>
-                                                        <button style="background-color: #696969; color: white;border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #349f42; color: white;border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Training for visa
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "11") { ?>
-                                                        <button style="background-color: #006600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #16431c; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Completed
                                                         </button>
                                                     <?php } ?>

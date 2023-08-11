@@ -10,15 +10,17 @@ class JobOpeningControllers extends BaseController
     public function index()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
         } else {
             $this->load->model('Job_Opening_model');
             $this->global['jobdetails'] = $this->Job_Opening_model->View();
-              $this->global['pageTitle'] = 'MTAS : Admin Dashboard';
+            $this->global['pageTitle'] = 'MTAS : Admin Dashboard';
             $this->global['name'] = 'MTAS : Job Opening Dashboard';
             $this->loadViews("jobOpening/viewjobopening", $this->global);
         }
@@ -28,16 +30,18 @@ class JobOpeningControllers extends BaseController
     public function AddJobDetails()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
         } else {
             $this->load->model('Job_Opening_model');
             $currentId = $this->Job_Opening_model->view_count();
-              $this->global['pageTitle'] = 'MTAS : Admin Dashboard';
-              $this->global['nextID'] = $currentId + 1;
+            $this->global['pageTitle'] = 'MTAS : Admin Dashboard';
+            $this->global['nextID'] = $currentId + 1;
             $this->global['name'] = 'MTAS :  Add Job Opening ';
             $this->loadViews("jobOpening/addjobopening", $this->global);
         }
@@ -65,8 +69,8 @@ class JobOpeningControllers extends BaseController
             $job_open_position = $this->input->post('job_open_position');
             $job_open_from = $this->input->post('job_open_from');
             $job_open_till = $this->input->post('job_open_till');
-            $result = $this->Job_Opening_model->view_count('',$job_country,$job_position,0);
-            if ($result <1) {
+            $result = $this->Job_Opening_model->view_count('', $job_country, $job_position, 0);
+            if ($result < 1) {
 
                 $OpenFrom = date('Y-m-d', strtotime(strtr($job_open_from, '/', '-')));
                 $OpenTo = date('Y-m-d', strtotime(strtr($job_open_till, '/', '-')));
@@ -79,13 +83,11 @@ class JobOpeningControllers extends BaseController
                     'job_open_till' => $OpenTo
 
                 );
-                if($this->Job_Opening_model->Insert($JobData))
-                {
+                if ($this->Job_Opening_model->Insert($JobData)) {
                     redirect('Jobopening');
-                }else
-                {
+                } else {
                     $this->session->set_flashdata('error', 'Try Again ');
-                redirect('AddJobopeningFrom');
+                    redirect('AddJobopeningFrom');
                 }
             } else {
                 $this->session->set_flashdata('error', 'This Position Already Exists');
@@ -123,11 +125,11 @@ class JobOpeningControllers extends BaseController
 
     public function viewJobOpeningCandidateReport($job_code)
     {
-       // echo $job_code;
+        // echo $job_code;
         $this->load->model('Candidate_model');
         $this->load->model('Job_Opening_model');
         $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfoUsingJobId($job_code);
-        $this->global['job'] = $this->Job_Opening_model->View('','',$job_code,'');
+        $this->global['job'] = $this->Job_Opening_model->View('', '', $job_code, '');
         // $job = $this->Candidate_model->ViewCandidateInfoUsingJobId($job_code);
         // print_r($job);
         $html = $this->load->view('pdf/jobopeningcandidatereport', $this->global, true);
@@ -164,13 +166,15 @@ class JobOpeningControllers extends BaseController
 
 
 
-    
+
 
     public function AdminInformation()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
@@ -187,8 +191,10 @@ class JobOpeningControllers extends BaseController
     public function UpdateAdminInformation($id)
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);

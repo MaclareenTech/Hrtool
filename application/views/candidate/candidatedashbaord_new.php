@@ -29,8 +29,6 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/jquery.mCustomScrollbar.css">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
@@ -126,10 +124,33 @@
     }
 
     form .button input:hover {
-        background: linear-gradient(-135deg, #99dda2, #9B59B6);
+        background: linear-gradient(-135deg, #C0C0C0, #9B59B6);
     }
 
+    /* Media Query */
+    @media (max-width: 584px) {
+        .wrapper {
+            max-width: 100%;
+        }
 
+        form .user-details .input-box {
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .gender-details .category {
+            width: 100%;
+        }
+
+        .wrapper form .user-details {
+            max-height: 300px;
+            overflow-y: scroll;
+        }
+
+        .user-details::-webkit-scrollbar {
+            width: 0;
+        }
+    }
 
     form .button1 input {
         height: 100%;
@@ -144,23 +165,15 @@
         letter-spacing: 1px;
         background: #434341;
     }
-</style>
-<!-- card animation  start -->
-<style>
-    /* Adjust the modal width and height */
-    @media (max-width: 767px) {
-        .modal-lg {
-            max-width: 90%;
-        }
-    }
 
-    /* Adjust the carousel image dimensions */
-    .carousel-inner img {
-        max-width: 80%;
-        height: 50%;
-    }
-</style>
+    /* card animation  start*/
 
+
+
+
+
+    /* card animation  end */
+</style>
 <style>
     .container1 {
         width: 640px;
@@ -170,38 +183,7 @@
         background: white;
         position: relative;
         box-sizing: border-box;
-        top: 20px;
-        /* Adjust the vertical position as needed */
-    }
-
-    /* Bounce Animation */
-    @keyframes bounce {
-
-        0%,
-        100% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-30px);
-        }
-    }
-
-    /* Zoom Animation */
-    @keyframes zoom {
-
-        0%,
-        100% {
-            transform: scale(1);
-        }
-
-        50% {
-            transform: scale(1.2);
-        }
-    }
-
-    .bounce-image {
-        animation: bounce 2s infinite, zoom 4s infinite alternate;
+        /* background-color: #317a5c; */
     }
 
     .marquee {
@@ -210,6 +192,8 @@
         position: relative;
         box-sizing: border-box;
         animation: marquee 100s linear infinite;
+        /* margin: 0 auto;
+    text-align: center; */
         color: #ffffff;
     }
 
@@ -222,47 +206,7 @@
             transform: translateY(-150%);
         }
     }
-
-    .marquee img,
-    .marquee p {
-        margin: 10px 0;
-        /* Adjust the margin as needed */
-    }
-
-    /* 3D Animation */
-    @keyframes tilt {
-
-        0%,
-        100% {
-            transform: translateX(0) rotateY(0);
-        }
-
-        50% {
-            transform: translateX(20px) rotateY(40deg);
-        }
-    }
-
-    /* Round Animation */
-    @keyframes round {
-        0% {
-            transform: rotateX(-20deg) rotateY(30deg);
-        }
-
-        100% {
-            transform: rotateX(-20deg) rotateY(0deg);
-        }
-    }
-
-    .marquee img {
-        animation: bounce 2s infinite, round 4s infinite alternate;
-        /* display: block; */
-        margin: 0 auto;
-        /* Center the images horizontally */
-    }
 </style>
-
-<!-- card animation  end  -->
-
 
 <body>
 
@@ -368,7 +312,7 @@
                     <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
-                            <!-- <div class="">
+                            <div class="">
                                 <div class="main-menu-header">
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
@@ -376,7 +320,7 @@
                                 </div>
 
 
-                            </div> -->
+                            </div>
 
                             <div class="pcoded-navigation-label">Home</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -401,7 +345,6 @@
                             </ul>
 
 
-                            <!-- card animation start -->
                             <div class="container1">
                                 <div class="marquee">
                                     <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" id="image1" style="width:200px;">
@@ -418,7 +361,7 @@
 
                                 </div>
                             </div>
-                            <!-- card animation end -->
+
 
                         </div>
                     </nav>
@@ -491,47 +434,47 @@
                                                             <span style="font-weight: bold;">Job Status:</span> Screening
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "1") { ?>
-                                                        <button style="background-color: #fe6367; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #e60000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Waiting for document
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "2") { ?>
-                                                        <button style="background-color: #64d886; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #00e600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Sent to recruitment review
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "3") { ?>
-                                                        <button style="background-color: #0abc38; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #00b300; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Shortlisted
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "4") { ?>
-                                                        <button style="background-color: #940005; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #b30000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Not selected
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "5") { ?>
-                                                        <button style="background-color: #99dda2; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #C0C0C0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Job Orientation 1
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "6") { ?>
-                                                        <button style="background-color: #6ecf7b; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #A9A9A9; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Job Orientation 2
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "7") { ?>
-                                                        <button style="background-color: #49c359; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #808080; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Job Orientation 3
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "8") { ?>
-                                                        <button style="background-color: #00892c; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #009900; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Work permit
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "9") { ?>
-                                                        <button style="background-color: #206228; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #008000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Visa filing
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "10") { ?>
-                                                        <button style="background-color: #349f42; color: white;border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #696969; color: white;border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Training for visa
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "11") { ?>
-                                                        <button style="background-color: #16431c; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #006600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Completed
                                                         </button>
                                                     <?php } ?>
@@ -584,127 +527,98 @@
 
                                             <div class="title" style="margin-top: 20px;">Job Orientation </div>
 
+                                            <?php if ($candidate[0]->job_training_one != "") { ?>
+                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 1</div>
+                                                <div class="user-details">
 
-                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 1</div>
-                                            <div class="user-details">
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;">
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
                                                         <span class="details">Meeting Url</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_one ?>" disabled>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;">
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
                                                         <span class="details">Meeting Time</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_one_date_time ?>" disabled>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;">
+                                                    <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
                                                         <span class="details">Meeting ID</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_id ?>" disabled>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;">
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
                                                         <span class="details">Meeting Password</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_password ?>" disabled>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            <?php } ?>
 
+                                            <?php if ($candidate[0]->job_training_two != "") { ?>
+                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 2</div>
+                                                <div class="user-details">
 
-
-                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 2</div>
-                                            <div class="user-details">
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;">
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
                                                         <span class="details">Meeting Url</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_two ?>" disabled>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;">
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
                                                         <span class="details">Meeting Time</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_two_date_time ?>" disabled>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;">
+                                                    <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
                                                         <span class="details">Meeting ID</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_id ?>" disabled>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;">
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
                                                         <span class="details">Meeting Password</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_password ?>" disabled>
                                                     </div>
                                                 </div>
+                                            <?php } ?>
+                                            <?php if ($candidate[0]->job_training_three != "") { ?>
+                                                <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 3</div>
+                                                <div class="user-details">
 
-                                            </div>
-
-
-                                            <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 3</div>
-                                            <div class="user-details">
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;">
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
                                                         <span class="details">Meeting Url</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_three ?>" disabled>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;">
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
                                                         <span class="details">Meeting Time</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_three_date_time ?>" disabled>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;" >
+                                                    <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
                                                         <span class="details">Meeting ID</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_three_meet_id ?>" disabled>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;">
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
                                                         <span class="details">Meeting Password</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_three_password ?>" disabled>
                                                     </div>
                                                 </div>
-                                            </div>
-
+                                            <?php } ?>
 
                                             <br>
                                             <div class="title">Visa Training</div>
 
+                                            <?php if ($candidate[0]->visa_training != "") { ?>
+                                                <div class="user-details">
 
-                                            <div class="user-details">
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;">
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
                                                         <span class="details">Meeting Url</span>
                                                         <input type="text" value="<?php echo $candidate[0]->visa_training ?>" disabled>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;">
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
                                                         <span class="details">Meeting Time</span>
                                                         <input type="text" value="<?php echo $candidate[0]->visa_training_datetime ?>" disabled>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;">
+                                                    <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
                                                         <span class="details">Meeting ID</span>
                                                         <input type="text" value="<?php echo $candidate[0]->visa_training_meet_id ?>" disabled>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;">
+                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
                                                         <span class="details">Meeting Password</span>
                                                         <input type="text" value="<?php echo $candidate[0]->visa_training_meet_password ?>" disabled>
                                                     </div>
                                                 </div>
-                                            </div>
-
+                                            <?php } ?>
 
                                         </form>
                                     </div>
@@ -751,91 +665,19 @@
             var image3_bg_color = '#ff0000';
             var image4_bg_color = '#000000';
 
-          
+            // pseudo-code...
+
+            // When #image2 becomes visible fade .container bg color from image1_bg_color to image2_bg_color
+
+            // When #image3 becomes visible fade .container bg color from image2_bg_color to image3_bg_color
+
+            // When #image4 becomes visible fade .container bg color from image3_bg_color to image4_bg_color
+
+            // When #image1 re-enters view fade .container bg color from image4_bg_color to image1_bg_color
+
+            // etc.
         });
     </script>
-
-
-    <!-- card animation start -->
-    <script>
-        // Get the container and the plans
-        const container = document.querySelector('.containernew');
-        const plans = document.querySelectorAll('.plan');
-
-        // Function to clone and append plans to the container
-        function appendClonedPlans() {
-            plans.forEach(plan => {
-                const clonedPlan = plan.cloneNode(true);
-                container.appendChild(clonedPlan);
-            });
-        }
-
-        // Set interval to append cloned plans every 10 seconds
-        setInterval(appendClonedPlans, 10000); // 10000 milliseconds = 10 seconds
-    </script>
-    <!-- card animation end -->
-
-
-    <!-- popup modal start  -->
-    <div class="modal fade" id="global-modal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <!-- Modal Content -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
-
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" alt="">
-                            </div>
-                        </div>
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        (function() {
-            var jq = document.createElement('script');
-            jq.src = "https://code.jquery.com/jquery-3.6.0.min.js";
-            document.getElementsByTagName('head')[0].appendChild(jq);
-
-            jq.onload = function() {
-                var bs = document.createElement('script');
-                bs.src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js";
-                document.getElementsByTagName('head')[0].appendChild(bs);
-
-                bs.onload = function() {
-                    $(document).ready(function() {
-                        $('#global-modal').on('shown.bs.modal', function() {
-                            var modalWidth = $('#myCarousel').find('.item.active img').width();
-                            $('.modal-dialog').css('width', modalWidth + 'px');
-                        });
-
-                        $('#global-modal').modal('show');
-                    });
-                };
-            };
-        })();
-    </script>;
-    </script>
-    <!-- popup modal end -->
-
 </body>
 
 

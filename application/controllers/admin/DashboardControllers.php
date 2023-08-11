@@ -9,8 +9,10 @@ class DashboardControllers extends BaseController
     public function index()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
@@ -30,8 +32,10 @@ class DashboardControllers extends BaseController
     public function AdminInformation()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
@@ -48,14 +52,16 @@ class DashboardControllers extends BaseController
     public function UpdateAdminInformation($id)
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
         } else {
             $this->load->model('Admin_model');
-            $this->global['emp'] = $this->Admin_model->viewAdmin($id, '', '', '', '1');
+            $this->global['emp'] = $this->Admin_model->viewAdmin($id, '', '', '', '');
             $this->global['pageTitle'] = 'MTAS : Update Admin Information';
             $this->loadViews("superadmin/updateadmininformation", $this->global);
         }

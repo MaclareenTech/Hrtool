@@ -9,8 +9,10 @@ class SuperAdminDashboardControllers extends BaseController
     public function index()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
+ 
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
@@ -43,9 +45,18 @@ class SuperAdminDashboardControllers extends BaseController
 
     public function RegisteNewAdmin()
     {
+        $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
+ 
 
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
+
+            $this->global['pageTitle'] = 'MTAS : Login';
+            $this->loadViews("login/login", $this->global);
+        } else {
         $this->global['pageTitle'] = 'MTAS : Register new admin';
         $this->loadViews("superadmin/insertnewadmin", $this->global);
+        }
     }
 
 

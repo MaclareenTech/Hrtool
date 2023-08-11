@@ -15,13 +15,15 @@ class ChatControllers extends BaseController
     public function index()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
  
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
         } else {
+            
            $this->load->model('Chat_model');
             $this->global['chatdata'] = $this->chat_model->View();
             $this->global['pageTitle'] = 'MTAS : Chat ';
@@ -44,6 +46,7 @@ class ChatControllers extends BaseController
                 $ChatDataData = array(
                     'sender_id' => $Admin_id,
                     'chat_message' => $message,
+                    
                     'chat_time' => $today
                 );
     

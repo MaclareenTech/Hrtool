@@ -341,13 +341,13 @@ class CI_Profiler {
 	protected function _compile_post()
 	{
 		$output = "\n\n"
-			.'<fieldset id="ci_profiler_post" style="border:1px solid #006600;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
+			.'<fieldset id="ci_profiler_post" style="border:1px solid #16431c;padding:6px 10px 10px 10px;margin:20px 0 20px 0;background-color:#eee;">'
 			."\n"
-			.'<legend style="color:#006600;">&nbsp;&nbsp;'.$this->CI->lang->line('profiler_post_data')."&nbsp;&nbsp;</legend>\n";
+			.'<legend style="color:#16431c;">&nbsp;&nbsp;'.$this->CI->lang->line('profiler_post_data')."&nbsp;&nbsp;</legend>\n";
 
 		if (count($_POST) === 0 && count($_FILES) === 0)
 		{
-			$output .= '<div style="color:#006600;font-weight:normal;padding:4px 0 4px 0;">'.$this->CI->lang->line('profiler_no_post').'</div>';
+			$output .= '<div style="color:#16431c;font-weight:normal;padding:4px 0 4px 0;">'.$this->CI->lang->line('profiler_no_post').'</div>';
 		}
 		else
 		{
@@ -361,7 +361,7 @@ class CI_Profiler {
 					: htmlspecialchars($val, ENT_QUOTES, config_item('charset'));
 
 				$output .= '<tr><td style="width:50%;padding:5px;color:#000;background-color:#ddd;">&#36;_POST['
-					.$key.']&nbsp;&nbsp; </td><td style="width:50%;padding:5px;color:#006600;font-weight:normal;background-color:#ddd;">'
+					.$key.']&nbsp;&nbsp; </td><td style="width:50%;padding:5px;color:#16431c;font-weight:normal;background-color:#ddd;">'
 					.$val."</td></tr>\n";
 			}
 
@@ -373,7 +373,7 @@ class CI_Profiler {
 					: htmlspecialchars($val, ENT_QUOTES, config_item('charset'));
 
 				$output .= '<tr><td style="width:50%;padding:5px;color:#000;background-color:#ddd;">&#36;_FILES['
-					.$key.']&nbsp;&nbsp; </td><td style="width:50%;padding:5px;color:#006600;font-weight:normal;background-color:#ddd;">'
+					.$key.']&nbsp;&nbsp; </td><td style="width:50%;padding:5px;color:#16431c;font-weight:normal;background-color:#ddd;">'
 					.$val."</td></tr>\n";
 			}
 

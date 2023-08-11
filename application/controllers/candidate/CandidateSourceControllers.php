@@ -9,8 +9,10 @@ class CandidateSourceControllers extends BaseController
     public function index()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
@@ -31,8 +33,10 @@ class CandidateSourceControllers extends BaseController
     public function AddNewCandidateSourceDetails()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
@@ -60,7 +64,7 @@ class CandidateSourceControllers extends BaseController
         $source_type = $this->input->post('source_type');
         $source_email = $this->input->post('source_email');
         $source_mobile_number = $this->input->post('source_mobile_number');
-    
+
         if ($this->form_validation->run() == FALSE) {
             $this->AddNewCandidateSourceDetails();
         } else {
@@ -68,14 +72,14 @@ class CandidateSourceControllers extends BaseController
                 $this->session->set_flashdata('error', 'If you select person, kindly fill email and mobile number');
                 redirect('AddNewCandidateSourceDetailsForm');
             }
-    
+
             if ($source_type == "1" && (!empty($source_email) || !empty($source_mobile_number))) {
                 $this->session->set_flashdata('error', 'You cannot enter social media mobile number and email id');
                 redirect('AddNewCandidateSourceDetailsForm');
             }
-    
+
             $result = $this->Candidate_source_model->view_count('', $source_name, $source_email, '', $source_type);
-    
+
             if ($result < 1) {
                 $SourceData = array(
                     'source_name' => $source_name,
@@ -83,7 +87,7 @@ class CandidateSourceControllers extends BaseController
                     'source_mobile_number' => $source_mobile_number,
                     'is_social_media' => $source_type
                 );
-    
+
                 if ($this->Candidate_source_model->Insert($SourceData)) {
                     redirect('viewCandidateSource');
                 } else {
@@ -96,7 +100,7 @@ class CandidateSourceControllers extends BaseController
             }
         }
     }
-    
+
 
 
 
@@ -162,8 +166,10 @@ class CandidateSourceControllers extends BaseController
     public function AdminInformation()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
@@ -180,8 +186,10 @@ class CandidateSourceControllers extends BaseController
     public function UpdateAdminInformation($id)
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);

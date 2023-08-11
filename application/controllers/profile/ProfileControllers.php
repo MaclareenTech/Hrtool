@@ -9,8 +9,10 @@ class ProfileControllers extends BaseController
     public function index()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
+ 
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);
@@ -25,8 +27,10 @@ class ProfileControllers extends BaseController
     public function ChangePasswordForm()
     {
         $isLoggedIn = $this->session->userdata('isLoggedIn');
+        $role = $this->session->userdata('role');
+ 
 
-        if (!isset($isLoggedIn) || $isLoggedIn != TRUE) {
+        if (!isset($isLoggedIn) || $isLoggedIn != TRUE || $role == 'candidate') {
 
             $this->global['pageTitle'] = 'MTAS : Login';
             $this->loadViews("login/login", $this->global);

@@ -124,7 +124,7 @@
     }
 
     form .button input:hover {
-        background: linear-gradient(-135deg, #C0C0C0, #9B59B6);
+        background: linear-gradient(-135deg, #99dda2, #9B59B6);
     }
 
     /* Media Query */
@@ -303,7 +303,7 @@
 
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -350,7 +350,7 @@
                             <?php } ?>
                             <?php
                             $mail = $this->session->userdata('user_email'); ?>
-                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com"  ) { ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com") { ?>
                                 <div class="pcoded-navigation-label">Invoice</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li class="">
@@ -515,47 +515,47 @@
                                                             <span style="font-weight: bold;">Job Status:</span> Screening
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "1") { ?>
-                                                        <button style="background-color: #e60000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #fe6367; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Waiting for document
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "2") { ?>
-                                                        <button style="background-color: #00e600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #64d886; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Sent to recruitment review
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "3") { ?>
-                                                        <button style="background-color: #00b300; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #0abc38; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Shortlisted
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "4") { ?>
-                                                        <button style="background-color: #b30000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #940005; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Not selected
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "5") { ?>
-                                                        <button style="background-color: #C0C0C0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #99dda2; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Job Orientation 1
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "6") { ?>
-                                                        <button style="background-color: #A9A9A9; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #6ecf7b; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Job Orientation 2
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "7") { ?>
-                                                        <button style="background-color: #808080; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #49c359; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Job Orientation 3
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "8") { ?>
-                                                        <button style="background-color: #009900; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #00892c; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Work permit
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "9") { ?>
-                                                        <button style="background-color: #008000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #206228; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Visa filing
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "10") { ?>
-                                                        <button style="background-color: #696969; color: white;border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #349f42; color: white;border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Training for visa
                                                         </button>
                                                     <?php } else if ($candidate[0]->candidate_job_status == "11") { ?>
-                                                        <button style="background-color: #006600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        <button style="background-color: #16431c; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
                                                             <span style="font-weight: bold;">Job Status:</span> Completed
                                                         </button>
                                                     <?php } ?>
@@ -612,21 +612,30 @@
                                                 <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 1</div>
                                                 <div class="user-details">
 
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Url</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one ?>" disabled>
+
+                                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                                        <div class="input-box" style=" width: 100%;">
+                                                            <span class="details">Meeting Url</span>
+                                                            <input type="text" value="<?php echo $candidate[0]->job_training_one ?>" disabled>
+                                                        </div>
                                                     </div>
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Time</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one_date_time ?>" disabled>
+                                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                                        <div class="input-box" style=" width: 100%;">
+                                                            <span class="details">Meeting Time</span>
+                                                            <input type="text" value="<?php echo $candidate[0]->job_training_one_date_time ?>" disabled>
+                                                        </div>
                                                     </div>
-                                                    <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting ID</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_id ?>" disabled>
+                                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                                        <div class="input-box" style=" width: 100%;">
+                                                            <span class="details">Meeting ID</span>
+                                                            <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_id ?>" disabled>
+                                                        </div>
                                                     </div>
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Password</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_password ?>" disabled>
+                                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                                        <div class="input-box" style=" width: 100%;">
+                                                            <span class="details">Meeting Password</span>
+                                                            <input type="text" value="<?php echo $candidate[0]->job_training_one_meet_password ?>" disabled>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             <?php } ?>
@@ -635,21 +644,30 @@
                                                 <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 2</div>
                                                 <div class="user-details">
 
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Url</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two ?>" disabled>
+
+                                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                                        <div class="input-box" style=" width: 100%;">
+                                                            <span class="details">Meeting Url</span>
+                                                            <input type="text" value="<?php echo $candidate[0]->job_training_two ?>" disabled>
+                                                        </div>
                                                     </div>
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Time</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two_date_time ?>" disabled>
+                                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                                        <div class="input-box" style=" width: 100%;">
+                                                            <span class="details">Meeting Time</span>
+                                                            <input type="text" value="<?php echo $candidate[0]->job_training_two_date_time ?>" disabled>
+                                                        </div>
                                                     </div>
-                                                    <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting ID</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_id ?>" disabled>
+                                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                                        <div class="input-box" style=" width: 100%;">
+                                                            <span class="details">Meeting ID</span>
+                                                            <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_id ?>" disabled>
+                                                        </div>
                                                     </div>
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Password</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_password ?>" disabled>
+                                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                                        <div class="input-box" style=" width: 100%;">
+                                                            <span class="details">Meeting Password</span>
+                                                            <input type="text" value="<?php echo $candidate[0]->job_training_two_meet_password ?>" disabled>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             <?php } ?>
@@ -657,127 +675,145 @@
                                                 <div class="title" style="margin-top: 20px;font-size: 20px;">Job Orientation 3</div>
                                                 <div class="user-details">
 
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                </div>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
                                                         <span class="details">Meeting Url</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_three ?>" disabled>
                                                     </div>
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                </div>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
                                                         <span class="details">Meeting Time</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_three_date_time ?>" disabled>
                                                     </div>
-                                                    <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
+                                                </div>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
                                                         <span class="details">Meeting ID</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_three_meet_id ?>" disabled>
                                                     </div>
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
+                                                </div>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <div class="input-box" style=" width: 100%;">
                                                         <span class="details">Meeting Password</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_three_password ?>" disabled>
                                                     </div>
                                                 </div>
-                                            <?php } ?>
-
-                                            <br>
-                                            <div class="title">Visa Training</div>
-
-                                            <?php if ($candidate[0]->visa_training != "") { ?>
-                                                <div class="user-details">
-
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Url</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->visa_training ?>" disabled>
-                                                    </div>
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Time</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->visa_training_datetime ?>" disabled>
-                                                    </div>
-                                                    <div class="input-box" style="margin-bottom: 15px; width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting ID</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->visa_training_meet_id ?>" disabled>
-                                                    </div>
-                                                    <div class="input-box" style="margin-bottom: 15px;width: calc(100% / 4 - 20px);">
-                                                        <span class="details">Meeting Password</span>
-                                                        <input type="text" value="<?php echo $candidate[0]->visa_training_meet_password ?>" disabled>
-                                                    </div>
-                                                </div>
-                                            <?php } ?>
-
-                                        </form>
                                     </div>
-                                    <br>
-                                    <h5>Status Log</h5>
+                                <?php } ?>
 
-                                    <table id="my-table" class="table datatable">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Status</th>
-                                                <th>Admin Name</th>
-                                                <th>Admin Emp Id</th>
-                                                <th>date</th>
-                                            </tr>
-                                        </thead>
+                                <br>
+                                <div class="title">Visa Training</div>
 
-                                        <tbody id="myTable">
-                                            <?php $counter = 0; ?>
-                                            <?php foreach ($log as $row) : ?>
-                                                <tr>
-                                                    <?php $counter++; ?>
-                                                    <td><?php echo $counter; ?></td>
-                                                    <td> <?php if ($row->status == "0") { ?>
-                                                            <button style="background-color: #ff3333; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Screening</button>
-                                                        <?php } else if ($row->status == "1") { ?>
-                                                            <button style="background-color: #e60000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Waiting for document </button>
-                                                        <?php } else if ($row->status == "2") { ?>
-                                                            <button style="background-color: #00e600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Sent to recruitment review</button>
-                                                        <?php } else if ($row->status == "3") { ?>
-                                                            <button style="background-color: #00b300; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Shortlisted</button>
-                                                        <?php } else if ($row->status == "4") { ?>
-                                                            <button style="background-color: #b30000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Not selected</button>
-                                                        <?php } else if ($row->status == "5") { ?>
-                                                            <button style="background-color: #C0C0C0; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 1</button>
-                                                        <?php } else if ($row->status == "6") { ?>
-                                                            <button style="background-color: #A9A9A9; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 2</button>
-                                                        <?php } else if ($row->status == "7") { ?>
-                                                            <button style="background-color: #808080; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 3</button>
-                                                        <?php } else if ($row->status == "8") { ?>
-                                                            <button style="background-color: #009900; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Work permit</button>
-                                                        <?php } else if ($row->status == "9") { ?>
-                                                            <button style="background-color: #008000; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Visa filing</button>
-                                                        <?php } else if ($row->status == "10") { ?>
-                                                            <button style="background-color: #696969; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Training for visa</button>
-                                                        <?php } else if ($row->status == "11") { ?>
-                                                            <button style="background-color: #006600; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Completed</button>
-
-                                                        <?php } ?>
+                                <?php if ($candidate[0]->visa_training != "") { ?>
+                                    <div class="user-details">
 
 
-                                                    </td>
-                                                    <td><?php echo $row->user_name ?></td>
-                                                    <td><?php echo $row->emp_id ?></td>
-                                                    <td><?php
-                                                        $timestamp = strtotime($row->date);
-                                                        $humanReadableDate = date("d F Y", $timestamp);
-
-                                                        echo $humanReadableDate; ?></td>
-
-
-
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-                                    <div id="pagination-container">
-                                        <ul id="pagination" class="pagination"></ul>
+                                        <div class="col-md-3 col-sm-6 col-xs-12">
+                                            <div class="input-box" style=" width: 100%;">
+                                                <span class="details">Meeting Url</span>
+                                                <input type="text" value="<?php echo $candidate[0]->visa_training ?>" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12">
+                                            <div class="input-box" style=" width: 100%;">
+                                                <span class="details">Meeting Time</span>
+                                                <input type="text" value="<?php echo $candidate[0]->visa_training_datetime ?>" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12">
+                                            <div class="input-box" style=" width: 100%;">
+                                                <span class="details">Meeting ID</span>
+                                                <input type="text" value="<?php echo $candidate[0]->visa_training_meet_id ?>" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 col-xs-12">
+                                            <div class="input-box" style=" width: 100%;">
+                                                <span class="details">Meeting Password</span>
+                                                <input type="text" value="<?php echo $candidate[0]->visa_training_meet_password ?>" disabled>
+                                            </div>
+                                        </div>
                                     </div>
+                                <?php } ?>
+
+                                </form>
                                 </div>
-                                <!-- Page-body end -->
+                                <br>
+                                <h5>Status Log</h5>
+
+                                <table id="my-table" class="table datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Status</th>
+                                            <th>Admin Name</th>
+                                            <th>Admin Emp Id</th>
+                                            <th>date</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="myTable">
+                                        <?php $counter = 0; ?>
+                                        <?php foreach ($log as $row) : ?>
+                                            <tr>
+                                                <?php $counter++; ?>
+                                                <td><?php echo $counter; ?></td>
+                                                <td> <?php if ($row->status == "0") { ?>
+                                                        <button style="background-color: #ff3333; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Screening</button>
+                                                    <?php } else if ($row->status == "1") { ?>
+                                                        <button style="background-color: #fe6367; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Waiting for document </button>
+                                                    <?php } else if ($row->status == "2") { ?>
+                                                        <button style="background-color: #64d886; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Sent to recruitment review</button>
+                                                    <?php } else if ($row->status == "3") { ?>
+                                                        <button style="background-color: #0abc38; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Shortlisted</button>
+                                                    <?php } else if ($row->status == "4") { ?>
+                                                        <button style="background-color: #940005; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Not selected</button>
+                                                    <?php } else if ($row->status == "5") { ?>
+                                                        <button style="background-color: #99dda2; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 1</button>
+                                                    <?php } else if ($row->status == "6") { ?>
+                                                        <button style="background-color: #6ecf7b; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 2</button>
+                                                    <?php } else if ($row->status == "7") { ?>
+                                                        <button style="background-color: #49c359; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Job Orientation 3</button>
+                                                    <?php } else if ($row->status == "8") { ?>
+                                                        <button style="background-color: #00892c; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Work permit</button>
+                                                    <?php } else if ($row->status == "9") { ?>
+                                                        <button style="background-color: #206228; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Visa filing</button>
+                                                    <?php } else if ($row->status == "10") { ?>
+                                                        <button style="background-color: #349f42; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Training for visa</button>
+                                                    <?php } else if ($row->status == "11") { ?>
+                                                        <button style="background-color: #16431c; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">Completed</button>
+
+                                                    <?php } ?>
+
+
+                                                </td>
+                                                <td><?php echo $row->user_name ?></td>
+                                                <td><?php echo $row->emp_id ?></td>
+                                                <td><?php
+                                                    $timestamp = strtotime($row->date);
+                                                    $humanReadableDate = date("d F Y", $timestamp);
+
+                                                    echo $humanReadableDate; ?></td>
+
+
+
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <div id="pagination-container">
+                                    <ul id="pagination" class="pagination"></ul>
+                                </div>
                             </div>
-                            <div id="styleSelector"> </div>
+                            <!-- Page-body end -->
                         </div>
+                        <div id="styleSelector"> </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     </div>
 
