@@ -137,6 +137,12 @@ $route['Chat'] = 'chat/ChatControllers';
 $route['AddChat'] = 'chat/ChatControllers/AddNewChat';
 $route['updatechat'] = 'chat/ChatControllers/UpdateChat';
 
+// advertisement 
+$route['advertisement'] = 'candidate/AdvertisementControllers';
+$route['AddNewAddvertisementForm'] = 'candidate/AdvertisementControllers/AddNewAdvertisementDetails';
+$route['UpdateAdvertisementStatus/(:num)/(:num)'] = 'candidate/AdvertisementControllers/UpdateAdvertisementStatus/$1/$2'; 
+$route['AddNewAddvertisement'] = 'candidate/AdvertisementControllers/AddNewAdvertisement';
+
 
 
 

@@ -17,7 +17,8 @@ class CandidateDashboardControllers extends BaseController
         } else {
             $userId = $this->session->userdata('userId');
             $this->load->model('Candidate_model');
-
+            $this->load->model('Advertisement_model');
+            $this->global['advertisementdetails'] = $this->Advertisement_model->View('','','0');
             $this->global['candidate'] = $this->Candidate_model->ViewCandidateInfo($userId);
             $this->global['pageTitle'] = 'MTAS : Candidate Dashboard';
             $this->global['candidateId'] = $userId;

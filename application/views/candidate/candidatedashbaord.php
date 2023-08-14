@@ -29,7 +29,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/jquery.mCustomScrollbar.css">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 
 </head>
 <style>
@@ -402,19 +402,18 @@
 
 
                             <!-- card animation start -->
+
                             <div class="container1">
                                 <div class="marquee">
-                                    <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" id="image1" style="width:200px;">
-                                    <p>This is some text about image 1.</p>
+                                    <?php foreach ($advertisementdetails as $row) : ?>
+                                        <tr>
 
-                                    <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" id="image2" style="width:200px;">
-                                    <p>This is some text about image 2.</p>
+                                            <img src="<?php echo  "https://maclareenai.com/mtas/upload/advertisement/" . $row->ad_image_path; ?>" id="image1" style="width:200px;">
+                                            <p>This is some text about image 1.</p>
 
-                                    <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" id="image3" style="width:200px;">
-                                    <p>This is some text about image 3</p>
+                                        <?php endforeach; ?>
 
-                                    <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" id="image4" style="width:200px;">
-                                    <p>This is some text about image 4.</p>
+
 
                                 </div>
                             </div>
@@ -660,7 +659,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 col-sm-6 col-xs-12">
-                                                    <div class="input-box" style=" width: 100%;" >
+                                                    <div class="input-box" style=" width: 100%;">
                                                         <span class="details">Meeting ID</span>
                                                         <input type="text" value="<?php echo $candidate[0]->job_training_three_meet_id ?>" disabled>
                                                     </div>
@@ -751,7 +750,7 @@
             var image3_bg_color = '#ff0000';
             var image4_bg_color = '#000000';
 
-          
+
         });
     </script>
 
@@ -777,15 +776,14 @@
 
 
     <!-- popup modal start  -->
-    <div class="modal fade" id="global-modal" role="dialog">
+    <!-- <div class="modal fade" id="global-modal" role="dialog">
         <div class="modal-dialog modal-lg">
-            <!-- Modal Content -->
+
             <div class="modal-content">
                 <div class="modal-header">
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
 
-                        <!-- Wrapper for slides -->
+
                         <div class="carousel-inner">
                             <div class="item active">
                                 <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" alt="">
@@ -794,7 +792,7 @@
                                 <img src="https://maclareenai.com/mtas/assets/images/job/test.jpeg" alt="">
                             </div>
                         </div>
-                        <!-- Left and right controls -->
+
                         <a class="left carousel-control" href="#myCarousel" data-slide="prev">
                             <span class="glyphicon glyphicon-chevron-left"></span>
                             <span class="sr-only">Previous</span>
@@ -832,8 +830,8 @@
                 };
             };
         })();
-    </script>;
-    </script>
+    </script>; -->
+
     <!-- popup modal end -->
 
 </body>

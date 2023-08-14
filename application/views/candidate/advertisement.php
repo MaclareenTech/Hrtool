@@ -37,6 +37,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+     <!-- serch option for table  -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 
@@ -169,7 +171,7 @@
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-                <nav class="pcoded-navbar">
+                    <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
@@ -241,7 +243,7 @@
                             <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com") { ?>
                                 <div class="pcoded-navigation-label">Advertisement</div>
                                 <ul class="pcoded-item pcoded-left-item">
-                                    <li class="">
+                                    <li class="active">
                                         <a href="<?php echo base_url(); ?>advertisement" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="fa fa-list-alt"></i><b>IN</b></span>
                                             <span class="pcoded-mtext">Advertisement</span>
@@ -255,13 +257,13 @@
                             <?php if ($role == "superadmin") { ?>
                                 <div class="pcoded-navigation-label">Job Openings</div>
                                 <ul class="pcoded-item pcoded-left-item">
-                                    <li class="pcoded-hasmenu active pcoded-trigger">
+                                    <li class="pcoded-hasmenu ">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="fa fa-cubes"></i><b>JO</b></span>
                                             <span class="pcoded-mtext">Job Openings</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
-                                        <ul class="pcoded-submenu ">
+                                        <ul class="pcoded-submenu">
                                             <li class="">
                                                 <a href="<?php echo base_url(); ?>Jobopening" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
@@ -269,7 +271,7 @@
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                             </li>
-                                            <li class="active">
+                                            <li class="">
                                                 <a href="<?php echo base_url(); ?>AddJobopeningFrom" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                     <span class="pcoded-mtext">Add Job Openings</span>
@@ -327,7 +329,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Add Job Opening</h5>
+                                            <h5 class="m-b-10">Advertisement Details</h5>
                                             <p class="m-b-0">Maclareen Talent Acquisition System </p>
                                         </div>
                                     </div>
@@ -336,7 +338,7 @@
                                             <li class="breadcrumb-item">
                                                 <a > <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a>Add Job Opening</a>
+                                            <li class="breadcrumb-item"><a>Advertisement Details</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -359,82 +361,83 @@
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
 
-                                    <!-- add position form start -->
-                                    <div class="card">
-                                        <?php
-                                        $this->load->helper('form');
-                                        $error = $this->session->flashdata('error');
-                                        if ($error) {
-                                        ?>
-                                            <div class="alert alert-danger alert-dismissable">
-                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                <?php echo $error; ?>
-                                            </div>
-                                        <?php }
-                                        $success = $this->session->flashdata('success');
-                                        if ($success) {
-                                        ?>
-                                            <div class="alert alert-success alert-dismissable">
-                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                <?php echo $success; ?>
-                                            </div>
-                                        <?php } ?>
-                                        <div class="card-header">
-                                            <h5>Add Job Details</h5>
-                                            <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
-                                        </div>
-                                        <div class="card-block">
-                                            <form class="form-material" action="<?php echo base_url(); ?>AddJobopening" method="post">
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="text" name="job_country" class="form-control" id="jobCountryInput" required>
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Job Country</label>
-                                                </div>
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="text" name="job_position" class="form-control" id="jobPositionInput" onkeyup="generateJobCode()" required>
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Job Position</label>
-                                                </div>
+                                    <!--  Admin table start -->
 
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="text" name="job_code" class="form-control" id="jobCodeInput" readonly required>
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Job Code</label>
-                                                </div>
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="number" name="job_open_position" class="form-control" pattern="[0-9]+" required> 
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Job Open Position</label>
-                                                </div>
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="date" name="job_open_from" class="form-control" min="<?= date('d F Y') ?>" required>
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Valid From</label>
-                                                </div>
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="date" name="job_open_till" class="form-control" min="<?= date('d F Y') ?>" required>
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Valid Till</label>
-                                                </div>
-                                                <center> <button type="submit" class="btn btn-success waves-effect waves-light" style="background: linear-gradient(to bottom, #2ecc71, #2ecc71); padding: 12px 20px; box-shadow: 0 4px 0 #0b872c; color: white; font-size: 16px; border-radius: 6px; border: none; margin-left: 10px; transition: all 0.3s ease;">
-                                                Add New  Opening
-                                                    </button></center>
+
+                                    <div class="card">
+                                        <div class="card-header">
+
+                                            <h5>Advertisement Details</h5>
+                                            <div style="display: flex; justify-content: flex-end;">
+                                                <a href="<?php echo base_url(); ?>AddNewAddvertisementForm">
+                                                    <button style="background-color: #2ECC71; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                        Add new Advertisement
+                                                    </button>
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                        <div class="card-block table-border-style">
+                                            <div class="table-responsive">
                                                 
-                                            </form>
+                                                <div id="candidate-table-container">
+                                                <input id="search" type="text" class="form-control" placeholder="Search for name and email......">
+                                                        <br>
+                                                    <table class="table datatable" id="my-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sr.No</th>
+                                                                <th>Advertisement Type</th>
+                                                                <th>Image</th>
+                                                                <th>Added Date</th>
+                                                                <th>Status</th>
+                                                                <!-- <th></th> -->
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody id="myTable">
+                                                            <?php $counter = 0; ?>
+                                                            <?php foreach ($advertisementdetails as $row) : ?>
+                                                                <tr>
+                                                                    <?php $counter++; ?>
+                                                               
+                                                                    <td><?php echo $counter; ?></td>
+                                                                    <td><?php  echo  $row->ad_type; ?> </td>
+                                                                    <td> <img src="<?php echo  "https://maclareenai.com/mtas/upload/advertisement/" . $row->ad_image_path; ?>" width="150px"></td>
+                                                                    <td><?php $time =  $row->added_date;
+                                                                            $date= new DateTime($time);
+                                                                            $AddedDate = $date->format('F j, Y, g:i A');
+                                                                            echo $AddedDate;?></td>
+                                                                    <td> <?php if ($row->is_active == "0") { ?>
+                                                                            <a href="<?php echo base_url('UpdateAdvertisementStatus/' . $row->is_active . '/' . $row->ad_id); ?>" style="text-decoration: none;">
+                                                                                <button style="background-color: #2ECC71; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                                                    Active
+                                                                                </button>
+                                                                            </a>
+                                                                        <?php } else if ($row->is_active == "1") { ?>
+                                                                            <a href="<?php echo base_url('UpdateAdvertisementStatus/' . $row->is_active . '/' . $row->ad_id); ?>" style="text-decoration: none;">
+                                                                                <button style="background-color: #E40505; color: white; border: none; border-radius: 6px; padding: 10px 20px; font-size: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
+                                                                                    Deactivate
+                                                                                </button>
+                                                                            </a> <?php } ?>
+
+                                                                        <!-- <td> <a class="btn btn-default" href="<?php echo base_url('UpdateAdminInformation/' . $row->job_id); ?>" style="padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f1f1f1; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-decoration: none; color: #333;">
+                                                                            <em class="fa fa-pencil"></em>
+                                                                        </a> </td> -->
+
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div id="pagination-container">
+                                                        <ul id="pagination" class="pagination"></ul>
+                                                    </div>
+
+                                            </div>
                                         </div>
                                     </div>
-                                    <!--  add position  form end -->
-
-
-
-
-
-
-
-
-
-
-
+                                    <!--  Admin table end -->
 
                                 </div>
                                 <!-- Page-body end -->
@@ -469,22 +472,6 @@
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/script.js "></script>
 
 
-    <!-- job id Creater start -->
-
-    <script>
-        function generateJobCode() {
-            const countryInput = document.getElementById('jobCountryInput');
-            const positionInput = document.getElementById('jobPositionInput');
-            const jobCodeInput = document.getElementById('jobCodeInput');
-
-            const country = countryInput.value.substring(0, 2).toUpperCase();
-            const position = positionInput.value.substring(0, 2).toUpperCase();
-            const randomNumbers = '<?php echo $nextID; ?>';
-
-            jobCodeInput.value = country + position + randomNumbers;
-        }
-    </script>
-    <!-- job id Creater end -->
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -495,6 +482,58 @@
     </script>
 
 
+
+        <!-- serch option script start  -->
+        <script>
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    </script>
+    <!-- serch option script end   -->
+    
+        <!-- pagination Start   -->
+        <script>
+        const tableBody = document.getElementById('myTable');
+        const paginationContainer = document.getElementById('pagination');
+        const itemsPerPage = 7;
+        let currentPage = 1;
+
+        function displayDataPage(page) {
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const rows = Array.from(tableBody.getElementsByTagName('tr'));
+
+            rows.forEach((row, index) => {
+                if (index >= start && index < end) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            updatePagination(page);
+        }
+
+        function updatePagination(currentPage) {
+            const rowsCount = tableBody.getElementsByTagName('tr').length;
+            const totalPages = Math.ceil(rowsCount / itemsPerPage);
+            let paginationHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                paginationHTML += `<li class="page-item${i === currentPage ? ' active' : ''}">
+        <a class="page-link" href="#" onclick="displayDataPage(${i})">${i}</a>
+      </li>`;
+            }
+
+            paginationContainer.innerHTML = paginationHTML;
+        }
+
+        displayDataPage(currentPage);
+    </script>
+ <!-- pagination end   -->
 
 </body>
 

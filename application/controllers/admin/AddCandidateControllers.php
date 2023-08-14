@@ -577,20 +577,22 @@ class AddCandidateControllers extends BaseController
     $this->load->library('form_validation');
     $this->load->model('Candidate_model');
     $this->load->model('Admin_model');
+    $candidate_id = $this->input->post('candidate_id');
     // Validate form fields
     $this->form_validation->set_rules('candidate_name', 'Candidate Name', 'required');
     $this->form_validation->set_rules('candidate_mobile_no', 'Candidate Mobile Number', 'required|regex_match[/^[0-9]{10}$/]');
-    $this->form_validation->set_rules('candidate_job_status', 'Job status', 'required');
+    // $this->form_validation->set_rules('candidate_job_status', 'Job status', 'required');
     if ($this->form_validation->run() == FALSE) {
       $this->session->set_flashdata('error', 'Enter All  right details');
-      redirect('addCandidate');
+      redirect('editCandidateInfo/' . $candidate_id);
     } else {
 
       $candidate_name = $this->input->post('candidate_name');
 
       $candidate_mobile_no = $this->input->post('candidate_mobile_no');
-      $candidate_id = $this->input->post('candidate_id');
+  
       $candidate_job_status = $this->input->post('candidate_job_status');
+      $candidate_cureent_status = $this->input->post('candidate_cureent_status');
 
       $job_training_one = $this->input->post('job_training_one');
       $job_training_one_date_time = $this->input->post('job_training_one_date_time');
@@ -644,13 +646,13 @@ class AddCandidateControllers extends BaseController
         'candidate_satus_days' => $today,
         'candidate_job_status' => $candidate_job_status
       );
-      if ($candidate_job_status == "opt1" || $candidate_job_status == "") {
+      if ($candidate_job_status == "opt1" ) {
         $this->session->set_flashdata('error', 'Failed to update candidate. Please select valid Status.');
         redirect('editCandidateInfo/' . $candidate_id);
       }
       if ($candidate_job_status == 5) {
         if ($job_training_one == '' ||  $job_training_one_date_time == '' || $job_training_one_meet_id == '' || $job_training_one_meet_password == '') {
-          $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
+          $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information 1.');
           redirect('editCandidateInfo/' . $candidate_id);
         } else {
           $data['job_training_one'] = $job_training_one;
@@ -661,7 +663,7 @@ class AddCandidateControllers extends BaseController
       }
       if ($candidate_job_status == 6) {
         if ($job_training_two == '' ||  $job_training_two_date_time == '' || $job_training_two_meet_id == '' || $job_training_two_meet_password == '') {
-          $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
+          $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information2.');
           redirect('editCandidateInfo/' . $candidate_id);
         } else {
           $data['job_training_two'] = $job_training_two;
@@ -672,7 +674,7 @@ class AddCandidateControllers extends BaseController
       }
       if ($candidate_job_status == 7) {
         if ($job_training_three == '' ||  $job_training_three_date_time == '' || $job_training_three_meet_id == '' || $job_training_three_password == '') {
-          $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
+          $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information 3.');
           redirect('editCandidateInfo/' . $candidate_id);
         } else {
           $data['job_training_three'] = $job_training_three;
@@ -683,7 +685,7 @@ class AddCandidateControllers extends BaseController
       }
       if ($candidate_job_status == 10) {
         if ($visa_training == '' ||  $visa_training_datetime == '' || $visa_training_meet_id == '' || $visa_training_meet_password == '') {
-          $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
+          $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information 4.');
           redirect('editCandidateInfo/' . $candidate_id);
         } else {
           $data['visa_training'] = $visa_training;
@@ -692,11 +694,11 @@ class AddCandidateControllers extends BaseController
           $data['visa_training_meet_password'] = $visa_training_meet_password;
         }
       }
-      // if ($candidate_job_status == 1 || $candidate_job_status == 2 || $candidate_job_status == 3 || $candidate_job_status == 4) {
-      //     if ($job_training_one != '' ||  $job_training_one_date_time != '' || $job_training_one_meet_id != '' || $job_training_one_meet_password != '' || $job_training_two != '' ||  $job_training_two_date_time != '' || $job_training_two_meet_id != '' || $job_training_two_meet_password != '' || $job_training_three != '' ||  $job_training_three_date_time != '' || $job_training_three_meet_id != '' || $job_training_three_password != ''  || $visa_training != '' ||  $visa_training_datetime != '' || $visa_training_meet_id != '' || $visa_training_meet_password != '') {
-      //         $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information.');
-      //         redirect('editCandidateInfo/' . $candidate_id);
-      //     }
+      // if ($candidate_job_status ==1 || $candidate_job_status == 2 || $candidate_job_status == 3 || $candidate_job_status == 4) {
+      //   if ($job_training_one != '' ||  $job_training_one_date_time != '' || $job_training_one_meet_id != '' || $job_training_one_meet_password != '' || $job_training_two != '' ||  $job_training_two_date_time != '' || $job_training_two_meet_id != '' || $job_training_two_meet_password != '' || $job_training_three != '' ||  $job_training_three_date_time != '' || $job_training_three_meet_id != '' || $job_training_three_password != ''  || $visa_training != '' ||  $visa_training_datetime != '' || $visa_training_meet_id != '' || $visa_training_meet_password != '') {
+      //     $this->session->set_flashdata('error', 'Failed to update candidate. Please enter valid information 5.');
+      //     redirect('editCandidateInfo/' . $candidate_id);
+      //   }
       // }
 
 
@@ -779,13 +781,15 @@ class AddCandidateControllers extends BaseController
         //   $upload_errors = true;
       }
       $candidate_id = $this->Candidate_model->UpdateCandidate($candidate_id, $data);
+   //   echo $candidate_job_status;
       $candidateMail = "";
       if ($candidate_id) {
+        if ($candidate_job_status != $candidate_cureent_status) {
 
-        if ($candidate_job_status == 1) {
-          $subject = 'Maclareen Talent Acquisition System  -  Waiting for document ';
+          if ($candidate_job_status == 1) {
+            $subject = 'Maclareen Talent Acquisition System  -  Waiting for document ';
 
-          $candidateMail = '
+            $candidateMail = '
                     <!DOCTYPE html>
                     <html>
                     <head>
@@ -855,22 +859,22 @@ class AddCandidateControllers extends BaseController
                           <p>I recently registered you for the ' . $candidate_job_profile . ' job profile. Kindly share the documents within 3-4 working days . If sent already you may ignore.</p>
                           <p>Following is the document list:</p>
                           <ol class="document-list">';
-          if ($candidate_aadhar_card == "") {
-            $candidateMail .= '<li>Aadhar Card</li>';
-          }
-          if ($candidate_pan_card == "") {
-            $candidateMail .= '<li>PAN Card</li>';
-          }
-          if ($candidate_passport == "") {
-            $candidateMail .= '<li>Passport</li>';
-          }
-          if ($candidate_resume == "") {
-            $candidateMail .= '<li>Resume</li>';
-          }
-          if ($candidate_photo == "") {
-            $candidateMail .= '<li>Passport size photo</li>';
-          }
-          $candidateMail .= '</ol>
+            if ($candidate_aadhar_card == "") {
+              $candidateMail .= '<li>Aadhar Card</li>';
+            }
+            if ($candidate_pan_card == "") {
+              $candidateMail .= '<li>PAN Card</li>';
+            }
+            if ($candidate_passport == "") {
+              $candidateMail .= '<li>Passport</li>';
+            }
+            if ($candidate_resume == "") {
+              $candidateMail .= '<li>Resume</li>';
+            }
+            if ($candidate_photo == "") {
+              $candidateMail .= '<li>Passport size photo</li>';
+            }
+            $candidateMail .= '</ol>
                           <p>Once you send all the documents, I will start the further process for your job profile.</p>
                         </div>
                         <div class="footer">
@@ -902,11 +906,11 @@ class AddCandidateControllers extends BaseController
                       </div>
                     </body>
                     </html>';
-        }
-        if ($candidate_job_status == 2) {
-          $subject = 'Maclareen Talent Acquisition System  -  Sent to recruitment review ';
+          }
+          if ($candidate_job_status == 2) {
+            $subject = 'Maclareen Talent Acquisition System  -  Sent to recruitment review ';
 
-          $candidateMail = '
+            $candidateMail = '
                     <!DOCTYPE html>
                     <html>
                     <head>
@@ -997,10 +1001,10 @@ class AddCandidateControllers extends BaseController
                     </body>
                     </html>
                     ';
-        }
-        if ($candidate_job_status == 3) {
-          $subject = 'Maclareen Talent Acquisition System  -  Shortlisted ';
-          $candidateMail = '
+          }
+          if ($candidate_job_status == 3) {
+            $subject = 'Maclareen Talent Acquisition System  -  Shortlisted ';
+            $candidateMail = '
                     <!DOCTYPE html>
                     <html>
                     <head>
@@ -1093,10 +1097,10 @@ class AddCandidateControllers extends BaseController
                     </html>
                     
                     ';
-        }
-        if ($candidate_job_status == 4) {
-          $subject = 'Maclareen Talent Acquisition System  -  Not selected ';
-          $candidateMail = '
+          }
+          if ($candidate_job_status == 4) {
+            $subject = 'Maclareen Talent Acquisition System  -  Not selected ';
+            $candidateMail = '
                     <!DOCTYPE html>
                             <html>
                             <head>
@@ -1185,10 +1189,10 @@ class AddCandidateControllers extends BaseController
 
                     
                     ';
-        }
-        if ($candidate_job_status == 5) {
-          $subject = 'Maclareen Talent Acquisition System  -  Job Orientation  1 ';
-          $candidateMail = '
+          }
+          if ($candidate_job_status == 5) {
+            $subject = 'Maclareen Talent Acquisition System  -  Job Orientation  1 ';
+            $candidateMail = '
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -1327,10 +1331,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-        }
-        if ($candidate_job_status == 6) {
-          $subject = 'Maclareen Talent Acquisition System  -  Job Orientation  2 ';
-          $candidateMail = '
+          }
+          if ($candidate_job_status == 6) {
+            $subject = 'Maclareen Talent Acquisition System  -  Job Orientation  2 ';
+            $candidateMail = '
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -1469,10 +1473,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-        }
-        if ($candidate_job_status == 7) {
-          $subject = 'Maclareen Talent Acquisition System  -  Job Orientation  3 ';
-          $candidateMail = '
+          }
+          if ($candidate_job_status == 7) {
+            $subject = 'Maclareen Talent Acquisition System  -  Job Orientation  3 ';
+            $candidateMail = '
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -1611,10 +1615,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-        }
-        if ($candidate_job_status == 8) {
-          $subject = 'Maclareen Talent Acquisition System  -  Work permit ';
-          $candidateMail = '
+          }
+          if ($candidate_job_status == 8) {
+            $subject = 'Maclareen Talent Acquisition System  -  Work permit ';
+            $candidateMail = '
                 <!DOCTYPE html>
                         <html>
                         <head>
@@ -1717,10 +1721,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-        }
-        if ($candidate_job_status == 9) {
-          $subject = 'Maclareen Talent Acquisition System  -  Visa filing ';
-          $candidateMail = '
+          }
+          if ($candidate_job_status == 9) {
+            $subject = 'Maclareen Talent Acquisition System  -  Visa filing ';
+            $candidateMail = '
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -1811,10 +1815,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-        }
-        if ($candidate_job_status == 10) {
-          $subject = 'Maclareen Talent Acquisition System  -  Training for visa ';
-          $candidateMail = '
+          }
+          if ($candidate_job_status == 10) {
+            $subject = 'Maclareen Talent Acquisition System  -  Training for visa ';
+            $candidateMail = '
                 <!DOCTYPE html>
                     <html>
                     <head>
@@ -1956,10 +1960,10 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
-        }
-        if ($candidate_job_status == 11) {
-          $subject = 'Maclareen Talent Acquisition System  - Completed ';
-          $candidateMail = '
+          }
+          if ($candidate_job_status == 11) {
+            $subject = 'Maclareen Talent Acquisition System  - Completed ';
+            $candidateMail = '
                 <html>
                     <head>
                         <title>
@@ -2106,36 +2110,45 @@ class AddCandidateControllers extends BaseController
                 
                     
                     ';
+          }
+          $this->load->config('email');
+          $this->load->library('email');
+
+          //	$token = $email_exist->emp_id;
+
+          $this->email->from('MTAS(Maclareen Talent Acquisition System)', 'Maclareen Talent Acquisition System ');
+          $this->email->to($candidate_email);
+          $this->email->subject($subject);
+          $this->email->message($candidateMail);
+          $this->email->set_header('Reply-To', 'immigration@maclareen.com');
+          $this->email->set_mailtype("html");
+          $sendemail = $this->email->send();
+          $test = $this->Admin_model->InsertLog($Logdata);
+          // Candidate registration successful
+          $role = $this->session->userdata('role');
+          if ($role == "candidate") {
+            redirect('candidateDashboard');
+          } else   if ($role == "admin") {
+            redirect('adminDashboard');;
+          } else {
+            redirect('superadminDashboard');
+          }
+        }else{
+          $role = $this->session->userdata('role');
+          if ($role == "candidate") {
+            redirect('candidateDashboard');
+          } else   if ($role == "admin") {
+            redirect('adminDashboard');;
+          } else {
+            redirect('superadminDashboard');
+          }
         }
-        $this->load->config('email');
-        $this->load->library('email');
-
-        //	$token = $email_exist->emp_id;
-
-        $this->email->from('MTAS(Maclareen Talent Acquisition System)', 'Maclareen Talent Acquisition System ');
-        $this->email->to($candidate_email);
-        $this->email->subject($subject);
-        $this->email->message($candidateMail);
-        $this->email->set_header('Reply-To', 'immigration@maclareen.com');
-        $this->email->set_mailtype("html");
-        $sendemail = $this->email->send();
-        $test = $this->Admin_model->InsertLog($Logdata);
-        // Candidate registration successful
-        $role = $this->session->userdata('role');
-        if ($role == "candidate") {
-          redirect('candidateDashboard');
-        } else   if ($role == "admin") {
-          redirect('adminDashboard');;
-        } else {
-          redirect('superadminDashboard');
-        }
-
         //  redirect('registermail');
       } else {
         // Failed to save candidate data
 
         $this->session->set_flashdata('error', 'Failed to register candidate. Please try again.');
-        redirect('addCandidate');
+        redirect('editCandidateInfo/' . $candidate_id);
       }
     }
   }

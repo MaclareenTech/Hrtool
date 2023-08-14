@@ -240,6 +240,7 @@
                                     </li>
                                 </ul>
                             <?php } ?>
+                            
                             <?php
                             $mail = $this->session->userdata('user_email'); ?>
                             <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com") { ?>
@@ -249,6 +250,20 @@
                                         <a href="<?php echo base_url(); ?>invlicelist" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="fa fa-list-alt"></i><b>IN</b></span>
                                             <span class="pcoded-mtext">Invoice</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+                            <?php
+                            $mail = $this->session->userdata('user_email'); ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com") { ?>
+                                <div class="pcoded-navigation-label">Advertisement</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="<?php echo base_url(); ?>advertisement" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa fa-list-alt"></i><b>IN</b></span>
+                                            <span class="pcoded-mtext">Advertisement</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>

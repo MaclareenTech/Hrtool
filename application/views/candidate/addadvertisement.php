@@ -117,7 +117,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a >
+                        <a>
                             <img class="img-fluid" src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
@@ -169,7 +169,7 @@
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-                <nav class="pcoded-navbar">
+                    <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
@@ -177,7 +177,7 @@
 
                                     <div class="user-details">
                                         <span id="more-details"><?php echo $this->session->userdata('name');; ?></span>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -224,10 +224,10 @@
                             <?php } ?>
                             <?php
                             $mail = $this->session->userdata('user_email'); ?>
-                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com"  ) { ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com") { ?>
                                 <div class="pcoded-navigation-label">Invoice</div>
                                 <ul class="pcoded-item pcoded-left-item">
-                                    <li class="">
+                                    <li class="active">
                                         <a href="<?php echo base_url(); ?>invlicelist" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="fa fa-list-alt"></i><b>IN</b></span>
                                             <span class="pcoded-mtext">Invoice</span>
@@ -241,7 +241,7 @@
                             <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com") { ?>
                                 <div class="pcoded-navigation-label">Advertisement</div>
                                 <ul class="pcoded-item pcoded-left-item">
-                                    <li class="">
+                                    <li class="active">
                                         <a href="<?php echo base_url(); ?>advertisement" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="fa fa-list-alt"></i><b>IN</b></span>
                                             <span class="pcoded-mtext">Advertisement</span>
@@ -255,7 +255,7 @@
                             <?php if ($role == "superadmin") { ?>
                                 <div class="pcoded-navigation-label">Job Openings</div>
                                 <ul class="pcoded-item pcoded-left-item">
-                                    <li class="pcoded-hasmenu active pcoded-trigger">
+                                    <li class="pcoded-hasmenu ">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="fa fa-cubes"></i><b>JO</b></span>
                                             <span class="pcoded-mtext">Job Openings</span>
@@ -269,7 +269,7 @@
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                             </li>
-                                            <li class="active">
+                                            <li class="">
                                                 <a href="<?php echo base_url(); ?>AddJobopeningFrom" class="waves-effect waves-dark">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                     <span class="pcoded-mtext">Add Job Openings</span>
@@ -327,16 +327,16 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Add Job Opening</h5>
+                                            <h5 class="m-b-10">Add Candidate Source</h5>
                                             <p class="m-b-0">Maclareen Talent Acquisition System </p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a > <i class="fa fa-home"></i> </a>
+                                                <a> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a>Add Job Opening</a>
+                                            <li class="breadcrumb-item"><a>Add Candidate Source</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -380,47 +380,31 @@
                                             </div>
                                         <?php } ?>
                                         <div class="card-header">
-                                            <h5>Add Job Details</h5>
+                                            <h5>Add Advertisement</h5>
                                             <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
                                         </div>
                                         <div class="card-block">
-                                            <form class="form-material" action="<?php echo base_url(); ?>AddJobopening" method="post">
+                                        <?php echo form_open_multipart('candidate/AdvertisementControllers/AddNewAdvertisement'); ?>
+                                          
                                                 <div class="form-group form-default form-static-label">
-                                                    <input type="text" name="job_country" class="form-control" id="jobCountryInput" required>
+                                                    <input type="text" name="ad_type" class="form-control" required>
                                                     <span class="form-bar"></span>
-                                                    <label class="float-label">Job Country</label>
+                                                    <label class="float-label" style="color: black;">Advertisement Type</label>
                                                 </div>
                                                 <div class="form-group form-default form-static-label">
-                                                    <input type="text" name="job_position" class="form-control" id="jobPositionInput" onkeyup="generateJobCode()" required>
+                                                <input type="file" name="ad_image_path" accept="image/*">
                                                     <span class="form-bar"></span>
-                                                    <label class="float-label">Job Position</label>
+                                  
                                                 </div>
+                                               
 
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="text" name="job_code" class="form-control" id="jobCodeInput" readonly required>
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Job Code</label>
-                                                </div>
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="number" name="job_open_position" class="form-control" pattern="[0-9]+" required> 
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Job Open Position</label>
-                                                </div>
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="date" name="job_open_from" class="form-control" min="<?= date('d F Y') ?>" required>
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Valid From</label>
-                                                </div>
-                                                <div class="form-group form-default form-static-label">
-                                                    <input type="date" name="job_open_till" class="form-control" min="<?= date('d F Y') ?>" required>
-                                                    <span class="form-bar"></span>
-                                                    <label class="float-label">Valid Till</label>
-                                                </div>
                                                 <center> <button type="submit" class="btn btn-success waves-effect waves-light" style="background: linear-gradient(to bottom, #2ecc71, #2ecc71); padding: 12px 20px; box-shadow: 0 4px 0 #0b872c; color: white; font-size: 16px; border-radius: 6px; border: none; margin-left: 10px; transition: all 0.3s ease;">
-                                                Add New  Opening
+                                                        Add Advertisement
                                                     </button></center>
-                                                
+
                                             </form>
+
+
                                         </div>
                                     </div>
                                     <!--  add position  form end -->
@@ -468,23 +452,6 @@
 
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/script.js "></script>
 
-
-    <!-- job id Creater start -->
-
-    <script>
-        function generateJobCode() {
-            const countryInput = document.getElementById('jobCountryInput');
-            const positionInput = document.getElementById('jobPositionInput');
-            const jobCodeInput = document.getElementById('jobCodeInput');
-
-            const country = countryInput.value.substring(0, 2).toUpperCase();
-            const position = positionInput.value.substring(0, 2).toUpperCase();
-            const randomNumbers = '<?php echo $nextID; ?>';
-
-            jobCodeInput.value = country + position + randomNumbers;
-        }
-    </script>
-    <!-- job id Creater end -->
 
     <script type="text/javascript">
         $(document).ready(function() {

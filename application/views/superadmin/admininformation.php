@@ -237,6 +237,20 @@
                                 </ul>
                             <?php } ?>
                             <?php
+                            $mail = $this->session->userdata('user_email'); ?>
+                            <?php if ($mail == "nisha.minsariya@maclareen.com" || $mail == "saranya.muralidharan@maclareen.com"  || $mail == "muthupandy.nadar@maclareen.com") { ?>
+                                <div class="pcoded-navigation-label">Advertisement</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="<?php echo base_url(); ?>advertisement" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="fa fa-list-alt"></i><b>IN</b></span>
+                                            <span class="pcoded-mtext">Advertisement</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+                            <?php
                             $role = $this->session->userdata('role'); ?>
                             <?php if ($role == "superadmin") { ?>
                                 <div class="pcoded-navigation-label">Job Openings</div>
@@ -392,12 +406,10 @@
                                                                     <td><?php echo $row->user_mobile ?></td>
                                                                     <td><?php echo $row->emp_id ?></td>
                                                                     <td> <?php if ($row->user_role == "1") { ?>
-                                                                            <div style="display: inline-block; padding: 10px 20px; border: 2px solid #000; border-radius: 5px;">
-                                                                                Admin
+                                                                            <div style="display: inline-block; padding: 10px 20px; border: 2px solid #000; border-radius: 5px;">   Admin    
                                                                             </div>
                                                                         <?php } else if ($row->user_role == "2") { ?>
-                                                                            <div style="display: inline-block; padding: 10px 20px; border: 2px solid #000; border-radius: 5px;">
-                                                                                Super Admin
+                                                                            <div style="display: inline-block; padding: 10px 20px; border: 2px solid #000; border-radius: 5px;"> Super Admin 
                                                                             </div>
                                                                         <?php } ?>
                                                                     <td><?php $LoginTime =  $row->login_time;
@@ -405,7 +417,7 @@
                                                                         $LogIN = $dateLogIn->format('F j, Y, g:i A');
                                                                         echo $LogIN; ?></td>
 
-
+ 
 
                                                                     <td>
                                                                         <?php if ($row->logout_time != "0000-00-00 00:00:00") { ?>
