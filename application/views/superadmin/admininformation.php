@@ -406,10 +406,10 @@
                                                                     <td><?php echo $row->user_mobile ?></td>
                                                                     <td><?php echo $row->emp_id ?></td>
                                                                     <td> <?php if ($row->user_role == "1") { ?>
-                                                                            <div style="display: inline-block; padding: 10px 20px; border: 2px solid #000; border-radius: 5px;">   Admin    
+                                                                            <div style="display: inline-block; padding: 10px 20px; border: 2px solid #000;    width: 100px; border-radius: 5px;">   Admin    
                                                                             </div>
                                                                         <?php } else if ($row->user_role == "2") { ?>
-                                                                            <div style="display: inline-block; padding: 10px 20px; border: 2px solid #000; border-radius: 5px;"> Super Admin 
+                                                                            <div style="display: inline-block; padding: 10px 20px; border: 2px solid #000;    width: 100px; border-radius: 5px;"> Super Admin 
                                                                             </div>
                                                                         <?php } ?>
                                                                     <td><?php $LoginTime =  $row->login_time;

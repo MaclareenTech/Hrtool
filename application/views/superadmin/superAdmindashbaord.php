@@ -862,11 +862,11 @@
                                                             <tr>
                                                                 <td>
                                                                     <div class="d-inline-block align-middle">
-                                                                        <?php if ($row->user_profile == "") { ?>
+                                                                        <!-- <?php if ($row->user_profile == "") { ?>
                                                                             <img src="assets/images/avatar-4.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
                                                                         <?php } else { ?>
                                                                             <img src="<?php echo  "https://maclareenai.com/mtas/upload/profile/" . $row->user_profile; ?>" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                                        <?php } ?>
+                                                                        <?php } ?> -->
 
                                                                         <div class="d-inline-block">
                                                                             <h6><?php echo $row->user_name ?></h6>
