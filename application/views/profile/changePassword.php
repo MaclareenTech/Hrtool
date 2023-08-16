@@ -216,7 +216,7 @@
                             </div>
                         </div>
                         <a>
-                            <img class="img-fluid" src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="Theme-Logo" style=" width: 160px; ">
+                            <img class="img-fluid" src="https://maclareenai.com/mtas/assets/images/bg/mtas_logo_167_33.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>

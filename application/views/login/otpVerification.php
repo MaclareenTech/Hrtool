@@ -267,7 +267,7 @@ align-items: center;
         <!-- Container-fluid starts -->
         <div class="container">
             <div class="text-center">
-                <img src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="bg/main_logo.png" style="width: 300px;">
+                <img src="https://maclareenai.com/mtas/assets/images/bg/mtas_logo_167_33.png" alt="bg/mtas_logo_167_33.png" style="width: 300px;">
             </div>
             <div class="row justify-content-md-center">
                 <div class="col-md-4 text-center">

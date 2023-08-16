@@ -291,7 +291,7 @@
                             </div>
                         </div>
                         <a>
-                            <img class="img-fluid" src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="Theme-Logo" style=" width: 160px; ">
+                            <img class="img-fluid" src="https://maclareenai.com/mtas/assets/images/bg/mtas_logo_167_33.png" alt="Theme-Logo" style=" width: 160px; ">
                         </a>
                         <a class="mobile-options waves-effect waves-light">
                             <i class="ti-more"></i>
@@ -480,6 +480,16 @@
                                     </a>
                                 </li>
                             </ul>
+                            <div class="pcoded-navigation-label">How To Use</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="https://maclareenai.com/mtas/upload/manual"  target= "_blank" waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa fa-book"></i><b>L</b></span>
+                                        <span class="pcoded-mtext">How To Use</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
                             <div class="pcoded-navigation-label">Logout</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
@@ -536,7 +546,7 @@
                                     <div class="col-xl-12">
                                         <div class="card proj-progress-card">
                                             <div class="card-block" style="
-                                            background-image: url(https://maclareenai.com/mtas/assets/images/bg/bg-new.png);
+                                            background-image: url(https://maclareenai.com/mtas/assets/images/bg/mtas_backgraund_4_1366_768.png);
                                             background-size: cover;
                                             background-position: center;
                                             background-repeat: no-repeat;">

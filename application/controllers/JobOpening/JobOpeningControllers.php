@@ -144,11 +144,11 @@ class JobOpeningControllers extends BaseController
         ]);
 
         // Add watermark to each page
-        $mpdf->SetWatermarkImage(base_url('assets/images/watrermark.jpg'));
+        $mpdf->SetWatermarkImage(base_url('assets/images/bg/watermark.pn'));
         $mpdf->showWatermarkImage = true;
 
         // Write content to PDF
-        $mpdf->WriteHTML($html);
+        $mpdf->WriteHTML($html); 
 
         // Output the PDF
         $mpdf->Output();

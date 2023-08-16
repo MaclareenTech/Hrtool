@@ -234,7 +234,7 @@ align-items: center;
 
                     <form class="md-float-material form-material" action="<?php echo base_url(); ?>loginMe" method="post">
                         <div class="text-center">
-                            <img src="https://maclareenai.com/mtas/assets/images/bg/main_logo.png" alt="bg/main_logo.png" style="width: 300px;">
+                            <img src="https://maclareenai.com/mtas/assets/images/bg/mtas_logo_167_33.png" alt="bg/mtas_logo_167_33.png" style="width: 300px;">
                         </div>
                         <div class="auth-box card">
                             <div class="card-block">

@@ -145,7 +145,7 @@
 
 <body>
     <div class="invoice-container">
-        <div class="red-strip"><img src="https://maclareenai.com/mtas/assets/images/bg/invoice.png" alt=""></div>
+        <div class="red-strip"><img src="https://maclareenai.com/mtas/assets/images/bg/mtas_strip_1841_119.png" alt=""></div>
         <div class="centered-content"> <h4 style="font-size: 23px;">INVOICE</h4></div>
 
        
